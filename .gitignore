@@ -1,0 +1,30 @@
+# Secrets — never commit
+.env
+.env.*
+
+# Local staging
+cloudinary_upload/
+decoded_template.html
+CONTENT-INVENTORY-raw.md
+
+# Bundled source (huge, not needed in repo)
+Marang House (standalone).html
+
+# macOS
+.DS_Store
+
+# Redundant local images (now served from Cloudinary)
+uploads/
+web-images/
+screenshots/
+
+# Other local HTML exports not deployed
+Marang House.html
+export-src.html
+preview.html
+preview2.html
+ref-viewer.html
+
+# Maps and scripts (local tooling, optional to keep)
+*.pyc
+__pycache__/
