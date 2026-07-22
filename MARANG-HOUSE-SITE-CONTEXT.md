@@ -135,3 +135,66 @@ Pulled from the original design, in case you're adding new sections:
 - Keep `f_auto,q_auto` on Cloudinary photo URLs for performance.
 - This is plain HTML/CSS/JS. No React, no build step. Keep it that way unless the user explicitly wants to migrate.
 - After edits, remind the user to redeploy with `vercel --prod` (or push to `main`).
+
+---
+
+## 10. Site overhaul — plan & status (started 2026-07-22)
+
+The original single-file static export (`index.html`) is being rebuilt as a Next.js
+App Router project on Vercel, keeping the **visual design pixel-for-pixel identical**
+while fixing code quality, UX, SEO, accessibility, and security gaps. All work happens
+on a branch (`overhaul/nextjs-migration`) with Vercel preview deployments; `main` /
+production is not touched until the rebuild is reviewed and approved.
+
+**Rollback point:** git tag `backup/pre-overhaul-2026-07-22` (commit `1554a8a`) is the
+exact pre-overhaul static site. `git checkout backup/pre-overhaul-2026-07-22` always
+gets you back to it.
+
+### Problems identified in the original `index.html`
+- Fake routing — one URL, JS `show()` toggles which `<div class="page">` is visible,
+  state mirrored into `localStorage`. No shareable links, no working back button,
+  nothing for search engines to index per page.
+- Contact form was non-functional — `onsubmit="return false;"`, no backend, no
+  action/fetch. Submissions vanished.
+- No SEO surface — no meta description, no OG/Twitter tags, no `robots.txt`, no
+  `sitemap.xml`, no per-page titles.
+- Accessibility gaps — only 1 `aria-*` attribute in the whole doc, no `<label>` on any
+  form field (placeholder-only), no skip-to-content link, nav built from `onclick`
+  handlers instead of real links.
+- No security headers — no CSP, `X-Frame-Options`, `Referrer-Policy`,
+  `Permissions-Policy`, or HSTS configured anywhere.
+- Repo clutter — 6.6MB standalone export, a broken decoded template, one-off Python
+  scripts, and duplicate image folders sitting in the working tree.
+
+### Decisions made
+- **Architecture:** migrate to Next.js (App Router) rather than patch the static file
+  — real per-page routes, React components, `next/image` and `next/font`.
+- **Contact form:** third-party form service (Web3Forms) called client-side — no
+  custom backend or API keys to manage on Vercel.
+
+### Plan (phases)
+1. Scaffold Next.js project; port every section verbatim into real routes (`/`,
+   `/about`, `/lightkeepers`, `/donate`, `/press`, `/contact`) — pixel parity first.
+2. Componentize (Nav, Hero, LightkeeperBand, About, Donate, Press, Contact, Footer)
+   with real `<Link>` navigation and active states, no inline `onclick`.
+3. Images via `next/image` (Cloudinary `remotePatterns`, keep `f_auto,q_auto`
+   behaviour); fonts via `next/font` (Fredoka, Nunito, Permanent Marker — self-hosted,
+   no runtime Google Fonts request).
+4. Contact form wired to Web3Forms with real `<label>`s, validation, success/error
+   states, honeypot spam field.
+5. SEO: Metadata API per page, OG/Twitter cards, `app/sitemap.ts`, `app/robots.ts`,
+   JSON-LD for the NPO.
+6. Accessibility: skip link, semantic landmarks, visible focus states, labeled form
+   fields, alt-text audit, contrast check.
+7. Security headers in `next.config.js` (CSP scoped to Cloudinary/Web3Forms, X-Frame-
+   Options, Referrer-Policy, Permissions-Policy, HSTS), dependency audit.
+8. Performance pass (Lighthouse/Core Web Vitals, bundle size, confirm image
+   optimization is landing).
+9. Testing with Playwright — every route loads, nav/mobile menu, form submits
+   end-to-end, responsive breakpoints, no console errors.
+10. Repo cleanup — archive legacy Python scripts/exports/duplicate image folders out
+    of the active tree (kept in git history, not deleted). Merge to `main`, promote to
+    production once approved.
+
+### Status
+_Updated as work progresses — see git log on `overhaul/nextjs-migration` for details._
