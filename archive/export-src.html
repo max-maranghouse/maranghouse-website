@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marang House — Fostering Health, Providing Hope</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue:    #004aad;
+      --blue-dk: #00307a;
+      --yellow:  #f8e026;
+      --orange:  #f27926;
+      --red:     #df3436;
+      --gold:    #f9b83c;
+      --cream:   #fffbe8;
+    }
+    body { font-family: 'Nunito', sans-serif; background: #fff; color: #1a1a2e; }
+    h1,h2,h3,h4 { font-family: 'Fredoka One', cursive; font-weight: 400; }
+    img { display: block; }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Fredoka One', cursive; font-size: 0.85rem; letter-spacing: .5px;
+      padding: 9px 22px; border-radius: 50px;
+      cursor: pointer; border: none;
+      transition: opacity .2s, transform .15s;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: .88; transform: scale(1.03); }
+    .btn-yellow  { background: var(--yellow); color: #1a1a1a; }
+    .btn-orange  { background: var(--orange); color: #fff; }
+    .btn-blue    { background: var(--blue); color: #fff; }
+    .btn-blue-dk { background: var(--blue-dk); color: #fff; }
+    .btn-white-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.75); }
+    .btn-blue-outline  { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .btn-red     { background: var(--red); color: #fff; }
+
+    /* PAGE ROUTING */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    .nav {
+      position: sticky; top: 0; z-index: 300;
+      background: var(--blue);
+      height: 56px; padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; background: none; border: none; flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 30px; height: 30px;
+      background: var(--red); border-radius: 50% 50% 50% 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+    .nav-logo-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem; color: #fff; letter-spacing: 1.5px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+    .nav-links a {
+      font-family: 'Nunito', sans-serif; font-weight: 700;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,.82); cursor: pointer;
+      border-bottom: 2px solid transparent; padding: 2px 0;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; border-bottom-color: var(--yellow); }
+    .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-newsletter {
+      background: var(--yellow); color: #1a1a1a;
+      font-family: 'Fredoka One', cursive; font-size: 0.75rem; letter-spacing: .5px;
+      padding: 6px 14px; border-radius: 50px; cursor: pointer; border: none;
+      white-space: nowrap; transition: opacity .2s;
+    }
+    .nav-newsletter:hover { opacity: .85; }
+    .nav-socials { display: flex; align-items: center; gap: 8px; }
+    .nav-socials a { color: rgba(255,255,255,.75); display: flex; align-items: center; cursor: pointer; }
+    .nav-socials a:hover { color: #fff; }
+    .nav-socials svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* ═══════════════════════════════════════
+       SECTION 1: HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 440px;
+      overflow: hidden; display: flex; align-items: stretch;
+    }
+    .hero-photo {
+      position: absolute; inset: 0;
+      background-image: url('web-images/SmacPix_Marang1.jpg');
+      background-size: cover; background-position: center 20%;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,52,130,.92) 0%, rgba(0,52,130,.82) 42%, rgba(0,52,130,.35) 70%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 60px 40px 60px 40px; max-width: 500px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero h1 {
+      font-size: 2.9rem; line-height: 1.08; color: #fff; margin-bottom: 14px;
+    }
+    .hero h1 span { color: var(--yellow); }
+    .hero-sub {
+      color: rgba(255,255,255,.85); font-size: 0.88rem; line-height: 1.65;
+      margin-bottom: 26px; max-width: 360px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wa-fab {
+      position: absolute; right: 14px; bottom: 18px; z-index: 5;
+      width: 42px; height: 42px; background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    }
+    .wa-fab svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* ═══════════════════════════════════════
+       SECTION 2: LIGHTKEEPER STRIP
+    ═══════════════════════════════════════ */
+    .lk-strip {
+      background: var(--yellow);
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .lk-strip-text { flex: 1; }
+    .lk-strip-eyebrow { font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 2px; }
+    .lk-strip-title {
+      font-size: 2.5rem; color: var(--blue); line-height: .95; margin-bottom: 10px;
+    }
+    .lk-strip-desc { font-size: 0.84rem; color: #333; line-height: 1.5; margin-bottom: 14px; max-width: 440px; }
+    .lk-strip-pin { width: 120px; flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════
+       SECTION 3: WE'RE MARANG HOUSE
+    ═══════════════════════════════════════ */
+    .intro-section {
+      background: var(--cream);
+      padding: 0;
+      position: relative; overflow: hidden;
+    }
+    .intro-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(248,224,38,.55) 2.5px, transparent 2.5px);
+      background-size: 26px 26px;
+    }
+    .intro-inner { position: relative; z-index: 1; display: flex; min-height: 480px; }
+    .intro-left { flex: 1; padding: 56px 40px; position: relative; }
+    .intro-right-photo {
+      width: 42%; flex-shrink: 0; position: relative;
+      background-image: url('web-images/424572362_392057836643691_8244405606096808142_n.jpg');
+      background-size: cover; background-position: center;
+    }
+    .intro-sun {
+      position: absolute; top: -20px; right: -20px; width: 160px; pointer-events: none; z-index: 2;
+    }
+    .intro-stars {
+      position: absolute; bottom: 20px; left: 20px; width: 80px; pointer-events: none; opacity: .85; z-index: 2;
+    }
+    .intro-heading { font-size: 2.4rem; color: var(--blue); margin-bottom: 16px; max-width: 520px; }
+    .intro-heading span { color: var(--orange); }
+    .intro-body { font-size: 0.88rem; line-height: 1.75; color: #333; max-width: 520px; margin-bottom: 10px; }
+    .intro-what { font-weight: 800; color: var(--blue); font-size: 0.92rem; margin: 22px 0 18px; }
+    .intro-cards { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-end; }
+    .intro-card { width: 148px; filter: drop-shadow(0 6px 16px rgba(0,74,173,.18)); transition: transform .3s; }
+    .intro-card:hover { transform: translateY(-8px); }
+
+    /* ═══════════════════════════════════════
+       SECTION 4: NICE TO MEET YOU
+    ═══════════════════════════════════════ */
+    .ntmy-section { display: flex; min-height: 400px; }
+    .ntmy-photo {
+      width: 42%; flex-shrink: 0;
+      background-image: url('web-images/MARANG-1.jpg');
+      background-size: cover; background-position: center;
+    }
+    .ntmy-content {
+      flex: 1; padding: 52px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+      background: #fff;
+    }
+    .ntmy-content h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 8px; }
+    .ntmy-sub { font-size: 0.9rem; color: var(--orange); font-weight: 700; margin-bottom: 16px; line-height: 1.5; }
+    .ntmy-content p { font-size: 0.88rem; color: #444; line-height: 1.75; margin-bottom: 10px; }
+
+    /* ═══════════════════════════════════════
+       SECTION 5: OUR MISSION
+    ═══════════════════════════════════════ */
+    .mission-section {
+      position: relative; min-height: 280px;
+      overflow: hidden; display: flex; align-items: center;
+      padding: 56px 40px;
+    }
+    .mission-bg {
+      position: absolute; inset: 0;
+      background-image: url('web-images/424483000_363605573122900_9062681933234070373_n.jpg');
+      background-size: cover; background-position: center top;
+    }
+    .mission-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0, 40, 100, .78);
+    }
+    .mission-sun {
+      position: absolute; left: 28px; bottom: -8px; width: 110px; z-index: 2; pointer-events: none;
+    }
+    .mission-content { position: relative; z-index: 3; margin: 0 auto; text-align: center; }
+    .mission-eyebrow { font-family: 'Nunito', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,.88); letter-spacing: 1px; }
+    .mission-content h2 { font-size: 4.5rem; color: var(--yellow); line-height: .95; margin-bottom: 14px; }
+    .mission-content p { color: rgba(255,255,255,.85); font-size: 0.92rem; line-height: 1.7; max-width: 440px; margin: 0 auto; }
+
+    /* ═══════════════════════════════════════
+       SECTION 6: MEET THE PEOPLE
+    ═══════════════════════════════════════ */
+    .sponsors-section {
+      padding: 56px 40px 52px; background: #fff; text-align: center;
+    }
+    .sponsors-section h2 { font-size: 1.9rem; color: var(--blue); margin-bottom: 6px; }
+    .sponsors-sub { font-size: 0.85rem; color: #666; max-width: 500px; margin: 0 auto 36px; line-height: 1.6; }
+    .sponsors-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .sponsor-item { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 90px; }
+    .sponsor-avatar {
+      width: 68px; height: 68px; border-radius: 50%;
+      background-size: cover; background-position: center;
+      overflow: hidden; flex-shrink: 0;
+      border: 3px solid #e8f0ff;
+    }
+    .sponsor-avatar.placeholder { background-color: #dde8ff; display: flex; align-items: center; justify-content: center; }
+    .sponsor-name { font-size: 0.68rem; color: #333; font-weight: 700; text-align: center; line-height: 1.3; }
+    .sponsor-role { font-size: 0.62rem; color: #888; text-align: center; }
+
+    /* ═══════════════════════════════════════
+       SECTION 7: TESTIMONIALS
+    ═══════════════════════════════════════ */
+    .testimonials-section {
+      background: var(--cream);
+      display: flex; min-height: 400px;
+    }
+    .testi-photo {
+      width: 42%; flex-shrink: 0;
+      background-image: url('web-images/Marang_House_SM_posts_may_8.jpg');
+      background-size: cover; background-position: center top;
+    }
+    .testi-content { flex: 1; padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .testi-content h2 { font-size: 1.75rem; color: var(--blue); line-height: 1.25; margin-bottom: 24px; }
+    .testi-main { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,.07); }
+    .testi-main p { font-size: 0.88rem; color: #333; line-height: 1.7; font-style: italic; margin-bottom: 12px; }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background-size: cover; background-position: center;
+      border: 2px solid var(--yellow);
+    }
+    .testi-name { font-weight: 800; font-size: 0.84rem; color: #333; }
+    .testi-stars { color: var(--yellow); font-size: 0.8rem; margin-top: 2px; }
+    .testi-extra { font-size: 0.84rem; color: #555; font-style: italic; line-height: 1.65; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,.07); }
+    .testi-extra-name { font-weight: 800; font-style: normal; color: #333; font-size: 0.8rem; margin-top: 5px; }
+
+    /* ═══════════════════════════════════════
+       SECTION 8: ALL SUPPORT IS WELCOME
+    ═══════════════════════════════════════ */
+    .support-section { display: flex; min-height: 400px; }
+    .support-text {
+      flex: 1; padding: 56px 48px;
+      background: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .support-hearts { width: 72px; margin-bottom: 16px; }
+    .support-text h2 { font-size: 2rem; color: var(--blue); margin-bottom: 14px; }
+    .support-text p { font-size: 0.87rem; color: #444; line-height: 1.75; margin-bottom: 10px; max-width: 440px; }
+    .support-btns { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .support-photo {
+      width: 45%; flex-shrink: 0;
+      background-image: url('web-images/marang_house_image.jpg');
+      background-size: cover; background-position: center;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 9: HOW YOU CAN GET INVOLVED
+    ═══════════════════════════════════════ */
+    .involved-section {
+      padding: 56px 40px 0;
+      background: linear-gradient(to bottom, var(--blue) 0%, var(--blue) 48%, var(--cream) 48%);
+    }
+    .involved-heading { color: #fff; font-size: 2rem; margin-bottom: 28px; }
+    .involved-grid { display: flex; gap: 18px; padding-bottom: 56px; }
+    .involved-card {
+      flex: 1; background: #fff;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,.14);
+    }
+    .involved-photo { height: 170px; background-size: cover; background-position: center; }
+    .involved-body { padding: 22px 20px 24px; text-align: center; }
+    .involved-body h3 { font-size: 1.15rem; color: var(--blue); margin-bottom: 9px; }
+    .involved-body p { font-size: 0.8rem; color: #555; line-height: 1.65; margin-bottom: 16px; }
+    .hearts-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--red); color: #fff;
+      font-family: 'Fredoka One', cursive; font-size: 0.9rem;
+      padding: 4px 12px; border-radius: 10px; margin-bottom: 10px;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 10: CREATING A BETTER FUTURE
+    ═══════════════════════════════════════ */
+    .stats-section {
+      background: var(--blue-dk); padding: 60px 40px 40px;
+      position: relative; overflow: hidden;
+    }
+    .stats-heading { text-align: center; margin-bottom: 44px; }
+    .stats-heading h2 { font-size: 2.6rem; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .stats-heading p { font-size: 1.05rem; color: var(--yellow); font-family: 'Fredoka One', cursive; }
+    .stats-row { display: flex; justify-content: center; gap: 72px; align-items: flex-end; position: relative; z-index: 2; }
+    .stat-item { text-align: center; }
+    .stat-num { font-size: 3.5rem; color: var(--yellow); font-family: 'Fredoka One', cursive; line-height: 1; }
+    .stat-label { font-size: 1rem; color: rgba(255,255,255,.75); font-weight: 700; margin-top: 4px; }
+    .stats-figure {
+      position: absolute; left: 32px; bottom: 0;
+      height: 210px; pointer-events: none; z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════
+       INNER PAGES
+    ═══════════════════════════════════════ */
+    .page-hero {
+      background: var(--blue); padding: 68px 40px 60px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero .eyebrow { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; font-family: 'Nunito', sans-serif; }
+    .page-hero h1 { font-size: 3rem; color: var(--yellow); margin-bottom: 10px; }
+    .page-hero p { color: rgba(255,255,255,.85); font-size: 1rem; max-width: 580px; line-height: 1.7; }
+
+    .content-wrap { max-width: 840px; margin: 0 auto; padding: 60px 40px; }
+    .content-wrap h2 { font-size: 1.85rem; color: var(--blue); margin: 32px 0 12px; }
+    .content-wrap h2:first-child { margin-top: 0; }
+    .content-wrap p { font-size: 0.98rem; line-height: 1.85; color: #444; margin-bottom: 12px; }
+    .cards-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: 36px 0; }
+    .cards-row img { width: 150px; filter: drop-shadow(0 6px 16px rgba(0,74,173,.18)); transition: transform .3s; }
+    .cards-row img:hover { transform: translateY(-8px); }
+
+    .lk-page-hero { background: var(--blue); padding: 68px 40px; display: flex; align-items: center; gap: 48px; overflow: hidden; }
+    .lk-page-hero-text { flex: 1; }
+    .lk-page-hero-text .eyebrow { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; font-family: 'Nunito', sans-serif; }
+    .lk-page-hero-text h1 { font-size: 3rem; color: var(--yellow); margin-bottom: 12px; }
+    .lk-page-hero-text p { color: rgba(255,255,255,.88); font-size: 1rem; line-height: 1.8; margin-bottom: 22px; }
+    .lk-page-pin { width: 200px; flex-shrink: 0; filter: drop-shadow(0 16px 40px rgba(0,0,0,.3)); }
+
+    .donate-body { max-width: 740px; margin: 0 auto; padding: 60px 40px; }
+    .bank-box { background: #e8f0ff; border-radius: 18px; padding: 28px 32px; margin-bottom: 22px; }
+    .bank-box h3 { font-size: 1.35rem; color: var(--blue); margin-bottom: 18px; }
+    .bank-row { display: flex; gap: 12px; margin-bottom: 7px; font-size: 0.92rem; }
+    .bank-label { font-weight: 800; color: var(--blue); min-width: 130px; }
+    .bank-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(0,74,173,.15); font-size: 0.88rem; color: #555; line-height: 1.6; }
+    .bank-note strong { color: var(--blue); }
+    .info-strip { border-left: 4px solid var(--yellow); background: #fffbee; border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
+    .info-strip h4 { color: var(--blue); font-size: 0.92rem; margin-bottom: 4px; }
+    .info-strip p { color: #555; font-size: 0.87rem; line-height: 1.6; }
+    .npc-note { color: #aaa; font-size: 0.8rem; margin-top: 18px; }
+
+    .contact-body { max-width: 640px; margin: 0 auto; padding: 60px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+    .contact-label { font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue); margin-bottom: 6px; font-family: 'Nunito', sans-serif; }
+    .contact-value { font-size: 1.05rem; color: #222; }
+    .contact-value a { color: var(--blue); text-decoration: none; }
+
+    .press-body { padding: 68px 40px; text-align: center; }
+    .press-body h2 { font-size: 1.85rem; color: var(--blue); margin-bottom: 12px; }
+    .press-body p { color: #555; font-size: 0.98rem; max-width: 480px; margin: 0 auto 26px; line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue-dk); padding: 36px 40px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+      color: rgba(255,255,255,.55); font-size: 0.85rem;
+    }
+    .footer-logo { font-family: 'Fredoka One', cursive; font-size: 1.35rem; color: var(--yellow); margin-bottom: 2px; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.55); cursor: pointer; text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#004aad">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#004aad"></rect>
+    <circle cx="600" cy="360" r="130" fill="#f8e026"></circle>
+    <path d="M600 260 L680 340 L660 340 L660 430 L540 430 L540 340 L520 340 Z" fill="#004aad"></path>
+    <rect x="440" y="540" width="320" height="36" rx="18" fill="#f27926"></rect>
+  </svg>
+</template>
+
+<!-- ═══════ NAV ═══════════════════════════════════════════════ -->
+<nav class="nav" style="height: 63px">
+  <button class="nav-logo" onclick="show('home')">
+    <div class="nav-logo-mark">🏠</div>
+    <span class="nav-logo-text">MARANG HOUSE</span>
+  </button>
+  <ul class="nav-links">
+    <li><a id="nl-home" onclick="show('home')">Home</a></li>
+    <li><a id="nl-about" onclick="show('about')">About Us</a></li>
+    <li><a id="nl-contact" onclick="show('contact')">Contact</a></li>
+    <li><a id="nl-donate" onclick="show('donate')">Donate</a></li>
+    <li><a id="nl-lightkeepers" onclick="show('lightkeepers')">The Lightkeeper</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-newsletter" onclick="show('donate')">GET OUR NEWSLETTER</button>
+    <div class="nav-socials">
+      <a title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a title="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+      <a title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+      <a title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ HOME ══════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Fostering Health,<br>Providing <span>Hope.</span></h1>
+      <p class="hero-sub">Loving, safe, and nurturing homes for children between the ages of 4 and 14, empowering them to learn and manage their illnesses.</p>
+      <div class="hero-btns">
+        <button class="btn btn-yellow" onclick="show('donate')">DONATE</button>
+        <button class="btn btn-white-outline" onclick="show('donate')">DONATE IN KIND</button>
+      </div>
+    </div>
+    <a class="wa-fab" title="WhatsApp" href="https://wa.me/27114766698" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </section>
+
+  <!-- 2. LIGHTKEEPER STRIP -->
+  <section class="lk-strip">
+    <div class="lk-strip-text">
+      <p class="lk-strip-eyebrow">The Marang Circle of Light</p>
+      <h2 class="lk-strip-title">LIGHTKEEPER</h2>
+      <p class="lk-strip-desc">Join "The Circle of Light": Become a Marang House Lightkeeper and donate monthly to Marang House.</p>
+      <button class="btn btn-blue" onclick="show('lightkeepers')">SIGN UP</button>
+    </div>
+    <img class="lk-strip-pin" src="uploads/Marang House Website Element.png" alt="Lightkeeper badge">
+  </section>
+
+  <!-- 3. WE'RE MARANG HOUSE -->
+  <section class="intro-section">
+    <div class="intro-dots"></div>
+    <div class="intro-inner">
+      <div class="intro-left">
+        <h2 class="intro-heading">We're Marang House<span>.</span></h2>
+        <p class="intro-body">We provide a nurturing home environment for children between the ages of 4 and 14, empowering them to learn and manage their illnesses. They face serious health conditions that demand continuous monitoring and specialised treatments at a tertiary hospital.</p>
+        <p class="intro-body">Importantly, we ensure that their education remains a priority by taking them to the hospital daily, where they receive disease management training alongside traditional schooling.</p>
+        <p class="intro-what">What we do:</p>
+        <div class="intro-cards">
+          <img class="intro-card" src="uploads/mh_element_3.png" alt="Accommodate 12 Children at a time">
+          <img class="intro-card" src="uploads/mh_element_1.png" alt="Offer the Necessities">
+          <img class="intro-card" src="uploads/mh_element_2.png" alt="Round-the-clock Medical Care">
+        </div>
+      </div>
+      <div class="intro-right-photo">
+        <img class="intro-sun" src="uploads/mh_element_sun and cloud.png" alt="">
+        <img class="intro-stars" src="uploads/mh_element_stars.gif" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. NICE TO MEET YOU -->
+  <section class="ntmy-section">
+    <div class="ntmy-photo"></div>
+    <div class="ntmy-content">
+      <h2>Nice To Meet You.</h2>
+      <p class="ntmy-sub">The reality for children suffering from chronic illness is challenging.</p>
+      <p>Many families simply cannot afford the permanent medical care, supervision, and reliable environment required for their children's well-being.</p>
+      <p>They need to be consuming these illnesses routes like an oral cavity, filled with daily monitors of visiting dialysis, and the excruciating waiting game for organ transplants.</p>
+      <p>In 1993, Marang House emerged as a beacon of hope, dedicated to bringing light into the lives of South Africa's seriously ill children.</p>
+    </div>
+  </section>
+
+  <!-- 5. OUR MISSION -->
+  <section class="mission-section">
+    <div class="mission-bg"></div>
+    <div class="mission-overlay"></div>
+    <img class="mission-sun" src="uploads/mh_element_sun.gif" alt="">
+    <div class="mission-content">
+      <p class="mission-eyebrow">our</p>
+      <h2>MISSION</h2>
+      <p>Providing a safe and loving home where South African children can live and learn to manage their illness.</p>
+    </div>
+  </section>
+
+  <!-- 6. MEET THE PEOPLE -->
+  <section class="sponsors-section">
+    <h2>Meet some of the people who<br>help us transform lives</h2>
+    <p class="sponsors-sub">Businesses and Saban foundations have given their time and support to help us make a difference in children's lives.</p>
+    <div class="sponsors-row">
+      <div class="sponsor-item">
+        <div class="sponsor-avatar" style="background-image:url('web-images/Daryl_and_David2.jpg'); background-position: left center;"></div>
+        <div class="sponsor-name">Daryl &amp; David</div>
+        <div class="sponsor-role">Volunteers</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar" style="background-image:url('web-images/Daryl_and_David1.jpg');"></div>
+        <div class="sponsor-name">Daryl</div>
+        <div class="sponsor-role">Lightkeeper</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar" style="background-image:url('web-images/pirates_helpers.jpg');"></div>
+        <div class="sponsor-name">Pirates Helpers</div>
+        <div class="sponsor-role">Lightkeeper Crew</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar placeholder"></div>
+        <div class="sponsor-name">MSI Small Capital</div>
+        <div class="sponsor-role">Sponsor</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar placeholder"></div>
+        <div class="sponsor-name">June &amp; Roseyisha</div>
+        <div class="sponsor-role">Lightkeeper</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar placeholder"></div>
+        <div class="sponsor-name">Miss Gully Josie</div>
+        <div class="sponsor-role">Lightkeeper</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar placeholder"></div>
+        <div class="sponsor-name">Road To A Dream</div>
+        <div class="sponsor-role">Sponsor</div>
+      </div>
+      <div class="sponsor-item">
+        <div class="sponsor-avatar placeholder"></div>
+        <div class="sponsor-name">PA Sponsor</div>
+        <div class="sponsor-role">Sponsor</div>
+      </div>
+    </div>
+    <button class="btn btn-blue" onclick="show('donate')">SPONSOR A CHILD TODAY</button>
+  </section>
+
+  <!-- 7. TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="testi-photo"></div>
+    <div class="testi-content">
+      <h2>See what our sponsors &amp; volunteers have to say</h2>
+      <div class="testi-main">
+        <p>"Such a humbling experience to know that there are places like Marang. I donated some stuff and will be making an impact in children's lives."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background-image:url('web-images/SmacPix_Marang2.jpg');"></div>
+          <div>
+            <div class="testi-name">— Nkosi Speers</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <p class="testi-extra">
+        "I want to give more. The children seem so much fun and coming to Marang House is wonderful."<br>
+        <span class="testi-extra-name">— Eugalina Corn</span>
+      </p>
+      <p class="testi-extra">
+        "A great place full of warmth and resources for volunteers."<br>
+        <span class="testi-extra-name">— Minwase Khamala</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 8. ALL SUPPORT IS WELCOME -->
+  <section class="support-section">
+    <div class="support-text">
+      <img class="support-hearts" src="uploads/mh_element_hearts.gif" alt="">
+      <h2>All support is<br>Welcome!</h2>
+      <p>Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and contributors.</p>
+      <p>Your support helps provide a home away from home for children in need, while offering tax-deductible benefits and BBBEE scoreboard contributions.</p>
+      <div class="support-btns">
+        <button class="btn btn-blue-dk" onclick="show('contact')">GET IN TOUCH</button>
+        <button class="btn btn-orange" onclick="show('donate')">DONATE</button>
+      </div>
+    </div>
+    <div class="support-photo"></div>
+  </section>
+
+  <!-- 9. HOW YOU CAN GET INVOLVED -->
+  <section class="involved-section">
+    <h2 class="involved-heading">How You Can Get Involved</h2>
+    <div class="involved-grid">
+      <div class="involved-card">
+        <div class="involved-photo" style="background-image:url('web-images/Marang3.jpg'); background-position: center top;"></div>
+        <div class="involved-body">
+          <h3>Volunteer Your Time</h3>
+          <p>Our volunteer programme gives you the opportunity to become a heartfelt part of the Marang House family.</p>
+          <button class="btn btn-blue" style="width:100%;">VOLUNTEER</button>
+        </div>
+      </div>
+      <div class="involved-card">
+        <div class="involved-photo" style="background-image:url('web-images/424483000_363605573122900_9062681933234070373_n.jpg');"></div>
+        <div class="involved-body">
+          <div class="hearts-badge">❤ 2</div>
+          <h3>Sponsor Programme</h3>
+          <p>Be part of our "Monthly Giving Program" and bring stability to children with your generous donation. Together, we make a lasting impact.</p>
+          <button class="btn btn-orange" style="width:100%;" onclick="show('donate')">SPONSOR A CHILD TODAY</button>
+        </div>
+      </div>
+      <div class="involved-card">
+        <div class="involved-photo" style="background-image:url('web-images/MARANG-1.jpg');"></div>
+        <div class="involved-body">
+          <h3>Donate</h3>
+          <p>We rely on your generosity to continually help keep us going.</p>
+          <button class="btn btn-yellow" style="width:100%;color:#1a1a1a;" onclick="show('donate')">DONATE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CREATING A BETTER FUTURE -->
+  <section class="stats-section">
+    <div class="stats-heading">
+      <h2>Creating A Better Future</h2>
+      <p>For Children Living With Chronic Illness</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">25</div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="color: #F27926">100+</div>
+        <div class="stat-label">Children</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="color: #FF3538">1000+</div>
+        <div class="stat-label">Volunteers</div>
+      </div>
+    </div>
+    <img class="stats-figure" src="uploads/mh_element_skipping.gif" alt="Child skipping" style="width: 300px; height: 302px; left: -8px; top: -12px; position: absolute">
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ═══════ ABOUT US ══════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <section class="page-hero">
+    <p class="eyebrow">Who We Are</p>
+    <h1>About Us</h1>
+    <p>A nurturing home where health and hope thrive side by side.</p>
+  </section>
+  <div class="content-wrap">
+    <h2>Our Mission</h2>
+    <p>We provide a nurturing home environment for children between the ages of 4 and 14, empowering them to learn and manage their illnesses. They face serious health conditions that demand continuous monitoring and specialised treatments at a tertiary hospital.</p>
+    <p>Importantly, we ensure that their education remains a priority by taking them to the hospital daily, where they receive disease management training alongside traditional schooling.</p>
+    <div class="cards-row">
+      <img src="uploads/mh_element_3.png" alt="12 Children">
+      <img src="uploads/mh_element_1.png" alt="Necessities">
+      <img src="uploads/mh_element_2.png" alt="Medical Care">
+    </div>
+    <h2>What Makes Us Different</h2>
+    <p>Marang House bridges the gap between medical care and everyday life. Children don't have to choose between their health and their education — we make both possible under one roof.</p>
+    <p>Since 1993, we have provided a beacon of hope for South Africa's most seriously ill children, ensuring they grow up with dignity, care, and opportunity.</p>
+    <div style="text-align:center;margin-top:36px;">
+      <button class="btn btn-orange" onclick="show('donate')">Support Our Work</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ LIGHTKEEPERS ═══════════════════════════════════════ -->
+<div class="page" id="page-lightkeepers">
+  <section class="lk-page-hero">
+    <div class="lk-page-hero-text">
+      <p class="eyebrow">Our Community</p>
+      <h1>Lightkeepers</h1>
+      <p>The Lightkeepers are the people who help us keep Marang House going — a community of supporters, donors, and advocates who believe every child deserves a home, health, and hope.</p>
+      <button class="btn btn-yellow" onclick="show('donate')">Become a Lightkeeper</button>
+    </div>
+    <img class="lk-page-pin" src="uploads/Marang House Website Element.png" alt="Lightkeeper badge">
+  </section>
+  <div class="content-wrap" style="text-align:center;">
+    <img src="uploads/mh_element_stars.gif" alt="" style="width:140px;margin:0 auto 24px;opacity:.85;">
+    <h2>Be the Light</h2>
+    <p>Every contribution — big or small — keeps the lights on at Marang House. Lightkeepers are the backbone of our community, ensuring children have a safe place to heal, learn, and grow.</p>
+    <p>By donating or spreading the word, you become part of a family dedicated to changing children's lives for the better.</p>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap;">
+      <button class="btn btn-orange" onclick="show('donate')">Donate Now</button>
+      <button class="btn btn-blue-outline" onclick="show('contact')">Contact Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ DONATE ════════════════════════════════════════════ -->
+<div class="page" id="page-donate">
+  <section class="page-hero">
+    <p class="eyebrow">Make a Difference</p>
+    <h1>Donate</h1>
+    <p>Your generosity directly supports the children of Marang House. Every contribution matters.</p>
+  </section>
+  <div class="donate-body">
+    <div class="bank-box">
+      <h3>Bank Transfer</h3>
+      <div class="bank-row"><span class="bank-label">Bank</span><span>Nedbank</span></div>
+      <div class="bank-row"><span class="bank-label">Branch</span><span>Business Northrand</span></div>
+      <div class="bank-row"><span class="bank-label">Branch No</span><span>146-905</span></div>
+      <div class="bank-row"><span class="bank-label">Account Name</span><span>Marang House</span></div>
+      <div class="bank-row"><span class="bank-label">Account No</span><span>1469095769 (cheque)</span></div>
+      <div class="bank-row"><span class="bank-label">Swift No</span><span>NEDSZAJJ</span></div>
+      <p class="bank-note">Please use your <strong>name and surname</strong> as reference and send proof of payment to <strong>info@maranghouse.org</strong></p>
+    </div>
+    <div class="bank-box" style="background:#fff8e6;">
+      <h3>Cheques</h3>
+      <p style="font-size:.9rem;color:#333;">Cheques can be made out to: <strong style="color:var(--blue);">Marang House</strong></p>
+    </div>
+    <div class="info-strip"><h4>Tax Deductions</h4><p>Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A certificate can be issued after donation.</p></div>
+    <div class="info-strip"><h4>BBBEE Scorecard Points</h4><p>Contact us to discuss options and requirements.</p></div>
+    <div class="info-strip" style="border-left-color:var(--orange);"><h4>Coming Soon</h4><p><em>Back A Buddy monthly campaign — watch this space!</em></p></div>
+    <p class="npc-note">NPC Reg # 1998/009809/08</p>
+  </div>
+</div>
+
+<!-- ═══════ PRESS ═════════════════════════════════════════════ -->
+<div class="page" id="page-press">
+  <section class="page-hero">
+    <p class="eyebrow">Media</p>
+    <h1>Press</h1>
+    <p>Coverage, stories, and updates about Marang House.</p>
+  </section>
+  <div class="press-body">
+    <img src="uploads/mh_element_hearts.gif" alt="" style="width:76px;margin:0 auto 18px;">
+    <h2>Press Inquiries</h2>
+    <p>For media inquiries, interviews, or press kit materials, please reach out — we'd love to share the Marang House story.</p>
+    <button class="btn btn-orange" onclick="show('contact')">Contact Us</button>
+  </div>
+</div>
+
+<!-- ═══════ CONTACT ═══════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section class="page-hero">
+    <p class="eyebrow">Get in Touch</p>
+    <h1>Contact</h1>
+    <p>We'd love to hear from you.</p>
+  </section>
+  <div class="contact-body">
+    <div>
+      <div class="contact-label">Phone</div>
+      <div class="contact-value"><a href="tel:0114766698">011 476 6698</a></div>
+    </div>
+    <div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value"><a href="mailto:info@maranghouse.org">info@maranghouse.org</a></div>
+    </div>
+    <div>
+      <div class="contact-label">Donations POP</div>
+      <div class="contact-value"><a href="mailto:info@maranghouse.org">info@maranghouse.org</a></div>
+    </div>
+    <div>
+      <div class="contact-label">NPC Registration</div>
+      <div class="contact-value"># 1998/009809/08</div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:0 40px 56px;">
+    <img src="uploads/mh_element_sun and cloud.png" alt="" style="width:170px;opacity:.75;margin:0 auto;">
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div>
+    <div class="footer-logo">Marang House</div>
+    <div>NPC Reg # 1998/009809/08</div>
+  </div>
+  <div class="footer-links">
+    <a onclick="show('home')">Home</a>
+    <a onclick="show('about')">About Us</a>
+    <a onclick="show('lightkeepers')">Lightkeepers</a>
+    <a onclick="show('donate')">Donate</a>
+    <a onclick="show('press')">Press</a>
+    <a onclick="show('contact')">Contact</a>
+  </div>
+  <div style="text-align:right;">
+    <div>📞 011 476 6698</div>
+    <div style="margin-top:4px;">✉ info@maranghouse.org</div>
+  </div>
+</footer>
+
+<script>
+  const pages = ['home','about','lightkeepers','donate','press','contact'];
+  function show(name) {
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === name);
+      const nl = document.getElementById('nl-' + p);
+      if (nl) nl.classList.toggle('active', p === name);
+    });
+    window.scrollTo({ top: 0 });
+    try { localStorage.setItem('mh_page', name); } catch(e) {}
+    return false;
+  }
+  try {
+    const saved = localStorage.getItem('mh_page');
+    if (saved && pages.includes(saved)) show(saved);
+    else show('home');
+  } catch(e) { show('home'); }
+</script>
+</body>
+</html>

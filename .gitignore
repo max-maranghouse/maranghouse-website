@@ -1,31 +1,32 @@
 # Secrets — never commit
 .env
 .env.*
-
-# Local staging
-cloudinary_upload/
-decoded_template.html
-CONTENT-INVENTORY-raw.md
-
-# Bundled source (huge, not needed in repo)
-Marang House (standalone).html
+!.env.example
 
 # macOS
 .DS_Store
-
-# Redundant local images (now served from Cloudinary)
-uploads/
-web-images/
-screenshots/
-
-# Other local HTML exports not deployed
-Marang House.html
-export-src.html
-preview.html
-preview2.html
-ref-viewer.html
 
 # Maps and scripts (local tooling, optional to keep)
 *.pyc
 __pycache__/
 .vercel
+
+# Next.js
+/node_modules
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Legacy static-export files no longer used to build the site (see
+# MARANG-HOUSE-SITE-CONTEXT.md §10). Not deployed (see .vercelignore).
+# The bulky local image dumps and the 6.6MB bundled export are excluded
+# from git entirely — the images already live on Cloudinary, so these
+# are pure local backup clutter. Everything else in archive/ is small
+# text/code kept for historical reference.
+archive/uploads/
+archive/web-images/
+archive/screenshots/
+archive/cloudinary_upload/
+archive/Marang House (standalone).html

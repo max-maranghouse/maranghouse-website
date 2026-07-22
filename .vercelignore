@@ -1,17 +1,3 @@
-# Everything that shouldn't be deployed — images live on Cloudinary now
-Marang House (standalone).html
-Marang House.html
-decoded_template.html
-export-src.html
-preview.html
-preview2.html
-ref-viewer.html
-uploads/
-web-images/
-cloudinary_upload/
-screenshots/
-CONTENT-INVENTORY-raw.md
-*.py
-*.json
-.env
-.DS_Store
+# Reference-only legacy files from the pre-Next.js static export.
+# Kept in git history for posterity; not needed in the deployed bundle.
+archive/

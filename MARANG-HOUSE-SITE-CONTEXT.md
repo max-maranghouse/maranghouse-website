@@ -2,6 +2,8 @@
 
 > Upload this file at the start of a chat when you want help working on the Marang House website. It contains everything needed to understand how the site is built, where things live, and how to make and publish changes.
 
+> ⚠️ **Sections 1–9 below describe the site as it was originally built (a single static `index.html`).** A Next.js rebuild is in progress on branch `overhaul/nextjs-migration` — **read §10 first** for current status before assuming anything below still applies to what's live.
+
 ---
 
 ## 1. What this site is
@@ -196,5 +198,35 @@ gets you back to it.
     of the active tree (kept in git history, not deleted). Merge to `main`, promote to
     production once approved.
 
-### Status
-_Updated as work progresses — see git log on `overhaul/nextjs-migration` for details._
+### Status (as of 2026-07-22)
+
+Phases 1–10 are code-complete on branch `overhaul/nextjs-migration` (not yet merged
+to `main` / production). The site is now a Next.js 16 App Router project:
+
+- Real routes for every page, `next/image` (Cloudinary `remotePatterns`), `next/font`
+  self-hosted fonts, static CSP + security headers in `next.config.ts`, SEO metadata /
+  sitemap / robots / JSON-LD, accessibility fixes (skip link, labeled form fields,
+  focus states), and the contact form wired to Web3Forms (client-side, no backend).
+- `npm run build` and `npm run lint` pass clean; every route pre-renders as static
+  content; Playwright pass across all 6 pages found 0 console errors and 0 broken
+  images; screenshots confirm the design matches the original pixel-for-pixel.
+- Old static-export files (`index.html`, the Python build scripts, HTML exports,
+  local image dumps) moved to `archive/` — not deployed (see `.vercelignore`).
+
+**Before this can go live, three things need the site owner's input:**
+1. **Web3Forms access key.** The contact form has no key configured yet — it shows a
+   clear error instead of silently failing, but won't actually send email until a
+   free key from web3forms.com is set as `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in Vercel
+   (see `.env.example`).
+2. **Social media links.** The Facebook/Twitter/Instagram/LinkedIn icons in the nav
+   were never wired to real URLs in the original site either (`<a>` tags with no
+   `href`) — ported as-is (inert, not broken-looking) rather than inventing URLs.
+   Need the real profile links, or the icons should come out.
+3. **Press page content.** The three "Featured Coverage" items (Business Day, 702,
+   Mail & Guardian) with specific headlines and dates look like placeholder content
+   from the original Claude Design export, not verified real press mentions —
+   confirm these are real before launch, since attributing invented coverage to real
+   publications is a reputational/legal risk.
+
+Once resolved: merge `overhaul/nextjs-migration` → `main`, Vercel redeploys
+automatically (or `vercel --prod`).
