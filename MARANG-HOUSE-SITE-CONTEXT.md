@@ -171,8 +171,13 @@ gets you back to it.
 ### Decisions made
 - **Architecture:** migrate to Next.js (App Router) rather than patch the static file
   — real per-page routes, React components, `next/image` and `next/font`.
-- **Contact form:** third-party form service (Web3Forms) called client-side — no
-  custom backend or API keys to manage on Vercel.
+- **Contact form:** third-party form service, [Formspree](https://formspree.io)
+  (form ID `xjgnonlz`), called client-side via `@formspree/core` — no custom backend.
+  (Originally planned around Web3Forms; switched to Formspree once the site owner set
+  up a Formspree form instead. Using `@formspree/core` directly rather than
+  `@formspree/react` — the React package unconditionally bundles the Stripe SDK for
+  payment-field support this form doesn't use; `@formspree/core` has no such
+  dependency and implements the same submission/error contract.)
 
 ### Plan (phases)
 1. Scaffold Next.js project; port every section verbatim into real routes (`/`,
@@ -182,13 +187,13 @@ gets you back to it.
 3. Images via `next/image` (Cloudinary `remotePatterns`, keep `f_auto,q_auto`
    behaviour); fonts via `next/font` (Fredoka, Nunito, Permanent Marker — self-hosted,
    no runtime Google Fonts request).
-4. Contact form wired to Web3Forms with real `<label>`s, validation, success/error
+4. Contact form wired to Formspree with real `<label>`s, validation, success/error
    states, honeypot spam field.
 5. SEO: Metadata API per page, OG/Twitter cards, `app/sitemap.ts`, `app/robots.ts`,
    JSON-LD for the NPO.
 6. Accessibility: skip link, semantic landmarks, visible focus states, labeled form
    fields, alt-text audit, contrast check.
-7. Security headers in `next.config.js` (CSP scoped to Cloudinary/Web3Forms, X-Frame-
+7. Security headers in `next.config.js` (CSP scoped to Cloudinary/Formspree, X-Frame-
    Options, Referrer-Policy, Permissions-Policy, HSTS), dependency audit.
 8. Performance pass (Lighthouse/Core Web Vitals, bundle size, confirm image
    optimization is landing).
@@ -206,27 +211,24 @@ to `main` / production). The site is now a Next.js 16 App Router project:
 - Real routes for every page, `next/image` (Cloudinary `remotePatterns`), `next/font`
   self-hosted fonts, static CSP + security headers in `next.config.ts`, SEO metadata /
   sitemap / robots / JSON-LD, accessibility fixes (skip link, labeled form fields,
-  focus states), and the contact form wired to Web3Forms (client-side, no backend).
+  focus states), and the contact form wired to Formspree (client-side, no backend,
+  no env vars needed — the form ID isn't a secret).
 - `npm run build` and `npm run lint` pass clean; every route pre-renders as static
   content; Playwright pass across all 6 pages found 0 console errors and 0 broken
   images; screenshots confirm the design matches the original pixel-for-pixel.
 - Old static-export files (`index.html`, the Python build scripts, HTML exports,
   local image dumps) moved to `archive/` — not deployed (see `.vercelignore`).
 
-**Before this can go live, three things need the site owner's input:**
-1. **Web3Forms access key.** The contact form has no key configured yet — it shows a
-   clear error instead of silently failing, but won't actually send email until a
-   free key from web3forms.com is set as `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in Vercel
-   (see `.env.example`).
-2. **Social media links.** The Facebook/Twitter/Instagram/LinkedIn icons in the nav
-   were never wired to real URLs in the original site either (`<a>` tags with no
-   `href`) — ported as-is (inert, not broken-looking) rather than inventing URLs.
-   Need the real profile links, or the icons should come out.
-3. **Press page content.** The three "Featured Coverage" items (Business Day, 702,
+**Before this can go live, two things are still outstanding:**
+1. **Social media links.** Site owner is providing the real Facebook/Twitter/
+   Instagram/LinkedIn URLs (originally `<a>` tags with no `href` in the source site
+   too — ported as inert rather than inventing URLs).
+2. **Press page content.** The three "Featured Coverage" items (Business Day, 702,
    Mail & Guardian) with specific headlines and dates look like placeholder content
    from the original Claude Design export, not verified real press mentions —
    confirm these are real before launch, since attributing invented coverage to real
-   publications is a reputational/legal risk.
+   publications is a reputational/legal risk. Explicitly deferred per site owner
+   (2026-07-22) — revisit before production launch.
 
 Once resolved: merge `overhaul/nextjs-migration` → `main`, Vercel redeploys
 automatically (or `vercel --prod`).

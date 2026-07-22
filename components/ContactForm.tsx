@@ -1,10 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { createClient, isSubmissionError } from "@formspree/core";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+// Formspree form ID from https://formspree.io/f/xjgnonlz. Using
+// @formspree/core directly (not @formspree/react) — the React package
+// unconditionally bundles the Stripe SDK for its payment-field support,
+// which this form doesn't need; @formspree/core has no such dependency
+// and implements the same submission/error-parsing contract.
+const FORMSPREE_FORM_ID = "xjgnonlz";
+const formspreeClient = createClient();
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -12,14 +19,6 @@ export default function ContactForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (!WEB3FORMS_ACCESS_KEY) {
-      setStatus("error");
-      setErrorMessage(
-        "This form isn't configured yet — a Web3Forms access key is missing. Contact the site administrator."
-      );
-      return;
-    }
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -30,32 +29,20 @@ export default function ContactForm() {
       form.reset();
       return;
     }
-
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.append("subject", "New message from marang house website");
-    formData.append("from_name", "Marang House website");
+    formData.delete("botcheck");
 
     setStatus("submitting");
     setErrorMessage("");
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
-      const result = await response.json();
+    const result = await formspreeClient.submitForm(FORMSPREE_FORM_ID, formData);
 
-      if (result.success) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
-        setErrorMessage(result.message || "Something went wrong. Please try again.");
-      }
-    } catch {
+    if (isSubmissionError(result)) {
       setStatus("error");
-      setErrorMessage("Couldn't reach the server. Check your connection and try again.");
+      const message = result.getFormErrors()[0]?.message;
+      setErrorMessage(message || "Something went wrong. Please try again.");
+    } else {
+      setStatus("success");
+      form.reset();
     }
   }
 

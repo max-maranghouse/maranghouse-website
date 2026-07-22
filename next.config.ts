@@ -14,10 +14,10 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' https://res.cloudinary.com data:;
   font-src 'self';
-  connect-src 'self' https://api.web3forms.com;
+  connect-src 'self' https://formspree.io;
   object-src 'none';
   base-uri 'self';
-  form-action 'self' https://api.web3forms.com;
+  form-action 'self' https://formspree.io;
   frame-ancestors 'none';
   upgrade-insecure-requests;
 `
