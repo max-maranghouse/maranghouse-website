@@ -28,3 +28,4 @@ ref-viewer.html
 # Maps and scripts (local tooling, optional to keep)
 *.pyc
 __pycache__/
+.vercel
