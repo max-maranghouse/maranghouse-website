@@ -2,7 +2,7 @@
 
 > Upload this file at the start of a chat when you want help working on the Marang House website. It contains everything needed to understand how the site is built, where things live, and how to make and publish changes.
 
-> ⚠️ **Sections 1–9 below describe the site as it was originally built (a single static `index.html`).** A Next.js rebuild is in progress on branch `overhaul/nextjs-migration` — **read §10 first** for current status before assuming anything below still applies to what's live.
+> ⚠️ **Sections 1–9 below describe the site as it was originally built (a single static `index.html`).** They no longer describe what's actually live. A Next.js rebuild is in progress on branch `overhaul/nextjs-migration` (see §10), but **the domain currently points at neither of those** — read **§11 first**: the GoDaddy-hosted production site was hacked, and `maranghouse.org` now runs a separate temporary landing page in its own project/repo while both the hosting cleanup and the rebuild are unfinished.
 
 ---
 
@@ -232,3 +232,65 @@ to `main` / production). The site is now a Next.js 16 App Router project:
 
 Once resolved: merge `overhaul/nextjs-migration` → `main`, Vercel redeploys
 automatically (or `vercel --prod`).
+
+---
+
+## 11. GoDaddy hosting compromise & temporary landing page (2026-07-22/23)
+
+**What happened:** the live site was, until this point, actually hosted separately on
+GoDaddy (WordPress), not on the Vercel project this doc otherwise describes. That
+GoDaddy-hosted site was hacked — apparent cause: a compromised WordPress plugin — and
+taken down. `maranghouse.org` (the real production domain, registered at GoDaddy) was
+pointing at that hosting.
+
+**DNS-level compromise found too.** Reviewing the GoDaddy DNS zone turned up three
+records that shouldn't have been there: a `_cf-custom-hostname.www` TXT record and a
+Cloudflare delegated-DCV `_acme-challenge` CNAME — the signature of a "Cloudflare for
+SaaS" custom-hostname setup the org never configured. Since DNS records can't be added
+from inside WordPress alone, this meant something had GoDaddy **account**-level access,
+not just a WordPress-admin foothold. Response, in order: locked down the GoDaddy
+account (password + 2FA) before touching anything, confirmed via account activity that
+the GoDaddy account itself wasn't separately breached, then deleted the unauthorized
+records. Two other records (`pay` CNAME to GoDaddy's own Payment Links product, and a
+`sender._domainkey`/SPF entry for a third-party mailer at `sendersrv.com`) were
+confirmed as legitimate, pre-existing, and left alone. A couple of remaining records
+tied to GoDaddy's WordPress hosting product itself couldn't be deleted from the DNS
+panel (locked by the hosting product) — not a concern since nothing routes to that
+hosting anymore.
+
+**Still outstanding, not urgent:** the GoDaddy WordPress hosting account itself hasn't
+been cleaned/scanned or decommissioned — it's just no longer publicly reachable via the
+domain. Also, SPF ends in `?all` (neutral — doesn't stop spoofing) and DMARC is `p=none`
+(monitor-only) — both worth tightening at some point, more so than usual given the
+breach raises phishing risk, but not done yet.
+
+**Stopgap while both the hosting cleanup and the Next.js rebuild are unfinished:** a
+minimal, dependency-free static landing page.
+
+- **Location:** separate directory and separate git repo —
+  `/Users/maxwellernst/Documents/Marang House Website Landing/` — deliberately not part
+  of this repo or the Next.js project. Single `index.html`, inline CSS, zero JS, zero
+  third-party scripts (the opposite of what just got the WordPress site hacked).
+- **Hosting:** new, separate Vercel project `marang-house-landing` (not
+  `marang-house-website`, the project this repo deploys to).
+- **DNS:** `maranghouse.org` and `www.maranghouse.org` now point at this Vercel
+  project — A records `216.198.79.1` / `64.29.17.1` on `@`, `www` still CNAMEs to the
+  apex (pre-existing chain, still resolves correctly through to the new records).
+  Verified live via `vercel domains verify` and directly in-browser.
+- **Content:** About blurb, a "Lightkeepers" donate card linking to the org's BackaBuddy
+  campaign (`https://www.backabuddy.co.za/campaign/marang-circle-of-light`), contact
+  info, and a real photo (reused from the existing Cloudinary asset library) as a hero
+  background for legitimacy. A GivenGain donate button/widget was tried first — the
+  GivenGain widget itself turned out to be broken on their end (its CSS asset URL
+  returns their marketing homepage instead of stylesheet data) — and the org has since
+  decided to only use BackaBuddy going forward, so GivenGain was dropped entirely.
+- **Neutral "under maintenance" framing** used deliberately instead of disclosing the
+  security incident publicly (avoids alarming donors / inviting further attacks).
+
+**Important for whoever launches the Next.js rebuild:** the custom domain
+(`maranghouse.org` / `www`) is currently attached to the `marang-house-landing` Vercel
+project, not `marang-house-website`. A domain can only be attached to one Vercel
+project at a time — when the rebuild in `overhaul/nextjs-migration` is ready to replace
+this landing page, the domain needs to be moved (removed from `marang-house-landing`,
+added to `marang-house-website`) as part of that launch, or it'll still be pointing at
+the landing page after merging to `main`.
