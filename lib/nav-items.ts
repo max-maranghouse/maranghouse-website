@@ -1,10 +1,10 @@
 export const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
+  { href: "/press", label: "Press" },
   { href: "/donate", label: "Donate" },
   { href: "/lightkeepers", label: "The Lightkeepers" },
-  { href: "/press", label: "Press" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const SITE = {

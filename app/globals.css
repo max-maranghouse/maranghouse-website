@@ -89,21 +89,25 @@ img { display: block; }
 .nav-logo-text {
   font-family: var(--font-permanent-marker), cursive;
   font-size: 1.3rem; color: #fff; letter-spacing: 7px; white-space: nowrap;
+  text-decoration: none;
 }
 .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
 .nav-links a {
   font-family: var(--font-nunito), sans-serif; font-weight: 700;
   font-size: 0.82rem; text-transform: uppercase; letter-spacing: .6px;
   color: #fff; cursor: pointer; padding: 2px 0;
+  text-decoration: none;
   transition: color .2s;
 }
 .nav-links a:hover { color: var(--canva-yellow); }
 .nav-links a.active { color: var(--canva-yellow); }
 .nav-right { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
 .nav-newsletter {
+  display: inline-block;
   background: transparent; color: #fff; border: 2px solid #fff;
   font-family: var(--font-nunito), sans-serif; font-weight: 800; font-size: 0.78rem; letter-spacing: .6px;
   padding: 10px 22px; border-radius: 50px; cursor: pointer;
+  text-decoration: none;
   white-space: nowrap; transition: background .2s, color .2s;
 }
 .nav-newsletter:hover { background: #fff; color: var(--blue); }
@@ -130,7 +134,7 @@ img { display: block; }
    SECTION 1: HERO (corkboard)
 ═══════════════════════════════════════ */
 .hero {
-  position: relative; min-height: 960px;
+  position: relative; min-height: 700px;
   overflow: hidden; display: flex; align-items: stretch;
 }
 .hero-photo {
@@ -161,11 +165,12 @@ img { display: block; }
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
 }
 .hero-keyring {
-  position: absolute; right: 30%; top: 16%; width: 130px;
+  position: absolute; right: 28%; top: 10%; width: 190px;
+  transform: rotate(-10deg);
   filter: drop-shadow(0 14px 30px rgba(0,0,0,.4));
 }
 .hero-polaroid-1 {
-  position: absolute; right: 16%; top: 30%; width: 320px;
+  position: absolute; right: 22%; top: 30%; width: 320px;
   transform: rotate(-4deg);
   filter: drop-shadow(0 12px 26px rgba(0,0,0,.3));
 }
@@ -178,7 +183,7 @@ img { display: block; }
   position: absolute; right: 4%; bottom: 0; width: 220px;
 }
 .hero-pin-1 {
-  position: absolute; right: 27.5%; top: 27%; width: 46px;
+  position: absolute; right: 30.5%; top: 12.5%; width: 46px;
   transform: rotate(23deg);
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.35));
 }
