@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import ContactForm from "@/components/ContactForm";
 import { cld } from "@/lib/images";
@@ -32,6 +33,16 @@ export default function ContactPage() {
       </section>
 
       <section className="contact-form-section">
+        <Image
+          className="contact-form-rays"
+          src={cld("MH-Ray.gif")}
+          alt=""
+          width={800}
+          height={800}
+          style={{ height: "auto" }}
+          aria-hidden="true"
+          unoptimized
+        />
         <div className="contact-form-wrap">
           <div className="contact-form-aside-text">
             <h2>Get in touch!</h2>

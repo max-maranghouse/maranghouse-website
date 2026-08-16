@@ -43,6 +43,16 @@ export default function AboutPage() {
 
       <section className="about-whatwedo">
         <Image
+          className="about-whatwedo-rays"
+          src={cld("MH-Ray.gif")}
+          alt=""
+          width={800}
+          height={800}
+          style={{ height: "auto" }}
+          aria-hidden="true"
+          unoptimized
+        />
+        <Image
           className="about-whatwedo-cloud"
           src={cld("MH-cloud-giff.gif")}
           alt=""

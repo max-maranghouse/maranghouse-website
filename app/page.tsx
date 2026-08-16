@@ -89,6 +89,30 @@ export default function HomePage() {
             height={1000}
             style={{ height: "auto" }}
           />
+          <Image
+            className="hero-pin-1"
+            src={cld("MH-board-pin-yellow.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <Image
+            className="hero-pin-2"
+            src={cld("MH-board-pin-blue.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <Image
+            className="hero-pin-3"
+            src={cld("MH-board-pin-blue.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
         </div>
         <WhatsAppFab />
       </section>
@@ -96,6 +120,16 @@ export default function HomePage() {
       {/* 2. BECOME A LIGHTKEEPER banner */}
       <section className="lk-band">
         <div className="lk-card">
+          <Image
+            className="lk-card-rays"
+            src={cld("MH-Ray.gif")}
+            alt=""
+            width={800}
+            height={800}
+            style={{ height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
           <div className="lk-card-text">
             <h2 className="lk-title">Become A Lightkeeper</h2>
             <p className="lk-desc">
@@ -172,6 +206,124 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* MEET THE PEOPLE — present in the Canva source between Mission and
+          Testimonials, restored on request even though it wasn't in the 16
+          curated screenshots. */}
+      <section className="sponsors-section">
+        <h2>
+          Meet a few of the people who
+          <br />
+          help us transform lives
+        </h2>
+        <p className="sponsors-sub">
+          Businesses and fellow foundations have given their time and support to help us make a
+          difference in children&apos;s lives.
+        </p>
+        <div className="sponsors-row">
+          <div className="sponsor-item">
+            <BgPhoto
+              src={cld("v1784193096/maranghouse/Daryl_and_David1.jpg")}
+              alt="Daryl Impey"
+              className="sponsor-avatar"
+              position="70% center"
+              sizes="96px"
+            />
+            <div className="sponsor-name">
+              Professional Road Cyclist
+              <span>Daryl Impey</span>
+            </div>
+          </div>
+          <div className="sponsor-item">
+            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#b47fd6" }}>
+              MW
+            </div>
+            <div className="sponsor-name">
+              Mrs Universe
+              <span>Monique Weyers</span>
+            </div>
+          </div>
+          <div className="sponsor-item">
+            <BgPhoto
+              src={cld("v1784193104/maranghouse/pirates_helpers.jpg")}
+              alt="Pirates Running Club"
+              className="sponsor-avatar"
+              position="right center"
+              sizes="96px"
+            />
+            <div className="sponsor-name">
+              Pirates
+              <span>Running Club</span>
+            </div>
+          </div>
+          <div className="sponsor-item">
+            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#33334a" }}>
+              JJC
+            </div>
+            <div className="sponsor-name">
+              JHB Junior
+              <span>Council</span>
+            </div>
+          </div>
+        </div>
+        <div className="sponsors-row">
+          <div className="sponsor-item">
+            <BgPhoto
+              src={cld("v1784193097/maranghouse/Daryl_and_David2.jpg")}
+              alt="David Higgs"
+              className="sponsor-avatar"
+              position="65% top"
+              sizes="96px"
+            />
+            <div className="sponsor-name">
+              Chef &amp; Personality
+              <span>David Higgs</span>
+            </div>
+          </div>
+          <div className="sponsor-item">
+            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#8a6248" }}>
+              NW
+            </div>
+            <div className="sponsor-name">
+              Miss Earth 2019
+              <span>Nazia Wadee</span>
+            </div>
+          </div>
+          <div className="sponsor-item">
+            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#3fa9d8" }}>
+              RD
+            </div>
+            <div className="sponsor-name">Reach For A Dream</div>
+          </div>
+          <div className="sponsor-item">
+            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#1d2a4d" }}>
+              PCI
+            </div>
+            <div className="sponsor-name">PCI Carpets</div>
+          </div>
+        </div>
+        <Image
+          className="sponsors-stars"
+          src={cld("MH-star-giff.gif")}
+          alt=""
+          width={425}
+          height={425}
+          style={{ height: "auto" }}
+          unoptimized
+        />
+        <Image
+          className="sponsors-stars-2"
+          src={cld("MH-star-giff.gif")}
+          alt=""
+          width={425}
+          height={425}
+          style={{ height: "auto" }}
+          unoptimized
+        />
+        <Link href="/lightkeepers" className="btn btn-blue">
+          SPONSOR A CHILD TODAY
+        </Link>
+      </section>
+
       {/* 5. TESTIMONIALS */}
       <section className="testimonials-section">
         <BgPhoto
@@ -182,6 +334,14 @@ export default function HomePage() {
         />
         <Image
           className="testi-stars-doodle"
+          src={cld("MH-star-giff.gif")}
+          alt=""
+          width={425}
+          height={425}
+          unoptimized
+        />
+        <Image
+          className="testi-stars-doodle-2"
           src={cld("MH-star-giff.gif")}
           alt=""
           width={425}
