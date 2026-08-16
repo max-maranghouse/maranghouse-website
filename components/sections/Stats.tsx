@@ -1,54 +1,44 @@
 import Image from "next/image";
+import { cld } from "@/lib/images";
 
-const SKIPPING_GIF =
-  "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193090/maranghouse/mh_element_skipping.gif";
+// Figures match the Canva mockup (27+ / 300+ / 1000+) but conflict with the
+// site's existing copy (25 Years / 100+ Children) and the founding year is
+// inconsistent across sources (1993 vs 1998) — see MARANG-HOUSE-SITE-CONTEXT.md
+// and the Canva redesign brief. Numbers below are TBC pending Max's
+// confirmation; update this array in one place once confirmed.
+const STATS = [
+  { value: "27+", label: "Years", color: "var(--canva-yellow)" },
+  { value: "300+", label: "Children", color: "#f27926" },
+  { value: "1000+", label: "Volunteers", color: "#ff3538" },
+] as const;
 
 export default function Stats({ variant = "default" }: { variant?: "default" | "about" }) {
   return (
     <section className="stats-section">
+      <Image
+        className="stats-figure"
+        src={cld("MH-skipping-giff.gif")}
+        alt="Illustration of a child skipping rope"
+        width={979}
+        height={979}
+        unoptimized
+        style={variant === "about" ? { left: "3%", width: "auto" } : { width: "auto" }}
+      />
       <div className="stats-heading">
         <h2>Creating A Better Future</h2>
         <p>For Children Living With Chronic Illness</p>
       </div>
       <div className="stats-row">
-        <div className="stat-item">
-          <div className="stat-num">25</div>
-          <div className="stat-label">Years</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-num" style={{ color: "#f27926" }}>
-            100+
+        {STATS.map((stat) => (
+          <div className="stat-item" key={stat.label}>
+            <div className="stat-num" style={{ color: stat.color }}>
+              {stat.value}
+            </div>
+            <div className="stat-label">{stat.label}</div>
           </div>
-          <div className="stat-label">Children</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-num" style={{ color: "#ff3538" }}>
-            1000+
-          </div>
-          <div className="stat-label">Volunteers</div>
-        </div>
+        ))}
       </div>
-      {variant === "about" ? (
-        <Image
-          className="stats-figure"
-          src={SKIPPING_GIF}
-          alt="Child skipping"
-          width={300}
-          height={302}
-          unoptimized
-          style={{ width: "300px", height: "302px", left: "-94px", top: "-14px", position: "absolute" }}
-        />
-      ) : (
-        <Image
-          className="stats-figure"
-          src={SKIPPING_GIF}
-          alt="Child skipping"
-          width={330}
-          height={330}
-          unoptimized
-          style={{ width: "330px", height: "330px" }}
-        />
-      )}
+      <p className="stats-tbc-note">*Figures pending final confirmation.</p>
     </section>
   );
 }

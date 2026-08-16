@@ -7,61 +7,80 @@ import { cld } from "@/lib/images";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Marang House provides a nurturing home for children aged 7 to 14 living with chronic illnesses, ensuring their medical care and education go hand in hand.",
+    "Marang House provides a nurturing home for children aged 4 to 14 living with chronic illnesses, ensuring their medical care and education go hand in hand.",
 };
 
 export default function AboutPage() {
   return (
     <>
-      <section className="about-intro">
-        <div className="about-intro-left">
+      <section className="about-navy">
+        <div className="about-navy-left">
           <h1>
-            We&apos;re Marang House<span>.</span>
+            We are
+            <span>Marang House</span>
           </h1>
+          <ul className="about-navy-list">
+            <li>Provide a nurturing home environment</li>
+            <li>Children between the ages of 4 and 14</li>
+            <li>Learning to manage their illnesses</li>
+          </ul>
           <p>
-            We provide a nurturing home environment for children between the ages of 7 and 14,
-            empowering them to learn and manage their illnesses. They face serious health conditions
-            that demand continuous monitoring and specialised treatments at a tertiary hospital.
+            They face serious health conditions that demand continuous monitoring and specialized
+            treatments at a tertiary hospital.
           </p>
-          <p>
-            Importantly, we ensure that their education remains a priority by taking them to the
-            hospital daily, where they receive disease management training alongside traditional
-            schooling.
+          <p className="about-navy-important">Importantly:</p>
+          <p className="about-navy-italic">
+            We ensure that their education remains a priority by taking them to the hospital daily, where
+            they receive disease management training alongside traditional schooling
           </p>
-          <p style={{ fontWeight: 800, marginTop: "22px" }}>What we do:</p>
-          <div className="cards-row" style={{ marginTop: "8px" }}>
-            <Image
-              src={cld("v1784193087/maranghouse/mh_element_3.png")}
-              alt="Accommodate 12 children at a time"
-              width={150}
-              height={150}
-            />
-            <Image
-              src={cld("v1784193084/maranghouse/mh_element_1.png")}
-              alt="Offer the necessities"
-              width={150}
-              height={150}
-            />
-            <Image
-              src={cld("v1784193086/maranghouse/mh_element_2.png")}
-              alt="Round-the-clock medical care"
-              width={150}
-              height={150}
-            />
-          </div>
         </div>
         <BgPhoto
-          src={cld("v1784193095/maranghouse/424572362_392057836643691_8244405606096808142_n.jpg")}
+          src={cld("MH-kid-pirate.png")}
           alt="A child at Marang House"
-          className="about-intro-photo"
+          className="about-navy-photo"
         />
+      </section>
+
+      <section className="about-whatwedo">
+        <Image
+          className="about-whatwedo-cloud"
+          src={cld("MH-cloud-giff.gif")}
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ height: "auto" }}
+          aria-hidden="true"
+          unoptimized
+        />
+        <h2>What We Do:</h2>
+        <div className="about-whatwedo-grid">
+          <Image
+            src={cld("MH-what-we-do-1.png")}
+            alt="Accommodate 12 children at a time"
+            width={1000}
+            height={1000}
+          />
+          <Image
+            src={cld("MH-what-we-do-2.png")}
+            alt="Offer the necessities: food, housing"
+            width={1000}
+            height={1000}
+          />
+          <Image
+            src={cld("MH-what-we-do-3.png")}
+            alt="Round-the-clock medical care"
+            width={1000}
+            height={1000}
+          />
+        </div>
       </section>
 
       <section className="about-ntmy">
         <BgPhoto
-          src={cld("v1784193098/maranghouse/MARANG-1.jpg")}
-          alt="Marang House building"
+          src={cld("MH-kid-group.png")}
+          alt="A grandmother and children at Marang House"
           className="about-ntmy-photo"
+          sizes="260px"
         />
         <div className="about-ntmy-text">
           <h2>Nice To Meet You.</h2>
@@ -73,12 +92,12 @@ export default function AboutPage() {
             environment required for their children&apos;s well-being.
           </p>
           <p>
-            The road to overcoming these illnesses seems like an uphill battle, filled with daily
-            routines of testing, dialysis, and the uncertain waiting game for organ transplants.
+            The road to overcoming these illnesses seems like an uphill battle, filled with daily routines
+            of testing, dialysis, and the uncertain waiting game for organ transplants.
           </p>
           <p>
-            In 1998, Marang House emerged as a beacon of hope, dedicated to bringing light into the
-            lives of South Africa&apos;s seriously ill children.
+            In 1998, Marang House emerged as a beacon of hope, dedicated to bringing light into the lives
+            of South Africa&apos;s seriously ill children.
           </p>
         </div>
       </section>

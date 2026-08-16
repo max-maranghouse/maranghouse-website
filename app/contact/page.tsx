@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import BgPhoto from "@/components/BgPhoto";
 import ContactForm from "@/components/ContactForm";
+import { cld } from "@/lib/images";
 import { SITE } from "@/lib/nav-items";
 
 export const metadata: Metadata = {
@@ -12,29 +14,45 @@ export default function ContactPage() {
   return (
     <>
       <section className="contact-hero">
-        <h1>
-          WE&apos;D LOVE TO
-          <br />
-          <span>HEAR FROM YOU.</span>
-        </h1>
+        <BgPhoto
+          src={cld("MH-info-pg-element.png")}
+          alt=""
+          className="contact-hero-bg"
+          position="center 25%"
+          sizes="100vw"
+          priority
+        />
+        <div className="contact-hero-overlay" />
+        <div className="contact-hero-content">
+          <h1>
+            WE&apos;D LOVE TO
+            <span>HEAR FROM YOU</span>
+          </h1>
+        </div>
       </section>
 
-      <section className="contact-form-wrap">
-        <ContactForm />
-        <div className="contact-aside">
-          <h2>Get in touch!</h2>
-          <p>
-            Businesses and fellow foundations have given their time and support to help us make a
-            difference in children&apos;s lives.
-          </p>
-          <div className="contact-line">
-            📞 <a href={SITE.phoneHref}>{SITE.phone}</a>
+      <section className="contact-form-section">
+        <div className="contact-form-wrap">
+          <div className="contact-form-aside-text">
+            <h2>Get in touch!</h2>
+            <p>
+              Businesses and fellow foundations have given their time and support to help us make a
+              difference in children&apos;s lives.
+            </p>
+            <div className="contact-aside">
+              <div className="contact-line">
+                📞 <a href={SITE.phoneHref}>{SITE.phone}</a>
+              </div>
+              <div className="contact-line">
+                ✉ <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+              </div>
+              <div className="contact-line" style={{ color: "#7a4a10", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
+                {SITE.npcReg}
+              </div>
+            </div>
           </div>
-          <div className="contact-line">
-            ✉ <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-          </div>
-          <div className="contact-line" style={{ color: "#888", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
-            {SITE.npcReg}
+          <div className="contact-form-card">
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -45,6 +63,15 @@ export default function ContactPage() {
             <path d="M75 8C40 8 14 34 14 68c0 44 61 114 61 114s61-70 61-114C136 34 110 8 75 8z" fill="#7ba6dd" />
             <circle cx="75" cy="64" r="26" fill="#004aad" />
           </svg>
+        </div>
+        <div className="find-us-map">
+          <iframe
+            src="https://maps.google.com/maps?q=22+Milner+Ave,+Franklin+Roosevelt+Park,+Johannesburg,+2195&output=embed"
+            title="Map showing the Marang House location at 22 Milner Ave, Franklin Roosevelt Park, Johannesburg"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          />
         </div>
         <div className="find-us-body">
           <h2>

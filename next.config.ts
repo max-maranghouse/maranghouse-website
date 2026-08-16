@@ -15,6 +15,7 @@ const cspHeader = `
   img-src 'self' https://res.cloudinary.com data:;
   font-src 'self';
   connect-src 'self' https://formspree.io;
+  frame-src https://www.google.com https://maps.google.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://formspree.io;

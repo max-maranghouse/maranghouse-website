@@ -5,20 +5,31 @@ import WhatsAppFab from "@/components/WhatsAppFab";
 import Stats from "@/components/sections/Stats";
 import { cld } from "@/lib/images";
 
+// Testimonial names/quotes are unconfirmed — the Canva mockup (Rosita Gaskin /
+// Gugulethu Cele / Malwande Khumalo) and the site's existing content
+// inventory (Nkosi Speers / Eugalina Corn / Minwase Khamala) disagree on who
+// said what, and neither is verified. Placeholder copy ships instead of
+// picking one set — see MARANG-HOUSE-SITE-CONTEXT.md and the Canva redesign
+// brief. Swap in the confirmed names/quotes here once Max signs off.
+const TESTIMONIALS = [
+  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
+  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
+  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
+] as const;
+
 export default function HomePage() {
   return (
     <>
-      {/* 1. HERO */}
+      {/* 1. HERO — corkboard, bunting, polaroids, keyring badge */}
       <section className="hero">
         <BgPhoto
-          src={cld("v1784193102/maranghouse/SmacPix_Marang2.jpg")}
+          src={cld("MH-pinboard-BG.png")}
           alt=""
           className="hero-photo"
           position="center 30%"
           sizes="100vw"
           priority
         />
-        <div className="hero-overlay" />
         <div className="hero-content">
           <Image
             className="hero-doodle"
@@ -26,6 +37,7 @@ export default function HomePage() {
             alt="Marang House logo"
             width={120}
             height={120}
+            style={{ height: "auto" }}
           />
           <h1>
             Fostering Health,
@@ -39,278 +51,141 @@ export default function HomePage() {
             <Link href="/donate" className="btn btn-hero-solid">
               DONATE
             </Link>
-            <Link href="/donate" className="btn btn-white-outline">
-              DONATE IN KIND
+            <Link href="/contact" className="btn btn-hero-solid">
+              GET OUR NEWSLETTER
             </Link>
           </div>
+        </div>
+        <div className="hero-doodads" aria-hidden="true">
+          <Image
+            className="hero-keyring"
+            src={cld("MH-lighthouse-keychain.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <Image
+            className="hero-polaroid-1"
+            src={cld("MH-polaroid-1.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <Image
+            className="hero-polaroid-2"
+            src={cld("MH-polaroid-2.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <Image
+            className="hero-sketch"
+            src={cld("MH-kids-sketch.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
         </div>
         <WhatsAppFab />
       </section>
 
-      {/* 2. LIGHTKEEPER BAND */}
+      {/* 2. BECOME A LIGHTKEEPER banner */}
       <section className="lk-band">
         <div className="lk-card">
           <div className="lk-card-text">
-            <p className="lk-eyebrow">The Marang Circle of Light</p>
-            <h2 className="lk-title">LIGHTKEEPER</h2>
+            <h2 className="lk-title">Become A Lightkeeper</h2>
             <p className="lk-desc">
-              Join &ldquo;The&nbsp;Circle Of Light&rdquo;, become a Marang House lightkeeper, and donate
-              monthly to Marang House.
+              The <strong>Marang Circle of Light</strong> is a community of <strong>monthly donors</strong>{" "}
+              who keep the light of home shining, joy and love for chronically ill children receiving
+              treatment away from home. Be the first to get a limited-edition keyring with love from us.
             </p>
             <Link href="/lightkeepers" className="btn lk-signup">
-              SIGN&ndash;UP
+              SIGN&ndash;ME&ndash;UP!
             </Link>
           </div>
           <Image
             className="lk-card-pin"
-            src={cld("v1784193082/maranghouse/Marang_House_Website_Element.png")}
-            alt="Lightkeeper badge"
-            width={280}
-            height={280}
+            src={cld("MH-lighthouse-keychain.png")}
+            alt="Lightkeeper enamel keyring badge"
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
           />
         </div>
       </section>
 
-      {/* 3. WE'RE MARANG HOUSE */}
-      <section className="intro-section">
-        <div className="intro-inner">
-          <div className="intro-left">
-            <h2 className="intro-heading">We&rsquo;re Marang House.</h2>
-            <p className="intro-body">
-              We provide a nurturing home environment for children between the ages of 7 and 14,
-              empowering them to learn and manage their illnesses. They face serious health conditions
-              that demand continuous monitoring and specialized treatments at a tertiary hospital.
-            </p>
-            <p className="intro-body">
-              Importantly, we ensure that their education remains a priority by taking them to the
-              hospital daily, where they receive disease management training alongside traditional
-              schooling
-            </p>
-            <p className="intro-what">What we do:</p>
-            <div className="intro-cards">
-              <Image
-                className="intro-card"
-                src={cld("v1784193087/maranghouse/mh_element_3.png")}
-                alt="Accommodate 12 Children at a time"
-                width={172}
-                height={172}
-              />
-              <Image
-                className="intro-card"
-                src={cld("v1784193084/maranghouse/mh_element_1.png")}
-                alt="Offer the Necessities"
-                width={172}
-                height={172}
-              />
-              <Image
-                className="intro-card"
-                src={cld("v1784193086/maranghouse/mh_element_2.png")}
-                alt="Round-the-clock Medical Care"
-                width={172}
-                height={172}
-              />
-            </div>
-          </div>
-          <div className="intro-right">
+      {/* 3. WE'RE MARANG HOUSE — home teaser */}
+      <section className="home-intro-section">
+        <div className="home-intro-inner">
+          <div className="home-intro-left">
             <Image
-              className="intro-suncloud"
-              src={cld("v1784193092/maranghouse/mh_element_sun_and_cloud.png")}
+              className="home-intro-doodle"
+              src={cld("MH-shun-giff.gif")}
               alt=""
-              width={330}
-              height={183}
+              width={1000}
+              height={1000}
+              style={{ height: "auto" }}
+              unoptimized
             />
+            <h2>We&rsquo;re Marang House.</h2>
+            <p>Marang House is a home, and a Circle of Light, for children living with serious chronic illness.</p>
+            <p>
+              We take in kids aged 4 to 14 whose conditions demand constant medical care, and we give them
+              what every child deserves: a safe, loving place to live, daily treatment at a tertiary
+              hospital, and an education that never stops.
+            </p>
+            <p>Since 1998, we&rsquo;ve made sure no child has to choose between their health and their future.</p>
+          </div>
+          <div className="home-intro-right">
             <BgPhoto
-              src={cld("v1784193101/maranghouse/SmacPix_Marang1.jpg")}
-              alt="Children at Marang House"
-              className="arch-photo intro-right-photo"
+              src={cld("MH-kid-pirate.png")}
+              alt="A child at Marang House"
+              className="home-intro-photo"
+              position="center 20%"
             />
           </div>
         </div>
       </section>
 
-      {/* 4. NICE TO MEET YOU */}
-      <section className="ntmy-section">
-        <div className="ntmy-inner">
-          <BgPhoto
-            src={cld("v1784193098/maranghouse/MARANG-1.jpg")}
-            alt="Marang House building"
-            className="arch-photo ntmy-photo"
-          />
-          <div className="ntmy-content">
-            <h2>Nice To Meet You.</h2>
-            <p className="ntmy-sub">
-              The reality for children suffering from chronic illnesses is a harsh one.
-            </p>
-            <p>
-              Many families simply cannot afford the constant medical care, supervision, and suitable
-              environment required for their children&rsquo;s well-being.
-            </p>
-            <p>
-              The road to overcoming these illnesses seems like an uphill battle, filled with daily
-              routines of testing, dialysis, and the uncertain waiting game for organ transplants.
-            </p>
-            <p>
-              In 1998, Marang House emerged as a beacon of hope, dedicated to bringing light into the
-              lives of South Africa&rsquo;s seriously ill children.
-            </p>
-          </div>
-        </div>
-        <Image
-          className="ntmy-sun"
-          src={cld("v1784193093/maranghouse/mh_element_sun.gif")}
-          alt=""
-          width={300}
-          height={300}
-          unoptimized
-        />
-      </section>
-
-      {/* 5. OUR MISSION */}
+      {/* 4. OUR MISSION — heart hands full-bleed */}
       <section className="mission-section">
         <div className="mission-card">
-          <BgPhoto
-            src={cld("v1784193098/maranghouse/MARANG-1.jpg")}
+          <BgPhoto src={cld("MH-heart-hands-banner.png")} alt="" className="mission-bg" />
+          <Image
+            className="mission-love-doodle"
+            src={cld("MH-love-giff.gif")}
             alt=""
-            className="mission-bg"
+            width={200}
+            height={200}
+            style={{ height: "auto" }}
+            unoptimized
           />
-          <div className="mission-overlay" />
           <div className="mission-content">
             <p className="mission-eyebrow">our</p>
             <h2>MISSION</h2>
-            <div className="mission-divider" />
             <p>Providing a safe and loving home where brave kids can thrive and learn to manage their illness.</p>
           </div>
         </div>
-        <Image
-          className="mission-sun"
-          src={cld("v1784193093/maranghouse/mh_element_sun.gif")}
-          alt=""
-          width={300}
-          height={300}
-          unoptimized
-        />
       </section>
 
-      {/* 6. MEET THE PEOPLE */}
-      <section className="sponsors-section">
-        <h2>
-          Meet some of the people who
-          <br />
-          help us transform lives
-        </h2>
-        <p className="sponsors-sub">
-          Businesses and fellow foundations have given their time and support to help us make a
-          difference in children&apos;s lives.
-        </p>
-        <div className="sponsors-row">
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193096/maranghouse/Daryl_and_David1.jpg")}
-              alt="Daryl Impey"
-              className="sponsor-avatar"
-              position="70% center"
-              sizes="104px"
-            />
-            <div className="sponsor-name">
-              Professional Road Cyclist
-              <span>Daryl Impey</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#b47fd6" }}>
-              MW
-            </div>
-            <div className="sponsor-name">
-              Mrs Universe
-              <span>Monique Weyers</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193104/maranghouse/pirates_helpers.jpg")}
-              alt="Pirates Running Club"
-              className="sponsor-avatar"
-              position="right center"
-              sizes="104px"
-            />
-            <div className="sponsor-name">
-              Pirates
-              <span>Running Club</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#33334a" }}>
-              JJC
-            </div>
-            <div className="sponsor-name">
-              JHB Junior
-              <span>Council</span>
-            </div>
-          </div>
-        </div>
-        <div className="sponsors-row">
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193097/maranghouse/Daryl_and_David2.jpg")}
-              alt="David Higgs"
-              className="sponsor-avatar"
-              position="65% top"
-              sizes="104px"
-            />
-            <div className="sponsor-name">
-              Chef &amp; Personality
-              <span>David Higgs</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#8a6248" }}>
-              NW
-            </div>
-            <div className="sponsor-name">
-              Miss Earth 2019
-              <span>Nazia Wadee</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#3fa9d8" }}>
-              RD
-            </div>
-            <div className="sponsor-name">Reach For A Dream</div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#1d2a4d" }}>
-              PCI
-            </div>
-            <div className="sponsor-name">PCI Carpets</div>
-          </div>
-        </div>
-        <Image
-          className="sponsors-stars"
-          src={cld("v1784193091/maranghouse/mh_element_stars.gif")}
-          alt=""
-          width={130}
-          height={130}
-          unoptimized
-        />
-        <Link href="/lightkeepers" className="btn btn-blue">
-          SPONSOR A CHILD TODAY
-        </Link>
-      </section>
-
-      {/* 7. TESTIMONIALS */}
+      {/* 5. TESTIMONIALS */}
       <section className="testimonials-section">
         <BgPhoto
-          src={cld("v1784193102/maranghouse/SmacPix_Marang2.jpg")}
-          alt="Children at Marang House"
+          src={cld("MH-Little-boy.jpeg")}
+          alt="A child at Marang House with a caregiver"
           className="testi-photo"
-          position="center 25%"
+          position="center 30%"
         />
         <Image
           className="testi-stars-doodle"
-          src={cld("v1784193091/maranghouse/mh_element_stars.gif")}
+          src={cld("MH-star-giff.gif")}
           alt=""
-          width={150}
-          height={150}
+          width={425}
+          height={425}
           unoptimized
         />
         <div className="testi-content">
@@ -319,123 +194,90 @@ export default function HomePage() {
             <br />
             volunteers have to say
           </h2>
-          <p className="testi-quote">
-            &ldquo;Such a humbling experience to know that there places like Marang. I donated some stuff
-            and will be making an effort to do so more often.&rdquo;
-          </p>
-          <p className="testi-name">&ndash; Rosita Gaskin</p>
-          <p className="testi-quote">&ldquo;I loved my visit there. The little ones were so much fun to be with❤️❤️❤️❤️&rdquo;</p>
-          <p className="testi-name">&ndash; Gugulethu Cele</p>
-          <p className="testi-quote">&ldquo;It a good place full of warmth for kids and respect for volunteers.&rdquo;</p>
-          <p className="testi-name" style={{ marginBottom: 0 }}>
-            &ndash; Malwande Khumalo
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i}>
+              <p className="testi-quote">&ldquo;{t.quote}&rdquo;</p>
+              <p className="testi-name">{t.name}</p>
+            </div>
+          ))}
+          <p className="testi-tbc-note">
+            Names and quotes above are placeholders pending confirmation of the real supporter testimonials.
           </p>
         </div>
       </section>
 
-      {/* 8. ALL SUPPORT IS WELCOME */}
+      {/* 6. ALL SUPPORT IS WELCOME */}
       <section className="support-section">
-        <div className="support-inner">
-          <div className="support-text">
-            <h2>
-              All support is
-              <br />
-              <strong>Welcome!</strong>
-            </h2>
-            <p className="support-lead">
-              Marang House is funded entirely through the generosity of donors, sponsors, volunteers,
-              and corporate partners.
-            </p>
-            <p>
-              Your support helps provide a home away from home for seriously ill children and their
-              families, while offering tax-deductible benefits and potential B-BBEE scorecard
-              contributions.
-            </p>
+        <div className="support-text">
+          <h2>
+            All support is
+            <br />
+            <strong>Welcome!</strong>
+          </h2>
+          <p className="support-lead">
+            Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
+            corporate partners.
+          </p>
+          <p>
+            Your support helps provide a home away from home for seriously ill children and their families,
+            while offering tax-deductible benefits and potential B-BBEE scorecard contributions.
+          </p>
+        </div>
+        <div className="support-photo-wrap">
+          <BgPhoto src={cld("MH-landing-support2.png")} alt="A caregiver and child at Marang House" className="support-photo" />
+        </div>
+      </section>
+
+      {/* 7. HOW YOU CAN GET INVOLVED */}
+      <section className="involved-section">
+        <div className="involved-band">
+          <div className="involved-band-inner">
+            <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" />
+            <div className="involved-band-overlay" />
           </div>
-          <div className="support-photo-wrap">
-            <BgPhoto
-              src={cld("v1784193101/maranghouse/SmacPix_Marang1.jpg")}
-              alt="Children at Marang House"
-              className="arch-photo support-photo"
-              position="center 20%"
-            />
+          <div className="likes-badge">
             <Image
-              className="support-heart"
-              src={cld("v1784193088/maranghouse/mh_element_hearts.gif")}
+              className="likes-badge-gif"
+              src={cld("MH-likes-giff.gif")}
               alt=""
-              width={170}
-              height={170}
+              width={30}
+              height={30}
+              style={{ height: "auto" }}
               unoptimized
             />
+            <span>45</span>
+          </div>
+          <h2 className="involved-heading">How You Can Get Involved</h2>
+          <div className="involved-grid">
+            <div className="involved-card">
+              <Image className="involved-icon" src={cld("MH-involvment-icons-1.png")} alt="" width={1000} height={1000} />
+              <h3>VOLUNTEER</h3>
+              <p>Our volunteer program is the heartbeat of Marang House.</p>
+              <Link href="/contact" className="btn btn-blue">
+                VOLUNTEER
+              </Link>
+            </div>
+            <div className="involved-card">
+              <Image className="involved-icon" src={cld("MH-involvment-icons-2.png")} alt="" width={1000} height={1000} />
+              <h3>LIGHTKEEPER</h3>
+              <p>Be part of our Monthly Giving Program.</p>
+              <Link href="/lightkeepers" className="btn btn-blue">
+                SPONSOR A CHILD TODAY
+              </Link>
+            </div>
+            <div className="involved-card">
+              <Image className="involved-icon" src={cld("MH-involvment-icons-3.png")} alt="" width={1000} height={1000} />
+              <h3>DONATE</h3>
+              <p>Make a once off payment, get our bank details now.</p>
+              <Link href="/donate" className="btn btn-blue">
+                DONATE
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 9. HOW YOU CAN GET INVOLVED */}
-      <section className="involved-section">
-        <div className="involved-head">
-          <h2 className="involved-heading">
-            How You Can Get
-            <br />
-            Involved
-          </h2>
-          <div className="likes-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-            <span>2</span>
-          </div>
-        </div>
-        <div className="involved-grid">
-          <div className="involved-card">
-            <BgPhoto
-              src={cld("v1784193101/maranghouse/SmacPix_Marang1.jpg")}
-              alt=""
-              className="involved-photo"
-              position="center 20%"
-            />
-            <h3>Volunteer Your Time</h3>
-            <p>
-              Our volunteer program is the
-              <br />
-              heartbeat of Marang House.
-            </p>
-            <Link href="/contact" className="btn btn-blue">
-              VOLUNTEER
-            </Link>
-          </div>
-          <div className="involved-card">
-            <BgPhoto
-              src={cld("v1784193102/maranghouse/SmacPix_Marang2.jpg")}
-              alt=""
-              className="involved-photo"
-              position="center 25%"
-            />
-            <h3>Sponsor Programme</h3>
-            <p>
-              Be part of our &ldquo;Monthly Giving Program&rdquo; and bring stability to seriously ill
-              children with your generous donation! Together, we make a lasting impact
-            </p>
-            <Link href="/lightkeepers" className="btn btn-blue">
-              SPONSOR A CHILD TODAY
-            </Link>
-          </div>
-          <div className="involved-card">
-            <BgPhoto src={cld("v1784193098/maranghouse/MARANG-1.jpg")} alt="" className="involved-photo" />
-            <h3>Donate</h3>
-            <p>
-              We rely on our community
-              <br />
-              help keep us going.
-            </p>
-            <Link href="/donate" className="btn btn-blue">
-              DONATE
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. CREATING A BETTER FUTURE */}
+      {/* 8. CREATING A BETTER FUTURE */}
       <Stats />
     </>
   );

@@ -30,3 +30,13 @@ archive/web-images/
 archive/screenshots/
 archive/cloudinary_upload/
 archive/Marang House (standalone).html
+
+# Canva redesign (branch redesign/canva-v2): local mirror of the Cloudinary
+# folders + the 16 reference screenshots. Assets already live on Cloudinary
+# (cloud name m4hqddxx); these are pure local reference, not build inputs.
+cloudinary_upload2/
+design-reference/
+
+# Playwright MCP tooling output (QA screenshots/logs from this session, not
+# site content).
+.playwright-mcp/

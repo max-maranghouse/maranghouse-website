@@ -8,25 +8,32 @@ export const metadata: Metadata = {
   description: "Marang House in the news — media coverage, awards, and milestones.",
 };
 
+// Headlines/dates/links here are placeholders, not verified press mentions.
+// The Canva mockup's three items (Business Day "breaks ground on 200-unit
+// Gauteng development", Property24, Mail & Guardian) describe a property
+// developer, which doesn't match a 12-child chronic-illness care home — Max's
+// read is the sourcing is wrong rather than the section being fabricated
+// outright, and he'll supply the real coverage later. Kept as a single array
+// so swapping in confirmed headlines/dates/links is a one-place edit.
 const PRESS_CARDS = [
   {
     source: "Business Day",
-    title: "Marang House marks 25 years of fostering health and hope",
-    date: "12 March 2026",
-    photo: cld("v1784193101/maranghouse/SmacPix_Marang1.jpg"),
+    title: "[Headline TBC — Marang House press coverage]",
+    date: "Date TBC",
+    photo: cld("MH-kid-pirate.png"),
   },
   {
     source: "702",
-    title: "Inside Marang House: a home away from home for chronically ill children",
-    date: "28 January 2026",
-    photo: cld("v1784193100/maranghouse/Marang_House_SM_posts_may_8.jpg"),
-    position: "center top",
+    title: "[Headline TBC — Marang House press coverage]",
+    date: "Date TBC",
+    photo: cld("MH-Little-boy.jpeg"),
+    position: "center 20%",
   },
   {
     source: "Mail & Guardian",
-    title: "The Lightkeepers: how monthly giving keeps Marang House shining",
-    date: "5 November 2025",
-    photo: cld("v1784193104/maranghouse/pirates_helpers.jpg"),
+    title: "[Headline TBC — Marang House press coverage]",
+    date: "Date TBC",
+    photo: cld("MH-kid-group.png"),
   },
 ] as const;
 
@@ -34,19 +41,34 @@ export default function PressPage() {
   return (
     <>
       <section className="press-hero">
-        <p className="eyebrow">Press &amp; Media</p>
-        <h1>Marang House in the News</h1>
-        <p>
-          Explore our latest media coverage, awards, and milestones as we care for South Africa&apos;s
-          seriously ill children.
-        </p>
+        <BgPhoto
+          src={cld("MH-news-banner.png")}
+          alt=""
+          className="press-hero-bg"
+          position="center 30%"
+          sizes="100vw"
+          priority
+        />
+        <div className="press-hero-overlay" />
+        <div className="press-hero-content">
+          <h1>
+            Marang House
+            <span>In The News</span>
+          </h1>
+          <p>
+            Explore our latest media coverage, awards, and milestones as we care for South Africa&apos;s
+            seriously ill children.
+          </p>
+        </div>
       </section>
+
+      <div className="press-ribbon">PRESS &amp; MEDIA</div>
 
       <section className="press-featured">
         <h2>Featured Coverage</h2>
         <div className="press-cards">
           {PRESS_CARDS.map((card) => (
-            <div className="press-card" key={card.title}>
+            <div className="press-card" key={card.source}>
               <BgPhoto
                 src={card.photo}
                 alt=""
@@ -67,8 +89,8 @@ export default function PressPage() {
       <section className="press-enquiries">
         <h2>Media Enquiries</h2>
         <p>
-          For press kits, interviews, or media partnerships, get in touch with our communications team
-          at <a href="mailto:info@maranghouse.org">info@maranghouse.org</a>
+          For press kits, interviews, or media partnerships, get in touch with our communications team at{" "}
+          <a href="mailto:info@maranghouse.org">info@maranghouse.org</a>
         </p>
         <Link href="/contact" className="btn btn-red">
           CONTACT US
