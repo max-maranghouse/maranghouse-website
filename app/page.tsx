@@ -154,11 +154,40 @@ export default function HomePage() {
 
       {/* 3. WE'RE MARANG HOUSE — home teaser */}
       <section className="home-intro-section">
+        <Image
+          className="home-intro-doodle-2"
+          src={cld("MH-shun-giff.gif")}
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
+        <Image
+          className="home-intro-doodle-3"
+          src={cld("MH-shun-giff.gif")}
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="home-intro-inner">
           <div className="home-intro-left">
             <Image
               className="home-intro-doodle"
               src={cld("MH-shun-giff.gif")}
+              alt=""
+              width={1000}
+              height={1000}
+              style={{ height: "auto" }}
+              unoptimized
+            />
+            <Image
+              className="home-intro-cloud"
+              src={cld("MH-cloud-giff.gif")}
               alt=""
               width={1000}
               height={1000}
@@ -173,6 +202,27 @@ export default function HomePage() {
               hospital, and an education that never stops.
             </p>
             <p>Since 1998, we&rsquo;ve made sure no child has to choose between their health and their future.</p>
+            <p className="home-intro-what">What we do:</p>
+            <div className="home-intro-cards">
+              <Image
+                src={cld("MH-what-we-do-1.png")}
+                alt="Accommodate 12 children at a time"
+                width={1000}
+                height={1000}
+              />
+              <Image
+                src={cld("MH-what-we-do-2.png")}
+                alt="Offer the necessities: food, housing"
+                width={1000}
+                height={1000}
+              />
+              <Image
+                src={cld("MH-what-we-do-3.png")}
+                alt="Round-the-clock medical care"
+                width={1000}
+                height={1000}
+              />
+            </div>
           </div>
           <div className="home-intro-right">
             <BgPhoto

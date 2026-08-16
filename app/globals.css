@@ -245,18 +245,32 @@ img { display: block; }
 /* ═══════════════════════════════════════
    SECTION 3: WE'RE MARANG HOUSE (home teaser)
 ═══════════════════════════════════════ */
-.home-intro-section { background: #fff; padding: 90px 5.5%; position: relative; overflow: hidden; }
-.home-intro-inner { display: flex; gap: 70px; align-items: center; }
-.home-intro-left { flex: 1; position: relative; }
+.home-intro-section { background: #fff; padding: 90px 0 90px 5.5%; position: relative; overflow: hidden; }
+.home-intro-inner { display: flex; gap: 70px; align-items: stretch; }
+.home-intro-left { flex: 1; position: relative; padding-bottom: 20px; }
 .home-intro-left h2 { font-size: 2.9rem; color: var(--blue); margin-bottom: 26px; position: relative; z-index: 2; }
-.home-intro-left p { font-size: 1.05rem; line-height: 1.65; font-weight: 700; color: var(--blue); max-width: 540px; margin-bottom: 18px; }
-.home-intro-doodle { position: absolute; left: 320px; top: -30px; width: 130px; pointer-events: none; z-index: 1; }
-.home-intro-right { width: 40%; flex-shrink: 0; }
-.home-intro-photo { border-radius: 999px; height: 520px; overflow: hidden; position: relative; }
+.home-intro-left p { position: relative; z-index: 2; font-size: 1.05rem; line-height: 1.65; font-weight: 700; color: var(--blue); max-width: 540px; margin-bottom: 18px; }
+.home-intro-what { font-family: var(--h); font-weight: 700; font-size: 1.6rem; color: var(--blue); margin: 30px 0 20px; position: relative; z-index: 2; }
+.home-intro-cards { display: flex; gap: 18px; flex-wrap: wrap; position: relative; z-index: 2; }
+.home-intro-cards img { width: 150px; height: auto; filter: drop-shadow(0 6px 16px rgba(0,74,173,.18)); }
+.home-intro-doodle {
+  position: absolute; left: 290px; top: -125px; width: 220px; pointer-events: none; z-index: 1;
+}
+.home-intro-cloud {
+  position: absolute; left: 430px; top: -90px; width: 200px; pointer-events: none; z-index: 1;
+}
+.home-intro-doodle-2 {
+  position: absolute; right: 20%; top: -110px; width: 320px; pointer-events: none; z-index: 1; opacity: .9;
+}
+.home-intro-doodle-3 {
+  position: absolute; right: -80px; bottom: -110px; width: 280px; pointer-events: none; z-index: 1; opacity: .5;
+}
+.home-intro-right { width: 42%; flex-shrink: 0; position: relative; }
+.home-intro-photo { border-radius: 240px 240px 0 0; height: 100%; min-height: 640px; overflow: hidden; position: relative; }
 @media (max-width: 1100px) {
   .home-intro-inner { flex-direction: column; }
   .home-intro-right { width: 100%; }
-  .home-intro-doodle { display: none; }
+  .home-intro-doodle, .home-intro-cloud, .home-intro-doodle-2, .home-intro-doodle-3 { display: none; }
 }
 
 /* ═══════════════════════════════════════
