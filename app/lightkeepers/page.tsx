@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { cld } from "@/lib/images";
-import { SITE } from "@/lib/nav-items";
+import { DONATION, ORGANISATION } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "The Lightkeepers",
   description:
     "The Lightkeepers are a community of monthly donors, sponsors, and champions who keep the lights on at Marang House. Join the Circle of Light via BackaBuddy.",
 };
-
-const BACKABUDDY_URL = "https://www.backabuddy.co.za/campaign/marang-circle-of-light";
 
 export default function LightkeepersPage() {
   return (
@@ -27,7 +25,7 @@ export default function LightkeepersPage() {
           </div>
           <h1>The Lightkeepers</h1>
           <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
-          <a href={BACKABUDDY_URL} className="btn" target="_blank" rel="noopener noreferrer">
+          <a href={DONATION.primary.url} className="btn" target="_blank" rel="noopener noreferrer">
             DONATE VIA BACKABUDDY
           </a>
         </section>
@@ -40,7 +38,7 @@ export default function LightkeepersPage() {
               and love shining for chronically ill children receiving treatment away from home.
             </p>
             <p className="lk-info-bank">
-              Nedbank : Account No: {SITE.bankAccount}
+              {DONATION.eft.bank}: Account No: {DONATION.eft.accountNumber}
             </p>
             <div className="lk-info-grid">
               <Image
@@ -56,15 +54,15 @@ export default function LightkeepersPage() {
                 <h3>General info</h3>
                 <p>
                   NPO Number:
-                  <strong>{SITE.npoNumber}</strong>
+                  <strong>{ORGANISATION.registrations.npo}</strong>
                 </p>
                 <p>
                   PBO Number:
-                  <strong>{SITE.pboNumber}</strong>
+                  <strong>{ORGANISATION.registrations.pbo}</strong>
                 </p>
                 <p>
                   Reg. Number:
-                  <strong>{SITE.npcReg.replace("NPC Reg # ", "")}</strong>
+                  <strong>{ORGANISATION.registrations.npc}</strong>
                 </p>
               </div>
               <div className="lk-info-contact">
@@ -72,7 +70,7 @@ export default function LightkeepersPage() {
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z" />
                   </svg>
-                  <span>{SITE.address}</span>
+                  <span>{ORGANISATION.address.formatted}</span>
                 </div>
                 <div className="lk-info-contact-row">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -84,7 +82,7 @@ export default function LightkeepersPage() {
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3z" />
                   </svg>
-                  <a href={SITE.phoneHref}>Tel: {SITE.phone}</a>
+                  <a href={ORGANISATION.phone.href}>Tel: {ORGANISATION.phone.display}</a>
                 </div>
               </div>
             </div>
@@ -92,23 +90,6 @@ export default function LightkeepersPage() {
         </section>
       </div>
 
-      {/* Join The Circle — the Canva mockup shows this section unfinished
-          (rows of "Insert Name Here" placeholder circles, still in Canva's
-          editor chrome), so it isn't content to port. How recurring
-          BackaBuddy donors should surface here is an open product decision —
-          see the Canva redesign brief — not something to guess at. */}
-      <section className="lk-circle-section">
-        <h2>Join The Circle</h2>
-        <p>
-          The Circle of Light is our community of monthly Lightkeepers. We&rsquo;re still deciding how to
-          showcase our recurring BackaBuddy supporters here — check back soon.
-        </p>
-        <div className="lk-circle-note">
-          TODO: pending a decision on how monthly Circle of Light donors should be surfaced (a BackaBuddy
-          supporter widget if one exists, or a manually-curated list). Not a guess we&rsquo;re making for
-          launch.
-        </div>
-      </section>
     </>
   );
 }

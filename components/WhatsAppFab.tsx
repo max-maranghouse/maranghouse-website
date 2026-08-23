@@ -1,4 +1,4 @@
-import { SITE } from "@/lib/nav-items";
+import { ORGANISATION } from "@/lib/site-data";
 
 export default function WhatsAppFab() {
   return (
@@ -6,7 +6,7 @@ export default function WhatsAppFab() {
       className="wa-fab"
       title="Chat with us on WhatsApp"
       aria-label="Chat with us on WhatsApp"
-      href={SITE.whatsapp}
+      href={ORGANISATION.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
     >

@@ -2,20 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import WhatsAppFab from "@/components/WhatsAppFab";
-import Stats from "@/components/sections/Stats";
 import { cld } from "@/lib/images";
-
-// Testimonial names/quotes are unconfirmed — the Canva mockup (Rosita Gaskin /
-// Gugulethu Cele / Malwande Khumalo) and the site's existing content
-// inventory (Nkosi Speers / Eugalina Corn / Minwase Khamala) disagree on who
-// said what, and neither is verified. Placeholder copy ships instead of
-// picking one set — see MARANG-HOUSE-SITE-CONTEXT.md and the Canva redesign
-// brief. Swap in the confirmed names/quotes here once Max signs off.
-const TESTIMONIALS = [
-  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
-  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
-  { quote: "[Testimonial quote — TBC]", name: "— Name TBC" },
-] as const;
+import { DONATION } from "@/lib/site-data";
 
 export default function HomePage() {
   return (
@@ -48,11 +36,16 @@ export default function HomePage() {
             Creating a safe, clean, and nurturing home for children living with chronic illnesses.
           </p>
           <div className="hero-btns">
-            <Link href="/donate" className="btn btn-hero-solid">
-              DONATE
-            </Link>
-            <Link href="/contact" className="btn btn-hero-solid">
-              GET OUR NEWSLETTER
+            <a
+              href={DONATION.primary.url}
+              className="btn btn-hero-solid"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DONATE MONTHLY
+            </a>
+            <Link href="/donate" className="btn btn-white-outline">
+              EFT DETAILS
             </Link>
           </div>
         </div>
@@ -197,7 +190,7 @@ export default function HomePage() {
             <h2>We&rsquo;re Marang House.</h2>
             <p>Marang House is a home, and a Circle of Light, for children living with serious chronic illness.</p>
             <p>
-              We take in kids aged 4 to 14 whose conditions demand constant medical care, and we give them
+              We take in kids aged 7 to 14 whose conditions demand constant medical care, and we give them
               what every child deserves: a safe, loving place to live, daily treatment at a tertiary
               hospital, and an education that never stops.
             </p>
@@ -256,9 +249,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* MEET THE PEOPLE — present in the Canva source between Mission and
-          Testimonials, restored on request even though it wasn't in the 16
-          curated screenshots. */}
+      {/* Existing supporter section retained for a later homepage review pass. */}
       <section className="sponsors-section">
         <h2>
           Meet a few of the people who
@@ -374,48 +365,6 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* 5. TESTIMONIALS */}
-      <section className="testimonials-section">
-        <BgPhoto
-          src={cld("MH-Little-boy.jpeg")}
-          alt="A child at Marang House with a caregiver"
-          className="testi-photo"
-          position="center 30%"
-        />
-        <Image
-          className="testi-stars-doodle"
-          src={cld("MH-star-giff.gif")}
-          alt=""
-          width={425}
-          height={425}
-          unoptimized
-        />
-        <Image
-          className="testi-stars-doodle-2"
-          src={cld("MH-star-giff.gif")}
-          alt=""
-          width={425}
-          height={425}
-          unoptimized
-        />
-        <div className="testi-content">
-          <h2>
-            See what our sponsors &amp;
-            <br />
-            volunteers have to say
-          </h2>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i}>
-              <p className="testi-quote">&ldquo;{t.quote}&rdquo;</p>
-              <p className="testi-name">{t.name}</p>
-            </div>
-          ))}
-          <p className="testi-tbc-note">
-            Names and quotes above are placeholders pending confirmation of the real supporter testimonials.
-          </p>
-        </div>
-      </section>
-
       {/* 6. ALL SUPPORT IS WELCOME */}
       <section className="support-section">
         <div className="support-text">
@@ -487,8 +436,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. CREATING A BETTER FUTURE */}
-      <Stats />
     </>
   );
 }

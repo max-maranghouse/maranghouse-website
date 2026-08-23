@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { fredoka, nunito, permanentMarker } from "@/lib/fonts";
-import { SITE } from "@/lib/nav-items";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+import { ORGANISATION } from "@/lib/site-data";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(ORGANISATION.websiteUrl),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s | ${SITE.name}`,
+    default: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
+    template: `%s | ${ORGANISATION.name}`,
   },
   description:
     "Marang House is a Johannesburg non-profit providing a safe, nurturing home for children living with chronic illnesses since 1998.",
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     icon: "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193083/maranghouse/marang_house_logo_sm.png",
   },
   openGraph: {
-    title: `${SITE.name} — ${SITE.tagline}`,
+    title: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
     description:
       "A safe, nurturing home for children living with chronic illnesses. Johannesburg, South Africa, since 1998.",
-    url: SITE.url,
-    siteName: SITE.name,
+    url: ORGANISATION.websiteUrl,
+    siteName: ORGANISATION.name,
     images: [
       "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193102/maranghouse/SmacPix_Marang2.jpg",
     ],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.tagline}`,
+    title: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
     description:
       "A safe, nurturing home for children living with chronic illnesses. Johannesburg, South Africa, since 1998.",
     images: [
@@ -42,17 +42,18 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NGO",
-  name: SITE.name,
+  name: ORGANISATION.name,
   description:
     "A Johannesburg non-profit providing a safe, nurturing home for children living with chronic illnesses since 1998.",
-  url: SITE.url,
-  telephone: SITE.phone,
-  email: SITE.email,
+  url: ORGANISATION.websiteUrl,
+  foundingDate: String(ORGANISATION.foundedYear),
+  telephone: ORGANISATION.phone.international,
+  email: ORGANISATION.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "22 Milner Ave, Franklin Roosevelt Park",
-    addressLocality: "Johannesburg",
-    postalCode: "2195",
+    streetAddress: `${ORGANISATION.address.street}, ${ORGANISATION.address.suburb}`,
+    addressLocality: ORGANISATION.address.city,
+    postalCode: ORGANISATION.address.postalCode,
     addressCountry: "ZA",
   },
 };
@@ -73,9 +74,9 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <Nav />
+        <SiteHeader />
         <main id="main-content">{children}</main>
-        <Footer />
+        <SiteFooter />
       </body>
     </html>
   );

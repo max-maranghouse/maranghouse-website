@@ -3,7 +3,7 @@ import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import ContactForm from "@/components/ContactForm";
 import { cld } from "@/lib/images";
-import { SITE } from "@/lib/nav-items";
+import { ORGANISATION } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -52,13 +52,13 @@ export default function ContactPage() {
             </p>
             <div className="contact-aside">
               <div className="contact-line">
-                📞 <a href={SITE.phoneHref}>{SITE.phone}</a>
+                📞 <a href={ORGANISATION.phone.href}>{ORGANISATION.phone.display}</a>
               </div>
               <div className="contact-line">
-                ✉ <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                ✉ <a href={`mailto:${ORGANISATION.email}`}>{ORGANISATION.email}</a>
               </div>
               <div className="contact-line" style={{ color: "#7a4a10", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
-                {SITE.npcReg}
+                NPC Reg # {ORGANISATION.registrations.npc}
               </div>
             </div>
           </div>

@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/nav-items";
+import { ORGANISATION, SITE_NAVIGATION } from "@/lib/site-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/about", "/lightkeepers", "/donate", "/press", "/contact"];
+  const routes = SITE_NAVIGATION.map((item) => (item.href === "/" ? "" : item.href));
 
   return routes.map((route) => ({
-    url: `${SITE.url}${route}`,
+    url: `${ORGANISATION.websiteUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: route === "" ? 1 : 0.7,

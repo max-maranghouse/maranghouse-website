@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
-import Stats from "@/components/sections/Stats";
 import { cld } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Marang House provides a nurturing home for children aged 4 to 14 living with chronic illnesses, ensuring their medical care and education go hand in hand.",
+    "Marang House provides a nurturing home for children aged 7 to 14 living with chronic illnesses, ensuring their medical care and education go hand in hand.",
 };
 
 export default function AboutPage() {
@@ -21,7 +20,7 @@ export default function AboutPage() {
           </h1>
           <ul className="about-navy-list">
             <li>Provide a nurturing home environment</li>
-            <li>Children between the ages of 4 and 14</li>
+            <li>Children between the ages of 7 and 14</li>
             <li>Learning to manage their illnesses</li>
           </ul>
           <p>
@@ -112,7 +111,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Stats variant="about" />
     </>
   );
 }

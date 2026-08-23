@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
+import ButtonLink from "@/components/ui/ButtonLink";
 import { cld } from "@/lib/images";
+import { DONATION, ORGANISATION } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Donate",
   description:
-    "Support Marang House with a bank transfer, cheque, or volunteer time. Donations are tax-deductible in South Africa under Section 18A.",
+    "Become a Marang House Lightkeeper with a monthly donation through BackaBuddy, or support the house by EFT.",
 };
 
 export default function DonatePage() {
@@ -29,41 +31,47 @@ export default function DonatePage() {
       </section>
 
       <div className="donate-body">
+        <div className="donate-primary">
+          <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
+          <h2>Give monthly through BackaBuddy</h2>
+          <p>A monthly donor becomes a Marang House Lightkeeper.</p>
+          <ButtonLink
+            href={DONATION.primary.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Donate Monthly
+          </ButtonLink>
+        </div>
         <div className="bank-box">
-          <h3>Bank Transfer</h3>
+          <h2>Bank transfer</h2>
           <div className="bank-row">
             <span className="bank-label">Bank</span>
-            <span>Nedbank</span>
+            <span>{DONATION.eft.bank}</span>
           </div>
           <div className="bank-row">
             <span className="bank-label">Branch</span>
-            <span>Business Northrand</span>
+            <span>{DONATION.eft.branch}</span>
           </div>
           <div className="bank-row">
             <span className="bank-label">Branch No</span>
-            <span>146-905</span>
+            <span>{DONATION.eft.branchCode}</span>
           </div>
           <div className="bank-row">
             <span className="bank-label">Account Name</span>
-            <span>Marang House</span>
+            <span>{DONATION.eft.accountName}</span>
           </div>
           <div className="bank-row">
             <span className="bank-label">Account No</span>
-            <span>1469095769 (cheque)</span>
+            <span>{DONATION.eft.accountNumber} ({DONATION.eft.accountType.toLowerCase()})</span>
           </div>
           <div className="bank-row">
             <span className="bank-label">Swift No</span>
-            <span>NEDSZAJJ</span>
+            <span>{DONATION.eft.swiftCode}</span>
           </div>
           <p className="bank-note">
-            Please use your <strong>name and surname</strong> as reference and send proof of payment to{" "}
-            <strong>info@maranghouse.org</strong>
-          </p>
-        </div>
-        <div className="bank-box" style={{ background: "#fff8e6" }}>
-          <h3>Cheques</h3>
-          <p style={{ fontSize: ".9rem", color: "#333" }}>
-            Cheques can be made out to: <strong style={{ color: "var(--blue)" }}>Marang House</strong>
+            {DONATION.eft.referenceInstruction} Send proof of payment to{" "}
+            <strong>{DONATION.eft.proofOfPaymentEmail}</strong>.
           </p>
         </div>
         <div className="info-strip">
@@ -77,13 +85,7 @@ export default function DonatePage() {
           <h4>BBBEE Scorecard Points</h4>
           <p>Contact us to discuss options and requirements.</p>
         </div>
-        <div className="info-strip" style={{ borderLeftColor: "var(--orange)" }}>
-          <h4>Coming Soon</h4>
-          <p>
-            <em>Back A Buddy monthly campaign — watch this space!</em>
-          </p>
-        </div>
-        <p className="npc-note">NPC Reg # 1998/009809/08</p>
+        <p className="npc-note">NPC Reg # {ORGANISATION.registrations.npc}</p>
       </div>
 
       <section className="involved-white">
