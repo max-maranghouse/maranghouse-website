@@ -75,7 +75,60 @@ export default function HomePage() {
         <WhatsAppFab />
       </section>
 
-      {/* 2. WE ARE MARANG HOUSE + WHAT WE DO — identity, merged into one
+      {/* 2. BECOME A LIGHTKEEPER — positioned immediately after the hero
+          to match the Canva layout, where this is the first section below
+          the fold. The ask lands while the hero's emotional momentum is
+          still fresh. */}
+      <section className="lk-band">
+        <div className="lk-card">
+          <Image
+            className="lk-card-rays"
+            src={cld("MH-Ray.gif")}
+            alt=""
+            width={800}
+            height={800}
+            style={{ height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+          <div className="lk-card-text">
+            <h2 className="lk-title">Become A Lightkeeper</h2>
+            <p className="lk-desc">
+              The <strong>Marang Circle of Light</strong> is a community of <strong>monthly donors</strong>{" "}
+              who keep the light of home shining, joy and love for chronically ill children receiving
+              treatment away from home. Be the first to get a limited-edition keyring with love from us.
+            </p>
+            <div className="lk-cta-row">
+              <a
+                href={DONATION.primary.url}
+                className="btn lk-signup"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {DONATION.primary.label}
+              </a>
+              <Image
+                className="lk-card-badge"
+                src={cld("MH-lighthouse-pin.png")}
+                alt=""
+                width={1000}
+                height={1000}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+          <Image
+            className="lk-card-pin"
+            src={cld("MH-lighthouse-keychain.png")}
+            alt="Lightkeeper enamel keyring badge"
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+        </div>
+      </section>
+
+      {/* 3. WE ARE MARANG HOUSE + WHAT WE DO — identity, merged into one
           continuous navy → gradient composition so "what we do" reads as
           part of the same visual event rather than a separate card row. */}
       <section className="identity-section">
@@ -146,7 +199,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. NICE TO MEET YOU — human story, real photography carrying the
+      {/* 4. NICE TO MEET YOU — human story, real photography carrying the
           emotional weight rather than a single generic banner. */}
       <section className="story-section">
         <div className="story-inner">
@@ -181,60 +234,6 @@ export default function HomePage() {
               />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 4. BECOME A LIGHTKEEPER — repositioned after the identity/story
-          sections so the ask follows trust-building rather than repeating
-          the hero's CTA immediately. Panel itself is unchanged from the
-          last approved pass; only its position and a small badge accent
-          near the CTA are new. */}
-      <section className="lk-band">
-        <div className="lk-card">
-          <Image
-            className="lk-card-rays"
-            src={cld("MH-Ray.gif")}
-            alt=""
-            width={800}
-            height={800}
-            style={{ height: "auto" }}
-            unoptimized
-            aria-hidden="true"
-          />
-          <div className="lk-card-text">
-            <h2 className="lk-title">Become A Lightkeeper</h2>
-            <p className="lk-desc">
-              The <strong>Marang Circle of Light</strong> is a community of <strong>monthly donors</strong>{" "}
-              who keep the light of home shining, joy and love for chronically ill children receiving
-              treatment away from home. Be the first to get a limited-edition keyring with love from us.
-            </p>
-            <div className="lk-cta-row">
-              <a
-                href={DONATION.primary.url}
-                className="btn lk-signup"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {DONATION.primary.label}
-              </a>
-              <Image
-                className="lk-card-badge"
-                src={cld("MH-lighthouse-pin.png")}
-                alt=""
-                width={1000}
-                height={1000}
-                aria-hidden="true"
-              />
-            </div>
-          </div>
-          <Image
-            className="lk-card-pin"
-            src={cld("MH-lighthouse-keychain.png")}
-            alt="Lightkeeper enamel keyring badge"
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
         </div>
       </section>
 
