@@ -8,7 +8,7 @@ import { DONATION } from "@/lib/site-data";
 export default function HomePage() {
   return (
     <>
-      {/* 1. HERO — corkboard, bunting, polaroids, keyring badge */}
+      {/* 1. HERO — corkboard, bunting, polaroids */}
       <section className="hero">
         <BgPhoto
           src={cld("MH-pinboard-BG.png")}
@@ -42,22 +42,11 @@ export default function HomePage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              DONATE MONTHLY
+              {DONATION.primary.label}
             </a>
-            <Link href="/donate" className="btn btn-white-outline">
-              EFT DETAILS
-            </Link>
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
-          <Image
-            className="hero-keyring"
-            src={cld("MH-lighthouse-keychain.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
           <Image
             className="hero-polaroid-1"
             src={cld("MH-polaroid-1.png")}
@@ -82,35 +71,124 @@ export default function HomePage() {
             height={1000}
             style={{ height: "auto" }}
           />
-          <Image
-            className="hero-pin-1"
-            src={cld("MH-board-pin-yellow.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
-          <Image
-            className="hero-pin-2"
-            src={cld("MH-board-pin-blue.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
-          <Image
-            className="hero-pin-3"
-            src={cld("MH-board-pin-blue.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
         </div>
         <WhatsAppFab />
       </section>
 
-      {/* 2. BECOME A LIGHTKEEPER banner */}
+      {/* 2. WE ARE MARANG HOUSE + WHAT WE DO — identity, merged into one
+          continuous navy → gradient composition so "what we do" reads as
+          part of the same visual event rather than a separate card row. */}
+      <section className="identity-section">
+        <div className="identity-top">
+          <div className="identity-text">
+            <h2>
+              We are <span>Marang House.</span>
+            </h2>
+            <p>
+              Marang House is a home, and a Circle of Light, for children living with serious chronic
+              illness.
+            </p>
+            <ul className="identity-list">
+              <li>Children aged 7 to 14 whose conditions demand constant medical care</li>
+              <li>A safe, loving place to live, with daily treatment at a tertiary hospital</li>
+              <li>An education that never stops</li>
+            </ul>
+            <p className="identity-important">
+              <strong>Since 1998,</strong>{" "}we&rsquo;ve made sure no child has to choose between their health
+              and their future.
+            </p>
+          </div>
+          <div className="identity-photo-wrap">
+            <BgPhoto
+              src={cld("MH-kid-pirate.png")}
+              alt="A child at Marang House"
+              className="identity-photo"
+              position="center 20%"
+              sizes="(max-width: 1000px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+        <div className="whatwedo-band">
+          <Image
+            className="whatwedo-sun"
+            src={cld("MH-shun-giff.gif")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+          <h3 className="whatwedo-heading">What We Do</h3>
+          <div className="whatwedo-grid">
+            <Image
+              className="whatwedo-card"
+              src={cld("MH-what-we-do-1.png")}
+              alt="Accommodate 12 children at a time"
+              width={1000}
+              height={1000}
+            />
+            <Image
+              className="whatwedo-card"
+              src={cld("MH-what-we-do-2.png")}
+              alt="Offer the necessities: food and housing"
+              width={1000}
+              height={1000}
+            />
+            <Image
+              className="whatwedo-card"
+              src={cld("MH-what-we-do-3.png")}
+              alt="Round-the-clock medical care"
+              width={1000}
+              height={1000}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. NICE TO MEET YOU — human story, real photography carrying the
+          emotional weight rather than a single generic banner. */}
+      <section className="story-section">
+        <div className="story-inner">
+          <div className="story-arch-wrap">
+            <BgPhoto
+              src={cld("MH-girl-arch.png")}
+              alt="A child celebrating with her caregiver at Marang House"
+              className="story-arch-photo"
+              position="center 25%"
+              sizes="(max-width: 860px) 80vw, 42vw"
+            />
+          </div>
+          <div className="story-hands-wrap">
+            <BgPhoto src={cld("MH-hands.jpg")} alt="" className="story-hands-photo" sizes="(max-width: 860px) 100vw, 55vw" />
+            <div className="story-hands-scrim" aria-hidden="true" />
+            <div className="story-hands-content">
+              <p className="story-eyebrow">Nice to meet you.</p>
+              <h2>Our Mission</h2>
+              <p>
+                Providing a safe and loving home where brave kids can thrive and learn to manage their
+                illness.
+              </p>
+              <Image
+                className="story-love-doodle"
+                src={cld("MH-love-giff.gif")}
+                alt=""
+                width={200}
+                height={200}
+                style={{ height: "auto" }}
+                unoptimized
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. BECOME A LIGHTKEEPER — repositioned after the identity/story
+          sections so the ask follows trust-building rather than repeating
+          the hero's CTA immediately. Panel itself is unchanged from the
+          last approved pass; only its position and a small badge accent
+          near the CTA are new. */}
       <section className="lk-band">
         <div className="lk-card">
           <Image
@@ -130,9 +208,24 @@ export default function HomePage() {
               who keep the light of home shining, joy and love for chronically ill children receiving
               treatment away from home. Be the first to get a limited-edition keyring with love from us.
             </p>
-            <Link href="/lightkeepers" className="btn lk-signup">
-              SIGN&ndash;ME&ndash;UP!
-            </Link>
+            <div className="lk-cta-row">
+              <a
+                href={DONATION.primary.url}
+                className="btn lk-signup"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {DONATION.primary.label}
+              </a>
+              <Image
+                className="lk-card-badge"
+                src={cld("MH-lighthouse-pin.png")}
+                alt=""
+                width={1000}
+                height={1000}
+                aria-hidden="true"
+              />
+            </div>
           </div>
           <Image
             className="lk-card-pin"
@@ -145,111 +238,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. WE'RE MARANG HOUSE — home teaser */}
-      <section className="home-intro-section">
-        <Image
-          className="home-intro-doodle-2"
-          src={cld("MH-shun-giff.gif")}
-          alt=""
-          width={1000}
-          height={1000}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
-        <Image
-          className="home-intro-doodle-3"
-          src={cld("MH-shun-giff.gif")}
-          alt=""
-          width={1000}
-          height={1000}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
-        <div className="home-intro-inner">
-          <div className="home-intro-left">
-            <Image
-              className="home-intro-doodle"
-              src={cld("MH-shun-giff.gif")}
-              alt=""
-              width={1000}
-              height={1000}
-              style={{ height: "auto" }}
-              unoptimized
-            />
-            <Image
-              className="home-intro-cloud"
-              src={cld("MH-cloud-giff.gif")}
-              alt=""
-              width={1000}
-              height={1000}
-              style={{ height: "auto" }}
-              unoptimized
-            />
-            <h2>We&rsquo;re Marang House.</h2>
-            <p>Marang House is a home, and a Circle of Light, for children living with serious chronic illness.</p>
-            <p>
-              We take in kids aged 7 to 14 whose conditions demand constant medical care, and we give them
-              what every child deserves: a safe, loving place to live, daily treatment at a tertiary
-              hospital, and an education that never stops.
-            </p>
-            <p>Since 1998, we&rsquo;ve made sure no child has to choose between their health and their future.</p>
-            <p className="home-intro-what">What we do:</p>
-            <div className="home-intro-cards">
-              <Image
-                src={cld("MH-what-we-do-1.png")}
-                alt="Accommodate 12 children at a time"
-                width={1000}
-                height={1000}
-              />
-              <Image
-                src={cld("MH-what-we-do-2.png")}
-                alt="Offer the necessities: food, housing"
-                width={1000}
-                height={1000}
-              />
-              <Image
-                src={cld("MH-what-we-do-3.png")}
-                alt="Round-the-clock medical care"
-                width={1000}
-                height={1000}
-              />
-            </div>
-          </div>
-          <div className="home-intro-right">
-            <BgPhoto
-              src={cld("MH-kid-pirate.png")}
-              alt="A child at Marang House"
-              className="home-intro-photo"
-              position="center 20%"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 4. OUR MISSION — heart hands full-bleed */}
-      <section className="mission-section">
-        <div className="mission-card">
-          <BgPhoto src={cld("MH-heart-hands-banner.png")} alt="" className="mission-bg" />
-          <Image
-            className="mission-love-doodle"
-            src={cld("MH-love-giff.gif")}
-            alt=""
-            width={200}
-            height={200}
-            style={{ height: "auto" }}
-            unoptimized
-          />
-          <div className="mission-content">
-            <p className="mission-eyebrow">our</p>
-            <h2>MISSION</h2>
-            <p>Providing a safe and loving home where brave kids can thrive and learn to manage their illness.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Existing supporter section retained for a later homepage review pass. */}
+      {/* 5. TRUSTED BY — existing, verified supporter recognition. Demoted to
+          a quieter trust-signal band (smaller heading, one star doodle
+          instead of two, unified placeholder styling) rather than a full
+          narrative beat, since it sits outside the core content priorities. */}
       <section className="sponsors-section">
         <h2>
           Meet a few of the people who
@@ -275,9 +267,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#b47fd6" }}>
-              MW
-            </div>
+            <div className="sponsor-avatar placeholder">MW</div>
             <div className="sponsor-name">
               Mrs Universe
               <span>Monique Weyers</span>
@@ -297,9 +287,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#33334a" }}>
-              JJC
-            </div>
+            <div className="sponsor-avatar placeholder">JJC</div>
             <div className="sponsor-name">
               JHB Junior
               <span>Council</span>
@@ -321,24 +309,18 @@ export default function HomePage() {
             </div>
           </div>
           <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#8a6248" }}>
-              NW
-            </div>
+            <div className="sponsor-avatar placeholder">NW</div>
             <div className="sponsor-name">
               Miss Earth 2019
               <span>Nazia Wadee</span>
             </div>
           </div>
           <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#3fa9d8" }}>
-              RD
-            </div>
+            <div className="sponsor-avatar placeholder">RD</div>
             <div className="sponsor-name">Reach For A Dream</div>
           </div>
           <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder" style={{ backgroundColor: "#1d2a4d" }}>
-              PCI
-            </div>
+            <div className="sponsor-avatar placeholder">PCI</div>
             <div className="sponsor-name">PCI Carpets</div>
           </div>
         </div>
@@ -350,48 +332,22 @@ export default function HomePage() {
           height={425}
           style={{ height: "auto" }}
           unoptimized
-        />
-        <Image
-          className="sponsors-stars-2"
-          src={cld("MH-star-giff.gif")}
-          alt=""
-          width={425}
-          height={425}
-          style={{ height: "auto" }}
-          unoptimized
+          aria-hidden="true"
         />
         <Link href="/lightkeepers" className="btn btn-blue">
           SPONSOR A CHILD TODAY
         </Link>
       </section>
 
-      {/* 6. ALL SUPPORT IS WELCOME */}
-      <section className="support-section">
-        <div className="support-text">
-          <h2>
-            All support is
-            <br />
-            <strong>Welcome!</strong>
-          </h2>
-          <p className="support-lead">
-            Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
-            corporate partners.
-          </p>
-          <p>
-            Your support helps provide a home away from home for seriously ill children and their families,
-            while offering tax-deductible benefits and potential B-BBEE scorecard contributions.
-          </p>
-        </div>
-        <div className="support-photo-wrap">
-          <BgPhoto src={cld("MH-landing-support2.png")} alt="A caregiver and child at Marang House" className="support-photo" />
-        </div>
-      </section>
-
-      {/* 7. HOW YOU CAN GET INVOLVED */}
-      <section className="involved-section">
+      {/* 6. WAYS TO HELP — merged "All Support Is Welcome" + "How You Can Get
+          Involved" into one destination: the general-support message leads
+          straight into the three concrete actions, on one shared photo
+          backdrop instead of two separate sections with two separate
+          photos. */}
+      <section className="ways-section">
         <div className="involved-band">
           <div className="involved-band-inner">
-            <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" />
+            <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" sizes="100vw" />
             <div className="involved-band-overlay" />
           </div>
           <div className="likes-badge">
@@ -403,10 +359,24 @@ export default function HomePage() {
               height={30}
               style={{ height: "auto" }}
               unoptimized
+              aria-hidden="true"
             />
             <span>45</span>
           </div>
-          <h2 className="involved-heading">How You Can Get Involved</h2>
+          <div className="ways-intro">
+            <h2>
+              All support is <strong>Welcome!</strong>
+            </h2>
+            <p className="ways-lead">
+              Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
+              corporate partners.
+            </p>
+            <p className="ways-note">
+              Your support helps provide a home away from home for seriously ill children and their
+              families, while offering tax-deductible benefits and potential B-BBEE scorecard
+              contributions.
+            </p>
+          </div>
           <div className="involved-grid">
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-1.png")} alt="" width={1000} height={1000} />
@@ -420,9 +390,9 @@ export default function HomePage() {
               <Image className="involved-icon" src={cld("MH-involvment-icons-2.png")} alt="" width={1000} height={1000} />
               <h3>LIGHTKEEPER</h3>
               <p>Be part of our Monthly Giving Program.</p>
-              <Link href="/lightkeepers" className="btn btn-blue">
-                SPONSOR A CHILD TODAY
-              </Link>
+              <a href={DONATION.primary.url} className="btn btn-blue" target="_blank" rel="noopener noreferrer">
+                {DONATION.primary.label}
+              </a>
             </div>
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-3.png")} alt="" width={1000} height={1000} />
