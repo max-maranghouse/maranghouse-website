@@ -359,12 +359,40 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* 6. WAYS TO HELP — merged "All Support Is Welcome" + "How You Can Get
-          Involved" into one destination: the general-support message leads
-          straight into the three concrete actions, on one shared photo
-          backdrop instead of two separate sections with two separate
-          photos. */}
-      <section className="ways-section">
+      {/* 7. ALL SUPPORT IS WELCOME — cream bg, text left, photo right.
+          Matches Canva ref 05. Separate from the 3-card involvement grid. */}
+      <section className="support-section">
+        <div className="support-inner">
+          <div className="support-text">
+            <h2>
+              All support is <strong>Welcome!</strong>
+            </h2>
+            <p className="support-lead">
+              Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
+              corporate partners.
+            </p>
+            <p className="support-note">
+              Your support helps provide a home away from home for seriously ill children and their
+              families, while offering tax-deductible benefits and potential B-BBEE scorecard
+              contributions.
+            </p>
+          </div>
+          <div className="support-photo-wrap">
+            <BgPhoto
+              src={cld("MH-landing-support2.png")}
+              alt="A volunteer caring for a child at Marang House"
+              className="support-photo"
+              position="center 20%"
+              sizes="(max-width: 860px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 8. HOW YOU CAN GET INVOLVED — photo-backdrop, likes badge,
+          3 white cards (Volunteer / Lightkeeper / Donate).
+          Matches Canva ref 06. */}
+      <section className="involved-section">
         <div className="involved-band">
           <div className="involved-band-inner">
             <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" sizes="100vw" />
@@ -383,20 +411,7 @@ export default function HomePage() {
             />
             <span>45</span>
           </div>
-          <div className="ways-intro">
-            <h2>
-              All support is <strong>Welcome!</strong>
-            </h2>
-            <p className="ways-lead">
-              Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
-              corporate partners.
-            </p>
-            <p className="ways-note">
-              Your support helps provide a home away from home for seriously ill children and their
-              families, while offering tax-deductible benefits and potential B-BBEE scorecard
-              contributions.
-            </p>
-          </div>
+          <h2 className="involved-heading">How You Can Get Involved</h2>
           <div className="involved-grid">
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-1.png")} alt="" width={1000} height={1000} />
