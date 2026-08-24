@@ -321,37 +321,67 @@ img { display: block; }
 }
 
 /* ═══════════════════════════════════════
-   SECTION 4: NICE TO MEET YOU (human story)
+   SECTION 4: NICE TO MEET YOU
+   Canva ref 09 bottom: white bg, circular photo left, text right.
 ═══════════════════════════════════════ */
-.story-section { background: var(--cream); padding: 90px 5.5%; position: relative; overflow: hidden; }
-.story-inner { display: flex; align-items: center; }
-.story-arch-wrap {
-  position: relative; z-index: 2; width: 42%; margin-right: -50px;
-  filter: drop-shadow(0 18px 40px rgba(0,40,110,.22));
+.meet-section { background: #fff; padding: 80px 5.5%; position: relative; overflow: hidden; }
+.meet-inner { display: flex; align-items: center; gap: 60px; max-width: 1100px; margin: 0 auto; }
+.meet-photo-wrap {
+  width: 360px; flex-shrink: 0;
 }
-.story-arch-photo { position: relative; aspect-ratio: 1 / 1.08; border-radius: 999px 999px 28px 28px; overflow: hidden; }
-.story-hands-wrap {
-  position: relative; flex: 1; min-height: 480px; border-radius: 28px; overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,40,110,.16);
+.meet-photo {
+  position: relative; width: 100%; aspect-ratio: 1 / 1;
+  border-radius: 50%; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,40,110,.18);
 }
-.story-hands-photo { position: absolute; inset: 0; }
-.story-hands-scrim {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 70% at 66% 50%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.62) 42%, rgba(255,255,255,0) 72%);
+.meet-text h2 {
+  font-size: 3.2rem; line-height: 1.05; color: var(--blue); margin-bottom: 20px;
 }
-.story-hands-content { position: relative; z-index: 2; max-width: 360px; margin-left: auto; padding: 60px 64px 60px 40px; text-align: right; }
-.story-eyebrow { font-family: var(--h); font-weight: 600; font-size: 1.15rem; color: var(--orange); margin-bottom: 4px; }
-.story-hands-content h2 { font-size: 2.6rem; color: var(--blue); line-height: 1.05; margin-bottom: 14px; }
-.story-hands-content > p:not(.story-eyebrow) { font-size: 1.02rem; color: var(--blue); font-weight: 700; line-height: 1.55; max-width: 320px; margin-left: auto; }
-.story-love-doodle { width: 60px; margin: 16px 0 0 auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
+.meet-text p {
+  font-size: 1.05rem; line-height: 1.6; color: var(--blue); font-weight: 600;
+  max-width: 480px; margin-bottom: 14px;
+}
+.meet-text p:first-of-type { font-style: italic; color: var(--orange); font-weight: 700; }
 @media (max-width: 860px) {
-  .story-inner { flex-direction: column; }
-  .story-arch-wrap { width: 62%; max-width: 300px; margin: 0 auto -36px; }
-  .story-hands-wrap { width: 100%; min-height: 0; }
-  .story-hands-scrim { background: rgba(255,255,255,.85); }
-  .story-hands-content { max-width: 100%; margin: 0; padding: 70px 8% 40px; text-align: center; }
-  .story-hands-content > p:not(.story-eyebrow) { margin: 0 auto; }
-  .story-love-doodle { margin: 16px auto 0; }
+  .meet-inner { flex-direction: column; text-align: center; gap: 36px; }
+  .meet-photo-wrap { width: 260px; margin: 0 auto; }
+  .meet-text p { margin-left: auto; margin-right: auto; }
+}
+
+/* ═══════════════════════════════════════
+   SECTION 5: OUR MISSION (heart-hands banner)
+   Canva ref 03: full-bleed photo, centered overlay text.
+═══════════════════════════════════════ */
+.mission-banner {
+  position: relative; min-height: 480px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; width: 100%;
+}
+.mission-banner-photo { position: absolute; inset: 0; }
+.mission-banner-scrim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.2) 50%, transparent 80%);
+}
+.mission-banner-content {
+  position: relative; z-index: 2; text-align: center;
+  padding: 60px 5.5%; max-width: 700px;
+}
+.mission-label {
+  font-family: var(--h); font-size: 1.6rem; font-weight: 700;
+  color: #fff; letter-spacing: .08em; margin-bottom: 0;
+}
+.mission-banner-content h2 {
+  font-size: 4.5rem; color: var(--blue); line-height: 1;
+  margin-bottom: 18px; font-weight: 800;
+}
+.mission-banner-content > p:not(.mission-label) {
+  font-size: 1.1rem; color: var(--blue); font-weight: 700; line-height: 1.55;
+  max-width: 440px; margin: 0 auto;
+}
+.mission-love-doodle { width: 60px; margin: 20px auto 0; filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
+@media (max-width: 860px) {
+  .mission-banner { min-height: 360px; }
+  .mission-banner-content h2 { font-size: 3rem; }
 }
 
 /* ═══════════════════════════════════════

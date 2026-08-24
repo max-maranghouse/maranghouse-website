@@ -199,45 +199,66 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. NICE TO MEET YOU — human story, real photography carrying the
-          emotional weight rather than a single generic banner. */}
-      <section className="story-section">
-        <div className="story-inner">
-          <div className="story-arch-wrap">
+      {/* 4. NICE TO MEET YOU — circular photo + intro text, matching
+          Canva ref 09 bottom half: white section, photo left, text right. */}
+      <section className="meet-section">
+        <div className="meet-inner">
+          <div className="meet-photo-wrap">
             <BgPhoto
               src={cld("MH-girl-arch.png")}
               alt="A child celebrating with her caregiver at Marang House"
-              className="story-arch-photo"
+              className="meet-photo"
               position="center 25%"
-              sizes="(max-width: 860px) 80vw, 42vw"
+              sizes="(max-width: 860px) 80vw, 360px"
             />
           </div>
-          <div className="story-hands-wrap">
-            <BgPhoto src={cld("MH-hands.jpg")} alt="" className="story-hands-photo" sizes="(max-width: 860px) 100vw, 55vw" />
-            <div className="story-hands-scrim" aria-hidden="true" />
-            <div className="story-hands-content">
-              <p className="story-eyebrow">Nice to meet you.</p>
-              <h2>Our Mission</h2>
-              <p>
-                Providing a safe and loving home where brave kids can thrive and learn to manage their
-                illness.
-              </p>
-              <Image
-                className="story-love-doodle"
-                src={cld("MH-love-giff.gif")}
-                alt=""
-                width={200}
-                height={200}
-                style={{ height: "auto" }}
-                unoptimized
-                aria-hidden="true"
-              />
-            </div>
+          <div className="meet-text">
+            <h2>
+              Nice To<br />Meet You.
+            </h2>
+            <p>
+              The reality for children suffering from chronic illnesses is a harsh one.
+            </p>
+            <p>
+              Marang House provides a safe and loving home where brave kids can thrive and learn to
+              manage their illness — because no child should face it alone.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* 5. TRUSTED BY — existing, verified supporter recognition. Demoted to
+      {/* 5. OUR MISSION — full-bleed heart-hands photo banner with
+          centered mission statement, matching Canva ref 03. */}
+      <section className="mission-banner">
+        <BgPhoto
+          src={cld("MH-heart-hands-banner.png")}
+          alt=""
+          className="mission-banner-photo"
+          position="center center"
+          sizes="100vw"
+        />
+        <div className="mission-banner-scrim" aria-hidden="true" />
+        <div className="mission-banner-content">
+          <p className="mission-label">OUR</p>
+          <h2>MISSION</h2>
+          <p>
+            Providing a safe and loving home where brave kids can thrive and learn to manage their
+            illness.
+          </p>
+          <Image
+            className="mission-love-doodle"
+            src={cld("MH-love-giff.gif")}
+            alt=""
+            width={200}
+            height={200}
+            style={{ height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </div>
+      </section>
+
+      {/* 6. TRUSTED BY — existing, verified supporter recognition. Demoted to
           a quieter trust-signal band (smaller heading, one star doodle
           instead of two, unified placeholder styling) rather than a full
           narrative beat, since it sits outside the core content priorities. */}
