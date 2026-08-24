@@ -281,8 +281,15 @@ img { display: block; }
 .identity-list li::before { content: "✳"; position: absolute; left: 0; top: -1px; color: var(--orange); font-size: 1.05rem; }
 .identity-important { font-size: 1rem; line-height: 1.6; color: var(--canva-yellow); font-weight: 600; max-width: 480px; }
 .identity-important strong { font-weight: 800; }
-.identity-photo-wrap { width: 44%; flex-shrink: 0; position: relative; }
-.identity-photo { position: relative; height: 100%; min-height: 560px; }
+.identity-photo-wrap {
+  width: 44%; flex-shrink: 0; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 3%;
+}
+.identity-photo {
+  position: relative; width: 100%; max-width: 420px;
+  aspect-ratio: 1 / 1; border-radius: 50%; overflow: hidden;
+}
 .whatwedo-band {
   position: relative; overflow: visible;
   background:
@@ -295,17 +302,17 @@ img { display: block; }
    where the current implementation repeats this GIF three times. */
 .whatwedo-sun { position: absolute; top: -46px; left: 8%; width: 92px; z-index: 2; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.2)); }
 .whatwedo-heading { position: relative; z-index: 1; text-align: center; color: var(--blue-dk); font-size: 2.2rem; margin-bottom: 40px; }
-.whatwedo-grid { position: relative; z-index: 1; display: flex; gap: 26px; justify-content: center; max-width: 1080px; margin: 0 auto; }
+.whatwedo-grid { position: relative; z-index: 1; display: flex; gap: 26px; justify-content: center; max-width: 1080px; margin: 0 auto; flex-wrap: wrap; }
 /* These PNGs are already fully composed cards (icon badge + navy body +
    baked-in text, matching Canva ref 09 exactly) — they're given a stage
    here, not rebuilt around. */
-.whatwedo-card { width: 270px; height: auto; filter: drop-shadow(0 14px 30px rgba(0,0,0,.2)); transition: transform .25s; }
+.whatwedo-card { width: 270px; max-width: 100%; height: auto; filter: drop-shadow(0 14px 30px rgba(0,0,0,.2)); transition: transform .25s; }
 .whatwedo-card:hover { transform: translateY(-6px); }
 @media (max-width: 1000px) {
   .identity-top { flex-direction: column; min-height: 0; }
   .identity-text { max-width: 100%; padding: 56px 6% 40px; }
-  .identity-photo-wrap { width: 100%; }
-  .identity-photo { min-height: 340px; }
+  .identity-photo-wrap { width: 100%; padding: 0 6% 40px; }
+  .identity-photo { max-width: 320px; margin: 0 auto; }
 }
 @media (max-width: 760px) {
   .whatwedo-sun { display: none; }
