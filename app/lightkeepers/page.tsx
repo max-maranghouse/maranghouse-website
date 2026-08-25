@@ -22,12 +22,18 @@ export default function LightkeepersPage() {
               height={1536}
               priority
             />
+            {/* Overlaid on the open blue-card area to the right of the
+                heart badge (not centered over the whole graphic) —
+                percentage-based so it scales with the image at every
+                width, same idea as .contact-hero-content. */}
+            <div className="lk-hero-overlay">
+              <h1>The Lightkeepers</h1>
+              <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
+              <a href={DONATION.primary.url} className="btn lk-hero-overlay-cta" target="_blank" rel="noopener noreferrer">
+                DONATE VIA BACKABUDDY
+              </a>
+            </div>
           </div>
-          <h1>The Lightkeepers</h1>
-          <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
-          <a href={DONATION.primary.url} className="btn" target="_blank" rel="noopener noreferrer">
-            DONATE VIA BACKABUDDY
-          </a>
         </section>
 
         <section className="lk-info-section">

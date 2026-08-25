@@ -81,16 +81,6 @@ export default function HomePage() {
           still fresh. */}
       <section className="lk-band">
         <div className="lk-card">
-          <Image
-            className="lk-card-rays"
-            src={cld("MH-Ray.gif")}
-            alt=""
-            width={800}
-            height={800}
-            style={{ height: "auto" }}
-            unoptimized
-            aria-hidden="true"
-          />
           <div className="lk-card-text">
             <h2 className="lk-title">Become A Lightkeeper</h2>
             <p className="lk-desc">
@@ -107,14 +97,6 @@ export default function HomePage() {
               >
                 {DONATION.primary.label}
               </a>
-              <Image
-                className="lk-card-badge"
-                src={cld("MH-lighthouse-pin.png")}
-                alt=""
-                width={1000}
-                height={1000}
-                aria-hidden="true"
-              />
             </div>
           </div>
           <Image
@@ -209,7 +191,7 @@ export default function HomePage() {
               alt="A child celebrating with her caregiver at Marang House"
               className="meet-photo"
               position="center 25%"
-              sizes="(max-width: 860px) 80vw, 360px"
+              sizes="(max-width: 860px) 88vw, 48vw"
             />
           </div>
           <div className="meet-text">
@@ -263,6 +245,13 @@ export default function HomePage() {
           instead of two, unified placeholder styling) rather than a full
           narrative beat, since it sits outside the core content priorities. */}
       <section className="sponsors-section">
+        <BgPhoto
+          src={cld("v1786782356/MH-Rays-BG.png")}
+          alt=""
+          className="sponsors-section-bg"
+          sizes="100vw"
+        />
+        <div className="sponsors-section-inner">
         <h2>
           Meet a few of the people who
           <br />
@@ -357,6 +346,7 @@ export default function HomePage() {
         <Link href="/lightkeepers" className="btn btn-blue">
           SPONSOR A CHILD TODAY
         </Link>
+        </div>
       </section>
 
       {/* 7. ALL SUPPORT IS WELCOME — cream bg, text left, photo right.
@@ -439,6 +429,59 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* 9. CREATING A BETTER FUTURE — new closing section, built from
+          MH_-_Website_-Creating_a_better_future.svg. NOTE: this task's own
+          QA step (verify the f_png,q_auto raster renders before wiring it
+          in) found the asset is NOT a fully-composed flattened graphic like
+          the .whatwedo-card PNGs — it's background shapes only (a yellow/
+          orange wave pair + 3 empty pale card silhouettes), with no baked-in
+          heading, subheading, stat numbers, or skipping-kid illustration.
+          Built here with real HTML text over it instead — the site's
+          established convention, and what the pre-existing (previously
+          unused) .stats-section/.stat-num CSS below was already set up for
+          — rather than shipping three blank cards. Flagged to Max. */}
+      <section className="stats-section">
+        <BgPhoto
+          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612210/MH_-_Website_-Creating_a_better_future.svg"
+          alt=""
+          className="stats-section-bg"
+          sizes="100vw"
+        />
+        <div className="stats-section-inner">
+          <div className="stats-heading">
+            <h2>Creating A Better Future</h2>
+            <p className="stats-subheading">For Children Living With Chronic Illness</p>
+          </div>
+          <div className="stats-row">
+            <div className="stat-item">
+              <div className="stat-num">28+</div>
+              <div className="stat-label">Years</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-num">300+</div>
+              <div className="stat-label">Children</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-num">1000+</div>
+              <div className="stat-label">Volunteers</div>
+            </div>
+          </div>
+        </div>
+        {/* No baked-in skipping-kid illustration exists in the background
+            graphic to duplicate/clash with (see note above), so this can
+            be placed cleanly over the yellow hill, bottom-left. */}
+        <Image
+          className="stats-skip-gif"
+          src={cld("MH-skipping-giff.gif")}
+          alt=""
+          width={300}
+          height={300}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
       </section>
 
     </>

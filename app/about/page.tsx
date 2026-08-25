@@ -19,38 +19,52 @@ export default function AboutPage() {
             <span>Marang House</span>
           </h1>
           <ul className="about-navy-list">
-            <li>Provide a nurturing home environment</li>
-            <li>Children between the ages of 7 and 14</li>
-            <li>Learning to manage their illnesses</li>
+            <li>A nurturing, home-like environment</li>
+            <li>Children aged 7 to 14</li>
+            <li>Support to manage their illnesses long-term</li>
           </ul>
           <p>
-            They face serious health conditions that demand continuous monitoring and specialized
-            treatments at a tertiary hospital.
+            They face serious, chronic health conditions that require continuous monitoring and
+            specialised treatment at a tertiary hospital.
           </p>
           <p className="about-navy-important">Importantly:</p>
           <p className="about-navy-italic">
-            We ensure that their education remains a priority by taking them to the hospital daily, where
-            they receive disease management training alongside traditional schooling
+            We keep their education a priority — taking them to hospital daily for treatment, with
+            disease-management training running alongside their regular schooling.
           </p>
         </div>
-        <BgPhoto
-          src={cld("MH-kid-pirate.png")}
-          alt="A child at Marang House"
-          className="about-navy-photo"
-        />
+        <div className="about-navy-photo-wrap">
+          {/* v1786782366/MH-Group-kids.jpg — replaces the old MH-kid-pirate.png
+              cutout. Landscape group shot, so cropped with a slight upward
+              bias (center 35%) to favour faces/branded t-shirts over the
+              gravel foreground, per the wider .about-navy-photo split above. */}
+          <BgPhoto
+            src={cld("v1786782366/MH-Group-kids.jpg")}
+            alt="Children at Marang House wearing Marang House t-shirts"
+            className="about-navy-photo"
+            position="center 35%"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            priority
+          />
+          {/* Foreground depth layer: the same pirate-hat boy who used to be
+              the whole hero photo (MH-kid-pirate.png) is now a cutout
+              layered in front of the new group shot — same
+              absolutely-positioned-cutout-over-background technique as the
+              homepage hero's polaroids/sketch over hero-photo. */}
+          <Image
+            className="about-navy-kidhat"
+            src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
+            alt=""
+            width={870}
+            height={717}
+            style={{ height: "auto" }}
+            aria-hidden="true"
+            priority
+          />
+        </div>
       </section>
 
       <section className="about-whatwedo">
-        <Image
-          className="about-whatwedo-rays"
-          src={cld("MH-Ray.gif")}
-          alt=""
-          width={800}
-          height={800}
-          style={{ height: "auto" }}
-          aria-hidden="true"
-          unoptimized
-        />
         <Image
           className="about-whatwedo-cloud"
           src={cld("MH-cloud-giff.gif")}
@@ -89,7 +103,7 @@ export default function AboutPage() {
           src={cld("MH-kid-group.png")}
           alt="A grandmother and children at Marang House"
           className="about-ntmy-photo"
-          sizes="260px"
+          sizes="(max-width: 900px) 90vw, 42vw"
         />
         <div className="about-ntmy-text">
           <h2>Nice To Meet You.</h2>

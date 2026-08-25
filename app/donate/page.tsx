@@ -15,18 +15,32 @@ export default function DonatePage() {
   return (
     <>
       <section className="donate-hero">
+        {/* Source is an SVG export (MH_-_Website_-_Lets_Connect_banner.svg) —
+            next/image has no SVG support here (next.config.ts isn't set up
+            for dangerouslyAllowSVG), so it's requested as a rasterised PNG
+            via Cloudinary's on-the-fly f_png,q_auto transform instead of the
+            shared cld() f_auto,q_auto helper. Verified this renders a real
+            raster image (1366x873 PNG) before wiring it in:
+            https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612212/MH_-_Website_-_Lets_Connect_banner.svg
+            The artwork's own top ~35% is blank/transparent (just the blue
+            block + duotone photo fill the bottom portion), so it's cropped
+            bottom-anchored to avoid showing that empty band. */}
         <BgPhoto
-          src={cld("v1784193103/maranghouse/marang_house_image.jpg")}
+          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612212/MH_-_Website_-_Lets_Connect_banner.svg"
           alt=""
           className="donate-hero-bg"
-          position="center 35%"
+          position="center 85%"
           sizes="100vw"
           priority
         />
         <div className="donate-hero-overlay" />
         <div className="donate-hero-content">
-          <h1>Donate</h1>
-          <p>Your generosity directly supports the children of Marang House. Every contribution matters.</p>
+          <p className="donate-hero-body">
+            Every act of kindness makes a difference. Whether you choose to volunteer your time, make a
+            donation, partner with us, or simply help spread our story, there are many meaningful ways to
+            support Marang House. Together, we can create brighter futures, one step at a time.
+          </p>
+          <h1 className="donate-hero-heading">Lets connect</h1>
         </div>
       </section>
 
@@ -40,7 +54,7 @@ export default function DonatePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Donate Monthly
+            {DONATION.primary.label}
           </ButtonLink>
         </div>
         <div className="bank-box">
@@ -89,6 +103,7 @@ export default function DonatePage() {
       </div>
 
       <section className="involved-white">
+        <div className="involved-white-inner">
         <h2>How You Can Get Involved</h2>
         <div className="involved-cols">
           <div className="involved-col">
@@ -127,6 +142,7 @@ export default function DonatePage() {
               DONATE
             </Link>
           </div>
+        </div>
         </div>
       </section>
     </>
