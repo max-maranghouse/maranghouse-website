@@ -277,10 +277,7 @@ img { display: block; }
   display: flex; align-items: center; justify-content: center;
   padding: 40px 3%;
 }
-.identity-photo {
-  position: relative; width: 100%; max-width: 420px;
-  aspect-ratio: 1 / 1; border-radius: 50%; overflow: hidden;
-}
+.identity-photo { width: 100%; max-width: 420px; height: auto; }
 .whatwedo-band {
   position: relative; overflow: visible;
   background:
@@ -460,18 +457,6 @@ img { display: block; }
 .involved-band-bg { position: absolute; inset: 0; }
 .involved-band-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(210,110,20,.45), rgba(180,80,10,.6)); }
 .involved-heading { position: relative; z-index: 2; text-align: center; color: #fff; font-size: 2.4rem; margin-bottom: 40px; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
-.likes-badge {
-  position: absolute; z-index: 3; top: -20px; left: 50%; transform: translateX(-50%);
-  background: #e05252; color: #fff; border-radius: 16px;
-  padding: 12px 24px; display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--h); font-weight: 600; font-size: 1.4rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,.2);
-}
-.likes-badge::after {
-  content: ''; position: absolute; left: 50%; bottom: -12px; transform: translateX(-50%);
-  border: 12px solid transparent; border-top-color: #e05252; border-bottom: 0;
-}
-.likes-badge-gif { width: 30px; height: auto; border-radius: 4px; }
 .involved-grid { position: relative; z-index: 2; display: flex; gap: 32px; max-width: 1100px; margin: 0 auto; }
 .involved-card { flex: 1; background: #f4f5f7; border-radius: 20px; padding: 40px 28px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
 .involved-icon { width: 90px; height: 90px; margin-bottom: 18px; }
@@ -501,20 +486,24 @@ img { display: block; }
   display: inline-block; font-family: var(--h); font-weight: 500; font-size: 1.1rem; color: var(--canva-yellow);
   border: 2px solid var(--canva-yellow); border-radius: 999px; padding: 8px 26px;
 }
-.stats-row { display: flex; justify-content: center; gap: 90px; flex-wrap: wrap; }
-.stat-item { text-align: center; }
-.stat-num { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.6rem); color: var(--canva-yellow); font-family: var(--h); font-weight: 700; line-height: 1; }
+.stats-row { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.stat-item {
+  text-align: center; background: rgba(13, 30, 74, .55); border-radius: 18px;
+  padding: 18px 34px; backdrop-filter: blur(3px);
+}
+.stat-num { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.6rem); color: var(--canva-yellow); font-family: var(--h); font-weight: 700; line-height: 1; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
 .stat-label { font-size: 1.25rem; color: #fff; font-family: var(--h); font-weight: 400; margin-top: 8px; }
 .stats-skip-gif {
-  position: absolute; left: 4%; bottom: 4%; width: 140px; z-index: 2; pointer-events: none;
+  position: absolute; left: 4%; bottom: 0; width: 320px; z-index: 2; pointer-events: none;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
 }
 @media (max-width: 760px) {
   .stats-section { min-height: 0; }
   .stats-section-inner { padding: 64px 6% 56px; }
-  .stats-row { gap: 40px; }
+  .stats-row { gap: 24px; }
+  .stat-item { padding: 14px 20px; }
   .stats-heading h2 { font-size: 2rem; }
-  .stats-skip-gif { width: 90px; }
+  .stats-skip-gif { width: 190px; }
 }
 
 /* ═══════════════════════════════════════
@@ -536,16 +525,6 @@ img { display: block; }
    isn't over-cropped down to a narrow strip. */
 .about-navy-photo-wrap { position: relative; width: 50%; flex-shrink: 0; }
 .about-navy-photo { position: absolute; inset: 0; overflow: hidden; }
-/* Breaks across the seam into the text column's lower (typically empty)
-   space rather than past the section's own outer edge, so it isn't clipped
-   by .about-navy's overflow: hidden — same constraint the homepage hero's
-   .hero-doodads cutouts respect. Tune left/bottom by eye once the section
-   height with real copy is visible in the dev server. */
-.about-navy-kidhat {
-  position: absolute; z-index: 2; pointer-events: none;
-  left: -8%; bottom: 0; width: 38%; height: auto;
-  filter: drop-shadow(0 18px 34px rgba(0,0,0,.35));
-}
 
 .about-whatwedo {
   background:
@@ -560,9 +539,8 @@ img { display: block; }
 }
 .about-whatwedo h2 { position: relative; z-index: 1; text-align: center; color: var(--blue); font-size: 2.4rem; margin-bottom: 40px; }
 /* Enlarged and pulled up further to bridge the About hero → What We Do
-   seam, overlapping the bottom-right of the new .about-navy-kidhat cutout
-   above it. Exact offsets are a visual-judgment call — tune once both
-   layers render together in the dev server. */
+   seam. Exact offsets are a visual-judgment call — tune once both layers
+   render together in the dev server. */
 .about-whatwedo-cloud { position: absolute; top: -150px; right: 4%; width: 340px; z-index: 1; pointer-events: none; filter: drop-shadow(0 10px 20px rgba(0,0,0,.15)); }
 .about-whatwedo-grid { position: relative; z-index: 1; display: flex; gap: 24px; justify-content: center; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
 .about-whatwedo-grid img { width: 280px; height: auto; }
@@ -580,11 +558,6 @@ img { display: block; }
 @media (max-width: 900px) {
   .about-navy { flex-direction: column; }
   .about-navy-photo-wrap { width: 100%; height: 320px; }
-  /* Mobile stacks the photo as the last child in the section, so a
-     negative bottom offset here would exceed .about-navy's own box and
-     get clipped by its overflow: hidden — kept fully inside the panel
-     instead of trying to break its edge at this size. */
-  .about-navy-kidhat { left: auto; right: 4%; bottom: 4%; width: 34%; }
   .about-whatwedo-cloud { top: -70px; width: 170px; right: 5%; }
   .about-ntmy { flex-direction: column; text-align: center; }
   .about-ntmy-photo { width: 100%; max-width: 420px; aspect-ratio: 4 / 3; }
@@ -731,20 +704,27 @@ img { display: block; }
 .press-enquiries a { color: var(--yellow); text-decoration: none; font-weight: 700; }
 
 /* — Contact — */
-.contact-hero { position: relative; overflow: hidden; background: #fff; }
-.contact-hero-graphic { position: relative; width: 100%; }
+/* The source photo (MH_-_Website_-_contact_hero.webp) is only 814×503px —
+   stretching it to the full page width upscales well past its native
+   resolution and reads as blurry. Capped the same way .lk-hero-graphic
+   handles the same problem on the Lightkeeper page: contained, centered
+   block instead of full-bleed, so it's never displayed larger than it
+   actually is. */
+.contact-hero { position: relative; padding: 70px 5.5% 90px; background: #fff; }
+.contact-hero-graphic { position: relative; max-width: 800px; margin: 0 auto; }
 .contact-hero-graphic > img { width: 100%; height: auto; display: block; }
 .contact-hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(15deg, rgba(230,140,20,.4) 0%, rgba(250,200,60,.25) 45%, rgba(255,255,255,0) 75%);
 }
 .contact-hero-content {
-  position: absolute; z-index: 2; left: 4%; bottom: 6%; max-width: 56%;
+  position: absolute; z-index: 2; left: 4%; bottom: 6%; max-width: 60%;
   padding: 0 0 0 20px; border-left: 4px solid var(--red);
 }
-.contact-hero-content h1 { font-size: clamp(1.3rem, 0.6rem + 3.2vw, 2.6rem); color: var(--red); line-height: 1.15; }
+.contact-hero-content h1 { font-size: clamp(1.3rem, 0.6rem + 2.4vw, 2.3rem); color: var(--red); line-height: 1.15; }
 .contact-hero-content h1 span { display: block; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
 @media (max-width: 600px) {
+  .contact-hero { padding: 40px 5.5% 60px; }
   .contact-hero-content { max-width: 80%; bottom: 4%; }
 }
 
@@ -755,14 +735,21 @@ img { display: block; }
     linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
   padding: 60px 5.5% 90px;
 }
-.contact-form-wrap { position: relative; z-index: 1; display: flex; gap: 64px; align-items: flex-start; }
-.contact-form-aside-text { flex: 1; max-width: 420px; }
+.contact-form-wrap { position: relative; z-index: 1; display: flex; gap: 48px; align-items: center; }
+.contact-form-aside-text { flex: 1; max-width: 340px; }
 .contact-form-aside-text h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 14px; }
 .contact-form-aside-text p { font-size: 0.95rem; color: var(--blue); font-weight: 700; line-height: 1.7; margin-bottom: 22px; }
-.contact-aside-photo-wrap { position: relative; margin-top: 28px; width: 100%; max-width: 320px; }
-.contact-aside-photo { width: 100%; height: auto; }
-.contact-aside-photo-doodle { position: absolute; left: -6%; bottom: -6%; width: 30%; pointer-events: none; }
-.contact-form-card { flex: 1.3; background: rgba(255,255,255,.35); border-radius: 18px; padding: 32px; }
+/* Its own column, sized as a real visual anchor next to the form rather
+   than a small afterthought stacked under the contact details — same
+   drop-shadow-on-cutout language the site already uses for these PNG
+   photo elements elsewhere (identity/about-navy). */
+.contact-aside-photo-wrap {
+  position: relative; flex: 0 0 auto; width: 300px;
+  filter: drop-shadow(0 18px 34px rgba(0,0,0,.2));
+}
+.contact-aside-photo { width: 100%; height: auto; display: block; }
+.contact-aside-photo-doodle { position: absolute; left: -8%; bottom: -8%; width: 32%; pointer-events: none; }
+.contact-form-card { flex: 1.2; background: rgba(255,255,255,.35); border-radius: 18px; padding: 32px; }
 .contact-form { max-width: 520px; display: flex; flex-direction: column; gap: 16px; }
 .contact-form-row { display: flex; gap: 16px; }
 /* :not([type="checkbox"]) excludes the honeypot field — it must keep the
@@ -795,8 +782,8 @@ img { display: block; }
    .contact-form-wrap's contents directly. */
 @media (max-width: 860px) {
   .contact-form-wrap { flex-direction: column; gap: 32px; }
-  .contact-form-aside-text { max-width: 100%; }
-  .contact-aside-photo-wrap { margin-left: auto; margin-right: auto; }
+  .contact-form-aside-text { max-width: 100%; text-align: center; }
+  .contact-aside-photo-wrap { width: 220px; margin: 0 auto; }
   .find-us { flex-direction: column; padding: 56px 24px; text-align: center; gap: 32px; }
   .find-us-map { margin: 0 auto; }
   .find-us-pin { display: none; }

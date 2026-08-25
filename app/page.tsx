@@ -134,12 +134,13 @@ export default function HomePage() {
             </p>
           </div>
           <div className="identity-photo-wrap">
-            <BgPhoto
-              src={cld("MH-kid-pirate.png")}
-              alt="A child at Marang House"
+            <Image
               className="identity-photo"
-              position="center 20%"
-              sizes="(max-width: 1000px) 100vw, 50vw"
+              src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
+              alt="A child at Marang House"
+              width={870}
+              height={717}
+              style={{ width: "100%", height: "auto" }}
             />
           </div>
         </div>
@@ -379,7 +380,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. HOW YOU CAN GET INVOLVED — photo-backdrop, likes badge,
+      {/* 8. HOW YOU CAN GET INVOLVED — photo-backdrop,
           3 white cards (Volunteer / Lightkeeper / Donate).
           Matches Canva ref 06. */}
       <section className="involved-section">
@@ -387,19 +388,6 @@ export default function HomePage() {
           <div className="involved-band-inner">
             <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" sizes="100vw" />
             <div className="involved-band-overlay" />
-          </div>
-          <div className="likes-badge">
-            <Image
-              className="likes-badge-gif"
-              src={cld("MH-likes-giff.gif")}
-              alt=""
-              width={30}
-              height={30}
-              style={{ height: "auto" }}
-              unoptimized
-              aria-hidden="true"
-            />
-            <span>45</span>
           </div>
           <h2 className="involved-heading">How You Can Get Involved</h2>
           <div className="involved-grid">
