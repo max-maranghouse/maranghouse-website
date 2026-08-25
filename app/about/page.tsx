@@ -46,21 +46,6 @@ export default function AboutPage() {
             sizes="(max-width: 900px) 100vw, 50vw"
             priority
           />
-          {/* Foreground depth layer: the same pirate-hat boy who used to be
-              the whole hero photo (MH-kid-pirate.png) is now a cutout
-              layered in front of the new group shot — same
-              absolutely-positioned-cutout-over-background technique as the
-              homepage hero's polaroids/sketch over hero-photo. */}
-          <Image
-            className="about-navy-kidhat"
-            src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
-            alt=""
-            width={870}
-            height={717}
-            style={{ height: "auto" }}
-            aria-hidden="true"
-            priority
-          />
         </div>
       </section>
 

@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { cld } from "@/lib/images";
 import { DONATION, ORGANISATION, SITE_NAVIGATION } from "@/lib/site-data";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Container from "@/components/ui/Container";
@@ -34,11 +36,12 @@ export default function SiteHeader() {
           onClick={() => setIsMenuOpen(false)}
         >
           <span className="site-brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48">
-              <path d="M7 23.5 24 8l17 15.5v16A2.5 2.5 0 0 1 38.5 42h-29A2.5 2.5 0 0 1 7 39.5v-16Z" />
-              <path d="M19 42V29h10v13M15 20.5h18" />
-              <circle cx="36.5" cy="10.5" r="4.5" />
-            </svg>
+            <Image
+              src={cld("v1784193083/maranghouse/marang_house_logo_sm.png")}
+              alt=""
+              width={64}
+              height={64}
+            />
           </span>
           <span className="site-brand__text">
             <strong>{ORGANISATION.name}</strong>

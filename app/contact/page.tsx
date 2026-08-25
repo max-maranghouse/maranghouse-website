@@ -63,31 +63,31 @@ export default function ContactPage() {
                 NPC Reg # {ORGANISATION.registrations.npc}
               </div>
             </div>
-            {/* v1786782356/MH-info-pg-element.png — freed up by the step-14
-                hero swap (that section now uses the dedicated contact-hero
-                asset instead). Plain <Image>, not BgPhoto/fill, so the
-                cutout's own irregular transparent edges render as-is rather
-                than being cropped to a rectangle. */}
-            <div className="contact-aside-photo-wrap">
-              <Image
-                className="contact-aside-photo"
-                src={cld("MH-info-pg-element.png")}
-                alt=""
-                width={1000}
-                height={1000}
-                style={{ height: "auto" }}
-              />
-              <Image
-                className="contact-aside-photo-doodle"
-                src={cld("v1786782367/MH-love-giff.gif")}
-                alt=""
-                width={200}
-                height={200}
-                style={{ height: "auto" }}
-                unoptimized
-                aria-hidden="true"
-              />
-            </div>
+          </div>
+          {/* v1786782356/MH-info-pg-element.png — its own column beside the
+              form (not stacked under the contact-details text) so it reads
+              as a deliberate visual anchor at a larger size. Plain <Image>,
+              not BgPhoto/fill, so the cutout's own irregular transparent
+              edges render as-is rather than being cropped to a rectangle. */}
+          <div className="contact-aside-photo-wrap">
+            <Image
+              className="contact-aside-photo"
+              src={cld("MH-info-pg-element.png")}
+              alt=""
+              width={1000}
+              height={1000}
+              style={{ height: "auto" }}
+            />
+            <Image
+              className="contact-aside-photo-doodle"
+              src={cld("v1786782367/MH-love-giff.gif")}
+              alt=""
+              width={200}
+              height={200}
+              style={{ height: "auto" }}
+              unoptimized
+              aria-hidden="true"
+            />
           </div>
           <div className="contact-form-card">
             <ContactForm />

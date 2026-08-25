@@ -42,7 +42,7 @@ export const ORGANISATION = {
 
 export const DONATION = {
   primary: {
-    label: "Donate Monthly",
+    label: "Become a Lightkeeper",
     provider: "BackaBuddy",
     url: "https://www.backabuddy.co.za/campaign/marang-circle-of-light",
     programmeName: "Lightkeepers",
