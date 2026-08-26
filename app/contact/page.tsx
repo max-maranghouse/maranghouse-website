@@ -14,18 +14,22 @@ export default function ContactPage() {
   return (
     <>
       <section className="contact-hero">
-        {/* v1787612207/MH_-_Website_-_contact_hero.webp — a sepia/duotone
-            photo with its own baked-in wavy transparent bottom edge (not a
-            plain rectangle), matching the reference. Rendered at its
-            natural aspect ratio (width: 100%, height: auto — same pattern
-            as .lk-hero-graphic) instead of BgPhoto's fill+cover, which
-            would force-crop a rectangle and destroy the wave shape. */}
+        {/* v1787695702/MH_-_Website_-_contact_hero_image.svg — an SVG export,
+            so it's requested as a rasterised PNG via Cloudinary's on-the-fly
+            f_png,q_auto transform instead of the shared cld() f_auto,q_auto
+            helper (next/image has no SVG support here). Verified this
+            renders a real raster image (1366x768 PNG) before wiring it in.
+            Like the photo it replaces, it has its own baked-in wavy
+            transparent cutouts at both bottom corners (not a plain
+            rectangle), so it's rendered at its natural aspect ratio
+            (width: 100%, height: auto) instead of BgPhoto's fill+cover,
+            which would force-crop a rectangle and destroy the wave shape. */}
         <div className="contact-hero-graphic">
           <Image
-            src={cld("v1787612207/MH_-_Website_-_contact_hero.webp")}
+            src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695702/MH_-_Website_-_contact_hero_image.svg"
             alt=""
-            width={814}
-            height={503}
+            width={1366}
+            height={768}
             priority
             style={{ width: "100%", height: "auto" }}
           />
@@ -96,6 +100,14 @@ export default function ContactPage() {
       </section>
 
       <section className="find-us">
+        <Image
+          className="find-us-location-doodad"
+          src={cld("v1786782348/MH-location-element-1.png")}
+          alt=""
+          width={1000}
+          height={1000}
+          aria-hidden="true"
+        />
         <div className="find-us-pin">
           <svg viewBox="0 0 150 190" aria-hidden="true">
             <path d="M75 8C40 8 14 34 14 68c0 44 61 114 61 114s61-70 61-114C136 34 110 8 75 8z" fill="#7ba6dd" />

@@ -136,10 +136,10 @@ export default function HomePage() {
           <div className="identity-photo-wrap">
             <Image
               className="identity-photo"
-              src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
-              alt="A child at Marang House"
-              width={870}
-              height={717}
+              src={cld("v1786782357/MH-boy-arch.png")}
+              alt="A child in school uniform celebrating with caregivers at Marang House"
+              width={1000}
+              height={1000}
               style={{ width: "100%", height: "auto" }}
             />
           </div>

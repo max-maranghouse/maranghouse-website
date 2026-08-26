@@ -277,7 +277,7 @@ img { display: block; }
   display: flex; align-items: center; justify-content: center;
   padding: 40px 3%;
 }
-.identity-photo { width: 100%; max-width: 420px; height: auto; }
+.identity-photo { width: 100%; max-width: 420px; height: auto; filter: drop-shadow(0 12px 28px rgba(0,0,0,.25)); }
 .whatwedo-band {
   position: relative; overflow: visible;
   background:
@@ -625,36 +625,84 @@ img { display: block; }
 .lk-circle-section p { color: var(--blue); font-weight: 600; font-size: 1rem; max-width: 640px; margin: 0 auto 8px; line-height: 1.7; }
 .lk-circle-note { display: inline-block; margin-top: 18px; background: #fff8e6; border: 1px dashed var(--orange); border-radius: 12px; padding: 14px 22px; color: #8a5a10; font-size: 0.85rem; font-weight: 600; max-width: 560px; }
 
+/* Salome's story — plain white, editorial column. Quote-styled paragraph
+   for her direct words, a bold centered "standout" line for the thesis
+   sentence, and a closing tagline band as the page's final beat. */
+.lk-story { background: #fff; padding: 80px 5.5% 90px; }
+.lk-story-inner { max-width: 760px; margin: 0 auto; }
+.lk-story-eyebrow {
+  display: block; text-align: center; text-transform: uppercase; letter-spacing: 2px;
+  font-size: 0.8rem; font-weight: 800; color: var(--orange); margin-bottom: 12px;
+  font-family: var(--font-nunito), sans-serif;
+}
+.lk-story h2 { text-align: center; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); color: var(--blue); margin-bottom: 40px; }
+.lk-story p { font-size: 1rem; line-height: 1.85; color: #333; margin-bottom: 20px; }
+.lk-story p strong { color: var(--blue); }
+.lk-story-quote {
+  font-style: italic; font-size: 1.1rem; line-height: 1.8; color: var(--blue);
+  border-left: 4px solid var(--canva-yellow); padding: 4px 0 4px 24px; margin: 28px 0;
+}
+.lk-story-standout {
+  text-align: center; font-family: var(--h);
+  font-weight: 600; font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
+  color: var(--blue); line-height: 1.35; margin: 40px 0;
+}
+.lk-story-standout span { color: var(--orange); }
+.lk-story-tagline {
+  margin-top: 56px; text-align: center; background: var(--blue); border-radius: 22px;
+  padding: 40px 28px; color: #fff; font-family: var(--h);
+  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem); letter-spacing: 0.3px; line-height: 1.7;
+}
+.lk-story-tagline span { color: var(--canva-yellow); }
+@media (max-width: 600px) {
+  .lk-story { padding: 56px 6% 60px; }
+  .lk-story-quote { padding-left: 16px; }
+  .lk-story-tagline { padding: 32px 22px; }
+}
+
 /* — Donate — */
-.donate-hero { position: relative; min-height: 380px; display: flex; align-items: center; overflow: hidden; }
-.donate-hero-bg { position: absolute; inset: 0; }
-/* Purple tint per the "purple section" reference, replacing the old blue
-   wash — see --color-purple in :root. */
-.donate-hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(100deg, rgba(106,63,181,.6) 0%, rgba(60,30,110,.4) 55%, rgba(30,15,60,.15) 100%);
-}
-/* Two-part layout: body copy left (over the artwork's blue block), "Lets
-   connect" heading right (over the duotone photo half) — both real HTML
-   text over the background image, not baked into the graphic. */
-.donate-hero-content {
-  position: relative; z-index: 2; width: 100%;
-  display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  padding: 56px 6%;
-}
-.donate-hero-body {
-  color: #fff; font-size: 0.98rem; line-height: 1.7; max-width: 440px;
-  text-shadow: 0 1px 8px rgba(0,0,0,.35);
-}
+/* Split layout: copy on the left, the compact 683×549px photo on the
+   right in its own column at well under its native width — sizing it to
+   fill a wide contained card (as a solo centered element) upscaled it
+   past its native resolution and read as blurry; a narrower column here
+   keeps it crisp. Purple-toned dark background (--color-purple leaning
+   into --blue-dk) replaces the old photo-as-background treatment. */
+.donate-hero { position: relative; padding: 70px 5.5% 80px; background: linear-gradient(135deg, var(--blue-dk) 0%, #1e0f3c 120%); }
+.donate-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
+.donate-hero-text { flex: 1; max-width: 460px; }
 .donate-hero-heading {
-  font-size: clamp(2rem, 1.2rem + 3vw, 3.4rem); color: var(--canva-yellow);
-  text-align: right; flex-shrink: 0; text-shadow: 0 2px 16px rgba(0,0,0,.4);
+  font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); color: var(--canva-yellow);
+  margin-bottom: 16px;
 }
+.donate-hero-body { color: #fff; font-size: 1rem; line-height: 1.7; }
+.donate-hero-graphic {
+  flex: 0 0 auto; width: 46%; max-width: 460px; position: relative;
+  border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.35);
+}
+.donate-hero-graphic > img { width: 100%; height: auto; display: block; }
 @media (max-width: 760px) {
-  .donate-hero-content { flex-direction: column; align-items: flex-start; text-align: left; gap: 18px; padding: 44px 6%; }
-  .donate-hero-heading { text-align: left; font-size: 2.2rem; }
+  .donate-hero { padding: 48px 5.5% 50px; }
+  .donate-hero-inner { flex-direction: column; text-align: center; gap: 32px; }
+  .donate-hero-text { max-width: 100%; }
+  .donate-hero-graphic { width: 100%; max-width: 380px; }
+  .donate-hero-heading { font-size: 2.1rem; }
+  .donate-hero-body { font-size: 0.9rem; }
 }
-.involved-white { background: #fff; padding: 72px 5.5% 80px; }
+/* Full-bleed cream band behind .donate-body — was flat white sandwiched
+   between the (now dark) hero and .involved-white below, reading as one
+   long plain stretch. Cards inside (.bank-box, .info-strip) keep their
+   own contrasting fills against this tint. */
+.donate-body-band { background: var(--color-cream); }
+.involved-white {
+  /* Class name kept for history — background is now the same warm
+     gradient as .contact-form-section (blue text on it is an already-
+     proven combo there) instead of flat white, so this section doesn't
+     read as another blank stretch next to .donate-body-band above it. */
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  padding: 72px 5.5% 80px;
+}
 /* Shared container so the heading and the 3-column row line up to the same
    edges and center together as one balanced block, instead of the heading
    (max-width: 420px) and .involved-cols (max-width: 1000px, no auto
@@ -704,27 +752,36 @@ img { display: block; }
 .press-enquiries a { color: var(--yellow); text-decoration: none; font-weight: 700; }
 
 /* — Contact — */
-/* The source photo (MH_-_Website_-_contact_hero.webp) is only 814×503px —
-   stretching it to the full page width upscales well past its native
-   resolution and reads as blurry. Capped the same way .lk-hero-graphic
-   handles the same problem on the Lightkeeper page: contained, centered
-   block instead of full-bleed, so it's never displayed larger than it
-   actually is. */
-.contact-hero { position: relative; padding: 70px 5.5% 90px; background: #fff; }
-.contact-hero-graphic { position: relative; max-width: 800px; margin: 0 auto; }
+/* The source image (MH_-_Website_-_contact_hero_image.svg, rasterised to
+   1366×768) has enough resolution to run full-bleed edge-to-edge — no
+   section padding, no white margin around it. The section's own
+   background matches the gradient of .contact-form-section below it, so
+   nothing but the image itself is visible (the fallback only shows during
+   image load or if the SVG's own transparent wave dips below the section
+   edge at very wide/narrow aspect ratios). */
+.contact-hero {
+  position: relative; overflow: hidden;
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+}
+.contact-hero-graphic { position: relative; }
 .contact-hero-graphic > img { width: 100%; height: auto; display: block; }
 .contact-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(15deg, rgba(230,140,20,.4) 0%, rgba(250,200,60,.25) 45%, rgba(255,255,255,0) 75%);
+  background: linear-gradient(165deg, rgba(230,140,20,.4) 0%, rgba(250,200,60,.25) 45%, rgba(255,255,255,0) 75%);
 }
+/* The new artwork's wave cutout opens up on the center-right of the image
+   (not the bottom-left corner like the old photo), so the text block sits
+   in that negative space instead — right-anchored, same red-accent-bar
+   treatment. */
 .contact-hero-content {
-  position: absolute; z-index: 2; left: 4%; bottom: 6%; max-width: 60%;
+  position: absolute; z-index: 2; right: 4%; bottom: 4%; max-width: 34%;
   padding: 0 0 0 20px; border-left: 4px solid var(--red);
 }
 .contact-hero-content h1 { font-size: clamp(1.3rem, 0.6rem + 2.4vw, 2.3rem); color: var(--red); line-height: 1.15; }
 .contact-hero-content h1 span { display: block; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
 @media (max-width: 600px) {
-  .contact-hero { padding: 40px 5.5% 60px; }
   .contact-hero-content { max-width: 80%; bottom: 4%; }
 }
 
@@ -765,11 +822,25 @@ img { display: block; }
 .contact-aside .contact-line a { color: var(--blue); text-decoration: none; }
 
 .find-us { background: var(--blue); position: relative; padding: 64px 48px; display: flex; gap: 48px; align-items: center; overflow: visible; }
-.find-us-map { position: relative; width: 320px; height: 320px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 6px solid var(--blue); box-shadow: 0 0 0 2px rgba(255,255,255,.15); }
+/* Dashed-route doodad sits behind the map circle. The source art is drawn
+   in the same brand blue as this section's background (#004aad), so it's
+   recoloured white via filter and kept low-opacity to read as a subtle
+   background texture rather than invisible or competing with the map.
+   Centered on the map itself (left edge = section's 48px padding + half
+   the map's 320px width), not the whole flex row, since the row's
+   remaining width is taken up by the address/hours text. */
+.find-us-location-doodad {
+  position: absolute; z-index: 0; pointer-events: none;
+  left: 208px; top: 50%; transform: translate(-50%, -50%);
+  width: 380px; height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.3;
+}
+.find-us-map { position: relative; z-index: 1; width: 320px; height: 320px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 6px solid var(--blue); box-shadow: 0 0 0 2px rgba(255,255,255,.15); }
 .find-us-map iframe { width: 100%; height: 100%; border: 0; display: block; }
 .find-us-pin { position: absolute; left: 210px; top: -20px; width: 130px; z-index: 2; }
 .find-us-pin svg { width: 130px; height: 165px; display: block; }
-.find-us-body { flex: 1; }
+.find-us-body { position: relative; z-index: 1; flex: 1; }
 .find-us h2 { font-size: 2.6rem; line-height: 1.02; color: #fff; margin-bottom: 28px; }
 .find-us h2 span { color: var(--yellow); }
 .find-us-cols { display: flex; gap: 72px; flex-wrap: wrap; }
@@ -787,6 +858,7 @@ img { display: block; }
   .find-us { flex-direction: column; padding: 56px 24px; text-align: center; gap: 32px; }
   .find-us-map { margin: 0 auto; }
   .find-us-pin { display: none; }
+  .find-us-location-doodad { display: none; }
   .find-us-cols { justify-content: center; text-align: left; }
 }
 .hours-row { display: flex; gap: 18px; color: rgba(255,255,255,.92); font-size: 0.88rem; line-height: 1.8; font-weight: 600; }
@@ -822,7 +894,9 @@ img { display: block; }
 .bank-label { font-weight: 800; color: var(--blue); min-width: 130px; }
 .bank-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(0,74,173,.15); font-size: 0.88rem; color: #555; line-height: 1.6; }
 .bank-note strong { color: var(--blue); }
-.info-strip { border-left: 4px solid var(--yellow); background: #fffbee; border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
+/* White (not the old near-identical #fffbee) so it still stands out now
+   that .donate-body-band gives the whole section a cream tint. */
+.info-strip { border-left: 4px solid var(--yellow); background: #fff; border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
 .info-strip h4 { color: var(--blue); font-size: 0.92rem; margin-bottom: 4px; }
 .info-strip p { color: #555; font-size: 0.87rem; line-height: 1.6; }
 .npc-note { color: #aaa; font-size: 0.8rem; margin-top: 18px; }

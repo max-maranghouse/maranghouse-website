@@ -36,6 +36,22 @@ export default function LightkeepersPage() {
           </div>
         </section>
 
+        {/* Reuses .lk-circle-section — already defined in globals.css but
+            unused until now — as a short emotional lead-in between the
+            hero and the practical info card below. */}
+        <section className="lk-circle-section">
+          <h2>Join the Circle of Light</h2>
+          <p>
+            We invite you to become a Lightkeeper. Join the Marang House Circle of Light as a monthly
+            donor — your monthly gift provides more than food or shelter, it gives a child what every
+            child deserves.
+          </p>
+          <p>
+            They need stability. They need nutritious meals, transport to hospital, school uniforms,
+            shoes, electricity, warm beds and, most importantly, people who care.
+          </p>
+        </section>
+
         <section className="lk-info-section">
           <div className="lk-info-card">
             <h2>BECOME A LIGHTKEEPER</h2>
@@ -96,6 +112,52 @@ export default function LightkeepersPage() {
         </section>
       </div>
 
+      {/* Salome's story, in her own words — sits on plain white outside
+          .lk-page-gradient so it reads as a distinct, quieter beat after
+          the bright orange hero/info block above, closing with the
+          tagline band as the page's final note. */}
+      <section className="lk-story">
+        <div className="lk-story-inner">
+          <span className="lk-story-eyebrow">In Her Own Words</span>
+          <h2>Meet Salome, Our Matron</h2>
+          <p>
+            Salome, Matron of Marang House, was fourteen years old when she watched her grandmother pass
+            away at home. That was the moment she decided she wanted to become a nurse.
+          </p>
+          <p className="lk-story-quote">
+            &ldquo;Years later, I worked alongside Dr Pieter Ernst in theatre. One day he asked me if I
+            would come and help at a children&rsquo;s home called Marang House. He saw something in me
+            that I couldn&rsquo;t yet see in myself. Today I know exactly what he saw.&rdquo;
+          </p>
+          <p className="lk-story-standout">
+            Children don&rsquo;t heal because of insulin alone. Children heal because they feel
+            <span> secure and loved.</span>
+          </p>
+          <p>
+            Every child who comes to Marang House has already faced more than most adults. They leave
+            their families and travel hundreds of kilometres to Johannesburg for life-saving treatment.
+            Many arrive frightened. Some have spent more days in hospital than they have at home.
+          </p>
+          <p>Every one of them deserves to feel safe. That is why Marang House exists.</p>
+          <p>
+            It takes many people to create that feeling of security. A volunteer helping with homework.
+            A donor buying school shoes. A warm meal after a long day at hospital. A hug before bedtime.
+          </p>
+          <p>Together, those small acts of kindness become something much bigger.</p>
+          <p>
+            They become <strong>The Marang House Circle of Light</strong>. Together, we are the
+            Lightkeepers.
+          </p>
+          <p>
+            Security isn&rsquo;t created in a single day. It is built every single month. That is why
+            monthly giving matters. Because when children know they are safe, healing can begin.
+          </p>
+          <div className="lk-story-tagline">
+            One Home &middot; One Circle &middot; <span>A Thousand Lightkeepers</span> &middot; Endless
+            Hope
+          </div>
+        </div>
+      </section>
     </>
   );
 }

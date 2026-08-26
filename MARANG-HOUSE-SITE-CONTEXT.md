@@ -1,8 +1,15 @@
 # Marang House Website — Project Context & Working Guide
 
+> ⚠️ **Start with `CLAUDE.md` instead.** It's the current, maintained
+> reference (stack, conventions, design status, open content questions).
+> This file is kept for its historical/deployment record — §11 in
+> particular (the GoDaddy hosting compromise) is still fully current and
+> worth reading before touching domains/DNS — but §1–10 below describe
+> earlier states of the project that have since moved on.
+
 > Upload this file at the start of a chat when you want help working on the Marang House website. It contains everything needed to understand how the site is built, where things live, and how to make and publish changes.
 
-> ⚠️ **Sections 1–9 below describe the site as it was originally built (a single static `index.html`).** They no longer describe what's actually live. A Next.js rebuild is in progress on branch `overhaul/nextjs-migration` (see §10), but **the domain currently points at neither of those** — read **§11 first**: the GoDaddy-hosted production site was hacked, and `maranghouse.org` now runs a separate temporary landing page in its own project/repo while both the hosting cleanup and the rebuild are unfinished.
+> ⚠️ **Sections 1–9 below describe the site as it was originally built (a single static `index.html`).** They no longer describe what's actually live. §10 documents the Next.js rebuild plan and its status as of 2026-07-22 — that rebuild is itself now further along: a Canva-matching visual redesign was completed after this section was written (see `CLAUDE.md` → "Design status"), and §10's two "outstanding before launch" items (social media links, press page content) are **still outstanding** as of the current `CLAUDE.md`. The domain situation in **§11** is separate from all of that and still applies as written: `maranghouse.org` currently runs a temporary landing page in its own project/repo, not this one.
 
 ---
 

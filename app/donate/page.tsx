@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -15,35 +16,39 @@ export default function DonatePage() {
   return (
     <>
       <section className="donate-hero">
-        {/* Source is an SVG export (MH_-_Website_-_Lets_Connect_banner.svg) —
+        {/* Source is an SVG export (MH_-_Website_-_Donate_Hero_IMG.svg) —
             next/image has no SVG support here (next.config.ts isn't set up
             for dangerouslyAllowSVG), so it's requested as a rasterised PNG
             via Cloudinary's on-the-fly f_png,q_auto transform instead of the
             shared cld() f_auto,q_auto helper. Verified this renders a real
-            raster image (1366x873 PNG) before wiring it in:
-            https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612212/MH_-_Website_-_Lets_Connect_banner.svg
-            The artwork's own top ~35% is blank/transparent (just the blue
-            block + duotone photo fill the bottom portion), so it's cropped
-            bottom-anchored to avoid showing that empty band. */}
-        <BgPhoto
-          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612212/MH_-_Website_-_Lets_Connect_banner.svg"
-          alt=""
-          className="donate-hero-bg"
-          position="center 85%"
-          sizes="100vw"
-          priority
-        />
-        <div className="donate-hero-overlay" />
-        <div className="donate-hero-content">
-          <p className="donate-hero-body">
-            Every act of kindness makes a difference. Whether you choose to volunteer your time, make a
-            donation, partner with us, or simply help spread our story, there are many meaningful ways to
-            support Marang House. Together, we can create brighter futures, one step at a time.
-          </p>
-          <h1 className="donate-hero-heading">Lets connect</h1>
+            raster image (683x549 PNG) before wiring it in. It's a compact
+            photo, not a full-bleed composition, so it sits in its own
+            column at well under its native 683px width (not stretched to
+            fill a wide contained card, which read as slightly blurry) —
+            text and image split side by side instead of overlaid. */}
+        <div className="donate-hero-inner">
+          <div className="donate-hero-text">
+            <h1 className="donate-hero-heading">Donate</h1>
+            <p className="donate-hero-body">
+              Every act of kindness makes a difference. Whether you choose to volunteer your time, make a
+              donation, partner with us, or simply help spread our story, there are many meaningful ways to
+              support Marang House. Together, we can create brighter futures, one step at a time.
+            </p>
+          </div>
+          <div className="donate-hero-graphic">
+            <Image
+              src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695333/MH_-_Website_-_Donate_Hero_IMG.svg"
+              alt=""
+              width={683}
+              height={549}
+              priority
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
         </div>
       </section>
 
+      <section className="donate-body-band">
       <div className="donate-body">
         <div className="donate-primary">
           <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
@@ -101,6 +106,7 @@ export default function DonatePage() {
         </div>
         <p className="npc-note">NPC Reg # {ORGANISATION.registrations.npc}</p>
       </div>
+      </section>
 
       <section className="involved-white">
         <div className="involved-white-inner">

@@ -85,8 +85,8 @@ export default function AboutPage() {
 
       <section className="about-ntmy">
         <BgPhoto
-          src={cld("MH-kid-group.png")}
-          alt="A grandmother and children at Marang House"
+          src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
+          alt="A child at Marang House"
           className="about-ntmy-photo"
           sizes="(max-width: 900px) 90vw, 42vw"
         />
@@ -103,9 +103,15 @@ export default function AboutPage() {
             The road to overcoming these illnesses seems like an uphill battle, filled with daily routines
             of testing, dialysis, and the uncertain waiting game for organ transplants.
           </p>
+          {/* Founder + name meaning verified against en.wikipedia.org/wiki/Marang_House
+              and iol.co.za's 2023 Saturday Star profile before adding —
+              Dr Pieter Ernst founded the home in 1998; "Marang" is Setswana
+              for a ray of sunshine, which is why the sun motif runs through
+              the branding (logo, "Circle of Light", Lightkeepers). */}
           <p>
-            In 1998, Marang House emerged as a beacon of hope, dedicated to bringing light into the lives
-            of South Africa&apos;s seriously ill children.
+            In 1998, Dr Pieter Ernst founded Marang House as a beacon of hope for South Africa&apos;s
+            seriously ill children. Marang is the Setswana word for a ray of sunshine — the light we try
+            to bring into the life of every child who walks through our doors.
           </p>
         </div>
       </section>
