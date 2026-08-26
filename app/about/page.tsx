@@ -84,11 +84,18 @@ export default function AboutPage() {
       </section>
 
       <section className="about-ntmy">
-        <BgPhoto
+        {/* Cutout image (transparent background), so it's rendered at its
+            natural aspect ratio with a plain <Image> instead of BgPhoto's
+            fill+cover into a rounded card — that card's background/shadow
+            just showed through the cutout's transparent areas as a visible
+            white "tile" behind the child. */}
+        <Image
+          className="about-ntmy-photo"
           src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
           alt="A child at Marang House"
-          className="about-ntmy-photo"
-          sizes="(max-width: 900px) 90vw, 42vw"
+          width={870}
+          height={717}
+          style={{ width: "100%", height: "auto" }}
         />
         <div className="about-ntmy-text">
           <h2>Nice To Meet You.</h2>

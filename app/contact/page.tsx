@@ -20,28 +20,21 @@ export default function ContactPage() {
             f_png,q_auto transform instead of the shared cld() f_auto,q_auto
             helper (next/image has no SVG support here). Verified this
             renders a real raster image (1366x768 PNG) before wiring it in.
-            At its natural 16:9 aspect ratio the hero ran too tall — on
-            shorter viewports the "WE'D LOVE TO HEAR FROM YOU" heading (which
-            sits low, in the wave cutout) fell below the fold. Capped the
-            section to a fixed height and cropped with BgPhoto's fill+cover,
-            biased low (position="center 55%") to keep the wave/text area in
-            frame while trimming mostly-empty sky off the top — tuned down
-            from an earlier, more aggressive bias that cropped kids' heads. */}
-        <div className="contact-hero-graphic">
+            Previously ran full-bleed, forcing an awkward crop/stretch at
+            every viewport width. Split layout instead — a contained,
+            rounded photo card (BgPhoto fill+cover into a fixed 4/3 aspect
+            ratio, so it crops cleanly rather than stretching) on the left,
+            heading on the right, same text/image-split language as the
+            Donate hero. */}
+        <div className="contact-hero-inner">
           <BgPhoto
             src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695702/MH_-_Website_-_contact_hero_image.svg"
-            alt=""
-            className="contact-hero-bg"
-            position="center 55%"
-            sizes="100vw"
+            alt="Children at Marang House wearing Marang House t-shirts"
+            className="contact-hero-graphic"
+            position="center 32%"
+            sizes="(max-width: 760px) 90vw, 50vw"
             priority
           />
-          <div className="contact-hero-overlay" />
-          {/* The wave cuts the photo away in the bottom-left corner, so the
-              red-accent-bar text block sits in that negative space (over
-              the page background showing through) rather than on top of
-              the photo, per the reference. Percentage-positioned — tune by
-              eye against the live render once in the dev server. */}
           <div className="contact-hero-content">
             <h1>
               WE&apos;D LOVE TO
@@ -53,29 +46,11 @@ export default function ContactPage() {
 
       <section className="contact-form-section">
         <div className="contact-form-wrap">
-          <div className="contact-form-aside-text">
-            <h2>Get in touch!</h2>
-            <p>
-              Businesses and fellow foundations have given their time and support to help us make a
-              difference in children&apos;s lives.
-            </p>
-            <div className="contact-aside">
-              <div className="contact-line">
-                📞 <a href={ORGANISATION.phone.href}>{ORGANISATION.phone.display}</a>
-              </div>
-              <div className="contact-line">
-                ✉ <a href={`mailto:${ORGANISATION.email}`}>{ORGANISATION.email}</a>
-              </div>
-              <div className="contact-line" style={{ color: "#7a4a10", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
-                NPC Reg # {ORGANISATION.registrations.npc}
-              </div>
-            </div>
-          </div>
-          {/* v1786782356/MH-info-pg-element.png — its own column beside the
-              form (not stacked under the contact-details text) so it reads
-              as a deliberate visual anchor at a larger size. Plain <Image>,
-              not BgPhoto/fill, so the cutout's own irregular transparent
-              edges render as-is rather than being cropped to a rectangle. */}
+          {/* v1786782356/MH-info-pg-element.png — leads the row (left of the
+              text) as a deliberate, large visual anchor rather than a small
+              afterthought. Plain <Image>, not BgPhoto/fill, so the cutout's
+              own irregular transparent edges render as-is rather than being
+              cropped to a rectangle. */}
           <div className="contact-aside-photo-wrap">
             <Image
               className="contact-aside-photo"
@@ -96,6 +71,24 @@ export default function ContactPage() {
               aria-hidden="true"
             />
           </div>
+          <div className="contact-form-aside-text">
+            <h2>Get in touch!</h2>
+            <p>
+              Businesses and fellow foundations have given their time and support to help us make a
+              difference in children&apos;s lives.
+            </p>
+            <div className="contact-aside">
+              <div className="contact-line">
+                📞 <a href={ORGANISATION.phone.href}>{ORGANISATION.phone.display}</a>
+              </div>
+              <div className="contact-line">
+                ✉ <a href={`mailto:${ORGANISATION.email}`}>{ORGANISATION.email}</a>
+              </div>
+              <div className="contact-line" style={{ color: "#7a4a10", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
+                NPC Reg # {ORGANISATION.registrations.npc}
+              </div>
+            </div>
+          </div>
           <div className="contact-form-card">
             <ContactForm />
           </div>
@@ -104,73 +97,90 @@ export default function ContactPage() {
 
       <section className="find-us">
         <Image
-          className="find-us-location-doodad"
-          src={cld("v1786782348/MH-location-element-1.png")}
+          className="find-us-sun"
+          src={cld("v1786782354/MH-sun-sticker.png")}
           alt=""
           width={1000}
           height={1000}
           aria-hidden="true"
         />
-        <div className="find-us-pin">
-          <svg viewBox="0 0 150 190" aria-hidden="true">
-            <path d="M75 8C40 8 14 34 14 68c0 44 61 114 61 114s61-70 61-114C136 34 110 8 75 8z" fill="#7ba6dd" />
-            <circle cx="75" cy="64" r="26" fill="#004aad" />
-          </svg>
-        </div>
-        <div className="find-us-map">
-          <iframe
-            src="https://maps.google.com/maps?q=22+Milner+Ave,+Franklin+Roosevelt+Park,+Johannesburg,+2195&output=embed"
-            title="Map showing the Marang House location at 22 Milner Ave, Franklin Roosevelt Park, Johannesburg"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-          />
-        </div>
-        <div className="find-us-body">
-          <h2>
-            WHERE TO
-            <br />
-            <span>FIND US</span>
-          </h2>
-          <div className="find-us-cols">
-            <div className="find-us-col">
-              <div className="find-us-label">Address:</div>
-              <p>
-                22 Milner Ave,
-                <br />
-                Franklin Roosevelt Park,
-                <br />
-                Johannesburg, 2195
-              </p>
+        <div className="find-us-inner">
+          {/* Map, pin, and location doodad share their own positioning
+              wrapper (sized to the map, since it's the only in-flow child)
+              instead of being positioned relative to the whole section —
+              keeps the pin/doodad centered on the map regardless of how
+              wide .find-us-inner or .find-us-body end up. */}
+          <div className="find-us-map-wrap">
+            <Image
+              className="find-us-location-doodad"
+              src={cld("v1786782348/MH-location-element-1.png")}
+              alt=""
+              width={1000}
+              height={1000}
+              aria-hidden="true"
+            />
+            <div className="find-us-pin">
+              <svg viewBox="0 0 150 190" aria-hidden="true">
+                <path d="M75 8C40 8 14 34 14 68c0 44 61 114 61 114s61-70 61-114C136 34 110 8 75 8z" fill="#7ba6dd" />
+                <circle cx="75" cy="64" r="26" fill="#004aad" />
+              </svg>
             </div>
-            <div className="find-us-col">
-              <div className="find-us-label">Hours</div>
-              <div className="hours-row">
-                <div className="times">
-                  9 am – 5 pm
+            <div className="find-us-map">
+              <iframe
+                src="https://maps.google.com/maps?q=22+Milner+Ave,+Franklin+Roosevelt+Park,+Johannesburg,+2195&output=embed"
+                title="Map showing the Marang House location at 22 Milner Ave, Franklin Roosevelt Park, Johannesburg"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups"
+              />
+            </div>
+          </div>
+          <div className="find-us-body">
+            <h2>
+              WHERE TO
+              <br />
+              <span>FIND US</span>
+            </h2>
+            <div className="find-us-cols">
+              <div className="find-us-col">
+                <div className="find-us-label">Address:</div>
+                <p>
+                  22 Milner Ave,
                   <br />
-                  9 am – 5 pm
+                  Franklin Roosevelt Park,
                   <br />
-                  9 am – 5 pm
-                  <br />
-                  9 am – 5 pm
-                  <br />
-                  9 am – 5 pm
-                  <br />
-                  Closed
-                </div>
-                <div>
-                  Monday
-                  <br />
-                  Tuesday
-                  <br />
-                  Wednesday
-                  <br />
-                  Thursday
-                  <br />
-                  Friday
-                  <br />
-                  Saturday &amp; Sunday
+                  Johannesburg, 2195
+                </p>
+              </div>
+              <div className="find-us-col">
+                <div className="find-us-label">Hours</div>
+                <div className="hours-row">
+                  <div className="times">
+                    9 am – 5 pm
+                    <br />
+                    9 am – 5 pm
+                    <br />
+                    9 am – 5 pm
+                    <br />
+                    9 am – 5 pm
+                    <br />
+                    9 am – 5 pm
+                    <br />
+                    Closed
+                  </div>
+                  <div>
+                    Monday
+                    <br />
+                    Tuesday
+                    <br />
+                    Wednesday
+                    <br />
+                    Thursday
+                    <br />
+                    Friday
+                    <br />
+                    Saturday &amp; Sunday
+                  </div>
                 </div>
               </div>
             </div>

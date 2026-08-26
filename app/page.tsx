@@ -47,14 +47,30 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
-          <Image
-            className="hero-polaroid-1"
-            src={cld("MH-polaroid-1.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
+          {/* Pin is a child of the polaroid's own wrapper (not a sibling
+              positioned against the whole hero) so it always sticks to
+              polaroid-1's top-left corner, at every breakpoint, without
+              needing its own position overrides to track the polaroid's
+              — the wrap carries the position/rotation that used to live
+              directly on the photo. */}
+          <div className="hero-polaroid-1-wrap">
+            <Image
+              className="hero-polaroid-1"
+              src={cld("MH-polaroid-1.png")}
+              alt=""
+              width={1000}
+              height={1000}
+              style={{ height: "auto" }}
+            />
+            <Image
+              className="hero-board-pin"
+              src={cld("v1786782350/MH-board-pin-blue.png")}
+              alt=""
+              width={1000}
+              height={1000}
+              style={{ height: "auto" }}
+            />
+          </div>
           <Image
             className="hero-polaroid-2"
             src={cld("MH-polaroid-2.png")}

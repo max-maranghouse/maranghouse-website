@@ -153,10 +153,25 @@ img { display: block; }
 .hero-doodads {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
 }
-.hero-polaroid-1 {
+.hero-polaroid-1-wrap {
   position: absolute; right: 30%; top: 14%; width: 420px;
   transform: rotate(-4deg);
+}
+.hero-polaroid-1 {
+  display: block; width: 100%; height: auto;
   filter: drop-shadow(0 12px 26px rgba(0,0,0,.3));
+}
+/* Board pin "sticks" the polaroid to the corkboard: sized and anchored as
+   a % of the polaroid wrap so it scales with the photo at every
+   breakpoint instead of needing its own position overrides. Flipped
+   horizontally (source art's needle naturally points bottom-left; mirrored
+   so it points bottom-right instead) and nudged right of the exact
+   corner, sitting mostly on the photo itself rather than spilling far
+   onto the board. */
+.hero-board-pin {
+  position: absolute; top: -4%; left: 2%; width: 8.5%; height: auto;
+  transform: scaleX(-1);
+  z-index: 1; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
 }
 .hero-polaroid-2 {
   position: absolute; right: 0%; top: 8%; width: 480px;
@@ -173,12 +188,17 @@ img { display: block; }
    Pins are dropped at this size (too small to read) but the keyring stays,
    just smaller — matching the pre-checkpoint mobile treatment. */
 @media (max-width: 1400px) {
-  .hero-polaroid-1 { width: 180px; right: 36%; top: 4%; }
+  .hero-polaroid-1-wrap { width: 180px; right: 36%; top: 4%; }
   .hero-polaroid-2 { width: 210px; right: 4%; top: 2%; }
 }
 @media (max-width: 540px) {
-  .hero-polaroid-1 { width: 100px; right: 36%; }
-  .hero-polaroid-2 { width: 115px; right: 2%; }
+  /* Text stays bottom-anchored (.hero-content's justify-content:flex-end
+     is untouched) — taller section here just gives the now-bigger photos
+     more clear corkboard space above the text before it starts, instead
+     of the two overlapping. */
+  .hero { min-height: 980px; }
+  .hero-polaroid-1-wrap { width: 190px; right: 34%; top: 12%; }
+  .hero-polaroid-2 { width: 210px; right: -8%; top: 16%; }
   /* The single, longer "Become a Lightkeeper" CTA is wide enough at this
      width to sit under .hero-sketch's fixed 220px footprint; shrink the
      sketch, wrap the button onto two lines instead of letting it run full
@@ -545,12 +565,11 @@ img { display: block; }
 .about-whatwedo-grid { position: relative; z-index: 1; display: flex; gap: 24px; justify-content: center; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
 .about-whatwedo-grid img { width: 280px; height: auto; }
 
-.about-ntmy { display: flex; min-height: 380px; align-items: center; padding: 70px 5.5%; background: #fff; gap: 56px; }
-.about-ntmy-photo {
-  position: relative; width: 42%; max-width: 460px; aspect-ratio: 4 / 3;
-  flex-shrink: 0; border-radius: 24px; overflow: hidden;
-  box-shadow: 0 20px 48px rgba(0,40,110,.2);
-}
+/* No vertical padding/min-height — the section's white background is
+   sized to its content (the photo, since it's the shorter of the two
+   columns) rather than adding extra breathing room top and bottom. */
+.about-ntmy { display: flex; align-items: center; padding: 0 5.5%; background: #fff; gap: 56px; }
+.about-ntmy-photo { width: 42%; max-width: 460px; height: auto; flex-shrink: 0; }
 .about-ntmy-text { flex: 1; max-width: 520px; }
 .about-ntmy-text h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 10px; }
 .about-ntmy-lead { color: var(--orange); font-weight: 700; font-style: italic; font-size: 0.92rem; margin-bottom: 16px; }
@@ -560,7 +579,7 @@ img { display: block; }
   .about-navy-photo-wrap { width: 100%; height: 320px; }
   .about-whatwedo-cloud { top: -70px; width: 170px; right: 5%; }
   .about-ntmy { flex-direction: column; text-align: center; }
-  .about-ntmy-photo { width: 100%; max-width: 420px; aspect-ratio: 4 / 3; }
+  .about-ntmy-photo { width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
   .about-ntmy-text { max-width: 100%; }
 }
 
@@ -754,43 +773,36 @@ img { display: block; }
 .press-enquiries a { color: var(--yellow); text-decoration: none; font-weight: 700; }
 
 /* — Contact — */
-/* The source image (MH_-_Website_-_contact_hero_image.svg, rasterised to
-   1366×768) is full-bleed edge-to-edge — no section padding, no white
-   margin around it. The section's own background matches the gradient of
-   .contact-form-section below it, so nothing but the image itself is
-   visible (the fallback only shows during image load, or around the
-   cropped image's own edges at unusual viewport ratios).
-   At its natural 16:9 ratio the hero ran too tall on shorter viewports —
-   the heading sits low in the image's wave cutout, so it fell below the
-   fold before a visitor scrolled. Capped to a fixed height and cropped
-   with BgPhoto's fill+cover instead of rendering at natural aspect ratio,
-   biased low (position="center 78%") to trim the empty sky/trees off the
-   top rather than the wave/text area at the bottom. */
+/* Split layout: contained rounded photo card on the left, heading on the
+   right — same text/image-split language as the Donate hero. Replaces an
+   earlier full-bleed treatment where forcing the 16:9 source to fill the
+   viewport width at a fixed height (via fill+cover) read as stretched at
+   most widths. A fixed 4/3 card crops the source cleanly instead. */
 .contact-hero {
-  position: relative; overflow: hidden;
-  background:
-    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
-    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  position: relative; overflow: hidden; padding: 80px 5.5% 90px;
+  background: linear-gradient(135deg, var(--blue-dk) 0%, #1e0f3c 120%);
 }
-.contact-hero-graphic { position: relative; height: min(56vh, 500px); min-height: 320px; }
-.contact-hero-bg { position: absolute; inset: 0; }
-.contact-hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(165deg, rgba(230,140,20,.4) 0%, rgba(250,200,60,.25) 45%, rgba(255,255,255,0) 75%);
+.contact-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
+/* The image has its own baked-in wavy transparent cutout at the bottom
+   corners — sitting on a plain background it just showed through to
+   whatever colour the hero section itself was. Giving the card its own
+   orange background (behind the image, since the BgPhoto fill sits on
+   top) makes that cutout a deliberate warm accent instead, while the
+   rest of the hero stays the blue gradient. */
+.contact-hero-graphic {
+  flex: 0 0 auto; width: 50%; max-width: 520px; aspect-ratio: 4 / 3;
+  position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.25);
+  background: linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
 }
-/* The new artwork's wave cutout opens up on the center-right of the image
-   (not the bottom-left corner like the old photo), so the text block sits
-   in that negative space instead — right-anchored, same red-accent-bar
-   treatment. */
-.contact-hero-content {
-  position: absolute; z-index: 2; right: 4%; bottom: 6%; max-width: 34%;
-  padding: 0 0 0 20px; border-left: 4px solid var(--red);
-}
-.contact-hero-content h1 { font-size: clamp(1.3rem, 0.6rem + 2.4vw, 2.3rem); color: var(--red); line-height: 1.15; }
+.contact-hero-content { flex: 1; padding: 0 0 0 20px; border-left: 4px solid var(--red); }
+.contact-hero-content h1 { font-size: clamp(1.6rem, 0.9rem + 2.6vw, 2.6rem); color: var(--red); line-height: 1.15; }
 .contact-hero-content h1 span { display: block; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
-@media (max-width: 600px) {
-  .contact-hero-graphic { height: min(48vh, 380px); min-height: 260px; }
-  .contact-hero-content { max-width: 80%; bottom: 5%; }
+@media (max-width: 760px) {
+  .contact-hero { padding: 48px 5.5% 50px; }
+  .contact-hero-inner { flex-direction: column; gap: 32px; }
+  .contact-hero-graphic { width: 100%; max-width: 420px; }
+  .contact-hero-content { text-align: center; border-left: none; padding-left: 0; }
+  .contact-hero-content h1 { font-size: 1.9rem; }
 }
 
 .contact-form-section {
@@ -800,21 +812,30 @@ img { display: block; }
     linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
   padding: 60px 5.5% 90px;
 }
-.contact-form-wrap { position: relative; z-index: 1; display: flex; gap: 48px; align-items: center; }
-.contact-form-aside-text { flex: 1; max-width: 340px; }
+.contact-form-wrap { position: relative; z-index: 1; display: flex; gap: 40px; align-items: center; }
+.contact-form-aside-text { flex: 1; max-width: 300px; }
 .contact-form-aside-text h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 14px; }
 .contact-form-aside-text p { font-size: 0.95rem; color: var(--blue); font-weight: 700; line-height: 1.7; margin-bottom: 22px; }
-/* Its own column, sized as a real visual anchor next to the form rather
-   than a small afterthought stacked under the contact details — same
-   drop-shadow-on-cutout language the site already uses for these PNG
-   photo elements elsewhere (identity/about-navy). */
+/* Leads the row (left of the text) as a real visual anchor, sized larger
+   than before — same drop-shadow-on-cutout language the site already
+   uses for these PNG photo elements elsewhere (identity/about-navy). */
 .contact-aside-photo-wrap {
-  position: relative; flex: 0 0 auto; width: 300px;
+  position: relative; flex: 0 0 auto; width: 380px;
   filter: drop-shadow(0 18px 34px rgba(0,0,0,.2));
 }
 .contact-aside-photo { width: 100%; height: auto; display: block; }
 .contact-aside-photo-doodle { position: absolute; left: -8%; bottom: -8%; width: 32%; pointer-events: none; }
-.contact-form-card { flex: 1.2; background: rgba(255,255,255,.35); border-radius: 18px; padding: 32px; }
+.contact-form-card { flex: 1.2; min-width: 320px; background: rgba(255,255,255,.35); border-radius: 18px; padding: 32px; }
+/* The bigger photo (380px) needs more room than the shared 860px
+   breakpoint below gives it — between ~860-1040px the row was cramming
+   photo+text+form into too little space and clipping the form's inputs.
+   Stacks earlier, just for this row, rather than waiting for the shared
+   breakpoint that .find-us also depends on. */
+@media (max-width: 1040px) {
+  .contact-form-wrap { flex-direction: column; gap: 32px; }
+  .contact-form-aside-text { max-width: 100%; text-align: center; }
+  .contact-aside-photo-wrap { width: 280px; margin: 0 auto; }
+}
 .contact-form { max-width: 520px; display: flex; flex-direction: column; gap: 16px; }
 .contact-form-row { display: flex; gap: 16px; }
 /* :not([type="checkbox"]) excludes the honeypot field — it must keep the
@@ -829,45 +850,67 @@ img { display: block; }
 .contact-aside .contact-line { font-size: 0.95rem; color: var(--blue); margin-bottom: 8px; font-weight: 700; }
 .contact-aside .contact-line a { color: var(--blue); text-decoration: none; }
 
-.find-us { background: var(--blue); position: relative; padding: 64px 48px; display: flex; gap: 48px; align-items: center; overflow: visible; }
+/* Centered, wider content block instead of a fixed 48px gutter — on wide
+   viewports the old layout left a large empty gap on the right since
+   neither the map nor .find-us-body grew to fill it. Map/pin/doodad and
+   text are both bigger now too, so the map reads as the dominant visual
+   anchor the text sits beside, not a small icon next to a text-heavy row. */
+.find-us { position: relative; background: var(--blue); padding: 80px 5.5%; overflow: visible; }
+/* Big decorative sun, top-right corner of the whole section's background —
+   sits behind the map/text content (z-index 0, below .find-us-inner's 1),
+   not tucked in close beside the map. Fixed px top offset (not %) so it
+   stays inside the section's own blue background at every height instead
+   of scaling into the section above it. */
+.find-us-sun {
+  position: absolute; top: 0; right: -2%; z-index: 0; pointer-events: none;
+  width: 300px; height: auto; transform: rotate(8deg);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.2));
+}
+.find-us-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: flex; gap: 80px; align-items: center; }
+.find-us-map-wrap { position: relative; flex-shrink: 0; }
 /* Dashed-route doodad sits behind the map circle. The source art is drawn
    in the same brand blue as this section's background (#004aad), so it's
    recoloured white via filter and kept low-opacity to read as a subtle
    background texture rather than invisible or competing with the map.
-   Centered on the map itself (left edge = section's 48px padding + half
-   the map's 320px width), not the whole flex row, since the row's
-   remaining width is taken up by the address/hours text. */
+   Centered on .find-us-map-wrap, which — since the map is its only
+   in-flow child — is exactly the map's own footprint. */
 .find-us-location-doodad {
   position: absolute; z-index: 0; pointer-events: none;
-  left: 208px; top: 50%; transform: translate(-50%, -50%);
-  width: 380px; height: auto;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 500px; height: auto;
   filter: brightness(0) invert(1);
   opacity: 0.3;
 }
-.find-us-map { position: relative; z-index: 1; width: 320px; height: 320px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 6px solid var(--blue); box-shadow: 0 0 0 2px rgba(255,255,255,.15); }
+.find-us-map { position: relative; z-index: 1; width: 420px; height: 420px; border-radius: 50%; overflow: hidden; border: 6px solid var(--blue); box-shadow: 0 0 0 2px rgba(255,255,255,.15); }
 .find-us-map iframe { width: 100%; height: 100%; border: 0; display: block; }
-.find-us-pin { position: absolute; left: 210px; top: -20px; width: 130px; z-index: 2; }
-.find-us-pin svg { width: 130px; height: 165px; display: block; }
+.find-us-pin { position: absolute; left: 50%; top: -14px; width: 70px; transform: translateX(-50%); z-index: 2; }
+.find-us-pin svg { width: 70px; height: 89px; display: block; }
 .find-us-body { position: relative; z-index: 1; flex: 1; }
-.find-us h2 { font-size: 2.6rem; line-height: 1.02; color: #fff; margin-bottom: 28px; }
+.find-us h2 { font-size: 3rem; line-height: 1.02; color: #fff; margin-bottom: 32px; }
 .find-us h2 span { color: var(--yellow); }
-.find-us-cols { display: flex; gap: 72px; flex-wrap: wrap; }
-.find-us-label { font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--yellow); font-weight: 800; margin-bottom: 10px; }
-.find-us-col p { color: rgba(255,255,255,.92); font-size: 0.9rem; line-height: 1.7; font-weight: 600; }
-/* Neither .contact-form-wrap nor .find-us had a mobile stacking rule before
-   this task (confirmed against the last commit) — a pre-existing gap that
-   caused real horizontal overflow at narrow widths, found during this
-   task's own mobile QA pass. Fixed here since step 15 already touches
-   .contact-form-wrap's contents directly. */
-@media (max-width: 860px) {
-  .contact-form-wrap { flex-direction: column; gap: 32px; }
-  .contact-form-aside-text { max-width: 100%; text-align: center; }
-  .contact-aside-photo-wrap { width: 220px; margin: 0 auto; }
-  .find-us { flex-direction: column; padding: 56px 24px; text-align: center; gap: 32px; }
-  .find-us-map { margin: 0 auto; }
+/* Fixed gap (not space-between) so "Hours" sits close to "Address"
+   instead of pushed out toward the container's far edge. */
+.find-us-cols { display: flex; gap: 64px; flex-wrap: wrap; }
+.find-us-label { font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--yellow); font-weight: 800; margin-bottom: 12px; }
+.find-us-col p { color: rgba(255,255,255,.92); font-size: 1rem; line-height: 1.75; font-weight: 600; }
+/* .find-us had no mobile stacking rule before this task (confirmed
+   against an earlier commit) — a pre-existing gap that caused real
+   horizontal overflow at narrow widths, found during this task's own
+   mobile QA pass. (.contact-form-wrap's own stacking now lives in the
+   dedicated 1040px breakpoint above, next to the rules it affects.) */
+@media (max-width: 1040px) {
+  .find-us-inner { flex-direction: column; text-align: center; gap: 40px; }
+  .find-us-map-wrap { margin: 0 auto; }
   .find-us-pin { display: none; }
   .find-us-location-doodad { display: none; }
   .find-us-cols { justify-content: center; text-align: left; }
+  /* Once the map stacks and centers, its own top-right IS the section's
+     top-right — no clear spot left for the sun that wouldn't overlap it. */
+  .find-us-sun { display: none; }
+}
+@media (max-width: 500px) {
+  .find-us { padding: 56px 6%; }
+  .find-us-map { width: 280px; height: 280px; }
 }
 .hours-row { display: flex; gap: 18px; color: rgba(255,255,255,.92); font-size: 0.88rem; line-height: 1.8; font-weight: 600; }
 .hours-row .times { text-align: right; min-width: 90px; }
