@@ -116,6 +116,52 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Salome's story, in her own words — moved here from the
+          Lightkeepers page since it's really a "meet our people" piece.
+          Follows naturally from the founding history above (Dr Pieter
+          Ernst) into who carries that history forward today. */}
+      <section className="about-story">
+        <div className="about-story-inner">
+          <span className="about-story-eyebrow">In Her Own Words</span>
+          <h2>Meet Salome, Our Matron</h2>
+          <p>
+            Salome, Matron of Marang House, was fourteen years old when she watched her grandmother pass
+            away at home. That was the moment she decided she wanted to become a nurse.
+          </p>
+          <p className="about-story-quote">
+            &ldquo;Years later, I worked alongside Dr Pieter Ernst in theatre. One day he asked me if I
+            would come and help at a children&rsquo;s home called Marang House. He saw something in me
+            that I couldn&rsquo;t yet see in myself. Today I know exactly what he saw.&rdquo;
+          </p>
+          <p className="about-story-standout">
+            Children don&rsquo;t heal because of insulin alone. Children heal because they feel
+            <span> secure and loved.</span>
+          </p>
+          <p>
+            Every child who comes to Marang House has already faced more than most adults. They leave
+            their families and travel hundreds of kilometres to Johannesburg for life-saving treatment.
+            Many arrive frightened. Some have spent more days in hospital than they have at home.
+          </p>
+          <p>Every one of them deserves to feel safe. That is why Marang House exists.</p>
+          <p>
+            It takes many people to create that feeling of security. A volunteer helping with homework.
+            A donor buying school shoes. A warm meal after a long day at hospital. A hug before bedtime.
+          </p>
+          <p>Together, those small acts of kindness become something much bigger.</p>
+          <p>
+            They become <strong>The Marang House Circle of Light</strong>. Together, we are the
+            Lightkeepers.
+          </p>
+          <p>
+            Security isn&rsquo;t created in a single day. It is built every single month. That is why
+            monthly giving matters. Because when children know they are safe, healing can begin.
+          </p>
+          <div className="about-story-tagline">
+            One Home &middot; One Circle &middot; <span>A Thousand Lightkeepers</span> &middot; Endless
+            Hope
+          </div>
+        </div>
+      </section>
     </>
   );
 }

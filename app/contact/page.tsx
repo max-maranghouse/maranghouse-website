@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import BgPhoto from "@/components/BgPhoto";
 import ContactForm from "@/components/ContactForm";
 import { cld } from "@/lib/images";
 import { ORGANISATION } from "@/lib/site-data";
@@ -19,19 +20,21 @@ export default function ContactPage() {
             f_png,q_auto transform instead of the shared cld() f_auto,q_auto
             helper (next/image has no SVG support here). Verified this
             renders a real raster image (1366x768 PNG) before wiring it in.
-            Like the photo it replaces, it has its own baked-in wavy
-            transparent cutouts at both bottom corners (not a plain
-            rectangle), so it's rendered at its natural aspect ratio
-            (width: 100%, height: auto) instead of BgPhoto's fill+cover,
-            which would force-crop a rectangle and destroy the wave shape. */}
+            At its natural 16:9 aspect ratio the hero ran too tall — on
+            shorter viewports the "WE'D LOVE TO HEAR FROM YOU" heading (which
+            sits low, in the wave cutout) fell below the fold. Capped the
+            section to a fixed height and cropped with BgPhoto's fill+cover,
+            biased low (position="center 55%") to keep the wave/text area in
+            frame while trimming mostly-empty sky off the top — tuned down
+            from an earlier, more aggressive bias that cropped kids' heads. */}
         <div className="contact-hero-graphic">
-          <Image
+          <BgPhoto
             src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695702/MH_-_Website_-_contact_hero_image.svg"
             alt=""
-            width={1366}
-            height={768}
+            className="contact-hero-bg"
+            position="center 55%"
+            sizes="100vw"
             priority
-            style={{ width: "100%", height: "auto" }}
           />
           <div className="contact-hero-overlay" />
           {/* The wave cuts the photo away in the bottom-left corner, so the

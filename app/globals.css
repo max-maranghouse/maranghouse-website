@@ -564,6 +564,43 @@ img { display: block; }
   .about-ntmy-text { max-width: 100%; }
 }
 
+/* Salome's story — moved here from the Lightkeepers page (was .lk-story*)
+   since it's really a "meet our people" piece for About. Plain white,
+   editorial column: quote-styled paragraph for her direct words, a bold
+   centered "standout" line for the thesis sentence, and a closing
+   tagline band as the page's final beat. */
+.about-story { background: #fff; padding: 80px 5.5% 90px; }
+.about-story-inner { max-width: 760px; margin: 0 auto; }
+.about-story-eyebrow {
+  display: block; text-align: center; text-transform: uppercase; letter-spacing: 2px;
+  font-size: 0.8rem; font-weight: 800; color: var(--orange); margin-bottom: 12px;
+  font-family: var(--font-nunito), sans-serif;
+}
+.about-story h2 { text-align: center; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); color: var(--blue); margin-bottom: 40px; }
+.about-story p { font-size: 1rem; line-height: 1.85; color: #333; margin-bottom: 20px; }
+.about-story p strong { color: var(--blue); }
+.about-story-quote {
+  font-style: italic; font-size: 1.1rem; line-height: 1.8; color: var(--blue);
+  border-left: 4px solid var(--canva-yellow); padding: 4px 0 4px 24px; margin: 28px 0;
+}
+.about-story-standout {
+  text-align: center; font-family: var(--h);
+  font-weight: 600; font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
+  color: var(--blue); line-height: 1.35; margin: 40px 0;
+}
+.about-story-standout span { color: var(--orange); }
+.about-story-tagline {
+  margin-top: 56px; text-align: center; background: var(--blue); border-radius: 22px;
+  padding: 40px 28px; color: #fff; font-family: var(--h);
+  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem); letter-spacing: 0.3px; line-height: 1.7;
+}
+.about-story-tagline span { color: var(--canva-yellow); }
+@media (max-width: 600px) {
+  .about-story { padding: 56px 6% 60px; }
+  .about-story-quote { padding-left: 16px; }
+  .about-story-tagline { padding: 32px 22px; }
+}
+
 /* — Lightkeepers — */
 .lk-page-gradient {
   background:
@@ -625,48 +662,14 @@ img { display: block; }
 .lk-circle-section p { color: var(--blue); font-weight: 600; font-size: 1rem; max-width: 640px; margin: 0 auto 8px; line-height: 1.7; }
 .lk-circle-note { display: inline-block; margin-top: 18px; background: #fff8e6; border: 1px dashed var(--orange); border-radius: 12px; padding: 14px 22px; color: #8a5a10; font-size: 0.85rem; font-weight: 600; max-width: 560px; }
 
-/* Salome's story — plain white, editorial column. Quote-styled paragraph
-   for her direct words, a bold centered "standout" line for the thesis
-   sentence, and a closing tagline band as the page's final beat. */
-.lk-story { background: #fff; padding: 80px 5.5% 90px; }
-.lk-story-inner { max-width: 760px; margin: 0 auto; }
-.lk-story-eyebrow {
-  display: block; text-align: center; text-transform: uppercase; letter-spacing: 2px;
-  font-size: 0.8rem; font-weight: 800; color: var(--orange); margin-bottom: 12px;
-  font-family: var(--font-nunito), sans-serif;
-}
-.lk-story h2 { text-align: center; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); color: var(--blue); margin-bottom: 40px; }
-.lk-story p { font-size: 1rem; line-height: 1.85; color: #333; margin-bottom: 20px; }
-.lk-story p strong { color: var(--blue); }
-.lk-story-quote {
-  font-style: italic; font-size: 1.1rem; line-height: 1.8; color: var(--blue);
-  border-left: 4px solid var(--canva-yellow); padding: 4px 0 4px 24px; margin: 28px 0;
-}
-.lk-story-standout {
-  text-align: center; font-family: var(--h);
-  font-weight: 600; font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
-  color: var(--blue); line-height: 1.35; margin: 40px 0;
-}
-.lk-story-standout span { color: var(--orange); }
-.lk-story-tagline {
-  margin-top: 56px; text-align: center; background: var(--blue); border-radius: 22px;
-  padding: 40px 28px; color: #fff; font-family: var(--h);
-  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem); letter-spacing: 0.3px; line-height: 1.7;
-}
-.lk-story-tagline span { color: var(--canva-yellow); }
-@media (max-width: 600px) {
-  .lk-story { padding: 56px 6% 60px; }
-  .lk-story-quote { padding-left: 16px; }
-  .lk-story-tagline { padding: 32px 22px; }
-}
-
 /* — Donate — */
-/* Split layout: copy on the left, the compact 683×549px photo on the
-   right in its own column at well under its native width — sizing it to
-   fill a wide contained card (as a solo centered element) upscaled it
-   past its native resolution and read as blurry; a narrower column here
-   keeps it crisp. Purple-toned dark background (--color-purple leaning
-   into --blue-dk) replaces the old photo-as-background treatment. */
+/* Split layout: copy on the left, portrait photo card on the right.
+   The source (4247×6371, ~2:3) is a tall portrait — BgPhoto's fill+cover
+   crops it into a 3/4 card instead of rendering at natural aspect ratio,
+   which would tower far above the text column next to it. Narrower width
+   than a landscape image would use, since a portrait card reads taller
+   for the same width. Purple-toned dark background (--color-purple
+   leaning into --blue-dk) sits behind both columns. */
 .donate-hero { position: relative; padding: 70px 5.5% 80px; background: linear-gradient(135deg, var(--blue-dk) 0%, #1e0f3c 120%); }
 .donate-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
 .donate-hero-text { flex: 1; max-width: 460px; }
@@ -676,15 +679,14 @@ img { display: block; }
 }
 .donate-hero-body { color: #fff; font-size: 1rem; line-height: 1.7; }
 .donate-hero-graphic {
-  flex: 0 0 auto; width: 46%; max-width: 460px; position: relative;
-  border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.35);
+  flex: 0 0 auto; width: 34%; max-width: 380px; aspect-ratio: 3 / 4;
+  position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.35);
 }
-.donate-hero-graphic > img { width: 100%; height: auto; display: block; }
 @media (max-width: 760px) {
   .donate-hero { padding: 48px 5.5% 50px; }
   .donate-hero-inner { flex-direction: column; text-align: center; gap: 32px; }
   .donate-hero-text { max-width: 100%; }
-  .donate-hero-graphic { width: 100%; max-width: 380px; }
+  .donate-hero-graphic { width: 60%; max-width: 300px; }
   .donate-hero-heading { font-size: 2.1rem; }
   .donate-hero-body { font-size: 0.9rem; }
 }
@@ -753,20 +755,25 @@ img { display: block; }
 
 /* — Contact — */
 /* The source image (MH_-_Website_-_contact_hero_image.svg, rasterised to
-   1366×768) has enough resolution to run full-bleed edge-to-edge — no
-   section padding, no white margin around it. The section's own
-   background matches the gradient of .contact-form-section below it, so
-   nothing but the image itself is visible (the fallback only shows during
-   image load or if the SVG's own transparent wave dips below the section
-   edge at very wide/narrow aspect ratios). */
+   1366×768) is full-bleed edge-to-edge — no section padding, no white
+   margin around it. The section's own background matches the gradient of
+   .contact-form-section below it, so nothing but the image itself is
+   visible (the fallback only shows during image load, or around the
+   cropped image's own edges at unusual viewport ratios).
+   At its natural 16:9 ratio the hero ran too tall on shorter viewports —
+   the heading sits low in the image's wave cutout, so it fell below the
+   fold before a visitor scrolled. Capped to a fixed height and cropped
+   with BgPhoto's fill+cover instead of rendering at natural aspect ratio,
+   biased low (position="center 78%") to trim the empty sky/trees off the
+   top rather than the wave/text area at the bottom. */
 .contact-hero {
   position: relative; overflow: hidden;
   background:
     repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
     linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
 }
-.contact-hero-graphic { position: relative; }
-.contact-hero-graphic > img { width: 100%; height: auto; display: block; }
+.contact-hero-graphic { position: relative; height: min(56vh, 500px); min-height: 320px; }
+.contact-hero-bg { position: absolute; inset: 0; }
 .contact-hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(165deg, rgba(230,140,20,.4) 0%, rgba(250,200,60,.25) 45%, rgba(255,255,255,0) 75%);
@@ -776,13 +783,14 @@ img { display: block; }
    in that negative space instead — right-anchored, same red-accent-bar
    treatment. */
 .contact-hero-content {
-  position: absolute; z-index: 2; right: 4%; bottom: 4%; max-width: 34%;
+  position: absolute; z-index: 2; right: 4%; bottom: 6%; max-width: 34%;
   padding: 0 0 0 20px; border-left: 4px solid var(--red);
 }
 .contact-hero-content h1 { font-size: clamp(1.3rem, 0.6rem + 2.4vw, 2.3rem); color: var(--red); line-height: 1.15; }
 .contact-hero-content h1 span { display: block; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
 @media (max-width: 600px) {
-  .contact-hero-content { max-width: 80%; bottom: 4%; }
+  .contact-hero-graphic { height: min(48vh, 380px); min-height: 260px; }
+  .contact-hero-content { max-width: 80%; bottom: 5%; }
 }
 
 .contact-form-section {

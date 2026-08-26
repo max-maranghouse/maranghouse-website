@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -16,16 +15,14 @@ export default function DonatePage() {
   return (
     <>
       <section className="donate-hero">
-        {/* Source is an SVG export (MH_-_Website_-_Donate_Hero_IMG.svg) —
-            next/image has no SVG support here (next.config.ts isn't set up
-            for dangerouslyAllowSVG), so it's requested as a rasterised PNG
-            via Cloudinary's on-the-fly f_png,q_auto transform instead of the
-            shared cld() f_auto,q_auto helper. Verified this renders a real
-            raster image (683x549 PNG) before wiring it in. It's a compact
-            photo, not a full-bleed composition, so it sits in its own
-            column at well under its native 683px width (not stretched to
-            fill a wide contained card, which read as slightly blurry) —
-            text and image split side by side instead of overlaid. */}
+        {/* v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp — a tall portrait
+            photo (4247×6371, ~2:3), not a landscape composition like the
+            image this replaced. A plain natural-aspect-ratio <Image> would
+            render this far taller than the text column next to it, so it
+            uses BgPhoto's fill+cover instead, capped to a portrait
+            aspect-ratio card (3/4) — cropped, not squashed — with the crop
+            biased toward the top third to keep the child's face and the
+            toy in frame. */}
         <div className="donate-hero-inner">
           <div className="donate-hero-text">
             <h1 className="donate-hero-heading">Donate</h1>
@@ -35,16 +32,14 @@ export default function DonatePage() {
               support Marang House. Together, we can create brighter futures, one step at a time.
             </p>
           </div>
-          <div className="donate-hero-graphic">
-            <Image
-              src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695333/MH_-_Website_-_Donate_Hero_IMG.svg"
-              alt=""
-              width={683}
-              height={549}
-              priority
-              style={{ width: "100%", height: "auto" }}
-            />
-          </div>
+          <BgPhoto
+            src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
+            alt="A child at Marang House smiling while hugging a toy"
+            className="donate-hero-graphic"
+            position="center 30%"
+            sizes="(max-width: 760px) 80vw, 36vw"
+            priority
+          />
         </div>
       </section>
 
