@@ -94,10 +94,10 @@ they aren't lost.
 
 ## Still-open content questions (unresolved — don't silently guess on these)
 
-1. **Age range.** Site currently says "7–14" (`lib/site-data.ts`
-   `agesServed`, and the About page copy). An earlier verified content
-   inventory (`archive/CONTENT-INVENTORY-raw.md`) said "4–14" instead.
-   Needs Max's confirmation before changing either way.
+1. ~~**Age range.**~~ **Resolved 2026-08-27:** Max confirmed 7–14 is
+   correct (`lib/site-data.ts` `agesServed`, and the About page copy). The
+   "4–14" figure in `archive/CONTENT-INVENTORY-raw.md` was wrong/outdated
+   — no code change needed, both already say 7–14.
 2. **Homepage stats banner numbers** ("Creating A Better Future" section):
    28+ Years / 300+ Children / 1000+ Volunteers. 28+ Years is at least
    consistent with `foundedYear: 1998`; the Children/Volunteers figures
