@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import { cld } from "@/lib/images";
 
@@ -12,32 +13,24 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      {/* 1. HERO — tightened copy, deep navy gradient bg */}
       <section className="about-navy">
         <div className="about-navy-left">
           <h1>
             We are
             <span>Marang House</span>
           </h1>
-          <ul className="about-navy-list">
-            <li>A nurturing, home-like environment</li>
-            <li>Children aged 7 to 14</li>
-            <li>Support to manage their illnesses long-term</li>
-          </ul>
           <p>
-            They face serious, chronic health conditions that require continuous monitoring and
-            specialised treatment at a tertiary hospital.
+            Since 1998, Marang House has been a home for children aged 7 to 14 living
+            with serious chronic illness. We provide a safe, nurturing place to live
+            while they receive daily treatment at a tertiary hospital — with their
+            education running alongside, never paused.
           </p>
-          <p className="about-navy-important">Importantly:</p>
-          <p className="about-navy-italic">
-            We keep their education a priority — taking them to hospital daily for treatment, with
-            disease-management training running alongside their regular schooling.
+          <p className="about-navy-important">
+            No child should have to choose between their health and their future.
           </p>
         </div>
         <div className="about-navy-photo-wrap">
-          {/* v1786782366/MH-Group-kids.jpg — replaces the old MH-kid-pirate.png
-              cutout. Landscape group shot, so cropped with a slight upward
-              bias (center 35%) to favour faces/branded t-shirts over the
-              gravel foreground, per the wider .about-navy-photo split above. */}
           <BgPhoto
             src={cld("v1786782366/MH-Group-kids.jpg")}
             alt="Children at Marang House wearing Marang House t-shirts"
@@ -49,85 +42,71 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="about-whatwedo">
+      {/* 2. THE CHILDREN WE SERVE — orange rays bg. Uses the cutout element
+          photo (swapped from Contact page) instead of the kid-hat image
+          (which moved to Contact). */}
+      <section className="about-children">
         <Image
-          className="about-whatwedo-cloud"
-          src={cld("MH-cloud-giff.gif")}
+          className="about-children-doodle"
+          src={cld("v1786782353/MH-real-cloud.png")}
           alt=""
-          width={1000}
-          height={1000}
+          width={400}
+          height={400}
           style={{ height: "auto" }}
           aria-hidden="true"
-          unoptimized
         />
-        <h2>What We Do:</h2>
-        <div className="about-whatwedo-grid">
+        <div className="about-children-inner">
           <Image
-            src={cld("MH-what-we-do-1.png")}
-            alt="Accommodate 12 children at a time"
+            className="about-children-photo"
+            src={cld("MH-info-pg-element.png")}
+            alt="Children at Marang House"
             width={1000}
             height={1000}
+            style={{ width: "100%", height: "auto" }}
           />
-          <Image
-            src={cld("MH-what-we-do-2.png")}
-            alt="Offer the necessities: food, housing"
-            width={1000}
-            height={1000}
-          />
-          <Image
-            src={cld("MH-what-we-do-3.png")}
-            alt="Round-the-clock medical care"
-            width={1000}
-            height={1000}
-          />
+          <div className="about-children-text">
+            <h2>The Children We Serve</h2>
+            <p>
+              They arrive from towns and villages across South Africa — children as young as
+              seven, travelling hundreds of kilometres to Johannesburg for life-saving treatment.
+              Many have spent more days in hospital than they have at home. Some arrive
+              frightened. All of them arrive brave.
+            </p>
+            <p>
+              These are children living with conditions that demand constant medical care:
+              kidney disease requiring dialysis, diabetes needing daily insulin management,
+              and other chronic illnesses with treatment plans that stretch across months and
+              years. Their families often cannot afford the supervision, transport, and
+              environment their children need to heal.
+            </p>
+            <p>
+              In 1998, Dr Pieter Ernst saw this gap and founded Marang House as a beacon
+              of hope. <em>Marang</em> is the Setswana word for a ray of sunshine — the
+              light we try to bring into the life of every child who walks through our doors.
+            </p>
+            <p>
+              What began as one doctor&rsquo;s vision has grown into a home that has served
+              hundreds of children over more than twenty-eight years, proving that healing
+              happens best when a child feels safe, loved, and part of a family.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="about-ntmy">
-        {/* Cutout image (transparent background), so it's rendered at its
-            natural aspect ratio with a plain <Image> instead of BgPhoto's
-            fill+cover into a rounded card — that card's background/shadow
-            just showed through the cutout's transparent areas as a visible
-            white "tile" behind the child. */}
-        <Image
-          className="about-ntmy-photo"
-          src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
-          alt="A child at Marang House"
-          width={870}
-          height={717}
-          style={{ width: "100%", height: "auto" }}
-        />
-        <div className="about-ntmy-text">
-          <h2>Nice To Meet You.</h2>
-          <p className="about-ntmy-lead">
-            The reality for children suffering from chronic illnesses is a harsh one.
-          </p>
-          <p>
-            Many families simply cannot afford the constant medical care, supervision, and suitable
-            environment required for their children&apos;s well-being.
-          </p>
-          <p>
-            The road to overcoming these illnesses seems like an uphill battle, filled with daily routines
-            of testing, dialysis, and the uncertain waiting game for organ transplants.
-          </p>
-          {/* Founder + name meaning verified against en.wikipedia.org/wiki/Marang_House
-              and iol.co.za's 2023 Saturday Star profile before adding —
-              Dr Pieter Ernst founded the home in 1998; "Marang" is Setswana
-              for a ray of sunshine, which is why the sun motif runs through
-              the branding (logo, "Circle of Light", Lightkeepers). */}
-          <p>
-            In 1998, Dr Pieter Ernst founded Marang House as a beacon of hope for South Africa&apos;s
-            seriously ill children. Marang is the Setswana word for a ray of sunshine — the light we try
-            to bring into the life of every child who walks through our doors.
-          </p>
-        </div>
-      </section>
-
-      {/* Salome's story, in her own words — moved here from the
-          Lightkeepers page since it's really a "meet our people" piece.
-          Follows naturally from the founding history above (Dr Pieter
-          Ernst) into who carries that history forward today. */}
+      {/* 3. SALOME'S STORY — moved up from bottom to become the emotional
+          centrepiece. After "here's the problem" comes "here's the person
+          who lives this every day." Deep navy bg. */}
       <section className="about-story">
+        <Image
+          className="about-story-doodle"
+          src={cld("v1786782369/MH-star-giff.gif")}
+          alt=""
+          width={400}
+          height={400}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="about-story-inner">
           <span className="about-story-eyebrow">In Her Own Words</span>
           <h2>Meet Salome, Our Matron</h2>
@@ -166,6 +145,63 @@ export default function AboutPage() {
           <div className="about-story-tagline">
             One Home &middot; One Circle &middot; <span>A Thousand Lightkeepers</span> &middot; Endless
             Hope
+          </div>
+        </div>
+      </section>
+
+      {/* 4. WHAT WE DO — 3-card grid, now About-exclusive (removed from Home) */}
+      <section className="about-whatwedo">
+        <Image
+          className="about-whatwedo-cloud"
+          src={cld("MH-cloud-giff.gif")}
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ height: "auto" }}
+          aria-hidden="true"
+          unoptimized
+        />
+        <h2>What We Do:</h2>
+        <div className="about-whatwedo-grid">
+          <Image
+            src={cld("MH-what-we-do-1.png")}
+            alt="Accommodate 12 children at a time"
+            width={1000}
+            height={1000}
+          />
+          <Image
+            src={cld("MH-what-we-do-2.png")}
+            alt="Offer the necessities: food, housing"
+            width={1000}
+            height={1000}
+          />
+          <Image
+            src={cld("MH-what-we-do-3.png")}
+            alt="Round-the-clock medical care"
+            width={1000}
+            height={1000}
+          />
+        </div>
+      </section>
+
+      {/* 5. CLOSING CTA BRIDGE — deep navy, links to Lightkeepers + Donate */}
+      <section className="about-bridge">
+        <div className="about-bridge-inner">
+          <h2>
+            This is Marang House.<br />
+            <span>Now meet the people who keep the light shining.</span>
+          </h2>
+          <p>
+            Every month, a community of Lightkeepers makes it possible for children to
+            heal in safety. Join the circle — or give once and change a life today.
+          </p>
+          <div className="about-bridge-btns">
+            <Link href="/lightkeepers" className="btn btn-about-bridge-primary">
+              Meet the Lightkeepers
+            </Link>
+            <Link href="/donate" className="btn btn-about-bridge-secondary">
+              Donate Now
+            </Link>
           </div>
         </div>
       </section>

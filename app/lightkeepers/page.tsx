@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import BgPhoto from "@/components/BgPhoto";
 import { cld } from "@/lib/images";
-import { DONATION, ORGANISATION } from "@/lib/site-data";
+import { DONATION } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "The Lightkeepers",
   description:
-    "The Lightkeepers are a community of monthly donors, sponsors, and champions who keep the lights on at Marang House. Join the Circle of Light via BackaBuddy.",
+    "The Lightkeepers are a community of monthly donors who keep the lights on at Marang House. Join the Circle of Light via BackaBuddy.",
 };
 
 export default function LightkeepersPage() {
   return (
     <>
+      {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
           <div className="lk-hero-graphic">
@@ -22,10 +24,6 @@ export default function LightkeepersPage() {
               height={1536}
               priority
             />
-            {/* Overlaid on the open blue-card area to the right of the
-                heart badge (not centered over the whole graphic) —
-                percentage-based so it scales with the image at every
-                width, same idea as .contact-hero-content. */}
             <div className="lk-hero-overlay">
               <h1>The Lightkeepers</h1>
               <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
@@ -35,82 +33,178 @@ export default function LightkeepersPage() {
             </div>
           </div>
         </section>
+      </div>
 
-        {/* Reuses .lk-circle-section — already defined in globals.css but
-            unused until now — as a short emotional lead-in between the
-            hero and the practical info card below. */}
-        <section className="lk-circle-section">
-          <h2>Join the Circle of Light</h2>
-          <p>
-            We invite you to become a Lightkeeper. Join the Marang House Circle of Light as a monthly
-            donor — your monthly gift provides more than food or shelter, it gives a child what every
-            child deserves.
-          </p>
-          <p>
-            They need stability. They need nutritious meals, transport to hospital, school uniforms,
-            shoes, electricity, warm beds and, most importantly, people who care.
-          </p>
-        </section>
-
-        <section className="lk-info-section">
-          <div className="lk-info-card">
-            <h2>BECOME A LIGHTKEEPER</h2>
+      {/* 2. WHAT IS A LIGHTKEEPER? — explains the concept with a photo */}
+      <section className="lk-what">
+        <div className="lk-what-inner">
+          <div className="lk-what-text">
+            <h2>What Is A Lightkeeper?</h2>
             <p>
-              The Marang <strong>Circle Of Light</strong> is a community that keeps the light of home, joy,
-              and love shining for chronically ill children receiving treatment away from home.
+              A Lightkeeper is more than a donor. A Lightkeeper is part of the family.
             </p>
-            <p className="lk-info-bank">
-              {DONATION.eft.bank}: Account No: {DONATION.eft.accountNumber}
+            <p>
+              The <strong>Marang House Circle of Light</strong> is a community of people who
+              give monthly — not because they were asked once, but because they chose to stay.
+              They are the quiet, steady light that keeps Marang House standing.
             </p>
-            <div className="lk-info-grid">
-              <Image
-                className="lk-info-keychain"
-                src={cld("MH-lighthouse-keychain.png")}
-                alt="Lightkeeper enamel keyring badge"
-                width={1000}
-                height={1000}
-                style={{ height: "auto" }}
-              />
-              <div className="lk-info-divider" aria-hidden="true" />
-              <div className="lk-info-general">
-                <h3>General info</h3>
-                <p>
-                  NPO Number:
-                  <strong>{ORGANISATION.registrations.npo}</strong>
-                </p>
-                <p>
-                  PBO Number:
-                  <strong>{ORGANISATION.registrations.pbo}</strong>
-                </p>
-                <p>
-                  Reg. Number:
-                  <strong>{ORGANISATION.registrations.npc}</strong>
-                </p>
-              </div>
-              <div className="lk-info-contact">
-                <div className="lk-info-contact-row">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z" />
-                  </svg>
-                  <span>{ORGANISATION.address.formatted}</span>
-                </div>
-                <div className="lk-info-contact-row">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2c1.5 1.7 2.5 4 2.7 6H9.3c.2-2 1.2-4.3 2.7-6zM4.3 12c0-.7.1-1.4.2-2H8c-.1.7-.1 1.3-.1 2s0 1.3.1 2H4.5c-.1-.6-.2-1.3-.2-2zm.9 4h3.1c.3 1.4.8 2.6 1.4 3.7A8 8 0 015.2 16zm3.1-8H5.2a8 8 0 014.6-3.7C9.2 5.4 8.7 6.6 8.3 8zm2.7 8.1c-.2-1-.4-2-.4-2.1h3.7c-.1.1-.3 1.1-.4 2.1-.5.9-1 1.6-1.4 2-.5-.4-1-1.1-1.5-2zm3.7-.1c.6-1.1 1.1-2.3 1.4-3.7h3.1a8 8 0 01-4.5 3.7zm1.7-5.7c.1-.7.1-1.3.1-2s0-1.3-.1-2h3.5c.1.6.2 1.3.2 2s-.1 1.4-.2 2zm-.3-6c-.4-1.4-.9-2.6-1.4-3.7a8 8 0 014.5 3.7z" />
-                  </svg>
-                  <a href="https://www.maranghouse.org">www.maranghouse.org</a>
-                </div>
-                <div className="lk-info-contact-row">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.3 2.3z" />
-                  </svg>
-                  <a href={ORGANISATION.phone.href}>Tel: {ORGANISATION.phone.display}</a>
-                </div>
-              </div>
+            <p>
+              When a child arrives at Marang House, often frightened and far from home,
+              it is the Lightkeepers who have already made the bed, stocked the kitchen,
+              and kept the electricity on. That child will never know your name — but
+              they will feel your presence every single day.
+            </p>
+          </div>
+          <div className="lk-what-photo-wrap">
+            <BgPhoto
+              src={cld("v1784193094/maranghouse/424483000_363605573122900_9062681933234070373_n.jpg")}
+              alt="Children and caregivers sharing a moment at Marang House"
+              className="lk-what-photo"
+              position="center center"
+              sizes="(max-width: 860px) 90vw, 44vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. WHAT YOUR GIFT PROVIDES — concrete impact, orange rays bg, navy tiles */}
+      <section className="lk-impact">
+        <Image
+          className="lk-impact-doodle"
+          src={cld("v1786782364/MH-shun-giff.gif")}
+          alt=""
+          width={300}
+          height={300}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
+        <div className="lk-impact-inner">
+          <h2>What Your Monthly Gift Provides</h2>
+          <p className="lk-impact-lead">
+            Every rand goes directly to keeping Marang House running for the children
+            who call it home. Here is what monthly giving makes possible:
+          </p>
+          <div className="lk-impact-grid">
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">🏥</span>
+              <h3>Daily Hospital Transport</h3>
+              <p>
+                Every child at Marang House attends a tertiary hospital for treatment — some daily.
+                Your gift keeps the transport running so no appointment is ever missed.
+              </p>
+            </div>
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">🍽️</span>
+              <h3>Warm, Nutritious Meals</h3>
+              <p>
+                Chronically ill children need proper nutrition to heal. Three meals a day,
+                every day, prepared with care in a home kitchen — not a hospital canteen.
+              </p>
+            </div>
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">📚</span>
+              <h3>Education That Continues</h3>
+              <p>
+                Illness should not end a child&rsquo;s education. Marang House ensures
+                schooling runs alongside treatment, so children don&rsquo;t fall behind.
+              </p>
+            </div>
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">🛏️</span>
+              <h3>A Safe Bed Every Night</h3>
+              <p>
+                Electricity, clean linen, warm blankets, a bedroom that feels like home.
+                These basics are what monthly giving keeps secure.
+              </p>
+            </div>
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">👟</span>
+              <h3>School Uniforms &amp; Shoes</h3>
+              <p>
+                A child in school uniform feels normal — not like a patient.
+                Your gift restores a sense of everyday childhood.
+              </p>
+            </div>
+            <div className="lk-impact-item">
+              <span className="lk-impact-icon" aria-hidden="true">💛</span>
+              <h3>People Who Care</h3>
+              <p>
+                Matron Salome and the team are here around the clock. Your monthly gift
+                makes it possible to keep skilled, loving caregivers at the house.
+              </p>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* 4. WHY MONTHLY? — deep navy bg, Salome pull-quote in orange card */}
+      <section className="lk-why">
+        <Image
+          className="lk-why-doodle"
+          src={cld("v1786782369/MH-star-giff.gif")}
+          alt=""
+          width={480}
+          height={480}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
+        <div className="lk-why-inner">
+          <div className="lk-why-text">
+            <h2>Why Monthly?</h2>
+            <p>
+              The children at Marang House don&rsquo;t stay for days — they stay for months,
+              sometimes years. Their treatment is long-term. Their need for a safe home is
+              constant. A one-off donation is a gift. A monthly donation is a promise.
+            </p>
+            <p>
+              Monthly giving lets Marang House plan ahead: buy food in bulk, keep the lights
+              on through winter, pay caregivers a stable salary, and never have to tell a child
+              there&rsquo;s no room.
+            </p>
+          </div>
+          <blockquote className="lk-why-quote">
+            <p>
+              &ldquo;Security isn&rsquo;t created in a single day. It is built every single month.
+              Because when children know they are safe, healing can begin.&rdquo;
+            </p>
+            <cite>— Salome, Matron of Marang House</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* 5. CTA — prominent BackaBuddy link */}
+      <section className="lk-cta">
+        <div className="lk-cta-inner">
+          <Image
+            className="lk-cta-keychain"
+            src={cld("MH-lighthouse-keychain.png")}
+            alt="Lightkeeper enamel keyring badge"
+            width={1000}
+            height={1000}
+            style={{ height: "auto" }}
+          />
+          <div className="lk-cta-text">
+            <h2>Join The Circle of Light</h2>
+            <p>
+              Become a Lightkeeper today. Your monthly gift — no matter the amount — keeps
+              the light of home, joy, and love shining for children who need it most.
+            </p>
+            <p className="lk-cta-tagline">
+              One Home &middot; One Circle &middot; <span>A Thousand Lightkeepers</span> &middot; Endless Hope
+            </p>
+            <a
+              href={DONATION.primary.url}
+              className="btn btn-lk-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Become a Lightkeeper
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

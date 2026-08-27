@@ -8,7 +8,7 @@ import { DONATION } from "@/lib/site-data";
 export default function HomePage() {
   return (
     <>
-      {/* 1. HERO — corkboard, bunting, polaroids */}
+      {/* 1. HERO — corkboard, bunting, polaroids — UNTOUCHED */}
       <section className="hero">
         <BgPhoto
           src={cld("MH-pinboard-BG.png")}
@@ -47,12 +47,6 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
-          {/* Pin is a child of the polaroid's own wrapper (not a sibling
-              positioned against the whole hero) so it always sticks to
-              polaroid-1's top-left corner, at every breakpoint, without
-              needing its own position overrides to track the polaroid's
-              — the wrap carries the position/rotation that used to live
-              directly on the photo. */}
           <div className="hero-polaroid-1-wrap">
             <Image
               className="hero-polaroid-1"
@@ -91,10 +85,7 @@ export default function HomePage() {
         <WhatsAppFab />
       </section>
 
-      {/* 2. BECOME A LIGHTKEEPER — positioned immediately after the hero
-          to match the Canva layout, where this is the first section below
-          the fold. The ask lands while the hero's emotional momentum is
-          still fresh. */}
+      {/* 2. BECOME A LIGHTKEEPER — orange gradient band with navy card */}
       <section className="lk-band">
         <div className="lk-card">
           <div className="lk-card-text">
@@ -126,9 +117,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. WE ARE MARANG HOUSE + WHAT WE DO — identity, merged into one
-          continuous navy → gradient composition so "what we do" reads as
-          part of the same visual event rather than a separate card row. */}
+      {/* 3. WE ARE MARANG HOUSE — identity section, deep navy bg.
+          "What We Do" 3-card grid REMOVED (now About-exclusive). */}
       <section className="identity-section">
         <div className="identity-top">
           <div className="identity-text">
@@ -160,74 +150,52 @@ export default function HomePage() {
             />
           </div>
         </div>
-        <div className="whatwedo-band">
-          <Image
-            className="whatwedo-sun"
-            src={cld("MH-shun-giff.gif")}
-            alt=""
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-            unoptimized
-            aria-hidden="true"
-          />
-          <h3 className="whatwedo-heading">What We Do</h3>
-          <div className="whatwedo-grid">
-            <Image
-              className="whatwedo-card"
-              src={cld("MH-what-we-do-1.png")}
-              alt="Accommodate 12 children at a time"
-              width={1000}
-              height={1000}
-            />
-            <Image
-              className="whatwedo-card"
-              src={cld("MH-what-we-do-2.png")}
-              alt="Offer the necessities: food and housing"
-              width={1000}
-              height={1000}
-            />
-            <Image
-              className="whatwedo-card"
-              src={cld("MH-what-we-do-3.png")}
-              alt="Round-the-clock medical care"
-              width={1000}
-              height={1000}
-            />
-          </div>
-        </div>
       </section>
 
-      {/* 4. NICE TO MEET YOU — circular photo + intro text, matching
-          Canva ref 09 bottom half: white section, photo left, text right. */}
+      {/* 4. A DAY AT MARANG HOUSE — replaces the old "Nice To Meet You"
+          with a concrete vignette instead of repeating the mission.
+          Girl-arch shown as plain cutout image (no card/shadow tile). */}
       <section className="meet-section">
+        <Image
+          className="meet-doodle"
+          src={cld("v1786782365/MH-love-giff.gif")}
+          alt=""
+          width={200}
+          height={200}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="meet-inner">
           <div className="meet-photo-wrap">
-            <BgPhoto
+            <Image
+              className="meet-photo"
               src={cld("MH-girl-arch.png")}
               alt="A child celebrating with her caregiver at Marang House"
-              className="meet-photo"
-              position="center 25%"
-              sizes="(max-width: 860px) 88vw, 48vw"
+              width={1000}
+              height={1000}
+              style={{ width: "100%", height: "auto" }}
             />
           </div>
           <div className="meet-text">
             <h2>
-              Nice To<br />Meet You.
+              A Day At<br />Marang House.
             </h2>
             <p>
-              The reality for children suffering from chronic illnesses is a harsh one.
+              Morning starts with breakfast around a family table — not a hospital trolley.
+              Then it&rsquo;s off to a tertiary hospital for treatment: dialysis, check-ups,
+              the daily routines that keep these children alive.
             </p>
             <p>
-              Marang House provides a safe and loving home where brave kids can thrive and learn to
-              manage their illness — because no child should face it alone.
+              By afternoon they&rsquo;re back at Marang House, doing homework at the kitchen
+              counter, playing in the garden, being children. That is what makes this place
+              different — it is a home, not a ward.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 5. OUR MISSION — full-bleed heart-hands photo banner with
-          centered mission statement, matching Canva ref 03. */}
+      {/* 5. OUR MISSION — photo banner with distinct mission wording */}
       <section className="mission-banner">
         <BgPhoto
           src={cld("MH-heart-hands-banner.png")}
@@ -241,8 +209,8 @@ export default function HomePage() {
           <p className="mission-label">OUR</p>
           <h2>MISSION</h2>
           <p>
-            Providing a safe and loving home where brave kids can thrive and learn to manage their
-            illness.
+            To give every child facing chronic illness a stable home, continuous medical care,
+            and an education that never stops — so healing and growing happen together.
           </p>
           <Image
             className="mission-love-doodle"
@@ -257,10 +225,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. TRUSTED BY — existing, verified supporter recognition. Demoted to
-          a quieter trust-signal band (smaller heading, one star doodle
-          instead of two, unified placeholder styling) rather than a full
-          narrative beat, since it sits outside the core content priorities. */}
+      {/* 6. TRUSTED BY — social proof, deep navy bg */}
       <section className="sponsors-section">
         <BgPhoto
           src={cld("v1786782356/MH-Rays-BG.png")}
@@ -268,11 +233,30 @@ export default function HomePage() {
           className="sponsors-section-bg"
           sizes="100vw"
         />
+        <Image
+          className="sponsors-cloud"
+          src={cld("v1786782353/MH-real-cloud.png")}
+          alt=""
+          width={400}
+          height={400}
+          style={{ height: "auto" }}
+          aria-hidden="true"
+        />
+        <Image
+          className="sponsors-sun"
+          src={cld("v1786782364/MH-shun-giff.gif")}
+          alt=""
+          width={300}
+          height={300}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="sponsors-section-inner">
         <h2>
-          Meet a few of the people who
+          The people who help us
           <br />
-          help us transform lives
+          transform lives
         </h2>
         <p className="sponsors-sub">
           Businesses and fellow foundations have given their time and support to help us make a
@@ -360,57 +344,45 @@ export default function HomePage() {
           unoptimized
           aria-hidden="true"
         />
-        <Link href="/lightkeepers" className="btn btn-blue">
+        <Link href="/lightkeepers" className="btn btn-yellow">
           SPONSOR A CHILD TODAY
         </Link>
         </div>
       </section>
 
-      {/* 7. ALL SUPPORT IS WELCOME — cream bg, text left, photo right.
-          Matches Canva ref 05. Separate from the 3-card involvement grid. */}
-      <section className="support-section">
-        <div className="support-inner">
-          <div className="support-text">
-            <h2>
-              All support is <strong>Welcome!</strong>
-            </h2>
-            <p className="support-lead">
-              Marang House is funded entirely through the generosity of donors, sponsors, volunteers, and
-              corporate partners.
-            </p>
-            <p className="support-note">
-              Your support helps provide a home away from home for seriously ill children and their
-              families, while offering tax-deductible benefits and potential B-BBEE scorecard
-              contributions.
-            </p>
-          </div>
-          <div className="support-photo-wrap">
-            <BgPhoto
-              src={cld("MH-landing-support2.png")}
-              alt="A volunteer caring for a child at Marang House"
-              className="support-photo"
-              position="center 20%"
-              sizes="(max-width: 860px) 100vw, 50vw"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 8. HOW YOU CAN GET INVOLVED — photo-backdrop,
-          3 white cards (Volunteer / Lightkeeper / Donate).
-          Matches Canva ref 06. */}
+      {/* 7. HOW YOU CAN GET INVOLVED — MERGED from old §7 "All Support Is
+          Welcome" + §8 "How You Can Get Involved". Emotional pitch as intro,
+          3-card grid as action. Tax/B-BBEE moved to Donate. */}
       <section className="involved-section">
+        <Image
+          className="involved-doodle"
+          src={cld("v1786782358/MH-cloud-giff.gif")}
+          alt=""
+          width={300}
+          height={300}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="involved-band">
           <div className="involved-band-inner">
             <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" sizes="100vw" />
             <div className="involved-band-overlay" />
           </div>
           <h2 className="involved-heading">How You Can Get Involved</h2>
+          <p className="involved-lead">
+            Marang House is funded entirely through the generosity of donors, sponsors,
+            volunteers, and corporate partners. Your support helps provide a home away
+            from home for seriously ill children and their families.
+          </p>
           <div className="involved-grid">
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-1.png")} alt="" width={1000} height={1000} />
               <h3>VOLUNTEER</h3>
-              <p>Our volunteer program is the heartbeat of Marang House.</p>
+              <p>
+                Our volunteer program is the heartbeat of Marang House. Help with homework,
+                cook a meal, or simply be a friendly face after a long day at hospital.
+              </p>
               <Link href="/contact" className="btn btn-blue">
                 VOLUNTEER
               </Link>
@@ -418,7 +390,10 @@ export default function HomePage() {
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-2.png")} alt="" width={1000} height={1000} />
               <h3>LIGHTKEEPER</h3>
-              <p>Be part of our Monthly Giving Program.</p>
+              <p>
+                Join the Circle of Light as a monthly donor. Your recurring gift brings
+                stability and security to children who need it most.
+              </p>
               <a href={DONATION.primary.url} className="btn btn-blue" target="_blank" rel="noopener noreferrer">
                 {DONATION.primary.label}
               </a>
@@ -426,7 +401,10 @@ export default function HomePage() {
             <div className="involved-card">
               <Image className="involved-icon" src={cld("MH-involvment-icons-3.png")} alt="" width={1000} height={1000} />
               <h3>DONATE</h3>
-              <p>Make a once off payment, get our bank details now.</p>
+              <p>
+                Make a once-off contribution via bank transfer or BackaBuddy. Every
+                rand goes directly to the children in our care.
+              </p>
               <Link href="/donate" className="btn btn-blue">
                 DONATE
               </Link>
@@ -435,22 +413,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. CREATING A BETTER FUTURE — new closing section, built from
-          MH_-_Website_-Creating_a_better_future.svg. NOTE: this task's own
-          QA step (verify the f_png,q_auto raster renders before wiring it
-          in) found the asset is NOT a fully-composed flattened graphic like
-          the .whatwedo-card PNGs — it's background shapes only (a yellow/
-          orange wave pair + 3 empty pale card silhouettes), with no baked-in
-          heading, subheading, stat numbers, or skipping-kid illustration.
-          Built here with real HTML text over it instead — the site's
-          established convention, and what the pre-existing (previously
-          unused) .stats-section/.stat-num CSS below was already set up for
-          — rather than shipping three blank cards. Flagged to Max. */}
+      {/* 8. CREATING A BETTER FUTURE — stats, deep navy gradient bg.
+          Hills image sits at the bottom of the section. */}
       <section className="stats-section">
         <BgPhoto
-          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787612210/MH_-_Website_-Creating_a_better_future.svg"
+          src={cld("v1786782346/MH-hills.png")}
           alt=""
           className="stats-section-bg"
+          position="center bottom"
           sizes="100vw"
         />
         <div className="stats-section-inner">
@@ -473,9 +443,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* No baked-in skipping-kid illustration exists in the background
-            graphic to duplicate/clash with (see note above), so this can
-            be placed cleanly over the yellow hill, bottom-left. */}
         <Image
           className="stats-skip-gif"
           src={cld("MH-skipping-giff.gif")}

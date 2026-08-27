@@ -237,7 +237,7 @@ img { display: block; }
    more vertically compact than the old flex-row-driven height. */
 .lk-card {
   position: relative; overflow: visible;
-  background: #1245a8; border-radius: 26px;
+  background: var(--color-brand-deep); border-radius: 26px;
   padding: 46px 5% 50px 64px;
   box-shadow: 0 18px 50px rgba(120,60,0,.18);
 }
@@ -337,29 +337,35 @@ img { display: block; }
    the section's own height, paired with a right-hand text column — no
    circular mask, so the photo reads as the section's main event rather
    than a supporting avatar. */
-.meet-section { background: #fff; padding: 0; position: relative; overflow: hidden; }
+.meet-section {
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  padding: 0; position: relative; overflow: visible;
+}
 .meet-inner { display: flex; align-items: stretch; min-height: 620px; }
 .meet-photo-wrap {
-  width: 48%; flex-shrink: 0; position: relative;
-  margin: 48px 0 48px 5.5%; border-radius: 28px; overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,40,110,.22);
+  width: 48%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 3%;
 }
-.meet-photo { position: absolute; inset: 0; }
+.meet-photo { width: 100%; max-width: 480px; height: auto; filter: drop-shadow(0 12px 28px rgba(0,0,0,.25)); }
 .meet-text {
   flex: 1; display: flex; flex-direction: column; justify-content: center;
   padding: 40px 6% 40px 64px;
 }
 .meet-text h2 {
-  font-size: 3.6rem; line-height: 1.04; color: var(--blue); margin-bottom: 22px;
+  font-size: 3.6rem; line-height: 1.04; color: var(--color-brand-deep); margin-bottom: 22px;
 }
 .meet-text p {
-  font-size: 1.1rem; line-height: 1.6; color: var(--blue); font-weight: 600;
+  font-size: 1.1rem; line-height: 1.6; color: var(--color-brand-deep); font-weight: 600;
   max-width: 520px; margin-bottom: 16px;
 }
-.meet-text p:first-of-type { font-style: italic; color: var(--orange); font-weight: 700; font-size: 1.2rem; }
+.meet-text p:first-of-type { font-style: italic; color: var(--color-brand-deep); font-weight: 700; font-size: 1.2rem; }
 @media (max-width: 860px) {
   .meet-inner { flex-direction: column; text-align: center; min-height: 0; }
-  .meet-photo-wrap { width: 88%; margin: 40px auto 0; aspect-ratio: 4 / 3; }
+  .meet-photo-wrap { width: 88%; padding: 32px 6% 0; }
+  .meet-photo { max-width: 360px; margin: 0 auto; }
   .meet-text { padding: 32px 6% 48px; align-items: center; }
   .meet-text h2 { font-size: 2.6rem; }
   .meet-text p { margin-left: auto; margin-right: auto; }
@@ -388,11 +394,11 @@ img { display: block; }
   color: #fff; letter-spacing: .08em; margin-bottom: 0;
 }
 .mission-banner-content h2 {
-  font-size: 4.5rem; color: var(--blue); line-height: 1;
+  font-size: 4.5rem; color: var(--color-brand-deep); line-height: 1;
   margin-bottom: 18px; font-weight: 800;
 }
 .mission-banner-content > p:not(.mission-label) {
-  font-size: 1.1rem; color: var(--blue); font-weight: 700; line-height: 1.55;
+  font-size: 1.1rem; color: var(--color-brand-deep); font-weight: 700; line-height: 1.55;
   max-width: 440px; margin: 0 auto;
 }
 .mission-love-doodle { width: 60px; margin: 20px auto 0; filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
@@ -407,7 +413,7 @@ img { display: block; }
    priorities: smaller heading, one star doodle instead of two, unified
    placeholder styling instead of four unrelated colours.
 ═══════════════════════════════════════ */
-.sponsors-section { padding: 60px 5.5% 80px; background: #fff; text-align: center; position: relative; }
+.sponsors-section { padding: 60px 5.5% 80px; background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); text-align: center; position: relative; overflow: visible; }
 /* Full-bleed backdrop, following the .involved-band-bg/.involved-band-inner
    precedent: an absolutely-positioned sibling paints after non-positioned
    content in source order, so everything else is wrapped in
@@ -415,16 +421,16 @@ img { display: block; }
    (low opacity) so the avatar photos/placeholders and text stay legible. */
 .sponsors-section-bg { position: absolute; inset: 0; z-index: 0; opacity: .22; }
 .sponsors-section-inner { position: relative; z-index: 1; }
-.sponsors-section h2 { font-size: 1.9rem; color: var(--blue); line-height: 1.2; margin-bottom: 16px; }
-.sponsors-sub { font-size: 0.96rem; font-weight: 700; color: var(--color-muted); max-width: 520px; margin: 0 auto 44px; line-height: 1.55; }
+.sponsors-section h2 { font-size: 1.9rem; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+.sponsors-sub { font-size: 0.96rem; font-weight: 700; color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto 44px; line-height: 1.55; }
 .sponsors-row { display: flex; gap: 80px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
 .sponsors-row + .sponsors-row { margin-top: -6px; }
 .sponsor-item { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 140px; }
 .sponsor-avatar { position: relative; width: 96px; height: 96px; border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 6px 16px rgba(0,74,173,.15); }
-.sponsor-avatar.placeholder { display: flex; align-items: center; justify-content: center; font-family: var(--h); font-weight: 600; font-size: 1.4rem; color: #fff; background: var(--blue-dk); }
-.sponsor-name { font-size: 0.88rem; color: var(--blue); font-weight: 800; text-align: center; line-height: 1.35; }
+.sponsor-avatar.placeholder { display: flex; align-items: center; justify-content: center; font-family: var(--h); font-weight: 600; font-size: 1.4rem; color: var(--color-brand-deep); background: var(--canva-yellow); }
+.sponsor-name { font-size: 0.88rem; color: #fff; font-weight: 800; text-align: center; line-height: 1.35; }
 .sponsor-name span { display: block; font-weight: 600; }
-.sponsors-stars { position: absolute; left: 6%; bottom: 40px; width: 80px; pointer-events: none; opacity: .8; }
+.sponsors-stars { position: absolute; left: 6%; bottom: 40px; width: 260px; pointer-events: none; opacity: .7; }
 
 /* ═══════════════════════════════════════
    SECTION 5: TESTIMONIALS
@@ -471,17 +477,24 @@ img { display: block; }
    SECTION 8: HOW YOU CAN GET INVOLVED
    Canva ref 06: photo backdrop, likes badge, 3 white cards.
 ═══════════════════════════════════════ */
-.involved-section { padding: 70px 5.5% 90px; background: var(--cream); }
+.involved-section {
+  padding: 70px 5.5% 90px;
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  position: relative; overflow: visible;
+}
 .involved-band { position: relative; padding: 56px 40px 60px; }
 .involved-band-inner { position: absolute; inset: 0; border-radius: 26px; overflow: hidden; }
 .involved-band-bg { position: absolute; inset: 0; }
 .involved-band-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(210,110,20,.45), rgba(180,80,10,.6)); }
-.involved-heading { position: relative; z-index: 2; text-align: center; color: #fff; font-size: 2.4rem; margin-bottom: 40px; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
+.involved-heading { position: relative; z-index: 2; text-align: center; color: #fff; font-size: 2.4rem; margin-bottom: 18px; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
+.involved-lead { position: relative; z-index: 2; text-align: center; color: rgba(255,255,255,.92); font-size: 1.02rem; font-weight: 600; max-width: 600px; margin: 0 auto 40px; line-height: 1.65; text-shadow: 0 1px 6px rgba(0,0,0,.2); }
 .involved-grid { position: relative; z-index: 2; display: flex; gap: 32px; max-width: 1100px; margin: 0 auto; }
 .involved-card { flex: 1; background: #f4f5f7; border-radius: 20px; padding: 40px 28px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
 .involved-icon { width: 90px; height: 90px; margin-bottom: 18px; }
-.involved-card h3 { font-family: var(--h); font-weight: 700; font-size: 1.4rem; color: var(--blue); margin-bottom: 14px; letter-spacing: .5px; }
-.involved-card p { font-size: 0.96rem; color: var(--blue); font-weight: 600; line-height: 1.5; margin-bottom: 26px; flex: 1; }
+.involved-card h3 { font-family: var(--h); font-weight: 700; font-size: 1.4rem; color: var(--color-brand-deep); margin-bottom: 14px; letter-spacing: .5px; }
+.involved-card p { font-size: 0.96rem; color: var(--color-brand-deep); font-weight: 600; line-height: 1.5; margin-bottom: 26px; flex: 1; }
 .involved-card .btn { align-self: center; min-width: 220px; }
 @media (max-width: 900px) {
   .involved-grid { flex-direction: column; }
@@ -497,8 +510,8 @@ img { display: block; }
    the JSX comment above this section) + real HTML heading/subheading/stat
    numbers on top.
 ═══════════════════════════════════════ */
-.stats-section { background: var(--blue-rl); position: relative; overflow: hidden; min-height: 640px; display: flex; align-items: center; }
-.stats-section-bg { position: absolute; inset: 0; z-index: 0; }
+.stats-section { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); position: relative; overflow: hidden; min-height: 640px; display: flex; align-items: center; }
+.stats-section-bg { position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 0; object-position: center bottom; }
 .stats-section-inner { position: relative; z-index: 1; width: 100%; padding: 80px 5.5% 70px; }
 .stats-heading { text-align: center; margin-bottom: 50px; }
 .stats-heading h2 { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); color: #fff; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
@@ -511,7 +524,10 @@ img { display: block; }
   text-align: center; background: rgba(13, 30, 74, .55); border-radius: 18px;
   padding: 18px 34px; backdrop-filter: blur(3px);
 }
-.stat-num { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.6rem); color: var(--canva-yellow); font-family: var(--h); font-weight: 700; line-height: 1; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.stat-num { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.6rem); font-family: var(--h); font-weight: 700; line-height: 1; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.stat-item:nth-child(1) .stat-num { color: var(--canva-yellow); }
+.stat-item:nth-child(2) .stat-num { color: var(--orange); }
+.stat-item:nth-child(3) .stat-num { color: var(--red); }
 .stat-label { font-size: 1.25rem; color: #fff; font-family: var(--h); font-weight: 400; margin-top: 8px; }
 .stats-skip-gif {
   position: absolute; left: 4%; bottom: 0; width: 320px; z-index: 2; pointer-events: none;
@@ -527,10 +543,47 @@ img { display: block; }
 }
 
 /* ═══════════════════════════════════════
+   DECORATIVE DOODLES — overlapping, bridging GIFs/images
+   Used across pages to fill empty space and connect sections.
+═══════════════════════════════════════ */
+.doodle { position: absolute; pointer-events: none; z-index: 3; }
+.doodle-star { filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+.doodle-sun { filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+.doodle-cloud { filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
+.doodle-heart { filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
+.doodle-logo { filter: drop-shadow(0 6px 16px rgba(0,0,0,.15)); opacity: .25; }
+/* Sponsors section doodles */
+.sponsors-cloud { position: absolute; top: -60px; left: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
+.sponsors-sun { position: absolute; top: -50px; right: 5%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* Meet section doodle */
+.meet-doodle { position: absolute; bottom: -40px; right: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* Involved section doodle */
+.involved-doodle { position: absolute; top: -50px; right: 8%; width: 160px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* About children section doodle */
+.about-children-doodle { position: absolute; top: -60px; right: 6%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
+/* About story section doodle */
+.about-story-doodle { position: absolute; bottom: -50px; left: 6%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* LK impact doodle */
+.lk-impact-doodle { position: absolute; top: -55px; left: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* LK why doodle */
+.lk-why-doodle { position: absolute; bottom: -55px; right: 5%; width: 240px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+/* Donate body doodle */
+.donate-body-doodle { position: absolute; top: -45px; right: 6%; width: 160px; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
+/* Donate other doodle */
+.donate-other-doodle { position: absolute; bottom: -50px; left: 5%; width: 220px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+@media (max-width: 760px) {
+  .sponsors-cloud, .sponsors-sun, .meet-doodle, .involved-doodle,
+  .about-children-doodle, .about-story-doodle, .lk-impact-doodle,
+  .lk-why-doodle, .donate-body-doodle, .donate-other-doodle {
+    width: 100px !important;
+  }
+}
+
+/* ═══════════════════════════════════════
    INNER PAGES
 ═══════════════════════════════════════ */
 /* — About Us — */
-.about-navy { background: var(--blue); display: flex; min-height: 500px; overflow: hidden; }
+.about-navy { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); display: flex; min-height: 500px; overflow: hidden; }
 .about-navy-left { flex: 1; padding: 64px 48px; color: #fff; max-width: 520px; }
 .about-navy-left h1 { font-size: 2.7rem; line-height: 1.15; margin-bottom: 26px; font-weight: 700; }
 .about-navy-left h1 span { display: block; color: var(--canva-yellow); }
@@ -557,7 +610,7 @@ img { display: block; }
      only works there because .whatwedo-band is overflow: visible too. */
   overflow: visible;
 }
-.about-whatwedo h2 { position: relative; z-index: 1; text-align: center; color: var(--blue); font-size: 2.4rem; margin-bottom: 40px; }
+.about-whatwedo h2 { position: relative; z-index: 1; text-align: center; color: var(--color-brand-deep); font-size: 2.4rem; margin-bottom: 40px; }
 /* Enlarged and pulled up further to bridge the About hero → What We Do
    seam. Exact offsets are a visual-judgment call — tune once both layers
    render together in the dev server. */
@@ -565,55 +618,73 @@ img { display: block; }
 .about-whatwedo-grid { position: relative; z-index: 1; display: flex; gap: 24px; justify-content: center; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
 .about-whatwedo-grid img { width: 280px; height: auto; }
 
-/* No vertical padding/min-height — the section's white background is
-   sized to its content (the photo, since it's the shorter of the two
-   columns) rather than adding extra breathing room top and bottom. */
-.about-ntmy { display: flex; align-items: center; padding: 0 5.5%; background: #fff; gap: 56px; }
-.about-ntmy-photo { width: 42%; max-width: 460px; height: auto; flex-shrink: 0; }
-.about-ntmy-text { flex: 1; max-width: 520px; }
-.about-ntmy-text h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 10px; }
-.about-ntmy-lead { color: var(--orange); font-weight: 700; font-style: italic; font-size: 0.92rem; margin-bottom: 16px; }
-.about-ntmy-text p { font-size: 0.9rem; line-height: 1.75; color: var(--blue); font-weight: 600; margin-bottom: 12px; max-width: 440px; }
+/* — About: The Children We Serve — cream bg, image + text side-by-side */
+.about-children {
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  padding: 80px 5.5%; position: relative; overflow: visible;
+}
+.about-children-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
+.about-children-photo { width: 38%; max-width: 400px; flex-shrink: 0; border-radius: 16px; }
+.about-children-text { flex: 1; }
+.about-children-text h2 { font-size: 2.2rem; color: var(--color-brand-deep); margin-bottom: 18px; }
+.about-children-text p { font-size: 1rem; line-height: 1.78; color: #2a1a00; margin-bottom: 16px; }
+.about-children-text em { color: var(--orange); font-style: italic; font-weight: 700; }
 @media (max-width: 900px) {
   .about-navy { flex-direction: column; }
   .about-navy-photo-wrap { width: 100%; height: 320px; }
   .about-whatwedo-cloud { top: -70px; width: 170px; right: 5%; }
-  .about-ntmy { flex-direction: column; text-align: center; }
-  .about-ntmy-photo { width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
-  .about-ntmy-text { max-width: 100%; }
+  .about-children-inner { flex-direction: column; gap: 32px; }
+  .about-children-photo { width: 100%; max-width: 320px; margin: 0 auto; }
 }
+
+/* — About: Closing CTA bridge — deep navy, links to Lightkeepers + Donate */
+.about-bridge { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; text-align: center; }
+.about-bridge-inner { max-width: 700px; margin: 0 auto; }
+.about-bridge-inner h2 { font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem); color: #fff; line-height: 1.25; margin-bottom: 18px; }
+.about-bridge-inner h2 span { color: var(--canva-yellow); display: block; }
+.about-bridge-inner p { color: rgba(255,255,255,.88); font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px; }
+.about-bridge-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-about-bridge-primary { display: inline-block; background: var(--canva-yellow); color: var(--color-brand-deep); padding: 15px 32px; border-radius: 50px; font-weight: 800; font-size: 0.92rem; letter-spacing: 0.6px; text-decoration: none; transition: opacity 160ms ease; }
+.btn-about-bridge-primary:hover { opacity: .88; }
+.btn-about-bridge-secondary { display: inline-block; background: transparent; border: 2px solid rgba(255,255,255,.6); color: #fff; padding: 13px 32px; border-radius: 50px; font-weight: 800; font-size: 0.92rem; letter-spacing: 0.6px; text-decoration: none; transition: opacity 160ms ease; }
+.btn-about-bridge-secondary:hover { opacity: .78; }
 
 /* Salome's story — moved here from the Lightkeepers page (was .lk-story*)
    since it's really a "meet our people" piece for About. Plain white,
    editorial column: quote-styled paragraph for her direct words, a bold
    centered "standout" line for the thesis sentence, and a closing
    tagline band as the page's final beat. */
-.about-story { background: #fff; padding: 80px 5.5% 90px; }
+.about-story { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5% 90px; position: relative; overflow: visible; }
 .about-story-inner { max-width: 760px; margin: 0 auto; }
 .about-story-eyebrow {
   display: block; text-align: center; text-transform: uppercase; letter-spacing: 2px;
-  font-size: 0.8rem; font-weight: 800; color: var(--orange); margin-bottom: 12px;
+  font-size: 0.8rem; font-weight: 800; color: var(--canva-yellow); margin-bottom: 12px;
   font-family: var(--font-nunito), sans-serif;
 }
-.about-story h2 { text-align: center; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); color: var(--blue); margin-bottom: 40px; }
-.about-story p { font-size: 1rem; line-height: 1.85; color: #333; margin-bottom: 20px; }
-.about-story p strong { color: var(--blue); }
+.about-story h2 { text-align: center; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); color: #fff; margin-bottom: 40px; }
+.about-story p { font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,.9); margin-bottom: 20px; }
+.about-story p strong { color: var(--canva-yellow); }
 .about-story-quote {
-  font-style: italic; font-size: 1.1rem; line-height: 1.8; color: var(--blue);
+  font-style: italic; font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,.95);
   border-left: 4px solid var(--canva-yellow); padding: 4px 0 4px 24px; margin: 28px 0;
 }
 .about-story-standout {
   text-align: center; font-family: var(--h);
   font-weight: 600; font-size: clamp(1.3rem, 1rem + 1.2vw, 1.8rem);
-  color: var(--blue); line-height: 1.35; margin: 40px 0;
+  color: #fff; line-height: 1.35; margin: 40px 0;
 }
-.about-story-standout span { color: var(--orange); }
+.about-story-standout span { color: var(--canva-yellow); }
 .about-story-tagline {
-  margin-top: 56px; text-align: center; background: var(--blue); border-radius: 22px;
-  padding: 40px 28px; color: #fff; font-family: var(--h);
+  margin-top: 56px; text-align: center;
+  background: repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  border-radius: 22px;
+  padding: 40px 28px; color: var(--color-brand-deep); font-family: var(--h);
   font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem); letter-spacing: 0.3px; line-height: 1.7;
 }
-.about-story-tagline span { color: var(--canva-yellow); }
+.about-story-tagline span { color: var(--color-brand-deep); font-weight: 800; }
 @media (max-width: 600px) {
   .about-story { padding: 56px 6% 60px; }
   .about-story-quote { padding-left: 16px; }
@@ -654,32 +725,80 @@ img { display: block; }
 }
 .lk-hero-overlay-cta:hover { background: #ffe85c; }
 
-.lk-info-section { padding: 0 5.5% 90px; }
-.lk-info-card { background: var(--blue); border-radius: 22px; padding: 48px 56px; max-width: 1100px; margin: 0 auto; box-shadow: 0 18px 50px rgba(120,60,0,.18); }
-.lk-info-card h2 { color: var(--canva-yellow); font-size: 2.1rem; text-align: center; margin-bottom: 22px; letter-spacing: .5px; }
-.lk-info-card > p { color: #fff; text-align: center; font-size: 1rem; line-height: 1.6; max-width: 780px; margin: 0 auto 22px; }
-.lk-info-card > p strong { color: var(--canva-yellow); }
-.lk-info-bank { color: #fff; text-align: center; font-weight: 700; font-size: 1.15rem; margin-bottom: 34px; }
-.lk-info-grid { display: flex; align-items: center; gap: 40px; }
-.lk-info-keychain { width: 130px; flex-shrink: 0; filter: drop-shadow(0 10px 24px rgba(0,0,0,.3)); }
-.lk-info-divider { width: 2px; align-self: stretch; background: rgba(255,255,255,.3); flex-shrink: 0; }
-.lk-info-general h3 { color: var(--canva-yellow); font-size: 1rem; margin-bottom: 10px; }
-.lk-info-general p { color: #fff; font-size: 0.9rem; margin-bottom: 8px; }
-.lk-info-general p strong { display: block; font-size: 0.98rem; }
-.lk-info-contact { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.lk-info-contact-row { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 0.95rem; }
-.lk-info-contact-row svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
-.lk-info-contact-row a { color: #fff; text-decoration: none; font-weight: 700; }
-@media (max-width: 900px) {
-  .lk-info-card { padding: 36px 24px; }
-  .lk-info-grid { flex-direction: column; align-items: flex-start; }
-  .lk-info-divider { display: none; }
+/* — Lightkeepers: What Is A Lightkeeper — */
+.lk-what { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; color: #fff; }
+.lk-what-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
+.lk-what-text { flex: 1; }
+.lk-what-text h2 { font-size: 2.4rem; margin-bottom: 20px; color: var(--canva-yellow); }
+.lk-what-text p { font-size: 1rem; line-height: 1.75; margin-bottom: 16px; color: rgba(255,255,255,.92); max-width: 540px; }
+.lk-what-text strong { color: var(--canva-yellow); }
+.lk-what-photo-wrap { flex: 0 0 auto; width: 42%; max-width: 440px; aspect-ratio: 4 / 5; position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.3); }
+@media (max-width: 860px) {
+  .lk-what-inner { flex-direction: column; gap: 36px; }
+  .lk-what-photo-wrap { width: 100%; max-width: 400px; }
 }
 
-.lk-circle-section { padding: 70px 5.5% 90px; text-align: center; }
-.lk-circle-section h2 { color: var(--blue); font-size: 2.2rem; margin-bottom: 16px; }
-.lk-circle-section p { color: var(--blue); font-weight: 600; font-size: 1rem; max-width: 640px; margin: 0 auto 8px; line-height: 1.7; }
-.lk-circle-note { display: inline-block; margin-top: 18px; background: #fff8e6; border: 1px dashed var(--orange); border-radius: 12px; padding: 14px 22px; color: #8a5a10; font-size: 0.85rem; font-weight: 600; max-width: 560px; }
+/* — Lightkeepers: What Your Gift Provides — */
+.lk-impact {
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  padding: 80px 5.5%; position: relative; overflow: visible;
+}
+.lk-impact-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.lk-impact-inner h2 { font-size: 2.2rem; color: var(--color-brand-deep); margin-bottom: 12px; }
+.lk-impact-lead { font-size: 1.02rem; color: #2a1a00; font-weight: 600; max-width: 600px; margin: 0 auto 48px; line-height: 1.65; }
+.lk-impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; text-align: center; }
+.lk-impact-item { background: var(--color-brand-deep); border-radius: 18px; padding: 32px 28px; box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+.lk-impact-icon { font-size: 2.4rem; display: block; margin: 0 auto 14px; text-align: center; }
+.lk-impact-item h3 { font-size: 1.08rem; color: var(--canva-yellow); margin-bottom: 10px; }
+.lk-impact-item p { font-size: 0.92rem; color: rgba(255,255,255,.88); line-height: 1.65; }
+@media (max-width: 900px) {
+  .lk-impact-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .lk-impact-grid { grid-template-columns: 1fr; }
+}
+
+/* — Lightkeepers: Why Monthly — */
+.lk-why { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; position: relative; overflow: visible; }
+.lk-why-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-start; gap: 48px; }
+.lk-why-text { flex: 1; }
+.lk-why-text h2 { font-size: 2.2rem; color: var(--canva-yellow); margin-bottom: 18px; }
+.lk-why-text p { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,.9); margin-bottom: 16px; }
+.lk-why-quote {
+  flex: 0 0 340px;
+  background: repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  border-radius: 20px; padding: 36px 32px; box-shadow: 0 16px 40px rgba(0,0,0,.15);
+}
+.lk-why-quote p { color: var(--color-brand-deep); font-style: italic; font-size: 1.05rem; line-height: 1.65; margin-bottom: 14px; font-weight: 700; }
+.lk-why-quote cite { color: var(--color-brand-deep); font-style: normal; font-weight: 800; font-size: 0.9rem; }
+@media (max-width: 860px) {
+  .lk-why-inner { flex-direction: column; gap: 32px; }
+  .lk-why-quote { flex: none; width: 100%; max-width: 500px; }
+}
+
+/* — Lightkeepers: CTA — */
+.lk-cta {
+  background:
+    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  padding: 80px 5.5%;
+}
+.lk-cta-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
+.lk-cta-keychain { width: 180px; flex-shrink: 0; filter: drop-shadow(0 12px 28px rgba(0,0,0,.25)); }
+.lk-cta-text { flex: 1; }
+.lk-cta-text h2 { font-size: 2.2rem; color: var(--color-brand-deep); margin-bottom: 14px; }
+.lk-cta-text p { font-size: 1.02rem; color: var(--color-brand-deep); font-weight: 600; line-height: 1.65; margin-bottom: 12px; }
+.lk-cta-tagline { font-family: var(--font-heading); font-size: 0.95rem; letter-spacing: 0.3px; margin-bottom: 24px; }
+.lk-cta-tagline span { color: var(--color-brand-deep); font-weight: 800; }
+.btn-lk-cta { display: inline-block; background: var(--color-brand-deep); color: #fff; padding: 16px 36px; border-radius: 50px; font-family: var(--font-body); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.8px; text-decoration: none; transition: opacity 160ms ease; }
+.btn-lk-cta:hover { opacity: .88; }
+@media (max-width: 660px) {
+  .lk-cta-inner { flex-direction: column; text-align: center; }
+  .lk-cta-keychain { width: 140px; }
+}
 
 /* — Donate — */
 /* Split layout: copy on the left, portrait photo card on the right.
@@ -689,55 +808,50 @@ img { display: block; }
    than a landscape image would use, since a portrait card reads taller
    for the same width. Purple-toned dark background (--color-purple
    leaning into --blue-dk) sits behind both columns. */
-.donate-hero { position: relative; padding: 70px 5.5% 80px; background: linear-gradient(135deg, var(--blue-dk) 0%, #1e0f3c 120%); }
-.donate-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
-.donate-hero-text { flex: 1; max-width: 460px; }
+.donate-hero { position: relative; padding: 80px 5.5% 60px; background: linear-gradient(135deg, var(--blue-dk) 0%, #1e0f3c 120%); overflow: hidden; }
+.donate-hero-inner { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px; }
+.donate-hero-text { max-width: 600px; }
 .donate-hero-heading {
-  font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); color: var(--canva-yellow);
+  font-size: clamp(2.4rem, 1.6rem + 3vw, 3.8rem); color: var(--canva-yellow);
   margin-bottom: 16px;
 }
-.donate-hero-body { color: #fff; font-size: 1rem; line-height: 1.7; }
+.donate-hero-body { color: rgba(255,255,255,.92); font-size: 1.08rem; line-height: 1.7; margin-bottom: 8px; }
 .donate-hero-graphic {
-  flex: 0 0 auto; width: 34%; max-width: 380px; aspect-ratio: 3 / 4;
-  position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.35);
+  width: 56%; max-width: 400px; aspect-ratio: 3 / 4;
+  position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 56px rgba(0,0,0,.35);
 }
 @media (max-width: 760px) {
-  .donate-hero { padding: 48px 5.5% 50px; }
-  .donate-hero-inner { flex-direction: column; text-align: center; gap: 32px; }
-  .donate-hero-text { max-width: 100%; }
-  .donate-hero-graphic { width: 60%; max-width: 300px; }
+  .donate-hero { padding: 56px 5.5% 48px; }
+  .donate-hero-graphic { width: 70%; max-width: 300px; }
   .donate-hero-heading { font-size: 2.1rem; }
-  .donate-hero-body { font-size: 0.9rem; }
+  .donate-hero-body { font-size: 0.95rem; }
 }
 /* Full-bleed cream band behind .donate-body — was flat white sandwiched
    between the (now dark) hero and .involved-white below, reading as one
    long plain stretch. Cards inside (.bank-box, .info-strip) keep their
    own contrasting fills against this tint. */
-.donate-body-band { background: var(--color-cream); }
-.involved-white {
-  /* Class name kept for history — background is now the same warm
-     gradient as .contact-form-section (blue text on it is an already-
-     proven combo there) instead of flat white, so this section doesn't
-     read as another blank stretch next to .donate-body-band above it. */
+.donate-body-band {
   background:
     repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
     linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
-  padding: 72px 5.5% 80px;
+  position: relative; overflow: visible;
 }
-/* Shared container so the heading and the 3-column row line up to the same
-   edges and center together as one balanced block, instead of the heading
-   (max-width: 420px) and .involved-cols (max-width: 1000px, no auto
-   margins) drifting independently. */
-.involved-white-inner { max-width: 1000px; margin: 0 auto; }
-.involved-white h2 { font-size: 2.4rem; color: var(--blue); line-height: 1.1; margin-bottom: 48px; max-width: 420px; }
-.involved-cols { display: flex; gap: 40px; }
-.involved-col { flex: 1; text-align: center; display: flex; flex-direction: column; }
-.involved-col-photo { position: relative; height: 200px; border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
-.involved-col h3 { font-size: 1.15rem; color: var(--blue); margin-bottom: 12px; font-family: var(--font-nunito), sans-serif; font-weight: 800; }
-.involved-col p { font-size: 0.85rem; color: var(--blue); font-weight: 600; line-height: 1.7; margin-bottom: 22px; flex: 1; }
+/* — Donate: Other Ways To Give — */
+.donate-other { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 72px 5.5% 80px; position: relative; overflow: visible; }
+.donate-other-inner { max-width: 1000px; margin: 0 auto; }
+.donate-other-inner h2 { font-size: 2.2rem; color: #fff; margin-bottom: 40px; text-align: center; }
+.donate-other-grid { display: flex; gap: 32px; }
+.donate-other-card {
+  flex: 1;
+  background: repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
+    linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
+  border-radius: 18px; padding: 36px 28px 32px; display: flex; flex-direction: column;
+}
+.donate-other-card h3 { font-size: 1.1rem; color: var(--color-brand-deep); margin-bottom: 12px; font-family: var(--font-body); font-weight: 800; }
+.donate-other-card p { font-size: 0.92rem; color: #2a1a00; line-height: 1.7; margin-bottom: 24px; flex: 1; }
+.donate-other-card .btn { align-self: flex-start; background: var(--color-brand-deep); color: #fff; }
 @media (max-width: 760px) {
-  .involved-cols { flex-direction: column; gap: 44px; }
-  .involved-white h2 { max-width: 100%; text-align: center; }
+  .donate-other-grid { flex-direction: column; gap: 24px; }
 }
 
 /* — Press — */
@@ -814,8 +928,8 @@ img { display: block; }
 }
 .contact-form-wrap { position: relative; z-index: 1; display: flex; gap: 40px; align-items: center; }
 .contact-form-aside-text { flex: 1; max-width: 300px; }
-.contact-form-aside-text h2 { font-size: 2.4rem; color: var(--blue); margin-bottom: 14px; }
-.contact-form-aside-text p { font-size: 0.95rem; color: var(--blue); font-weight: 700; line-height: 1.7; margin-bottom: 22px; }
+.contact-form-aside-text h2 { font-size: 2.4rem; color: var(--color-brand-deep); margin-bottom: 14px; }
+.contact-form-aside-text p { font-size: 0.95rem; color: var(--color-brand-deep); font-weight: 700; line-height: 1.7; margin-bottom: 22px; }
 /* Leads the row (left of the text) as a real visual anchor, sized larger
    than before — same drop-shadow-on-cutout language the site already
    uses for these PNG photo elements elsewhere (identity/about-navy). */
@@ -855,7 +969,7 @@ img { display: block; }
    neither the map nor .find-us-body grew to fill it. Map/pin/doodad and
    text are both bigger now too, so the map reads as the dominant visual
    anchor the text sits beside, not a small icon next to a text-heavy row. */
-.find-us { position: relative; background: var(--blue); padding: 80px 5.5%; overflow: visible; }
+.find-us { position: relative; background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; overflow: visible; }
 /* Big decorative sun, top-right corner of the whole section's background —
    sits behind the map/text content (z-index 0, below .find-us-inner's 1),
    not tucked in close beside the map. Fixed px top offset (not %) so it
@@ -939,15 +1053,15 @@ img { display: block; }
 .lk-page-pin { width: 200px; flex-shrink: 0; filter: drop-shadow(0 16px 40px rgba(0,0,0,.3)); }
 
 .donate-body { max-width: 740px; margin: 0 auto; padding: 60px 40px; }
-.bank-box { background: #e8f0ff; border-radius: 18px; padding: 28px 32px; margin-bottom: 22px; }
-.bank-box h3 { font-size: 1.35rem; color: var(--blue); margin-bottom: 18px; }
+.bank-box { background: rgba(255,255,255,.85); border-radius: 18px; padding: 28px 32px; margin-bottom: 22px; }
+.bank-box h3 { font-size: 1.35rem; color: var(--color-brand-deep); margin-bottom: 18px; }
 .bank-row { display: flex; gap: 12px; margin-bottom: 7px; font-size: 0.92rem; }
 .bank-label { font-weight: 800; color: var(--blue); min-width: 130px; }
 .bank-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(0,74,173,.15); font-size: 0.88rem; color: #555; line-height: 1.6; }
 .bank-note strong { color: var(--blue); }
 /* White (not the old near-identical #fffbee) so it still stands out now
    that .donate-body-band gives the whole section a cream tint. */
-.info-strip { border-left: 4px solid var(--yellow); background: #fff; border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
+.info-strip { border-left: 4px solid var(--color-brand-deep); background: rgba(255,255,255,.85); border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
 .info-strip h4 { color: var(--blue); font-size: 0.92rem; margin-bottom: 4px; }
 .info-strip p { color: #555; font-size: 0.87rem; line-height: 1.6; }
 .npc-note { color: #aaa; font-size: 0.8rem; margin-top: 18px; }

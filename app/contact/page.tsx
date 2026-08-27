@@ -54,15 +54,15 @@ export default function ContactPage() {
           <div className="contact-aside-photo-wrap">
             <Image
               className="contact-aside-photo"
-              src={cld("MH-info-pg-element.png")}
-              alt=""
-              width={1000}
-              height={1000}
+              src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
+              alt="A child at Marang House"
+              width={870}
+              height={717}
               style={{ height: "auto" }}
             />
             <Image
               className="contact-aside-photo-doodle"
-              src={cld("v1786782367/MH-love-giff.gif")}
+              src={cld("v1786782365/MH-love-giff.gif")}
               alt=""
               width={200}
               height={200}
@@ -74,8 +74,8 @@ export default function ContactPage() {
           <div className="contact-form-aside-text">
             <h2>Get in touch!</h2>
             <p>
-              Businesses and fellow foundations have given their time and support to help us make a
-              difference in children&apos;s lives.
+              Whether you&apos;d like to volunteer, arrange a visit, or simply ask a question
+              — we&apos;d love to hear from you.
             </p>
             <div className="contact-aside">
               <div className="contact-line">
