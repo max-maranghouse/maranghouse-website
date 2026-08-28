@@ -1,7 +1,7 @@
 # Marang House Website — AGENTS.md
 
-Canonical, current-state reference for Codex sessions working in this
-repo. Read this first. For deep history (the original static-site era, and
+Canonical, current-state reference for Codex and Claude Code sessions working
+in this repo. Read this first. For deep history (the original static-site era, and
 the 2026-07-22/23 GoDaddy hosting compromise), see
 `MARANG-HOUSE-SITE-CONTEXT.md` §11 — still fully relevant, see the warning
 below.
@@ -14,8 +14,8 @@ different repo/Vercel project (`marang-house-landing`), put up as a stopgap
 after the original GoDaddy/WordPress hosting was compromised. Full story in
 `MARANG-HOUSE-SITE-CONTEXT.md` §11. When this project is ready to launch,
 the domain has to be manually moved from `marang-house-landing` to this
-project (`marang-house-website`) in the Vercel dashboard — it won't happen
-automatically on merge to `main`.
+project (`marang-house-website`) in the Vercel dashboard — it will not happen
+from a code merge alone.
 
 - **Repo:** https://github.com/max-maranghouse/maranghouse-website
 - **Vercel project:** `marang-house-website` (team `marang-house-team`)
@@ -24,11 +24,14 @@ automatically on merge to `main`.
   `max-maranghouse`; a 403 on push means the wrong `gh` account is active
   (`gh auth switch --user max-maranghouse` then `gh auth setup-git`).
 
-## Branches
+## Branch baseline
 
-- **Main/production:** `overhaul/nextjs-migration`
-- **Active design work:** `rebuild/marang-v3` (current branch)
-- Nothing merges to `main` without review; Vercel preview deploys per branch.
+- **Authoritative site branch:** `origin/rebuild/marang-v3`.
+- Create task branches directly from that remote branch and record the exact
+  base commit in the task file.
+- `main` and the other historical branches are obsolete. Do not merge, rebase,
+  or cherry-pick them into task branches.
+- Review task branches before any release action. Vercel preview deploys per branch.
 
 ## Design status
 
@@ -124,6 +127,17 @@ they aren't lost.
    real URL — ask for it before using) and `MH-skipping-gif.gif` (typo;
    the working asset is `MH-skipping-giff.gif`, already wired in where
    needed).
+
+## Agent workflow
+
+- Active work is specified in `.ai/tasks/`. The task file is the authority for
+  outcome, scope, acceptance criteria, verification, decisions, and handoff.
+- Codex inspects and architects the task, records the base commit, and reviews
+  the completed diff against both the task and this guide.
+- Claude Code implements only the approved scope, runs the task's verification,
+  records results and deviations in its handoff, and marks it ready for review.
+- Neither agent commits, pushes, deploys, or changes production infrastructure
+  unless the user explicitly requests it.
 
 ## Related docs
 
