@@ -106,14 +106,14 @@ export default function DonatePage() {
           </p>
         </div>
         <div className="info-strip">
-          <h4>Tax Deductions</h4>
+          <h3>Tax Deductions</h3>
           <p>
             Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A
             certificate can be issued after donation.
           </p>
         </div>
         <div className="info-strip">
-          <h4>BBBEE Scorecard Points</h4>
+          <h3>BBBEE Scorecard Points</h3>
           <p>
             Corporate donors can earn B-BBEE scorecard points through their contribution
             to Marang House. <Link href="/contact">Contact us</Link> to discuss options and requirements.

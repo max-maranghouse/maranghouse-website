@@ -952,6 +952,12 @@ img { display: block; }
 }
 .contact-form { max-width: 520px; display: flex; flex-direction: column; gap: 16px; }
 .contact-form-row { display: flex; gap: 16px; }
+/* Below ~480px the email/phone pair is too narrow to fit both placeholder
+   text and the required/optional marker without them overlapping — stack
+   them like the full-width fields instead. */
+@media (max-width: 480px) {
+  .contact-form-row { flex-direction: column; gap: 16px; }
+}
 /* :not([type="checkbox"]) excludes the honeypot field — it must keep the
    1px/clipped sizing from .sr-only; this rule's higher specificity was
    overriding that with width:100% on a position:absolute element with no
@@ -959,6 +965,23 @@ img { display: block; }
 .contact-form input:not([type="checkbox"]), .contact-form textarea { font-family: var(--font-nunito), sans-serif; font-weight: 700; font-style: italic; font-size: 0.92rem; color: var(--blue); background: #fff; border: none; border-radius: 4px; padding: 14px 16px; width: 100%; outline: none; }
 .contact-form input::placeholder, .contact-form textarea::placeholder { color: #9fb3d4; }
 .contact-form textarea { min-height: 120px; resize: vertical; font-style: normal; }
+/* Visible required/optional cues (the field labels are sr-only, so
+   required/optional must be signalled some other way for sighted users;
+   screen reader users already get it from the native required attribute). */
+.contact-form-hint { font-size: 0.78rem; color: var(--color-brand-deep); font-weight: 700; margin-top: -4px; }
+.contact-form-hint span { color: var(--red); font-weight: 800; }
+.contact-field { position: relative; }
+/* Extra right padding keeps typed text clear of the required/optional
+   marker instead of running underneath it. */
+/* Selector needs to match or beat .contact-form input:not([type="checkbox"])'s
+   specificity (0,2,1) — plain ".contact-field input" was only (0,1,1) and
+   silently lost the padding-right override to that rule's padding shorthand,
+   computing to 16px instead of 58px. */
+.contact-form .contact-field input:not([type="checkbox"]),
+.contact-form .contact-field textarea { padding-right: 58px; }
+.contact-field-required, .contact-field-optional { position: absolute; top: 14px; right: 16px; font-size: 0.72rem; font-weight: 800; pointer-events: none; }
+.contact-field-required { color: var(--red); }
+.contact-field-optional { color: var(--color-muted); font-style: italic; letter-spacing: 0.02em; }
 .contact-submit { align-self: flex-end; background: var(--blue); color: #fff; border: none; cursor: pointer; font-family: var(--font-nunito), sans-serif; font-weight: 800; font-size: 0.82rem; letter-spacing: 1.5px; padding: 12px 28px; border-radius: 50px; display: flex; align-items: center; gap: 8px; }
 .contact-submit:hover { opacity: .85; }
 .contact-aside .contact-line { font-size: 0.95rem; color: var(--blue); margin-bottom: 8px; font-weight: 700; }
@@ -969,7 +992,14 @@ img { display: block; }
    neither the map nor .find-us-body grew to fill it. Map/pin/doodad and
    text are both bigger now too, so the map reads as the dominant visual
    anchor the text sits beside, not a small icon next to a text-heavy row. */
-.find-us { position: relative; background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; overflow: visible; }
+/* overflow-x: clip (not the previous overflow: visible) — .find-us-sun's
+   right: -2% offset pushes it past the section's own right edge, which on
+   a full-width section is the viewport edge, causing page-level horizontal
+   overflow at wide viewports (found during MH-001 repair, reproduced at
+   1440px on /contact). Clipping only the x-axis keeps the sun's intended
+   bleed-into-the-section-background look with no visible difference, since
+   the section's background already fills the full section width. */
+.find-us { position: relative; background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; overflow-x: clip; }
 /* Big decorative sun, top-right corner of the whole section's background —
    sits behind the map/text content (z-index 0, below .find-us-inner's 1),
    not tucked in close beside the map. Fixed px top offset (not %) so it
@@ -1062,7 +1092,7 @@ img { display: block; }
 /* White (not the old near-identical #fffbee) so it still stands out now
    that .donate-body-band gives the whole section a cream tint. */
 .info-strip { border-left: 4px solid var(--color-brand-deep); background: rgba(255,255,255,.85); border-radius: 0 12px 12px 0; padding: 14px 20px; margin-bottom: 12px; }
-.info-strip h4 { color: var(--blue); font-size: 0.92rem; margin-bottom: 4px; }
+.info-strip h3 { color: var(--blue); font-size: 0.92rem; margin-bottom: 4px; }
 .info-strip p { color: #555; font-size: 0.87rem; line-height: 1.6; }
 .npc-note { color: #aaa; font-size: 0.8rem; margin-top: 18px; }
 
