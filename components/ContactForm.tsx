@@ -24,12 +24,24 @@ export default function ContactForm() {
     const formData = new FormData(form);
 
     // Honeypot: real users never fill this hidden field; bots usually do.
+    // Checked before validity so a bot that fills the honeypot but leaves
+    // other fields empty still gets the fake-success response instead of
+    // being blocked by validation and revealing that it was detected.
     if (formData.get("botcheck")) {
       setStatus("success");
       form.reset();
       return;
     }
     formData.delete("botcheck");
+
+    // The form carries noValidate so we control the submit flow, but native
+    // constraint validation (required/type=email) still works on demand:
+    // reportValidity() blocks submission and shows the browser's built-in,
+    // accessible validation message on the first invalid field.
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     setStatus("submitting");
     setErrorMessage("");
@@ -59,32 +71,55 @@ export default function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit} noValidate>
-      <input type="checkbox" name="botcheck" className="sr-only" tabIndex={-1} autoComplete="off" />
+      {/* Honeypot: aria-hidden removes it from the accessibility tree
+          entirely (it's decorative-to-bots, not a real field a screen
+          reader user should ever encounter), on top of the existing
+          tabIndex={-1} that already kept it out of the tab order. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        className="sr-only"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
 
-      <label htmlFor="contact-name" className="sr-only">
-        Name and surname
-      </label>
-      <input id="contact-name" type="text" name="name" placeholder="Name and Surname" required autoComplete="name" />
+      <p className="contact-form-hint">
+        <span aria-hidden="true">*</span> Required
+      </p>
+
+      <div className="contact-field">
+        <label htmlFor="contact-name" className="sr-only">
+          Name and surname
+        </label>
+        <input id="contact-name" type="text" name="name" placeholder="Name and Surname" required autoComplete="name" />
+        <span className="contact-field-required" aria-hidden="true">*</span>
+      </div>
 
       <div className="contact-form-row">
-        <div style={{ flex: 1 }}>
+        <div className="contact-field" style={{ flex: 1 }}>
           <label htmlFor="contact-email" className="sr-only">
             Email address
           </label>
           <input id="contact-email" type="email" name="email" placeholder="Email address" required autoComplete="email" />
+          <span className="contact-field-required" aria-hidden="true">*</span>
         </div>
-        <div style={{ flex: 1 }}>
+        <div className="contact-field" style={{ flex: 1 }}>
           <label htmlFor="contact-phone" className="sr-only">
             Phone number
           </label>
           <input id="contact-phone" type="tel" name="phone" placeholder="Phone number" autoComplete="tel" />
+          <span className="contact-field-optional" aria-hidden="true">Optional</span>
         </div>
       </div>
 
-      <label htmlFor="contact-message" className="sr-only">
-        Message
-      </label>
-      <textarea id="contact-message" name="message" placeholder="Hi..." required />
+      <div className="contact-field">
+        <label htmlFor="contact-message" className="sr-only">
+          Message
+        </label>
+        <textarea id="contact-message" name="message" placeholder="Hi..." required />
+        <span className="contact-field-required" aria-hidden="true">*</span>
+      </div>
 
       {status === "error" && (
         <p role="alert" style={{ color: "var(--red)", fontWeight: 700, fontSize: "0.88rem" }}>
