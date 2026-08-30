@@ -45,13 +45,13 @@ export default function LightkeepersPage() {
             </p>
             <p>
               The <strong>Marang House Circle of Light</strong> is a community of people who
-              give monthly — not because they were asked once, but because they chose to stay.
+              give monthly, not because they were asked once, but because they chose to stay.
               They are the quiet, steady light that keeps Marang House standing.
             </p>
             <p>
               When a child arrives at Marang House, often frightened and far from home,
               it is the Lightkeepers who have already made the bed, stocked the kitchen,
-              and kept the electricity on. That child will never know your name — but
+              and kept the electricity on. That child will never know your name, but
               they will feel your presence every single day.
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function LightkeepersPage() {
               <span className="lk-impact-icon" aria-hidden="true">🏥</span>
               <h3>Daily Hospital Transport</h3>
               <p>
-                Every child at Marang House attends a tertiary hospital for treatment — some daily.
+                Every child at Marang House attends a tertiary hospital for treatment, some daily.
                 Your gift keeps the transport running so no appointment is ever missed.
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function LightkeepersPage() {
               <h3>Warm, Nutritious Meals</h3>
               <p>
                 Chronically ill children need proper nutrition to heal. Three meals a day,
-                every day, prepared with care in a home kitchen — not a hospital canteen.
+                every day, prepared with care in a home kitchen, not a hospital canteen.
               </p>
             </div>
             <div className="lk-impact-item">
@@ -122,7 +122,7 @@ export default function LightkeepersPage() {
               <span className="lk-impact-icon" aria-hidden="true">👟</span>
               <h3>School Uniforms &amp; Shoes</h3>
               <p>
-                A child in school uniform feels normal — not like a patient.
+                A child in school uniform feels normal, not like a patient.
                 Your gift restores a sense of everyday childhood.
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function LightkeepersPage() {
           <div className="lk-why-text">
             <h2>Why Monthly?</h2>
             <p>
-              The children at Marang House don&rsquo;t stay for days — they stay for months,
+              The children at Marang House don&rsquo;t stay for days, they stay for months,
               sometimes years. Their treatment is long-term. Their need for a safe home is
               constant. A one-off donation is a gift. A monthly donation is a promise.
             </p>
@@ -169,7 +169,7 @@ export default function LightkeepersPage() {
               &ldquo;Security isn&rsquo;t created in a single day. It is built every single month.
               Because when children know they are safe, healing can begin.&rdquo;
             </p>
-            <cite>— Salome, Matron of Marang House</cite>
+            <cite>Salome, Matron of Marang House</cite>
           </blockquote>
         </div>
       </section>
@@ -188,7 +188,7 @@ export default function LightkeepersPage() {
           <div className="lk-cta-text">
             <h2>Join The Circle of Light</h2>
             <p>
-              Become a Lightkeeper today. Your monthly gift — no matter the amount — keeps
+              Become a Lightkeeper today. Your monthly gift, no matter the amount, keeps
               the light of home, joy, and love shining for children who need it most.
             </p>
             <p className="lk-cta-tagline">

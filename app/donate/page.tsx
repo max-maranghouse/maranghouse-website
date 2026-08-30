@@ -15,9 +15,19 @@ export const metadata: Metadata = {
 export default function DonatePage() {
   return (
     <>
-      {/* 1. HERO — centered layout, text stacked above photo */}
+      {/* 1. HERO — two columns: child photo left, high-contrast copy/CTA
+          panel right. Photo comes first in markup so it also leads when
+          the columns stack (photo above panel) on narrow screens. */}
       <section className="donate-hero">
         <div className="donate-hero-inner">
+          <BgPhoto
+            src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
+            alt="A child at Marang House smiling while hugging a toy"
+            className="donate-hero-graphic"
+            position="center 30%"
+            sizes="(max-width: 760px) 70vw, 400px"
+            priority
+          />
           <div className="donate-hero-text">
             <h1 className="donate-hero-heading">Donate</h1>
             <p className="donate-hero-body">
@@ -34,14 +44,6 @@ export default function DonatePage() {
               {DONATION.primary.label}
             </ButtonLink>
           </div>
-          <BgPhoto
-            src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
-            alt="A child at Marang House smiling while hugging a toy"
-            className="donate-hero-graphic"
-            position="center 30%"
-            sizes="(max-width: 760px) 70vw, 400px"
-            priority
-          />
         </div>
       </section>
 
@@ -62,7 +64,7 @@ export default function DonatePage() {
           <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
           <h2>Give monthly through BackaBuddy</h2>
           <p>
-            A monthly donor becomes a Marang House Lightkeeper — part of the community
+            A monthly donor becomes a Marang House Lightkeeper, part of the community
             that keeps the Circle of Light shining. Your recurring gift provides
             stability that one-off donations cannot.
           </p>
@@ -75,49 +77,47 @@ export default function DonatePage() {
           </ButtonLink>
         </div>
         <div className="bank-box">
-          <h2>Bank transfer</h2>
-          <div className="bank-row">
-            <span className="bank-label">Bank</span>
-            <span>{DONATION.eft.bank}</span>
-          </div>
-          <div className="bank-row">
-            <span className="bank-label">Branch</span>
-            <span>{DONATION.eft.branch}</span>
-          </div>
-          <div className="bank-row">
-            <span className="bank-label">Branch No</span>
-            <span>{DONATION.eft.branchCode}</span>
-          </div>
-          <div className="bank-row">
-            <span className="bank-label">Account Name</span>
-            <span>{DONATION.eft.accountName}</span>
-          </div>
-          <div className="bank-row">
-            <span className="bank-label">Account No</span>
-            <span>{DONATION.eft.accountNumber} ({DONATION.eft.accountType.toLowerCase()})</span>
-          </div>
-          <div className="bank-row">
-            <span className="bank-label">Swift No</span>
-            <span>{DONATION.eft.swiftCode}</span>
-          </div>
+          <h3>Bank transfer</h3>
+          <dl className="bank-details">
+            <dt>Bank</dt>
+            <dd>{DONATION.eft.bank}</dd>
+            <dt>Branch</dt>
+            <dd>{DONATION.eft.branch}</dd>
+            <dt>Branch No</dt>
+            <dd>{DONATION.eft.branchCode}</dd>
+            <dt>Account Name</dt>
+            <dd>{DONATION.eft.accountName}</dd>
+            <dt>Account No</dt>
+            <dd>{DONATION.eft.accountNumber} ({DONATION.eft.accountType.toLowerCase()})</dd>
+            <dt>Swift No</dt>
+            <dd>{DONATION.eft.swiftCode}</dd>
+          </dl>
           <p className="bank-note">
             {DONATION.eft.referenceInstruction} Send proof of payment to{" "}
             <strong>{DONATION.eft.proofOfPaymentEmail}</strong>.
           </p>
         </div>
-        <div className="info-strip">
-          <h3>Tax Deductions</h3>
-          <p>
-            Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A
-            certificate can be issued after donation.
-          </p>
+        <div className="info-tile">
+          <span className="info-tile-icon" aria-hidden="true">🧾</span>
+          <div>
+            <span className="info-tile-eyebrow">Section 18A</span>
+            <h3>Tax Deductions</h3>
+            <p>
+              Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A
+              certificate can be issued after donation.
+            </p>
+          </div>
         </div>
-        <div className="info-strip">
-          <h3>BBBEE Scorecard Points</h3>
-          <p>
-            Corporate donors can earn B-BBEE scorecard points through their contribution
-            to Marang House. <Link href="/contact">Contact us</Link> to discuss options and requirements.
-          </p>
+        <div className="info-tile">
+          <span className="info-tile-icon" aria-hidden="true">🤝</span>
+          <div>
+            <span className="info-tile-eyebrow">Corporate Giving</span>
+            <h3>BBBEE Scorecard Points</h3>
+            <p>
+              Corporate donors can earn B-BBEE scorecard points through their contribution
+              to Marang House. <Link href="/contact">Contact us</Link> to discuss options and requirements.
+            </p>
+          </div>
         </div>
         <p className="npc-note">NPC Reg # {ORGANISATION.registrations.npc}</p>
       </div>
@@ -153,7 +153,7 @@ export default function DonatePage() {
               <h3>In-Kind Donations</h3>
               <p>
                 School uniforms, shoes, bedding, toiletries, food supplies, and medical
-                equipment — the practical things that keep Marang House running. Every item
+                equipment, the practical things that keep Marang House running. Every item
                 helps a child feel at home.
               </p>
               <Link href="/contact" className="btn btn-blue">

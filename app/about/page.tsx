@@ -23,7 +23,7 @@ export default function AboutPage() {
           <p>
             Since 1998, Marang House has been a home for children aged 7 to 14 living
             with serious chronic illness. We provide a safe, nurturing place to live
-            while they receive daily treatment at a tertiary hospital — with their
+            while they receive daily treatment at a tertiary hospital, with their
             education running alongside, never paused.
           </p>
           <p className="about-navy-important">
@@ -67,7 +67,7 @@ export default function AboutPage() {
           <div className="about-children-text">
             <h2>The Children We Serve</h2>
             <p>
-              They arrive from towns and villages across South Africa — children as young as
+              They arrive from communities across South Africa, children as young as
               seven, travelling hundreds of kilometres to Johannesburg for life-saving treatment.
               Many have spent more days in hospital than they have at home. Some arrive
               frightened. All of them arrive brave.
@@ -81,7 +81,7 @@ export default function AboutPage() {
             </p>
             <p>
               In 1998, Dr Pieter Ernst saw this gap and founded Marang House as a beacon
-              of hope. <em>Marang</em> is the Setswana word for a ray of sunshine — the
+              of hope. <em>Marang</em> is the Setswana word for a ray of sunshine, the
               light we try to bring into the life of every child who walks through our doors.
             </p>
             <p>
@@ -193,7 +193,7 @@ export default function AboutPage() {
           </h2>
           <p>
             Every month, a community of Lightkeepers makes it possible for children to
-            heal in safety. Join the circle — or give once and change a life today.
+            heal in safety. Join the circle, or give once and change a life today.
           </p>
           <div className="about-bridge-btns">
             <Link href="/lightkeepers" className="btn btn-about-bridge-primary">
