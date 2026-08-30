@@ -6,6 +6,13 @@ the 2026-07-22/23 GoDaddy hosting compromise), see
 `MARANG-HOUSE-SITE-CONTEXT.md` §11 — still fully relevant, see the warning
 below.
 
+For a security finding, follow the canonical private policy in
+`Maxwell103/security-agents` and the Conductor `SECURITY-GATES.md` workflow.
+Claude Sonnet is the independent read-only reviewer for Terra security fixes
+unless Maxwell explicitly assigns a different bounded role. A model review is
+evidence, not authorization to merge, deploy, rotate credentials, change DNS/
+recovery/OAuth, or approve legal/privacy text.
+
 ## ⚠️ Deployment status — read before assuming this is live
 
 The production domain `maranghouse.org` is **not** currently pointed at this
