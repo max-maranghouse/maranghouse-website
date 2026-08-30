@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(ORGANISATION.websiteUrl),
   title: {
-    default: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
+    default: `${ORGANISATION.name}. ${ORGANISATION.tagline}`,
     template: `%s | ${ORGANISATION.name}`,
   },
   description:
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     icon: "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193083/maranghouse/marang_house_logo_sm.png",
   },
   openGraph: {
-    title: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
+    title: `${ORGANISATION.name}. ${ORGANISATION.tagline}`,
     description:
       "A safe, nurturing home for children living with chronic illnesses. Johannesburg, South Africa, since 1998.",
     url: ORGANISATION.websiteUrl,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${ORGANISATION.name} — ${ORGANISATION.tagline}`,
+    title: `${ORGANISATION.name}. ${ORGANISATION.tagline}`,
     description:
       "A safe, nurturing home for children living with chronic illnesses. Johannesburg, South Africa, since 1998.",
     images: [

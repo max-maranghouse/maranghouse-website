@@ -141,11 +141,21 @@ export default function HomePage() {
           </div>
           <div className="identity-photo-wrap">
             <Image
+              className="identity-doodle"
+              src={cld("v1786782369/MH-star-giff.gif")}
+              alt=""
+              width={200}
+              height={200}
+              style={{ height: "auto" }}
+              unoptimized
+              aria-hidden="true"
+            />
+            <Image
               className="identity-photo"
-              src={cld("v1786782357/MH-boy-arch.png")}
-              alt="A child in school uniform celebrating with caregivers at Marang House"
+              src={cld("MH-group-hands.png")}
+              alt="Children and caregivers at Marang House waving and celebrating together"
               width={1000}
-              height={1000}
+              height={667}
               style={{ width: "100%", height: "auto" }}
             />
           </div>
@@ -158,7 +168,7 @@ export default function HomePage() {
       <section className="meet-section">
         <Image
           className="meet-doodle"
-          src={cld("v1786782365/MH-love-giff.gif")}
+          src={cld("v1786782369/MH-star-giff.gif")}
           alt=""
           width={200}
           height={200}
@@ -182,25 +192,29 @@ export default function HomePage() {
               A Day At<br />Marang House.
             </h2>
             <p>
-              Morning starts with breakfast around a family table — not a hospital trolley.
+              Morning starts with breakfast around a family table, not a hospital trolley.
               Then it&rsquo;s off to a tertiary hospital for treatment: dialysis, check-ups,
               the daily routines that keep these children alive.
             </p>
             <p>
               By afternoon they&rsquo;re back at Marang House, doing homework at the kitchen
               counter, playing in the garden, being children. That is what makes this place
-              different — it is a home, not a ward.
+              different. It is a home, not a ward.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 5. OUR MISSION — photo banner with distinct mission wording */}
+      {/* 5. OUR MISSION — sun rays behind a contained heart-hands photo.
+          Previously a full-bleed BgPhoto fill+cover of the 2732x1536
+          source cropped into a short section height, cutting off the top
+          and bottom hands. A plain <Image> at its own aspect ratio shows
+          the whole thing, so the section grows to fit it instead. */}
       <section className="mission-banner">
         <BgPhoto
-          src={cld("MH-heart-hands-banner.png")}
+          src={cld("v1786782356/MH-Rays-BG.png")}
           alt=""
-          className="mission-banner-photo"
+          className="mission-banner-bg"
           position="center center"
           sizes="100vw"
         />
@@ -210,8 +224,17 @@ export default function HomePage() {
           <h2>MISSION</h2>
           <p>
             To give every child facing chronic illness a stable home, continuous medical care,
-            and an education that never stops — so healing and growing happen together.
+            and an education that never stops, so healing and growing happen together.
           </p>
+        </div>
+        <div className="mission-banner-photo-wrap">
+          <Image
+            className="mission-banner-photo"
+            src={cld("MH-heart-hands-banner.png")}
+            alt="Two pairs of hands forming a heart shape"
+            width={2732}
+            height={1536}
+          />
           <Image
             className="mission-love-doodle"
             src={cld("MH-love-giff.gif")}
@@ -225,14 +248,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. TRUSTED BY — social proof, deep navy bg */}
+      {/* 6. TRUSTED BY — social proof, deep navy bg. Plain gradient, no
+          rays photo overlay — the Mission section right above this one
+          already uses that same rays image, and stacking it here too
+          made the two sections read as one long, indistinguishable blue
+          block instead of two distinct sections. */}
       <section className="sponsors-section">
-        <BgPhoto
-          src={cld("v1786782356/MH-Rays-BG.png")}
-          alt=""
-          className="sponsors-section-bg"
-          sizes="100vw"
-        />
         <Image
           className="sponsors-cloud"
           src={cld("v1786782353/MH-real-cloud.png")}
@@ -334,16 +355,6 @@ export default function HomePage() {
             <div className="sponsor-name">PCI Carpets</div>
           </div>
         </div>
-        <Image
-          className="sponsors-stars"
-          src={cld("MH-star-giff.gif")}
-          alt=""
-          width={425}
-          height={425}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
         <Link href="/lightkeepers" className="btn btn-yellow">
           SPONSOR A CHILD TODAY
         </Link>
@@ -354,6 +365,8 @@ export default function HomePage() {
           Welcome" + §8 "How You Can Get Involved". Emotional pitch as intro,
           3-card grid as action. Tax/B-BBEE moved to Donate. */}
       <section className="involved-section">
+        <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-bg" sizes="100vw" />
+        <div className="involved-overlay" />
         <Image
           className="involved-doodle"
           src={cld("v1786782358/MH-cloud-giff.gif")}
@@ -364,11 +377,17 @@ export default function HomePage() {
           unoptimized
           aria-hidden="true"
         />
+        <Image
+          className="involved-badge"
+          src={cld("MH-likes-giff.gif")}
+          alt=""
+          width={200}
+          height={200}
+          style={{ height: "auto" }}
+          unoptimized
+          aria-hidden="true"
+        />
         <div className="involved-band">
-          <div className="involved-band-inner">
-            <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-band-bg" sizes="100vw" />
-            <div className="involved-band-overlay" />
-          </div>
           <h2 className="involved-heading">How You Can Get Involved</h2>
           <p className="involved-lead">
             Marang House is funded entirely through the generosity of donors, sponsors,

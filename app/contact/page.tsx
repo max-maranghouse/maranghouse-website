@@ -8,7 +8,7 @@ import { ORGANISATION } from "@/lib/site-data";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Marang House — call, email, or send us a message. 22 Milner Ave, Franklin Roosevelt Park, Johannesburg.",
+    "Get in touch with Marang House, call, email, or send us a message. 22 Milner Ave, Franklin Roosevelt Park, Johannesburg.",
 };
 
 export default function ContactPage() {
@@ -74,8 +74,8 @@ export default function ContactPage() {
           <div className="contact-form-aside-text">
             <h2>Get in touch!</h2>
             <p>
-              Whether you&apos;d like to volunteer, arrange a visit, or simply ask a question
-              — we&apos;d love to hear from you.
+              Whether you&apos;d like to volunteer, arrange a visit, or simply ask a question,
+              we&apos;d love to hear from you.
             </p>
             <div className="contact-aside">
               <div className="contact-line">
