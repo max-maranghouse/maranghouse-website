@@ -1,0 +1,58 @@
+name: Security
+
+on:
+  push:
+    branches: [overhaul/nextjs-migration, rebuild/marang-v3]
+  pull_request:
+  schedule:
+    - cron: "57 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  policy-and-dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install locked dependencies without package lifecycle scripts
+        run: npm ci --ignore-scripts
+      - name: Check committed secrets and workflow policy
+        run: python3 scripts/security-policy.py
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+
+  codeql:
+    if: vars.ENABLE_CODEQL == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+        with:
+          languages: javascript-typescript
+      - name: Install and build
+        run: npm ci --ignore-scripts && npm run build
+      - name: Analyze
+        uses: github/codeql-action/analyze@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+

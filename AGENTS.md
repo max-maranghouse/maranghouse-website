@@ -6,6 +6,13 @@ the 2026-07-22/23 GoDaddy hosting compromise), see
 `MARANG-HOUSE-SITE-CONTEXT.md` §11 — still fully relevant, see the warning
 below.
 
+For a security finding, follow the canonical private policy in
+`Maxwell103/security-agents` and the Conductor `SECURITY-GATES.md` workflow.
+Codex Security discovers read-only; a human accepts scope; GPT-5.6 Terra/high
+implements a bounded code/configuration/dependency fix; Claude Sonnet reviews
+it read-only; the human merges or deploys. Agents never rotate credentials,
+change DNS/recovery/OAuth, approve legal/privacy text, or deploy this site.
+
 ## ⚠️ Deployment status — read before assuming this is live
 
 The production domain `maranghouse.org` is **not** currently pointed at this
