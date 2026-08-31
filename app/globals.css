@@ -129,6 +129,15 @@ img { display: block; }
 .hero-photo {
   position: absolute; inset: 0;
 }
+/* The corkboard artwork replaced in MH-003 renders noticeably lighter than
+   the previous background — this tint warms/darkens it back down to match
+   the rest of the hero without touching the image asset itself. */
+.hero-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(150, 70, 10, .35);
+  pointer-events: none;
+}
 .hero-content {
   position: relative; z-index: 2;
   padding: 60px 40px 60px 9%; max-width: 640px;
@@ -154,32 +163,19 @@ img { display: block; }
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
 }
 .hero-polaroid-1-wrap {
-  position: absolute; right: 28%; top: 15%; width: 460px;
-  transform: rotate(-4deg);
+  position: absolute; right: 28%; top: 8%; width: 460px;
+  transform: rotate(-2deg);
 }
 .hero-polaroid-1 {
   display: block; width: 100%; height: auto;
   filter: drop-shadow(0 12px 26px rgba(0,0,0,.3));
 }
-/* Board pin "sticks" the polaroid to the corkboard: sized and anchored as
-   a % of the polaroid wrap so it scales with the photo at every
-   breakpoint instead of needing its own position overrides. Flipped
-   horizontally (source art's needle naturally points bottom-left; mirrored
-   so it points bottom-right instead) and nudged right of the exact
-   corner, sitting mostly on the photo itself rather than spilling far
-   onto the board. */
-.hero-board-pin {
-  position: absolute; top: calc(-4% + 38px); left: calc(2% + 38px); width: 8.5%; height: auto;
-  transform: scaleX(-1);
-  z-index: 1; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
-}
 .hero-polaroid-2 {
   position: absolute; right: 0%; top: 8%; width: 480px;
-  transform: rotate(-14deg);
   filter: drop-shadow(0 14px 30px rgba(0,0,0,.32));
 }
 .hero-sketch {
-  position: absolute; right: 4%; bottom: 0; width: 220px;
+  position: absolute; right: 23%; bottom: 0; width: 220px;
 }
 /* Below 1400px, .hero-content's fixed 640px max-width leaves too little
    clear space for the mid-size desktop photos without overlapping the
@@ -738,7 +734,7 @@ img { display: block; }
     repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
     linear-gradient(104deg, #ffd84d 0%, #fbaf3c 45%, #f27926 100%);
 }
-.lk-hero { padding: 70px 5.5% 90px; text-align: center; }
+.lk-hero { padding: 24px 5.5% 90px; text-align: center; }
 .lk-hero-graphic { position: relative; width: 100%; max-width: 1600px; margin: 0 auto; }
 .lk-hero-graphic img { width: 100%; height: auto; display: block; }
 /* Lands on the blue-card area of the banner artwork specifically — the

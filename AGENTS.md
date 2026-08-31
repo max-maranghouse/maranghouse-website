@@ -26,11 +26,11 @@ from a code merge alone.
 
 ## Branch baseline
 
-- **Authoritative site branch:** `origin/rebuild/marang-v3`.
+- **Authoritative site branch:** `origin/main`.
 - Create task branches directly from that remote branch and record the exact
   base commit in the task file.
-- `main` and the other historical branches are obsolete. Do not merge, rebase,
-  or cherry-pick them into task branches.
+- `origin/rebuild/marang-v3` and other historical branches are obsolete. Do
+  not merge, rebase, or cherry-pick them into task branches.
 - Review task branches before any release action. Vercel preview deploys per branch.
 
 ## Design status

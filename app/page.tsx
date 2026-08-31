@@ -11,7 +11,7 @@ export default function HomePage() {
       {/* 1. HERO — corkboard, bunting, polaroids — UNTOUCHED */}
       <section className="hero">
         <BgPhoto
-          src={cld("MH-pinboard-BG.png")}
+          src={cld("v1788169584/Cork_board_for_Marang.webp")}
           alt=""
           className="hero-photo"
           position="center 30%"
@@ -50,15 +50,7 @@ export default function HomePage() {
           <div className="hero-polaroid-1-wrap">
             <Image
               className="hero-polaroid-1"
-              src={cld("MH-polaroid-1.png")}
-              alt=""
-              width={1000}
-              height={1000}
-              style={{ height: "auto" }}
-            />
-            <Image
-              className="hero-board-pin"
-              src={cld("v1786782350/MH-board-pin-blue.png")}
+              src={cld("v1788169591/Polaroid_1_Marang_House.png")}
               alt=""
               width={1000}
               height={1000}
@@ -67,7 +59,7 @@ export default function HomePage() {
           </div>
           <Image
             className="hero-polaroid-2"
-            src={cld("MH-polaroid-2.png")}
+            src={cld("v1788169586/Polaroid_2_Marang_House.png")}
             alt=""
             width={1000}
             height={1000}
