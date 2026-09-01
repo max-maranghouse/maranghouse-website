@@ -187,26 +187,22 @@ img { display: block; }
   .hero-polaroid-1-wrap { width: 180px; right: 36%; top: 4%; }
   .hero-polaroid-2 { width: 210px; right: 4%; top: 2%; }
 }
+/* MH-005: center the text stack itself (logo/heading/body/CTA) — the
+   bottom anchoring (.hero-content's justify-content:flex-end) is
+   untouched, only horizontal alignment changes. */
+@media (max-width: 760px) {
+  .hero-content { align-items: center; text-align: center; }
+  .hero-btns { justify-content: center; }
+  /* The polaroids + kids sketch don't fit mobile widths well (see the
+     removed per-breakpoint repositioning this replaces) — hidden here,
+     desktop's layout (1400px breakpoint and up) is untouched. */
+  .hero-doodads { display: none; }
+}
 @media (max-width: 540px) {
-  /* Text stays bottom-anchored (.hero-content's justify-content:flex-end
-     is untouched) — taller section here just gives the now-bigger photos
-     more clear corkboard space above the text before it starts, instead
-     of the two overlapping. */
-  .hero { min-height: 980px; }
-  .hero-polaroid-1-wrap { width: 190px; right: 34%; top: 12%; }
-  .hero-polaroid-2 { width: 210px; right: -8%; top: 16%; }
-  /* The single, longer "Become a Lightkeeper" CTA is wide enough at this
-     width to sit under .hero-sketch's fixed 220px footprint; shrink the
-     sketch, wrap the button onto two lines instead of letting it run full
-     width, and lift the button row — clearing the sketch by measured
-     bounding-box math rather than eyeballing it, rather than touching
-     either element's desktop sizing. */
-  .hero-sketch { width: 150px; }
   .hero-btns { margin-bottom: 50px; }
   .hero-btns .btn-hero-solid { max-width: 190px; padding-left: 18px; padding-right: 18px; white-space: normal; text-align: center; }
 }
 @media (max-width: 410px) {
-  .hero-sketch { width: 100px; }
   .hero-btns .btn-hero-solid { max-width: 150px; }
 }
 .wa-fab {
@@ -261,7 +257,7 @@ img { display: block; }
 @media (max-width: 760px) {
   .lk-band { padding: 48px 5.5%; }
   .lk-card { padding: 40px 28px 36px; }
-  .lk-card-text { max-width: 100%; }
+  .lk-card-text { max-width: 100%; text-align: center; align-items: center; }
   .lk-title { font-size: 2.2rem; }
   .lk-desc { max-width: 100%; margin-bottom: 26px; }
   .lk-cta-row { justify-content: center; }
@@ -318,7 +314,11 @@ img { display: block; }
 .whatwedo-card:hover { transform: translateY(-6px); }
 @media (max-width: 1000px) {
   .identity-top { flex-direction: column; min-height: 0; }
-  .identity-text { max-width: 100%; padding: 56px 6% 40px; }
+  .identity-text { max-width: 100%; padding: 56px 6% 40px; text-align: center; }
+  /* Parent centers the narrative heading/paragraphs; the bullet list stays
+     left-aligned as a block, same convention as .find-us-cols against
+     .find-us-inner below. */
+  .identity-list { text-align: left; }
   .identity-photo-wrap { width: 100%; padding: 0 6% 40px; }
   .identity-photo { max-width: 420px; margin: 0 auto; }
   .identity-doodle { width: 132px; top: 16px; left: 16px; }
@@ -423,6 +423,11 @@ img { display: block; }
   .mission-banner-content h2 { font-size: 3rem; }
   .mission-love-doodle { width: 60px; }
 }
+/* MH-005: nudge 2px higher on mobile only — desktop's +38px offset above
+   is untouched. */
+@media (max-width: 760px) {
+  .mission-love-doodle { transform: translate(-50%, calc(-50% + 36px)); }
+}
 
 /* ═══════════════════════════════════════
    TRUSTED BY (supporters) — existing, verified content, demoted to a
@@ -526,6 +531,10 @@ img { display: block; }
   .involved-grid { flex-direction: column; }
 }
 @media (max-width: 600px) {
+  /* MH-005: clip the likes GIF to its own photo-background section instead
+     of letting the base rule's overflow: visible allow it to bleed above
+     the section's top boundary at narrow widths. */
+  .involved-section { overflow: hidden; }
   .involved-badge { width: 140px; top: 16px; }
   /* Clears both the badge (bottom at 16+140=156px) and the
      .involved-doodle cloud (bottom at 24+132=156px at this width). */
@@ -664,6 +673,10 @@ img { display: block; }
 .about-children-text em { color: var(--orange); font-style: italic; font-weight: 700; }
 @media (max-width: 900px) {
   .about-navy { flex-direction: column; }
+  .about-navy-left { text-align: center; }
+  /* Bullet list stays left-aligned as a block, same convention as
+     .find-us-cols against .find-us-inner below. */
+  .about-navy-list { text-align: left; }
   .about-navy-photo-wrap { width: 100%; height: 320px; }
   .about-whatwedo-cloud { top: 16px; width: 132px; right: 5%; }
   /* Extra top clearance so the doodle (132px tall at this width) doesn't
@@ -671,6 +684,7 @@ img { display: block; }
   .about-whatwedo { padding-top: 170px; }
   .about-children-inner { flex-direction: column; gap: 32px; }
   .about-children-photo { width: 100%; max-width: 416px; margin: 0 auto; }
+  .about-children-text { text-align: center; }
 }
 
 /* — About: Closing CTA bridge — deep navy, links to Lightkeepers + Donate */
@@ -773,6 +787,7 @@ img { display: block; }
 @media (max-width: 860px) {
   .lk-what-inner { flex-direction: column; gap: 36px; }
   .lk-what-photo-wrap { width: 100%; max-width: 400px; }
+  .lk-what-text { text-align: center; }
 }
 
 /* — Lightkeepers: What Your Gift Provides — */
@@ -796,10 +811,12 @@ img { display: block; }
 @media (max-width: 560px) {
   .lk-impact-grid { grid-template-columns: 1fr; }
 }
-/* Extra top clearance so the doodle (132px tall at this width, per the
-   shared mobile doodle rule) doesn't sit over the heading below it. */
+/* MH-005: the sun doodle GIF (.lk-impact-doodle, MH-shun-giff.gif) is
+   hidden on mobile, so the extra top clearance that previously existed
+   only to clear it is removed too — .lk-impact goes back to its base
+   80px top padding at this width. */
 @media (max-width: 760px) {
-  .lk-impact { padding-top: 190px; }
+  .lk-impact-doodle { display: none; }
 }
 
 /* — Lightkeepers: Why Monthly — */
@@ -819,6 +836,8 @@ img { display: block; }
 @media (max-width: 860px) {
   .lk-why-inner { flex-direction: column; gap: 32px; }
   .lk-why-quote { flex: none; width: 100%; max-width: 500px; }
+  .lk-why-text { text-align: center; }
+  .lk-why-quote { text-align: center; }
 }
 
 /* — Lightkeepers: CTA — */
@@ -839,7 +858,8 @@ img { display: block; }
 .btn-lk-cta:hover { opacity: .88; }
 @media (max-width: 660px) {
   .lk-cta-inner { flex-direction: column; text-align: center; }
-  .lk-cta-keychain { width: 140px; }
+  /* MH-005: enlarged from 140px so it reads as prominent on mobile. */
+  .lk-cta-keychain { width: 220px; max-width: 60vw; }
 }
 
 /* — Donate — */
@@ -909,6 +929,8 @@ img { display: block; }
 .donate-other-card .btn { align-self: flex-start; background: var(--color-brand-deep); color: #fff; }
 @media (max-width: 760px) {
   .donate-other-grid { flex-direction: column; gap: 24px; }
+  .donate-other-card { text-align: center; align-items: center; }
+  .donate-other-card .btn { align-self: center; }
 }
 
 /* — Press — */
@@ -1244,6 +1266,13 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
 .donate-primary h2 { margin-bottom: var(--space-3); font-size: var(--text-2xl); }
 .donate-primary p:not(.donate-primary__eyebrow) { margin-bottom: var(--space-5); color: #dce6f8; }
 
+/* MH-005: center the brand name/tagline and section headings on mobile —
+   the nav link lists and the contact <address> stay left-aligned (they're
+   structured/data-shaped, not narrative copy). */
+@media (max-width: 47.999rem) {
+  .site-footer__brand { text-align: center; margin-inline: auto; }
+  .site-footer h2 { text-align: center; }
+}
 @media (min-width: 48rem) {
   .site-footer__grid { grid-template-columns: 1.4fr 0.7fr 1fr; }
   .site-footer__legal { flex-direction: row; justify-content: space-between; gap: var(--space-5); }
