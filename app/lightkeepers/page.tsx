@@ -16,9 +16,19 @@ export default function LightkeepersPage() {
       {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
+          <Image
+            className="lk-hero-cloud"
+            src={cld("v1786782353/MH-real-cloud.png")}
+            alt=""
+            width={600}
+            height={600}
+            sizes="(max-width: 760px) 280px, 520px"
+            unoptimized
+            aria-hidden="true"
+          />
           <div className="lk-hero-graphic">
             <Image
-              src={cld("MH-lightkeepers-banner.png")}
+              src={cld("v1788295787/MH-lightkeeprs-banner-1.2.png")}
               alt="A lighthouse beaming light onto the Marang House Lightkeeper enamel badge"
               width={2732}
               height={1536}
@@ -27,9 +37,6 @@ export default function LightkeepersPage() {
             <div className="lk-hero-overlay">
               <h1>The Lightkeepers</h1>
               <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
-              <a href={DONATION.primary.url} className="btn lk-hero-overlay-cta" target="_blank" rel="noopener noreferrer">
-                DONATE VIA BACKABUDDY
-              </a>
             </div>
           </div>
         </section>

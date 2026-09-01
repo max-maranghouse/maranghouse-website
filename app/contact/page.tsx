@@ -28,7 +28,7 @@ export default function ContactPage() {
             Donate hero. */}
         <div className="contact-hero-inner">
           <BgPhoto
-            src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto/v1787695702/MH_-_Website_-_contact_hero_image.svg"
+            src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
             alt="Children at Marang House wearing Marang House t-shirts"
             className="contact-hero-graphic"
             position="center 32%"

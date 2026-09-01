@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Marang House is a Johannesburg non-profit providing a safe, nurturing home for children living with chronic illnesses since 1998.",
   icons: {
-    icon: "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193083/maranghouse/marang_house_logo_sm.png",
+    icon: "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/v1784193083/maranghouse/marang_house_logo_sm.png",
   },
   openGraph: {
     title: `${ORGANISATION.name}. ${ORGANISATION.tagline}`,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: ORGANISATION.websiteUrl,
     siteName: ORGANISATION.name,
     images: [
-      "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193102/maranghouse/SmacPix_Marang2.jpg",
+      "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/v1784193102/maranghouse/SmacPix_Marang2.jpg",
     ],
     locale: "en_ZA",
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       "A safe, nurturing home for children living with chronic illnesses. Johannesburg, South Africa, since 1998.",
     images: [
-      "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto/v1784193102/maranghouse/SmacPix_Marang2.jpg",
+      "https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/v1784193102/maranghouse/SmacPix_Marang2.jpg",
     ],
   },
 };
