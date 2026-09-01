@@ -4,7 +4,7 @@ import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
 import { cld } from "@/lib/images";
-import { DONATION, ORGANISATION } from "@/lib/site-data";
+import { DONATION } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -38,10 +38,11 @@ export default function DonatePage() {
             </p>
             <ButtonLink
               href={DONATION.primary.url}
+              variant="secondary"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {DONATION.primary.label}
+              Donate via BackaBuddy
             </ButtonLink>
           </div>
         </div>
@@ -119,7 +120,6 @@ export default function DonatePage() {
             </p>
           </div>
         </div>
-        <p className="npc-note">NPC Reg # {ORGANISATION.registrations.npc}</p>
       </div>
       </section>
 

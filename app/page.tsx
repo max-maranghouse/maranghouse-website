@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import WhatsAppFab from "@/components/WhatsAppFab";
+import GardenDayCarousel from "@/components/GardenDayCarousel";
+import NewsletterInterestForm from "@/components/NewsletterInterestForm";
+import CloudinaryGif from "@/components/CloudinaryGif";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -17,6 +20,15 @@ export default function HomePage() {
           position="center 30%"
           sizes="100vw"
           priority
+        />
+        <Image
+          className="hero-flags"
+          src={cld("v1788285379/Flags_For_Marang1.png")}
+          alt=""
+          width={1537}
+          height={864}
+          sizes="100vw"
+          aria-hidden="true"
         />
         <div className="hero-content">
           <Image
@@ -44,13 +56,14 @@ export default function HomePage() {
             >
               {DONATION.primary.label}
             </a>
+            <a href="#newsletter-interest" className="btn btn-yellow">Subscribe to newsletter</a>
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
           <div className="hero-polaroid-1-wrap">
             <Image
               className="hero-polaroid-1"
-              src={cld("v1788169591/Polaroid_1_Marang_House.png")}
+              src={cld("v1788285379/NEW-polaroid-1.2.png")}
               alt=""
               width={1000}
               height={1000}
@@ -88,14 +101,7 @@ export default function HomePage() {
               treatment away from home. Be the first to get a limited-edition keyring with love from us.
             </p>
             <div className="lk-cta-row">
-              <a
-                href={DONATION.primary.url}
-                className="btn lk-signup"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {DONATION.primary.label}
-              </a>
+              <Link href="/lightkeepers" className="btn lk-signup">Meet the Lightkeepers</Link>
             </div>
           </div>
           <Image
@@ -197,6 +203,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GardenDayCarousel />
+
       {/* 5. OUR MISSION — sun rays behind a contained heart-hands photo.
           Previously a full-bleed BgPhoto fill+cover of the 2732x1536
           source cropped into a short section height, cutting off the top
@@ -239,6 +247,8 @@ export default function HomePage() {
           />
         </div>
       </section>
+
+      <NewsletterInterestForm />
 
       {/* 6. TRUSTED BY — social proof, deep navy bg. Plain gradient, no
           rays photo overlay — the Mission section right above this one
@@ -359,15 +369,13 @@ export default function HomePage() {
       <section className="involved-section">
         <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-bg" sizes="100vw" />
         <div className="involved-overlay" />
-        <Image
+        <CloudinaryGif
           className="involved-doodle"
           src={cld("v1786782358/MH-cloud-giff.gif")}
           alt=""
           width={300}
           height={300}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
+          sizes="(max-width: 600px) 220px, 320px"
         />
         <Image
           className="involved-badge"
