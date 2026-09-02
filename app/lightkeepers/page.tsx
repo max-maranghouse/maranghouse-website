@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -16,16 +18,18 @@ export default function LightkeepersPage() {
       {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
-          <Image
-            className="lk-hero-cloud"
-            src={cld("v1786782353/MH-real-cloud.png")}
-            alt=""
-            width={600}
-            height={600}
-            sizes="(max-width: 760px) 280px, 520px"
-            unoptimized
-            aria-hidden="true"
-          />
+          <Parallax className="lk-hero-cloud" strength={18}>
+            <Image
+              src={cld("v1786782353/MH-real-cloud.png")}
+              alt=""
+              width={600}
+              height={600}
+              sizes="(max-width: 760px) 280px, 520px"
+              style={{ width: "100%", height: "auto" }}
+              unoptimized
+              aria-hidden="true"
+            />
+          </Parallax>
           <div className="lk-hero-graphic">
             <Image
               src={cld("v1788295787/MH-lightkeeprs-banner-1.2.png")}
@@ -34,6 +38,16 @@ export default function LightkeepersPage() {
               height={1536}
               priority
             />
+            {/* Decorative lantern glow + beam sweep, tracking the banner
+                artwork's own lighthouse and its rightward rays. Pure CSS
+                (no JS): the animation is driven by @keyframes and disabled
+                entirely under prefers-reduced-motion, where it falls back
+                to a static low-intensity glow. Sits above the photo but
+                beneath .lk-hero-overlay's text. */}
+            <div className="lk-lighthouse-fx" aria-hidden="true">
+              <span className="lk-lighthouse-lantern" />
+              <span className="lk-lighthouse-beam" />
+            </div>
             <div className="lk-hero-overlay">
               <h1>The Lightkeepers</h1>
               <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
@@ -62,7 +76,7 @@ export default function LightkeepersPage() {
               they will feel your presence every single day.
             </p>
           </div>
-          <div className="lk-what-photo-wrap">
+          <Reveal className="lk-what-photo-wrap">
             <BgPhoto
               src={cld("v1784193094/maranghouse/424483000_363605573122900_9062681933234070373_n.jpg")}
               alt="Children and caregivers sharing a moment at Marang House"
@@ -70,7 +84,7 @@ export default function LightkeepersPage() {
               position="center center"
               sizes="(max-width: 860px) 90vw, 44vw"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -184,14 +198,15 @@ export default function LightkeepersPage() {
       {/* 5. CTA — prominent BackaBuddy link */}
       <section className="lk-cta">
         <div className="lk-cta-inner">
-          <Image
-            className="lk-cta-keychain"
-            src={cld("MH-lighthouse-keychain.png")}
-            alt="Lightkeeper enamel keyring badge"
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
+          <Reveal as="figure" className="lk-cta-keychain">
+            <Image
+              src={cld("MH-lighthouse-keychain.png")}
+              alt="Lightkeeper enamel keyring badge"
+              width={1000}
+              height={1000}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </Reveal>
           <div className="lk-cta-text">
             <h2>Join The Circle of Light</h2>
             <p>
