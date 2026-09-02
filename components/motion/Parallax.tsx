@@ -26,6 +26,13 @@ type ParallaxProps = {
  * the viewport. Pass `rotate` instead of a CSS `transform: rotate(...)` on
  * the same class, since Motion's inline transform would otherwise replace
  * it outright rather than combine with it.
+ *
+ * The root node is always a `motion.div` carrying the same `ref` used by
+ * `useScroll` — swapping between a plain `div` and `motion.div` on the same
+ * ref (as an earlier version of this component did) makes React remount the
+ * DOM node the moment `mounted` flips true, which detaches `useScroll`'s
+ * target and permanently freezes `scrollYProgress`. Keeping one stable node
+ * and only switching which `style` it receives avoids that.
  */
 export default function Parallax({ children, className, strength = 36, rotate }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -33,17 +40,14 @@ export default function Parallax({ children, className, strength = 36, rotate }:
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-strength, strength]);
-
-  if (!mounted || prefersReducedMotion) {
-    return (
-      <div ref={ref} className={className} style={rotate ? { transform: `rotate(${rotate}deg)` } : undefined}>
-        {children}
-      </div>
-    );
-  }
+  const active = mounted && !prefersReducedMotion;
 
   return (
-    <motion.div ref={ref} className={className} style={{ y, rotate }}>
+    <motion.div
+      ref={ref}
+      className={className}
+      style={active ? { y, rotate } : rotate ? { transform: `rotate(${rotate}deg)` } : undefined}
+    >
       {children}
     </motion.div>
   );

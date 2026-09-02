@@ -18,7 +18,7 @@ export default function LightkeepersPage() {
       {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
-          <Parallax className="lk-hero-cloud" strength={18}>
+          <Parallax className="lk-hero-cloud" strength={55}>
             <Image
               src={cld("v1786782353/MH-real-cloud.png")}
               alt=""
@@ -32,21 +32,46 @@ export default function LightkeepersPage() {
           </Parallax>
           <div className="lk-hero-graphic">
             <Image
-              src={cld("v1788295787/MH-lightkeeprs-banner-1.2.png")}
-              alt="A lighthouse beaming light onto the Marang House Lightkeeper enamel badge"
-              width={2732}
-              height={1536}
+              src={cld("v1788384654/MH_-_Website_-_lighthouse_-_banner_-_3.png")}
+              alt="A lighthouse beaming light across the Marang House Lightkeepers banner"
+              width={2004}
+              height={916}
               priority
             />
-            {/* Decorative lantern glow + beam sweep, tracking the banner
-                artwork's own lighthouse and its rightward rays. Pure CSS
-                (no JS): the animation is driven by @keyframes and disabled
-                entirely under prefers-reduced-motion, where it falls back
-                to a static low-intensity glow. Sits above the photo but
+            {/* Decorative repeat of the Lightkeeper enamel pin (already
+                shown full-size below in .lk-cta), tilted, enlarged, and set
+                near the bottom of the hero card as a large accent on the
+                hero artwork itself. Gentle scroll parallax, same as the
+                cloud and lens glow above. */}
+            <Parallax className="lk-hero-pin-accent" strength={12} rotate={-15}>
+              <Image
+                src={cld("v1786782362/MH-lighthouse-pin.png")}
+                alt=""
+                width={1000}
+                height={1000}
+                aria-hidden="true"
+              />
+            </Parallax>
+            {/* Decorative lantern glow + a fan of five tapered beams (each
+                a clip-path cone, thin at the lens and widening outward),
+                all anchored to the same lens point and rotating together
+                as one rigid fan (.lk-lighthouse-beam-fan carries the one
+                shared sweep animation; individual beams only hold their
+                fixed relative angle), tracking the banner artwork's own
+                lighthouse and its rightward rays. Pure CSS (no JS): the
+                animation is driven by @keyframes and disabled entirely
+                under prefers-reduced-motion, where it falls back to a
+                static low-intensity glow. Sits above the photo but
                 beneath .lk-hero-overlay's text. */}
             <div className="lk-lighthouse-fx" aria-hidden="true">
               <span className="lk-lighthouse-lantern" />
-              <span className="lk-lighthouse-beam" />
+              <div className="lk-lighthouse-beam-fan">
+                <span className="lk-lighthouse-beam lk-lighthouse-beam--1" />
+                <span className="lk-lighthouse-beam lk-lighthouse-beam--2" />
+                <span className="lk-lighthouse-beam lk-lighthouse-beam--3" />
+                <span className="lk-lighthouse-beam lk-lighthouse-beam--4" />
+                <span className="lk-lighthouse-beam lk-lighthouse-beam--5" />
+              </div>
             </div>
             <div className="lk-hero-overlay">
               <h1>The Lightkeepers</h1>
@@ -60,6 +85,17 @@ export default function LightkeepersPage() {
       <section className="lk-what">
         <div className="lk-what-inner">
           <div className="lk-what-text">
+            <Parallax className="lk-what-sun" strength={12}>
+              <Image
+                src={cld("v1786782364/MH-shun-giff.gif")}
+                alt=""
+                width={300}
+                height={300}
+                style={{ width: "100%", height: "auto" }}
+                unoptimized
+                aria-hidden="true"
+              />
+            </Parallax>
             <h2>What Is A Lightkeeper?</h2>
             <p>
               A Lightkeeper is more than a donor. A Lightkeeper is part of the family.
@@ -76,7 +112,7 @@ export default function LightkeepersPage() {
               they will feel your presence every single day.
             </p>
           </div>
-          <Reveal className="lk-what-photo-wrap">
+          <Parallax className="lk-what-photo-wrap" strength={10}>
             <BgPhoto
               src={cld("v1784193094/maranghouse/424483000_363605573122900_9062681933234070373_n.jpg")}
               alt="Children and caregivers sharing a moment at Marang House"
@@ -84,22 +120,12 @@ export default function LightkeepersPage() {
               position="center center"
               sizes="(max-width: 860px) 90vw, 44vw"
             />
-          </Reveal>
+          </Parallax>
         </div>
       </section>
 
       {/* 3. WHAT YOUR GIFT PROVIDES — concrete impact, orange rays bg, navy tiles */}
       <section className="lk-impact">
-        <Image
-          className="lk-impact-doodle"
-          src={cld("v1786782364/MH-shun-giff.gif")}
-          alt=""
-          width={300}
-          height={300}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
         <div className="lk-impact-inner">
           <h2>What Your Monthly Gift Provides</h2>
           <p className="lk-impact-lead">
@@ -161,16 +187,17 @@ export default function LightkeepersPage() {
 
       {/* 4. WHY MONTHLY? — deep navy bg, Salome pull-quote in orange card */}
       <section className="lk-why">
-        <Image
-          className="lk-why-doodle"
-          src={cld("v1786782369/MH-star-giff.gif")}
-          alt=""
-          width={480}
-          height={480}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
+        <Parallax className="lk-why-doodle" strength={10}>
+          <Image
+            src={cld("v1786782369/MH-star-giff.gif")}
+            alt=""
+            width={480}
+            height={480}
+            style={{ width: "100%", height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="lk-why-inner">
           <div className="lk-why-text">
             <h2>Why Monthly?</h2>
@@ -200,8 +227,8 @@ export default function LightkeepersPage() {
         <div className="lk-cta-inner">
           <Reveal as="figure" className="lk-cta-keychain">
             <Image
-              src={cld("MH-lighthouse-keychain.png")}
-              alt="Lightkeeper enamel keyring badge"
+              src={cld("v1786782362/MH-lighthouse-pin.png")}
+              alt="Lightkeeper lighthouse enamel pin"
               width={1000}
               height={1000}
               style={{ width: "100%", height: "auto" }}

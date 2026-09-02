@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import BgPhoto from "@/components/BgPhoto";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
@@ -32,16 +31,17 @@ export default function AboutPage() {
             No child should have to choose between their health and their future.
           </p>
         </div>
-        <Reveal className="about-navy-photo-wrap">
-          <BgPhoto
-            src={cld("v1786782366/MH-Group-kids.jpg")}
-            alt="Children at Marang House wearing Marang House t-shirts"
+        <Parallax className="about-navy-photo-wrap" strength={10}>
+          <Image
+            src={cld("v1788383830/MH_-_Website_-_Piratehat-_boy.png")}
+            alt="A boy at Marang House smiling while holding up an oversized pirate hat"
             className="about-navy-photo"
-            position="center 35%"
+            fill
             sizes="(max-width: 900px) 100vw, 50vw"
+            style={{ objectFit: "contain", objectPosition: "bottom" }}
             priority
           />
-        </Reveal>
+        </Parallax>
       </section>
 
       {/* 2. THE CHILDREN WE SERVE — orange rays bg. Uses the cutout element
@@ -61,10 +61,10 @@ export default function AboutPage() {
         <div className="about-children-inner">
           <Reveal as="figure" className="about-children-photo">
             <Image
-              src={cld("MH-info-pg-element.png")}
+              src={cld("c_crop,x_470,y_0,w_1730,h_1766/v1786782366/MH-Group-kids.jpg")}
               alt="Children at Marang House"
-              width={1000}
-              height={1000}
+              width={1730}
+              height={1766}
               style={{ width: "100%", height: "auto" }}
             />
           </Reveal>

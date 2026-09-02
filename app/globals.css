@@ -103,9 +103,15 @@ h1,h2,h3,h4 { font-family: var(--h); font-weight: 600; }
 h1,h2,h3,h4 { line-height: 1.15; }
 /* Content keeps a readable baseline even where older route-specific rules
    previously compressed it; compact UI labels are intentionally excluded. */
-h1, h2, h3, h4 { line-height: 1.15 !important; }
-p, li, dd, blockquote { line-height: 1.6 !important; }
+h1, h2, h3, h4 { line-height: 1.15 !important; text-wrap: balance; }
+p, li, dd, blockquote { line-height: 1.6 !important; text-wrap: pretty; }
 img { display: block; }
+.keep-together { white-space: nowrap; }
+
+/* Overscanned fill layer for Motion backdrops. The outer class retains each
+   section's geometry while this inner layer moves without exposing an edge. */
+[data-parallax-backdrop] { overflow: hidden; }
+.parallax-bg-photo__layer { position: absolute; inset: -90px 0; }
 
 .btn {
   display: inline-block;
@@ -134,7 +140,8 @@ img { display: block; }
 .hero-photo {
   position: absolute; inset: 0;
 }
-.hero-flags { position: absolute; z-index: 1; top: -28px; left: 16px; width: calc(100% + 16px); height: auto; pointer-events: none; }
+.hero-flags-wrap { position: absolute; z-index: 1; top: -42px; left: -20px; width: calc(100% + 20px); pointer-events: none; }
+.hero-flags { width: 100%; height: auto; }
 /* The corkboard artwork replaced in MH-003 renders noticeably lighter than
    the previous background — this tint warms/darkens it back down to match
    the rest of the hero without touching the image asset itself. */
@@ -279,7 +286,13 @@ img { display: block; }
    Merged identity + services into one continuous navy → gradient
    composition (Canva refs 08/09), instead of a separate generic card row.
 ═══════════════════════════════════════ */
-.identity-section { background: var(--color-brand-deep); position: relative; overflow: hidden; }
+.identity-section {
+  background:
+    radial-gradient(circle at 78% 38%, rgba(0,74,173,.46), transparent 34%),
+    radial-gradient(circle at 4% 92%, rgba(248,224,38,.08), transparent 25%),
+    linear-gradient(135deg, #0b3c82 0%, #10164d 115%);
+  position: relative; overflow: hidden;
+}
 .identity-top { display: flex; align-items: stretch; min-height: 560px; }
 .identity-text { flex: 1; padding: 76px 5% 76px 5.5%; max-width: 620px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
 .identity-text h2 { font-size: 2.9rem; line-height: 1.12; margin-bottom: 22px; font-weight: 700; }
@@ -377,10 +390,26 @@ img { display: block; }
    shift. Reduced motion swaps the 3D coverflow transform for an instant
    slide effect at the component level; navigation stays available either
    way. */
-.garden-day { padding: clamp(3rem, 5vw, 5rem) 0; background: var(--color-brand-deep); overflow: hidden; }
-.garden-day__controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0 auto 1.25rem; padding-inline: 5.5%; }
-.garden-day__controls button { min-height: 2.75rem; min-width: 2.75rem; padding: .65rem 1.25rem; border: 2px solid var(--color-brand); border-radius: 999px; background: var(--color-brand); color: var(--color-white); font: inherit; font-weight: 800; cursor: pointer; }
-.garden-day__controls button:disabled { opacity: .55; cursor: default; }
+.garden-day {
+  padding: clamp(3rem, 5vw, 5rem) 0;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(0,74,173,.46), transparent 56%),
+    linear-gradient(145deg, #0a397d 0%, #12164d 100%);
+  overflow: hidden;
+}
+.garden-day__stage { position: relative; }
+.garden-day__arrow {
+  position: absolute; z-index: 12; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 48px; height: 48px;
+  border: 2px solid rgba(8,47,115,.18); border-radius: 50%;
+  background: rgba(255,255,255,.96); color: var(--color-brand-deep);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22); cursor: pointer;
+  transition: background .2s ease, color .2s ease, opacity .2s ease, box-shadow .2s ease;
+}
+.garden-day__arrow span { font: 700 2rem/1 var(--font-body); transform: translateY(-1px); }
+.garden-day__arrow--prev { left: clamp(12px, 2.2vw, 32px); }
+.garden-day__arrow--next { right: clamp(12px, 2.2vw, 32px); }
+.garden-day__arrow:disabled { opacity: .42; cursor: default; box-shadow: none; }
 .garden-day__swiper { padding: 1.25rem 5.5% 2.5rem; }
 .garden-day__slide {
   position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-lg);
@@ -390,6 +419,15 @@ img { display: block; }
 .garden-day__slide img { object-fit: cover; }
 .garden-day__slide.swiper-slide-active { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .garden-day__slide { transition: none; } }
+@media (max-width: 600px) {
+  .garden-day__arrow { width: 44px; height: 44px; }
+  .garden-day__arrow--prev { left: 8px; }
+  .garden-day__arrow--next { right: 8px; }
+  .garden-day__swiper { padding-inline: 20px; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .garden-day__arrow:not(:disabled):hover { background: var(--canva-yellow); box-shadow: 0 10px 28px rgba(0,0,0,.28); }
+}
 
 .newsletter-interest { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .9fr); gap: 2rem; align-items: center; padding: clamp(3rem, 5vw, 5rem) 8%; background: var(--color-yellow); color: var(--color-brand-deep); }
 .newsletter-interest > div > p { font-weight: 900; letter-spacing: .12em; font-size: .78rem; }
@@ -446,24 +484,19 @@ img { display: block; }
   font-size: 1.1rem; color: #fff; font-weight: 700; line-height: 1.55;
   max-width: 440px; margin: 0 auto; text-shadow: 0 1px 8px rgba(0,0,0,.3);
 }
-.mission-banner-photo-wrap { position: relative; z-index: 2; width: 100%; max-width: 820px; }
+.mission-banner-photo-wrap { position: relative; z-index: 2; width: 100%; max-width: 1200px; }
 .mission-banner-photo { width: 100%; height: auto; display: block; filter: drop-shadow(0 14px 30px rgba(0,0,0,.35)); }
 /* Centred in the negative space the two hands form, rather than sitting
    below the photo as a separate flourish. */
 .mission-love-doodle {
-  position: absolute; top: 48%; left: 50%; transform: translate(-50%, calc(-50% + 38px));
+  position: absolute; top: calc(48% - 7px); left: calc(50% - 45px);
   width: 90px; height: auto; z-index: 3; pointer-events: none;
   filter: drop-shadow(0 4px 10px rgba(0,0,0,.2));
 }
 @media (max-width: 860px) {
   .mission-banner { padding: 48px 6% 44px; }
   .mission-banner-content h2 { font-size: 3rem; }
-  .mission-love-doodle { width: 60px; }
-}
-/* MH-005: nudge 2px higher on mobile only — desktop's +38px offset above
-   is untouched. */
-@media (max-width: 760px) {
-  .mission-love-doodle { transform: translate(-50%, calc(-50% + 36px)); }
+  .mission-love-doodle { top: calc(48% + 6px); left: calc(50% - 30px); width: 60px; }
 }
 
 /* ═══════════════════════════════════════
@@ -472,7 +505,14 @@ img { display: block; }
    priorities: smaller heading, one star doodle instead of two, unified
    placeholder styling instead of four unrelated colours.
 ═══════════════════════════════════════ */
-.sponsors-section { padding: 60px 5.5% 80px; background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); text-align: center; position: relative; overflow: visible; }
+.sponsors-section {
+  padding: 60px 5.5% 80px;
+  background:
+    repeating-conic-gradient(from 214deg at -8% 112%, rgba(248,224,38,.04) 0deg 2.5deg, transparent 2.5deg 11deg),
+    radial-gradient(circle at 51% 48%, rgba(0,74,173,.28), transparent 48%),
+    linear-gradient(135deg, #0b3c82 0%, #151446 120%);
+  text-align: center; position: relative; overflow: visible;
+}
 .sponsors-section-inner { position: relative; z-index: 1; }
 .sponsors-section h2 { font-size: 1.9rem; color: #fff; line-height: 1.2; margin-bottom: 16px; }
 /* Extra top clearance so the corner doodles (132px min height at this
@@ -539,17 +579,15 @@ img { display: block; }
    clearance beneath it instead. */
 .involved-section {
   padding: 0 5.5% 90px;
-  background:
-    repeating-conic-gradient(from 200deg at -6% -30%, rgba(255,255,255,.14) 0deg 3deg, transparent 3deg 11deg),
-    linear-gradient(104deg, #f8e026 0%, #fbaf3c 45%, #f27926 100%);
-  position: relative; overflow: visible;
+  background: var(--color-brand-deep);
+  position: relative; overflow: hidden;
 }
 /* Background image now paints the section directly (no rounded, framed
    "card" clipping it) — .involved-bg/.involved-overlay are the section's
    own full-bleed backdrop, matching the plain-backdrop pattern
    .mission-banner uses. */
 .involved-bg { position: absolute; inset: 0; z-index: 0; }
-.involved-overlay { position: absolute; inset: 0; z-index: 0; background: linear-gradient(rgba(210,110,20,.45), rgba(180,80,10,.6)); }
+.involved-overlay { position: absolute; inset: 0; z-index: 0; background: linear-gradient(rgba(5,35,84,.34), rgba(5,24,67,.62)); }
 /* Sits fully on the Blur background image now (not straddling the
    section's top seam), just above the heading. */
 .involved-badge { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); width: 180px; z-index: 2; pointer-events: none; }
@@ -560,7 +598,7 @@ img { display: block; }
 .involved-lead { position: relative; z-index: 2; text-align: center; color: rgba(255,255,255,.92); font-size: 1.02rem; font-weight: 600; max-width: 600px; margin: 0 auto 40px; line-height: 1.65; text-shadow: 0 1px 6px rgba(0,0,0,.2); }
 .involved-grid { position: relative; z-index: 2; display: flex; gap: 32px; max-width: 1100px; margin: 0 auto; }
 .involved-card { flex: 1; background: #f4f5f7; border-radius: 20px; padding: 40px 28px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
-.involved-icon { width: 90px; height: 90px; margin-bottom: 18px; }
+.involved-icon { width: 110px; height: 110px; margin-bottom: 18px; }
 .involved-card h3 { font-family: var(--h); font-weight: 700; font-size: 1.4rem; color: var(--color-brand-deep); margin-bottom: 14px; letter-spacing: .5px; }
 .involved-card p { font-size: 0.96rem; color: var(--color-brand-deep); font-weight: 600; line-height: 1.5; margin-bottom: 26px; flex: 1; }
 .involved-card .btn { align-self: center; min-width: 220px; }
@@ -568,13 +606,9 @@ img { display: block; }
   .involved-grid { flex-direction: column; }
 }
 @media (max-width: 600px) {
-  /* MH-005: clip the likes GIF to its own photo-background section instead
-     of letting the base rule's overflow: visible allow it to bleed above
-     the section's top boundary at narrow widths. */
-  .involved-section { overflow: hidden; }
   .involved-badge { width: 140px; top: 16px; }
-  /* Clears both the badge (bottom at 16+140=156px) and the
-     .involved-doodle cloud (bottom at 24+132=156px at this width). */
+  /* Clears the badge (bottom at 16+140=156px) with comfortable space before
+     the heading; the competing cloud was removed from this section. */
   .involved-band { padding: 196px 24px 40px; }
   .ways-intro h2 { font-size: 2rem; }
 }
@@ -636,14 +670,10 @@ img { display: block; }
 .sponsors-sun { position: absolute; top: 24px; right: 5%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
 /* Meet section doodle */
 .meet-doodle { position: absolute; bottom: 24px; right: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
-/* Involved section doodle */
-.involved-doodle { position: absolute; top: 16px; right: 5%; width: 320px; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.18)); }
 /* About children section doodle */
 .about-children-doodle { position: absolute; top: 24px; right: 6%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
 /* About story section doodle */
 .about-story-doodle { position: absolute; bottom: 24px; left: 6%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
-/* LK impact doodle */
-.lk-impact-doodle { position: absolute; top: 24px; left: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
 /* LK why doodle */
 .lk-why-doodle { position: absolute; bottom: 24px; right: 5%; width: 240px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
 /* Donate body doodle */
@@ -655,8 +685,8 @@ img { display: block; }
      one top/bottom offset and one left/right offset, so touching the
      unused sides isn't needed and would risk stretching an absolutely
      positioned, height:auto image between two opposing edges. */
-  .sponsors-cloud, .sponsors-sun, .meet-doodle, .involved-doodle,
-  .about-children-doodle, .about-story-doodle, .lk-impact-doodle,
+  .sponsors-cloud, .sponsors-sun, .meet-doodle,
+  .about-children-doodle, .about-story-doodle,
   .lk-why-doodle, .donate-body-doodle, .donate-other-doodle {
     width: 132px !important;
   }
@@ -676,9 +706,10 @@ img { display: block; }
 .about-navy-left p { font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,.92); margin-bottom: 16px; max-width: 480px; }
 .about-navy-important { color: var(--canva-yellow); font-weight: 700; margin-bottom: 8px; }
 .about-navy-left .about-navy-italic { font-style: italic; }
-/* Widened from the old 42% cutout-portrait proportion to suit the new
-   MH-Group-kids.jpg — a wide landscape photo, not a tall cutout — so it
-   isn't over-cropped down to a narrow strip. */
+/* MH-008: holds the Piratehat-boy cutout (a transparent PNG, not a
+   rectangular photo) — object-fit: contain, anchored to the bottom, so the
+   full boy renders uncropped and appears to stand in the navy section
+   rather than being cover-cropped like a normal photo panel. */
 .about-navy-photo-wrap { position: relative; width: 50%; flex-shrink: 0; }
 .about-navy-photo { position: absolute; inset: 0; overflow: hidden; }
 
@@ -725,7 +756,12 @@ img { display: block; }
 }
 
 /* — About: Closing CTA bridge — deep navy, links to Lightkeepers + Donate */
-.about-bridge { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; text-align: center; }
+.about-bridge {
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(0,74,173,.65), transparent 58%),
+    linear-gradient(135deg, #0a387b 0%, #171442 115%);
+  padding: 80px 5.5%; text-align: center;
+}
 .about-bridge-inner { max-width: 700px; margin: 0 auto; }
 .about-bridge-inner h2 { font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem); color: #fff; line-height: 1.25; margin-bottom: 18px; }
 .about-bridge-inner h2 span { color: var(--canva-yellow); display: block; }
@@ -741,7 +777,13 @@ img { display: block; }
    editorial column: quote-styled paragraph for her direct words, a bold
    centered "standout" line for the thesis sentence, and a closing
    tagline band as the page's final beat. */
-.about-story { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5% 90px; position: relative; overflow: visible; }
+.about-story {
+  background:
+    repeating-conic-gradient(from 220deg at -12% 108%, rgba(255,255,255,.035) 0deg 2deg, transparent 2deg 12deg),
+    radial-gradient(circle at 82% 22%, rgba(0,74,173,.32), transparent 34%),
+    linear-gradient(135deg, #0b3c82 0%, #171442 115%);
+  padding: 80px 5.5% 90px; position: relative; overflow: visible;
+}
 .about-story-inner { max-width: 760px; margin: 0 auto; }
 .about-story-eyebrow {
   display: block; text-align: center; text-transform: uppercase; letter-spacing: 2px;
@@ -789,6 +831,33 @@ img { display: block; }
 .lk-hero-cloud { position: absolute; z-index: 2; top: -12px; left: 58%; width: min(42vw, 520px); height: auto; pointer-events: none; filter: drop-shadow(0 10px 20px rgba(0,0,0,.16)); }
 .lk-hero-graphic { position: relative; z-index: 1; width: 100%; max-width: 1600px; margin: 0 auto; }
 .lk-hero-graphic img { width: 100%; height: auto; display: block; }
+/* MH-008: a second, large copy of the Lightkeeper enamel pin (the same
+   artwork used full-size in .lk-cta below), tilted and floated near the
+   bottom of the hero card as a decorative accent on the hero banner
+   itself. Percentage offsets track the banner's own rendered size. This is
+   the Parallax wrapper (a motion.div) — `translate` is the standalone CSS
+   property (not `transform`, which Motion's own y/rotate scroll-linked
+   inline style already owns), so the two compose instead of clobbering
+   each other; the static -15deg tilt is passed as Parallax's `rotate` prop
+   for the same reason. */
+.lk-hero-graphic .lk-hero-pin-accent {
+  position: absolute;
+  left: 18%;
+  top: 82%;
+  width: clamp(130px, 18vw, 300px);
+  /* -50%/-50% centres the pin on the left/top anchor point; the extra
+     +50px/-80px is a cumulative manual nudge (30px right + 20px right,
+     30px up + 50px up) on top of that. */
+  translate: calc(-50% + 50px) calc(-50% - 80px);
+  z-index: 2;
+  pointer-events: none;
+}
+.lk-hero-graphic .lk-hero-pin-accent img {
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .3));
+}
+@media (max-width: 760px) {
+  .lk-hero-graphic .lk-hero-pin-accent { width: clamp(84px, 28vw, 170px); top: 80%; }
+}
 /* Lands on the blue-card area of the banner artwork specifically — the
    heart badge occupies roughly the left 40% of the card, so this box
    starts past it. Percentage offsets (not fixed px) so it tracks the
@@ -801,8 +870,46 @@ img { display: block; }
   display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
   text-align: left;
 }
+/* 90px left of the base 46%/5% box (30px + a further 60px), width
+   unchanged (left -90px, right +90px so both edges shift together).
+   Scoped to wider screens only — at mobile widths a fixed 90px offset is
+   a much bigger share of the box and pushes the heading straight into the
+   pin badge on the left. */
+@media (min-width: 761px) {
+  .lk-hero-overlay { left: calc(46% - 90px); right: calc(5% + 90px); }
+}
 .lk-hero-overlay h1 {
-  font-size: clamp(1.5rem, 5.4vw, 3.6rem); color: #fff; line-height: 1.08; margin-bottom: 0.4em;
+  font-size: clamp(1.5rem, 5.4vw, 3.6rem); color: var(--canva-yellow); line-height: 1.08; margin-bottom: 0.4em;
+}
+/* A bright white-gold highlight band sweeps left-to-right through the
+   heading text, echoing the lighthouse beams passing over it. Gated
+   behind @supports so browsers without background-clip: text keep the
+   plain yellow heading above (no invisible-text risk), and skipped
+   entirely under prefers-reduced-motion, where the heading stays plain
+   yellow. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .lk-hero-overlay h1 {
+    background-image: linear-gradient(100deg, var(--canva-yellow) 30%, var(--canva-yellow) 42%, #fffbe8 47%, #fff 50%, #fffbe8 53%, var(--canva-yellow) 58%, var(--canva-yellow) 100%);
+    background-size: 260% 100%;
+    background-position: 160% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: lkTitleShine 5s ease-in-out infinite;
+  }
+}
+@keyframes lkTitleShine {
+  0%, 40% { background-position: 160% 0; }
+  70%, 100% { background-position: -60% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lk-hero-overlay h1 {
+    animation: none;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: var(--canva-yellow);
+  }
 }
 .lk-hero-overlay p {
   color: var(--canva-yellow); font-weight: 700; line-height: 1.3;
@@ -816,15 +923,33 @@ img { display: block; }
 .lk-hero-overlay-cta:hover { background: #f8e026; }
 
 /* — Lightkeepers: What Is A Lightkeeper — */
-.lk-what { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; color: #fff; }
-.lk-what-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; }
+.lk-what {
+  background:
+    radial-gradient(circle at 83% 48%, rgba(0,74,173,.5), transparent 37%),
+    linear-gradient(135deg, #0b3c82 0%, #171442 115%);
+  padding: 80px 5.5%; color: #fff; position: relative; overflow: hidden;
+}
+.lk-what-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 56px; position: relative; z-index: 1; }
+/* In-flow, left-aligned with the heading below it — not absolutely
+   centred in the section — so it reads as "above the title" rather than a
+   floating background decoration. */
+.lk-what-sun {
+  width: clamp(72px, 6.4vw, 96px); margin-bottom: 14px; pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.18));
+}
 .lk-what-text { flex: 1; }
 .lk-what-text h2 { font-size: 2.4rem; margin-bottom: 20px; color: var(--canva-yellow); }
 .lk-what-text p { font-size: 1rem; line-height: 1.75; margin-bottom: 16px; color: rgba(255,255,255,.92); max-width: 540px; }
 .lk-what-text strong { color: var(--canva-yellow); }
 .lk-what-photo-wrap { flex: 0 0 auto; width: 42%; max-width: 440px; aspect-ratio: 4 / 5; position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.3); }
 @media (max-width: 860px) {
-  .lk-hero-cloud { top: -8px; left: 56%; width: 280px; }
+  /* MH-008: the lighthouse-banner-3 artwork is a shorter aspect ratio than
+     the banner this was originally tuned against, leaving much less "sky"
+     above the blue card at narrow widths — sized/positioned to clear
+     .lk-hero-overlay's text box instead of overlapping it. */
+  .lk-hero-cloud { top: -22px; left: 74%; width: min(13vw, 70px); }
+  .lk-what { padding-top: 40px; }
+  .lk-what-sun { width: 88px; margin: 0 auto 14px; }
   .lk-what-inner { flex-direction: column; gap: 36px; }
   .lk-what-photo-wrap { width: 100%; max-width: 400px; }
   .lk-what-text { text-align: center; }
@@ -851,16 +976,14 @@ img { display: block; }
 @media (max-width: 560px) {
   .lk-impact-grid { grid-template-columns: 1fr; }
 }
-/* MH-005: the sun doodle GIF (.lk-impact-doodle, MH-shun-giff.gif) is
-   hidden on mobile, so the extra top clearance that previously existed
-   only to clear it is removed too — .lk-impact goes back to its base
-   80px top padding at this width. */
-@media (max-width: 760px) {
-  .lk-impact-doodle { display: none; }
-}
-
 /* — Lightkeepers: Why Monthly — */
-.lk-why { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 80px 5.5%; position: relative; overflow: visible; }
+.lk-why {
+  background:
+    repeating-conic-gradient(from 216deg at -10% 105%, rgba(255,255,255,.035) 0deg 2deg, transparent 2deg 12deg),
+    radial-gradient(circle at 78% 42%, rgba(0,74,173,.38), transparent 38%),
+    linear-gradient(135deg, #0a397d 0%, #171442 115%);
+  padding: 80px 5.5%; position: relative; overflow: visible;
+}
 .lk-why-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-start; gap: 48px; }
 .lk-why-text { flex: 1; }
 .lk-why-text h2 { font-size: 2.2rem; color: var(--canva-yellow); margin-bottom: 18px; }
@@ -954,7 +1077,12 @@ img { display: block; }
   position: relative; overflow: visible;
 }
 /* — Donate: Other Ways To Give — */
-.donate-other { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); padding: 72px 5.5% 80px; position: relative; overflow: visible; }
+.donate-other {
+  background:
+    radial-gradient(ellipse at 50% 52%, rgba(0,74,173,.4), transparent 56%),
+    linear-gradient(135deg, #0b3c82 0%, #171442 115%);
+  padding: 72px 5.5% 80px; position: relative; overflow: visible;
+}
 .donate-other-inner { max-width: 1000px; margin: 0 auto; }
 .donate-other-inner h2 { font-size: 2.2rem; color: #fff; margin-bottom: 40px; text-align: center; }
 .donate-other-grid { display: flex; gap: 32px; }
@@ -1307,6 +1435,12 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
 .donate-primary h2 { margin-bottom: var(--space-3); font-size: var(--text-2xl); }
 .donate-primary p:not(.donate-primary__eyebrow) { margin-bottom: var(--space-5); color: #dce6f8; }
 
+@media (max-width: 22.5rem) {
+  .donate-body { padding-inline: 20px; }
+  .donate-primary { padding: 24px; }
+  .donate-primary h2 { font-size: 1.45rem; }
+}
+
 /* MH-005: center the brand name/tagline and section headings on mobile —
    the nav link lists and the contact <address> stay left-aligned (they're
    structured/data-shaped, not narrative copy). */
@@ -1375,19 +1509,21 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
 }
 
 /* ═══════════════════════════════════════
-   MH-007: LIGHTKEEPERS LANTERN GLOW
-   Decorative, non-interactive glow + beam sweep anchored to the banner
-   artwork's own lighthouse lantern (left: 15.8%, top: 26.9% of
+   MH-007/MH-008: LIGHTKEEPERS LANTERN GLOW
+   Decorative, non-interactive glow + beam fan anchored to the banner
+   artwork's own lighthouse lantern (left: 9.23%, top: 20.2% of
    .lk-hero-graphic, which is sized to the image's own aspect ratio, so the
-   anchor tracks the artwork at every width). Sits above the photo
+   anchor tracks the artwork at every width). Measured directly from the
+   current lighthouse-banner-3 artwork's transparent lantern-glass cutout
+   (pixel centre 185,185 of the 2004x916 source). Sits above the photo
    (z-index: 2) but beneath .lk-hero-overlay's text (z-index: 3). Pure CSS:
    no JavaScript is involved, and prefers-reduced-motion swaps the animated
    pulse/sweep for a static, low-intensity glow.
 ═══════════════════════════════════════ */
 .lk-lighthouse-fx {
   position: absolute;
-  left: 15.8%;
-  top: 26.9%;
+  left: 9.23%;
+  top: 20.2%;
   z-index: 2;
   width: 1px;
   height: 1px;
@@ -1397,48 +1533,128 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(50px, 7vw, 130px);
-  height: clamp(50px, 7vw, 130px);
+  width: clamp(34px, 4.6vw, 88px);
+  height: clamp(34px, 4.6vw, 88px);
   transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 232, 150, 0.85) 0%, rgba(255, 200, 70, 0.45) 40%, rgba(255, 200, 70, 0) 72%);
-  filter: blur(2px);
-  animation: lkLanternPulse 3.4s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255,247,194,.98) 0%, rgba(255,220,92,.75) 34%, rgba(255,190,45,.22) 60%, rgba(255,200,70,0) 76%);
+  filter: blur(1.5px); mix-blend-mode: screen;
+  animation: lkLanternPulse 3s ease-in-out infinite;
+  z-index: 1;
 }
-.lk-lighthouse-beam {
+/* Five tapered cones fanning out from the SAME lens point — all of them
+   are positioned left:0/top:0 inside .lk-lighthouse-beam-fan, a 1px anchor
+   centred on the lantern via translate(-50%,-50%), so every beam's origin
+   coincides exactly. Each beam keeps a fixed angle relative to that
+   anchor (7deg, -6deg, 19deg, -16deg, 29deg); the fan wrapper is the only
+   thing that animates (one shared rotate sweep), so all five beams swing
+   together in parallel rather than crossing each other on independent
+   schedules. Each beam still starts as a sliver at the lens (the
+   clip-path polygon's 0% edge) and widens toward its far end. */
+.lk-lighthouse-beam-fan {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(220px, 32vw, 520px);
-  height: clamp(46px, 6vw, 110px);
+  width: 1px;
+  height: 1px;
+  animation: lkBeamFanSweep 5s ease-in-out infinite;
+}
+.lk-lighthouse-beam {
+  position: absolute;
+  left: 0;
+  top: 0;
   transform-origin: 0% 50%;
+  filter: blur(1.5px); mix-blend-mode: screen;
+  pointer-events: none;
+}
+.lk-lighthouse-beam--1 {
+  width: clamp(320px, 46vw, 760px);
+  height: clamp(50px, 6.2vw, 112px);
+  clip-path: polygon(0% 44%, 0% 56%, 100% 0%, 100% 100%);
+  background: linear-gradient(90deg, rgba(255,244,190,.92) 0%, rgba(255,224,115,.5) 42%, rgba(255,230,150,0) 100%);
   transform: translate(0, -50%) rotate(7deg);
-  background: linear-gradient(90deg, rgba(255, 230, 150, 0.4) 0%, rgba(255, 230, 150, 0.1) 55%, rgba(255, 230, 150, 0) 100%);
-  filter: blur(1px);
-  opacity: 0.45;
-  animation: lkBeamSweep 4.8s ease-in-out infinite;
+  opacity: .8;
+}
+.lk-lighthouse-beam--2 {
+  width: clamp(260px, 37vw, 600px);
+  height: clamp(34px, 4.4vw, 78px);
+  clip-path: polygon(0% 42%, 0% 58%, 100% 0%, 100% 100%);
+  background: linear-gradient(90deg, rgba(255,244,190,.8) 0%, rgba(255,224,115,.42) 46%, rgba(255,230,150,0) 100%);
+  transform: translate(0, -50%) rotate(-6deg);
+  opacity: .68;
+}
+.lk-lighthouse-beam--3 {
+  width: clamp(220px, 30vw, 480px);
+  height: clamp(28px, 3.6vw, 62px);
+  clip-path: polygon(0% 40%, 0% 60%, 100% 0%, 100% 100%);
+  background: linear-gradient(90deg, rgba(255,244,190,.72) 0%, rgba(255,224,115,.36) 50%, rgba(255,230,150,0) 100%);
+  transform: translate(0, -50%) rotate(19deg);
+  opacity: .58;
+}
+.lk-lighthouse-beam--4 {
+  width: clamp(190px, 25vw, 400px);
+  height: clamp(24px, 3vw, 50px);
+  clip-path: polygon(0% 40%, 0% 60%, 100% 0%, 100% 100%);
+  background: linear-gradient(90deg, rgba(255,244,190,.64) 0%, rgba(255,224,115,.3) 50%, rgba(255,230,150,0) 100%);
+  transform: translate(0, -50%) rotate(-16deg);
+  opacity: .48;
+}
+.lk-lighthouse-beam--5 {
+  width: clamp(160px, 21vw, 340px);
+  height: clamp(20px, 2.6vw, 42px);
+  clip-path: polygon(0% 38%, 0% 62%, 100% 0%, 100% 100%);
+  background: linear-gradient(90deg, rgba(255,244,190,.58) 0%, rgba(255,224,115,.26) 50%, rgba(255,230,150,0) 100%);
+  transform: translate(0, -50%) rotate(29deg);
+  opacity: .42;
 }
 @keyframes lkLanternPulse {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.94); }
-  50% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.06); }
+  0%, 100% { opacity: .68; transform: translate(-50%, -50%) scale(.9); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.14); }
 }
-@keyframes lkBeamSweep {
-  0%, 100% { opacity: 0.3; transform: translate(0, -50%) rotate(4deg); }
-  50% { opacity: 0.55; transform: translate(0, -50%) rotate(10deg); }
+/* The whole fan sweeps together through a shared ±5deg arc, plus a gentle
+   shared brightening — every beam keeps its own fixed relative angle, so
+   the fan rocks as one rigid shape rather than its beams crossing. */
+@keyframes lkBeamFanSweep {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); opacity: .82; }
+  50% { transform: translate(-50%, -50%) rotate(5deg); opacity: 1; }
 }
 @media (max-width: 760px) {
-  .lk-lighthouse-lantern { width: clamp(36px, 12vw, 80px); height: clamp(36px, 12vw, 80px); }
-  .lk-lighthouse-beam { width: clamp(140px, 46vw, 280px); height: clamp(30px, 9vw, 60px); }
+  .lk-lighthouse-lantern { width: clamp(24px, 7.4vw, 54px); height: clamp(24px, 7.4vw, 54px); }
+  .lk-lighthouse-beam--1 { width: clamp(160px, 54vw, 340px); height: clamp(24px, 7vw, 50px); }
+  .lk-lighthouse-beam--2 { width: clamp(130px, 44vw, 270px); height: clamp(18px, 5.2vw, 36px); }
+  .lk-lighthouse-beam--3 { width: clamp(105px, 36vw, 220px); height: clamp(14px, 4.2vw, 30px); }
+  .lk-lighthouse-beam--4 { width: clamp(90px, 30vw, 185px); height: clamp(12px, 3.6vw, 26px); }
+  .lk-lighthouse-beam--5 { width: clamp(75px, 25vw, 155px); height: clamp(10px, 3vw, 22px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .lk-lighthouse-lantern {
     animation: none;
-    opacity: 0.55;
+    opacity: .48;
     transform: translate(-50%, -50%) scale(0.9);
   }
-  .lk-lighthouse-beam {
-    animation: none;
-    opacity: 0.25;
-    transform: translate(0, -50%) rotate(6deg);
-  }
+  .lk-lighthouse-beam-fan { animation: none; transform: translate(-50%, -50%) rotate(0deg); opacity: .3; }
+}
+
+/* ═══════════════════════════════════════
+   SITE-WIDE: CLICK LIGHT EFFECT
+   A small "circle of light" flourish at the cursor on every left click —
+   ClickLightEffect.tsx mounts/unmounts one .click-light-burst span per
+   click and never renders at all under prefers-reduced-motion (checked in
+   JS), so this block only needs to handle the motion itself. Fixed,
+   pointer-events: none, and a very high z-index so it always sits above
+   page content without ever intercepting the click that spawned it. */
+.click-light-layer { position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
+.click-light-burst {
+  position: absolute;
+  width: 16px; height: 16px;
+  margin-left: -8px; margin-top: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,250,220,1) 0%, rgba(255,224,115,.85) 30%, rgba(255,190,45,.35) 55%, rgba(255,200,70,0) 75%);
+  mix-blend-mode: screen;
+  animation: clickLightBurst .6s ease-out forwards;
+}
+@keyframes clickLightBurst {
+  0% { transform: scale(.3); opacity: .95; }
+  60% { opacity: .7; }
+  100% { transform: scale(4.5); opacity: 0; }
 }

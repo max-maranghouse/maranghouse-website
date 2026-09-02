@@ -4,9 +4,9 @@ import BgPhoto from "@/components/BgPhoto";
 import WhatsAppFab from "@/components/WhatsAppFab";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
 import NewsletterInterestForm from "@/components/NewsletterInterestForm";
-import CloudinaryGif from "@/components/CloudinaryGif";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
+import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
 import VerticalCutReveal from "@/components/motion/VerticalCutReveal";
 import NumberTicker from "@/components/motion/NumberTicker";
 import { cld } from "@/lib/images";
@@ -17,23 +17,26 @@ export default function HomePage() {
     <>
       {/* 1. HERO — corkboard, bunting, polaroids — UNTOUCHED */}
       <section className="hero">
-        <BgPhoto
+        <ParallaxBgPhoto
           src={cld("v1788169584/Cork_board_for_Marang.webp")}
           alt=""
           className="hero-photo"
           position="center 30%"
           sizes="100vw"
           priority
+          strength={65}
         />
-        <Image
-          className="hero-flags"
-          src={cld("v1788285379/Flags_For_Marang1.png")}
-          alt=""
-          width={1537}
-          height={864}
-          sizes="100vw"
-          aria-hidden="true"
-        />
+        <Parallax className="hero-flags-wrap" strength={10}>
+          <Image
+            className="hero-flags"
+            src={cld("v1788285379/Flags_For_Marang1.png")}
+            alt=""
+            width={1537}
+            height={864}
+            sizes="100vw"
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="hero-content">
           <Image
             className="hero-doodle"
@@ -71,6 +74,7 @@ export default function HomePage() {
               alt=""
               width={1000}
               height={1000}
+              priority
               style={{ height: "auto" }}
             />
           </Parallax>
@@ -80,6 +84,7 @@ export default function HomePage() {
             alt=""
             width={1000}
             height={1000}
+            priority
             style={{ height: "auto" }}
           />
           <Image
@@ -88,6 +93,7 @@ export default function HomePage() {
             alt=""
             width={1000}
             height={1000}
+            priority
             style={{ height: "auto" }}
           />
         </div>
@@ -141,7 +147,7 @@ export default function HomePage() {
               and their future.
             </p>
           </div>
-          <Reveal className="identity-photo-wrap">
+          <Parallax className="identity-photo-wrap" strength={10}>
             <Image
               className="identity-doodle"
               src={cld("v1786782369/MH-star-giff.gif")}
@@ -160,7 +166,7 @@ export default function HomePage() {
               height={667}
               style={{ width: "100%", height: "auto" }}
             />
-          </Reveal>
+          </Parallax>
         </div>
       </section>
 
@@ -168,18 +174,19 @@ export default function HomePage() {
           with a concrete vignette instead of repeating the mission.
           Girl-arch shown as plain cutout image (no card/shadow tile). */}
       <section className="meet-section">
-        <Image
-          className="meet-doodle"
-          src={cld("v1786782369/MH-star-giff.gif")}
-          alt=""
-          width={200}
-          height={200}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
+        <Parallax className="meet-doodle" strength={10}>
+          <Image
+            src={cld("v1786782369/MH-star-giff.gif")}
+            alt=""
+            width={200}
+            height={200}
+            style={{ width: "100%", height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="meet-inner">
-          <Reveal className="meet-photo-wrap">
+          <Parallax className="meet-photo-wrap" strength={10}>
             <Image
               className="meet-photo"
               src={cld("MH-girl-arch.png")}
@@ -188,7 +195,7 @@ export default function HomePage() {
               height={1000}
               style={{ width: "100%", height: "auto" }}
             />
-          </Reveal>
+          </Parallax>
           <div className="meet-text">
             <h2>
               A Day At<br />Marang House.
@@ -215,12 +222,13 @@ export default function HomePage() {
           and bottom hands. A plain <Image> at its own aspect ratio shows
           the whole thing, so the section grows to fit it instead. */}
       <section className="mission-banner">
-        <BgPhoto
+        <ParallaxBgPhoto
           src={cld("v1786782356/MH-Rays-BG.png")}
           alt=""
           className="mission-banner-bg"
           position="center center"
           sizes="100vw"
+          strength={55}
         />
         <div className="mission-banner-scrim" aria-hidden="true" />
         <div className="mission-banner-content">
@@ -239,16 +247,17 @@ export default function HomePage() {
             width={2732}
             height={1536}
           />
-          <Image
-            className="mission-love-doodle"
-            src={cld("MH-love-giff.gif")}
-            alt=""
-            width={200}
-            height={200}
-            style={{ height: "auto" }}
-            unoptimized
-            aria-hidden="true"
-          />
+          <Parallax className="mission-love-doodle" strength={8}>
+            <Image
+              src={cld("MH-love-giff.gif")}
+              alt=""
+              width={200}
+              height={200}
+              style={{ width: "100%", height: "auto" }}
+              unoptimized
+              aria-hidden="true"
+            />
+          </Parallax>
         </Reveal>
       </section>
 
@@ -371,16 +380,14 @@ export default function HomePage() {
           Welcome" + §8 "How You Can Get Involved". Emotional pitch as intro,
           3-card grid as action. Tax/B-BBEE moved to Donate. */}
       <section className="involved-section">
-        <BgPhoto src={cld("MH-Blur-BG.png")} alt="" className="involved-bg" sizes="100vw" />
-        <div className="involved-overlay" />
-        <CloudinaryGif
-          className="involved-doodle"
-          src={cld("v1786782358/MH-cloud-giff.gif")}
+        <ParallaxBgPhoto
+          src={cld("MH-Blur-BG.png")}
           alt=""
-          width={300}
-          height={300}
-          sizes="(max-width: 600px) 220px, 320px"
+          className="involved-bg"
+          sizes="100vw"
+          strength={65}
         />
+        <div className="involved-overlay" />
         <Image
           className="involved-badge"
           src={cld("MH-likes-giff.gif")}

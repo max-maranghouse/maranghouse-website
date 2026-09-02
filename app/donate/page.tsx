@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
-import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
@@ -22,7 +21,7 @@ export default function DonatePage() {
           the columns stack (photo above panel) on narrow screens. */}
       <section className="donate-hero">
         <div className="donate-hero-inner">
-          <Reveal className="donate-hero-graphic">
+          <Parallax className="donate-hero-graphic" strength={10}>
             <BgPhoto
               src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
               alt="A child at Marang House smiling while hugging a toy"
@@ -31,7 +30,7 @@ export default function DonatePage() {
               sizes="(max-width: 760px) 70vw, 400px"
               priority
             />
-          </Reveal>
+          </Parallax>
           <div className="donate-hero-text">
             <h1 className="donate-hero-heading">Donate</h1>
             <p className="donate-hero-body">
@@ -67,7 +66,7 @@ export default function DonatePage() {
       <div className="donate-body">
         <div className="donate-primary">
           <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
-          <h2>Give monthly through BackaBuddy</h2>
+          <h2>Give monthly <span className="keep-together">through BackaBuddy</span></h2>
           <p>
             A monthly donor becomes a Marang House Lightkeeper, part of the community
             that keeps the Circle of Light shining. Your recurring gift provides
@@ -120,7 +119,8 @@ export default function DonatePage() {
             <h3>BBBEE Scorecard Points</h3>
             <p>
               Corporate donors can earn B-BBEE scorecard points through their contribution
-              to Marang House. <Link href="/contact">Contact us</Link> to discuss options and requirements.
+              to Marang House. <Link href="/contact">Contact us</Link> to discuss options{" "}
+              <span className="keep-together">and requirements.</span>
             </p>
           </div>
         </div>
@@ -169,8 +169,8 @@ export default function DonatePage() {
               <h3>Give Your Time</h3>
               <p>
                 Volunteers are the heartbeat of Marang House. Help with homework, organise
-                activities, or lend your professional skills. Even a few hours a month makes
-                a difference.
+                activities, or lend your professional skills. Even a few hours a month makes{" "}
+                <span className="keep-together">a difference.</span>
               </p>
               <Link href="/contact" className="btn btn-blue">
                 VOLUNTEER
