@@ -55,62 +55,68 @@ export default function GardenDayCarousel() {
 
   return (
     <section className="garden-day" aria-label="Garden Day photo gallery">
-      <div className="garden-day__controls">
+      <div className="garden-day__stage">
         <button
           type="button"
+          className="garden-day__arrow garden-day__arrow--prev"
           onClick={() => swiperRef.current?.slidePrev()}
           disabled={atStart}
           aria-label="Show previous Garden Day photo"
+          aria-controls="garden-day-gallery"
         >
-          Previous
+          <span aria-hidden="true">‹</span>
         </button>
-        <p className="sr-only" aria-live="polite">
-          Photo {current} of {slides.length}
-        </p>
         <button
           type="button"
+          className="garden-day__arrow garden-day__arrow--next"
           onClick={() => swiperRef.current?.slideNext()}
           disabled={atEnd}
           aria-label="Show next Garden Day photo"
+          aria-controls="garden-day-gallery"
         >
-          Next
+          <span aria-hidden="true">›</span>
         </button>
+        <Swiper
+          id="garden-day-gallery"
+          key={reducedMotion ? "reduced" : "full"}
+          modules={[EffectCoverflow, Keyboard, A11y]}
+          effect={reducedMotion ? "slide" : "coverflow"}
+          speed={reducedMotion ? 0 : 500}
+          coverflowEffect={{ rotate: 28, stretch: 0, depth: 140, modifier: 1, slideShadows: false }}
+          centeredSlides
+          centeredSlidesBounds
+          loop={false}
+          grabCursor
+          keyboard={{ enabled: true }}
+          a11y={{ enabled: true }}
+          slidesPerView={1.08}
+          spaceBetween={16}
+          breakpoints={{
+            601: { slidesPerView: 1.6, spaceBetween: 24 },
+            1001: { slidesPerView: 1.9, spaceBetween: 28 },
+          }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            syncState(swiper);
+          }}
+          onSlideChange={syncState}
+          className="garden-day__swiper"
+        >
+          {slides.map(([src, alt]) => (
+            <SwiperSlide key={src} className="garden-day__slide">
+              <Image
+                src={cld(src)}
+                alt={alt}
+                fill
+                sizes="(max-width: 600px) 84vw, (max-width: 1000px) 56vw, 38vw"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-      <Swiper
-        key={reducedMotion ? "reduced" : "full"}
-        modules={[EffectCoverflow, Keyboard, A11y]}
-        effect={reducedMotion ? "slide" : "coverflow"}
-        speed={reducedMotion ? 0 : 500}
-        coverflowEffect={{ rotate: 28, stretch: 0, depth: 140, modifier: 1, slideShadows: false }}
-        centeredSlides
-        loop={false}
-        grabCursor
-        keyboard={{ enabled: true }}
-        a11y={{ enabled: true }}
-        slidesPerView={1.08}
-        spaceBetween={16}
-        breakpoints={{
-          601: { slidesPerView: 1.6, spaceBetween: 24 },
-          1001: { slidesPerView: 2.3, spaceBetween: 32 },
-        }}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-          syncState(swiper);
-        }}
-        onSlideChange={syncState}
-        className="garden-day__swiper"
-      >
-        {slides.map(([src, alt]) => (
-          <SwiperSlide key={src} className="garden-day__slide">
-            <Image
-              src={cld(src)}
-              alt={alt}
-              fill
-              sizes="(max-width: 600px) 84vw, (max-width: 1000px) 56vw, 38vw"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <p className="sr-only" aria-live="polite">
+        Photo {current} of {slides.length}
+      </p>
     </section>
   );
 }

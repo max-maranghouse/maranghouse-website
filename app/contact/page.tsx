@@ -29,7 +29,7 @@ export default function ContactPage() {
             heading on the right, same text/image-split language as the
             Donate hero. */}
         <div className="contact-hero-inner">
-          <Reveal className="contact-hero-graphic">
+          <Parallax className="contact-hero-graphic" strength={10}>
             <BgPhoto
               src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
               alt="Children at Marang House wearing Marang House t-shirts"
@@ -38,7 +38,7 @@ export default function ContactPage() {
               sizes="(max-width: 760px) 90vw, 50vw"
               priority
             />
-          </Reveal>
+          </Parallax>
           <div className="contact-hero-content">
             <h1>
               WE&apos;D LOVE TO
