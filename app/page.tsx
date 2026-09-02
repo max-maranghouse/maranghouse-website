@@ -5,6 +5,10 @@ import WhatsAppFab from "@/components/WhatsAppFab";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
 import NewsletterInterestForm from "@/components/NewsletterInterestForm";
 import CloudinaryGif from "@/components/CloudinaryGif";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
+import VerticalCutReveal from "@/components/motion/VerticalCutReveal";
+import NumberTicker from "@/components/motion/NumberTicker";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -40,7 +44,7 @@ export default function HomePage() {
             style={{ height: "auto" }}
           />
           <h1>
-            Fostering Health,
+            <VerticalCutReveal text="Fostering Health," />
             <br />
             Providing <span>Hope.</span>
           </h1>
@@ -60,7 +64,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
-          <div className="hero-polaroid-1-wrap">
+          <Parallax className="hero-polaroid-1-wrap" strength={16} rotate={-2}>
             <Image
               className="hero-polaroid-1"
               src={cld("v1788285379/NEW-polaroid-1.2.png")}
@@ -69,7 +73,7 @@ export default function HomePage() {
               height={1000}
               style={{ height: "auto" }}
             />
-          </div>
+          </Parallax>
           <Image
             className="hero-polaroid-2"
             src={cld("v1788169586/Polaroid_2_Marang_House.png")}
@@ -137,7 +141,7 @@ export default function HomePage() {
               and their future.
             </p>
           </div>
-          <div className="identity-photo-wrap">
+          <Reveal className="identity-photo-wrap">
             <Image
               className="identity-doodle"
               src={cld("v1786782369/MH-star-giff.gif")}
@@ -156,7 +160,7 @@ export default function HomePage() {
               height={667}
               style={{ width: "100%", height: "auto" }}
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -175,7 +179,7 @@ export default function HomePage() {
           aria-hidden="true"
         />
         <div className="meet-inner">
-          <div className="meet-photo-wrap">
+          <Reveal className="meet-photo-wrap">
             <Image
               className="meet-photo"
               src={cld("MH-girl-arch.png")}
@@ -184,7 +188,7 @@ export default function HomePage() {
               height={1000}
               style={{ width: "100%", height: "auto" }}
             />
-          </div>
+          </Reveal>
           <div className="meet-text">
             <h2>
               A Day At<br />Marang House.
@@ -227,7 +231,7 @@ export default function HomePage() {
             and an education that never stops, so healing and growing happen together.
           </p>
         </div>
-        <div className="mission-banner-photo-wrap">
+        <Reveal className="mission-banner-photo-wrap">
           <Image
             className="mission-banner-photo"
             src={cld("MH-heart-hands-banner.png")}
@@ -245,7 +249,7 @@ export default function HomePage() {
             unoptimized
             aria-hidden="true"
           />
-        </div>
+        </Reveal>
       </section>
 
       <NewsletterInterestForm />
@@ -395,7 +399,7 @@ export default function HomePage() {
             from home for seriously ill children and their families.
           </p>
           <div className="involved-grid">
-            <div className="involved-card">
+            <Reveal as="div" className="involved-card" delay={0}>
               <Image className="involved-icon" src={cld("MH-involvment-icons-1.png")} alt="" width={1000} height={1000} />
               <h3>VOLUNTEER</h3>
               <p>
@@ -405,8 +409,8 @@ export default function HomePage() {
               <Link href="/contact" className="btn btn-blue">
                 VOLUNTEER
               </Link>
-            </div>
-            <div className="involved-card">
+            </Reveal>
+            <Reveal as="div" className="involved-card" delay={0.08}>
               <Image className="involved-icon" src={cld("MH-involvment-icons-2.png")} alt="" width={1000} height={1000} />
               <h3>LIGHTKEEPER</h3>
               <p>
@@ -416,8 +420,8 @@ export default function HomePage() {
               <a href={DONATION.primary.url} className="btn btn-blue" target="_blank" rel="noopener noreferrer">
                 {DONATION.primary.label}
               </a>
-            </div>
-            <div className="involved-card">
+            </Reveal>
+            <Reveal as="div" className="involved-card" delay={0.16}>
               <Image className="involved-icon" src={cld("MH-involvment-icons-3.png")} alt="" width={1000} height={1000} />
               <h3>DONATE</h3>
               <p>
@@ -427,7 +431,7 @@ export default function HomePage() {
               <Link href="/donate" className="btn btn-blue">
                 DONATE
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -449,29 +453,30 @@ export default function HomePage() {
           </div>
           <div className="stats-row">
             <div className="stat-item">
-              <div className="stat-num">28+</div>
+              <div className="stat-num"><NumberTicker value={28} suffix="+" /></div>
               <div className="stat-label">Years</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">300+</div>
+              <div className="stat-num"><NumberTicker value={300} suffix="+" /></div>
               <div className="stat-label">Children</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">1000+</div>
+              <div className="stat-num"><NumberTicker value={1000} suffix="+" /></div>
               <div className="stat-label">Volunteers</div>
             </div>
           </div>
         </div>
-        <Image
-          className="stats-skip-gif"
-          src={cld("MH-skipping-giff.gif")}
-          alt=""
-          width={300}
-          height={300}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
+        <Parallax className="stats-skip-gif" strength={12}>
+          <Image
+            src={cld("MH-skipping-giff.gif")}
+            alt=""
+            width={300}
+            height={300}
+            style={{ width: "100%", height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </Parallax>
       </section>
 
     </>

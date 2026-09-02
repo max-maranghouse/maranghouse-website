@@ -370,17 +370,26 @@ img { display: block; }
 }
 .meet-text p:first-of-type { font-style: italic; color: var(--color-brand-deep); font-weight: 700; font-size: 1.2rem; }
 
-/* Garden Day is deliberately a scroll-snap gallery: no timer or drag-only
-   interaction, and a fixed aspect ratio prevents image layout shift. */
-.garden-day { padding: clamp(3rem, 5vw, 5rem) 5.5%; background: var(--color-brand-deep); overflow: hidden; }
-.garden-day__controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0 auto 1.25rem; }
-.garden-day__controls button { min-height: 2.75rem; padding: .65rem 1rem; border: 2px solid var(--color-brand); border-radius: 999px; background: var(--color-brand); color: var(--color-white); font: inherit; font-weight: 800; cursor: pointer; }
+/* Garden Day is a drag/swipe-first Swiper cover-flow gallery (see
+   components/GardenDayCarousel.tsx): finite, never autoplays, a centred
+   active slide with angled side previews on desktop/tablet narrowing to one
+   focused slide on mobile, and a fixed aspect ratio to prevent layout
+   shift. Reduced motion swaps the 3D coverflow transform for an instant
+   slide effect at the component level; navigation stays available either
+   way. */
+.garden-day { padding: clamp(3rem, 5vw, 5rem) 0; background: var(--color-brand-deep); overflow: hidden; }
+.garden-day__controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0 auto 1.25rem; padding-inline: 5.5%; }
+.garden-day__controls button { min-height: 2.75rem; min-width: 2.75rem; padding: .65rem 1.25rem; border: 2px solid var(--color-brand); border-radius: 999px; background: var(--color-brand); color: var(--color-white); font: inherit; font-weight: 800; cursor: pointer; }
 .garden-day__controls button:disabled { opacity: .55; cursor: default; }
-.garden-day__track { display: grid; grid-auto-columns: 82%; grid-auto-flow: column; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 1px; padding-bottom: .75rem; scrollbar-color: var(--color-brand) transparent; }
-.garden-day__slide { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-lg); scroll-snap-align: start; box-shadow: 0 .5rem 1.5rem rgba(8,47,115,.18); }
+.garden-day__swiper { padding: 1.25rem 5.5% 2.5rem; }
+.garden-day__slide {
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-lg);
+  box-shadow: 0 .5rem 1.5rem rgba(8,47,115,.18);
+  opacity: .55; transition: opacity .35s ease;
+}
 .garden-day__slide img { object-fit: cover; }
-@media (min-width: 601px) { .garden-day__track { grid-auto-columns: calc((100% - 1rem) / 2); } }
-@media (min-width: 1001px) { .garden-day__track { grid-auto-columns: calc((100% - 2rem) / 3); } }
+.garden-day__slide.swiper-slide-active { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .garden-day__slide { transition: none; } }
 
 .newsletter-interest { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .9fr); gap: 2rem; align-items: center; padding: clamp(3rem, 5vw, 5rem) 8%; background: var(--color-yellow); color: var(--color-brand-deep); }
 .newsletter-interest > div > p { font-weight: 900; letter-spacing: .12em; font-size: .78rem; }
@@ -1318,4 +1327,118 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ═══════════════════════════════════════
+   MH-007: HERO VERTICAL CUT REVEAL
+   Local Fancy adaptation — see components/motion/VerticalCutReveal.tsx.
+   Only used for the hero's first line; no Tailwind involved.
+═══════════════════════════════════════ */
+/* Fills a sized/positioned ancestor exactly, for BgPhoto instances nested
+   inside a Reveal/Parallax wrapper that already carries the real sizing
+   class — next/image's `fill` mode expects its *direct* parent to declare
+   its own position, not just a positioned grandparent. */
+.bg-fill { position: absolute; inset: 0; }
+
+.vcr-word { display: inline-block; white-space: nowrap; }
+.vcr-mask { display: inline-block; overflow: hidden; vertical-align: top; }
+.vcr-char { display: inline-block; will-change: transform; }
+
+/* ═══════════════════════════════════════
+   MH-007: POINTER-ONLY HOVER FEEDBACK
+   Restrained lift/shadow for buttons and interactive cards. Gated to
+   fine-pointer/hover-capable devices so touch interaction is unaffected —
+   this is additive to each element's own existing hover rule, not a
+   replacement for it.
+═══════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  .btn,
+  .involved-card,
+  .donate-other-card,
+  .lk-impact-item,
+  .sponsor-item {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn:hover { box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2); }
+  /* .involved-card is also a Reveal (motion.div) target: Motion leaves its
+     settled animation state as an inline `transform` after the reveal
+     plays, which would outrank a CSS `:hover` transform here, so this
+     group's translateY lift is limited to the plain (non-motion) cards;
+     .involved-card still gets the shared box-shadow lift below. */
+  .donate-other-card:hover,
+  .lk-impact-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+  }
+  .involved-card:hover { box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22); }
+  .sponsor-item:hover { transform: translateY(-4px); }
+}
+
+/* ═══════════════════════════════════════
+   MH-007: LIGHTKEEPERS LANTERN GLOW
+   Decorative, non-interactive glow + beam sweep anchored to the banner
+   artwork's own lighthouse lantern (left: 15.8%, top: 26.9% of
+   .lk-hero-graphic, which is sized to the image's own aspect ratio, so the
+   anchor tracks the artwork at every width). Sits above the photo
+   (z-index: 2) but beneath .lk-hero-overlay's text (z-index: 3). Pure CSS:
+   no JavaScript is involved, and prefers-reduced-motion swaps the animated
+   pulse/sweep for a static, low-intensity glow.
+═══════════════════════════════════════ */
+.lk-lighthouse-fx {
+  position: absolute;
+  left: 15.8%;
+  top: 26.9%;
+  z-index: 2;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.lk-lighthouse-lantern {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(50px, 7vw, 130px);
+  height: clamp(50px, 7vw, 130px);
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 232, 150, 0.85) 0%, rgba(255, 200, 70, 0.45) 40%, rgba(255, 200, 70, 0) 72%);
+  filter: blur(2px);
+  animation: lkLanternPulse 3.4s ease-in-out infinite;
+}
+.lk-lighthouse-beam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(220px, 32vw, 520px);
+  height: clamp(46px, 6vw, 110px);
+  transform-origin: 0% 50%;
+  transform: translate(0, -50%) rotate(7deg);
+  background: linear-gradient(90deg, rgba(255, 230, 150, 0.4) 0%, rgba(255, 230, 150, 0.1) 55%, rgba(255, 230, 150, 0) 100%);
+  filter: blur(1px);
+  opacity: 0.45;
+  animation: lkBeamSweep 4.8s ease-in-out infinite;
+}
+@keyframes lkLanternPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.94); }
+  50% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.06); }
+}
+@keyframes lkBeamSweep {
+  0%, 100% { opacity: 0.3; transform: translate(0, -50%) rotate(4deg); }
+  50% { opacity: 0.55; transform: translate(0, -50%) rotate(10deg); }
+}
+@media (max-width: 760px) {
+  .lk-lighthouse-lantern { width: clamp(36px, 12vw, 80px); height: clamp(36px, 12vw, 80px); }
+  .lk-lighthouse-beam { width: clamp(140px, 46vw, 280px); height: clamp(30px, 9vw, 60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lk-lighthouse-lantern {
+    animation: none;
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  .lk-lighthouse-beam {
+    animation: none;
+    opacity: 0.25;
+    transform: translate(0, -50%) rotate(6deg);
+  }
 }

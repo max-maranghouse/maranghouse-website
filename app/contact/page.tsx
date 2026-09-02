@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import ContactForm from "@/components/ContactForm";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
 import { ORGANISATION } from "@/lib/site-data";
 
@@ -27,14 +29,16 @@ export default function ContactPage() {
             heading on the right, same text/image-split language as the
             Donate hero. */}
         <div className="contact-hero-inner">
-          <BgPhoto
-            src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
-            alt="Children at Marang House wearing Marang House t-shirts"
-            className="contact-hero-graphic"
-            position="center 32%"
-            sizes="(max-width: 760px) 90vw, 50vw"
-            priority
-          />
+          <Reveal className="contact-hero-graphic">
+            <BgPhoto
+              src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
+              alt="Children at Marang House wearing Marang House t-shirts"
+              className="bg-fill"
+              position="center 32%"
+              sizes="(max-width: 760px) 90vw, 50vw"
+              priority
+            />
+          </Reveal>
           <div className="contact-hero-content">
             <h1>
               WE&apos;D LOVE TO
@@ -51,7 +55,7 @@ export default function ContactPage() {
               afterthought. Plain <Image>, not BgPhoto/fill, so the cutout's
               own irregular transparent edges render as-is rather than being
               cropped to a rectangle. */}
-          <div className="contact-aside-photo-wrap">
+          <Reveal className="contact-aside-photo-wrap">
             <Image
               className="contact-aside-photo"
               src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
@@ -70,7 +74,7 @@ export default function ContactPage() {
               unoptimized
               aria-hidden="true"
             />
-          </div>
+          </Reveal>
           <div className="contact-form-aside-text">
             <h2>Get in touch!</h2>
             <p>
@@ -96,14 +100,16 @@ export default function ContactPage() {
       </section>
 
       <section className="find-us">
-        <Image
-          className="find-us-sun"
-          src={cld("v1786782354/MH-sun-sticker.png")}
-          alt=""
-          width={1000}
-          height={1000}
-          aria-hidden="true"
-        />
+        <Parallax className="find-us-sun" strength={20} rotate={8}>
+          <Image
+            src={cld("v1786782354/MH-sun-sticker.png")}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="find-us-inner">
           {/* Map, pin, and location doodad share their own positioning
               wrapper (sized to the map, since it's the only in-flow child)

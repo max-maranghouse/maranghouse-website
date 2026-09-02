@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -30,7 +32,7 @@ export default function AboutPage() {
             No child should have to choose between their health and their future.
           </p>
         </div>
-        <div className="about-navy-photo-wrap">
+        <Reveal className="about-navy-photo-wrap">
           <BgPhoto
             src={cld("v1786782366/MH-Group-kids.jpg")}
             alt="Children at Marang House wearing Marang House t-shirts"
@@ -39,31 +41,33 @@ export default function AboutPage() {
             sizes="(max-width: 900px) 100vw, 50vw"
             priority
           />
-        </div>
+        </Reveal>
       </section>
 
       {/* 2. THE CHILDREN WE SERVE — orange rays bg. Uses the cutout element
           photo (swapped from Contact page) instead of the kid-hat image
           (which moved to Contact). */}
       <section className="about-children">
-        <Image
-          className="about-children-doodle"
-          src={cld("v1786782353/MH-real-cloud.png")}
-          alt=""
-          width={400}
-          height={400}
-          style={{ height: "auto" }}
-          aria-hidden="true"
-        />
-        <div className="about-children-inner">
+        <Parallax className="about-children-doodle" strength={14}>
           <Image
-            className="about-children-photo"
-            src={cld("MH-info-pg-element.png")}
-            alt="Children at Marang House"
-            width={1000}
-            height={1000}
+            src={cld("v1786782353/MH-real-cloud.png")}
+            alt=""
+            width={400}
+            height={400}
             style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
           />
+        </Parallax>
+        <div className="about-children-inner">
+          <Reveal as="figure" className="about-children-photo">
+            <Image
+              src={cld("MH-info-pg-element.png")}
+              alt="Children at Marang House"
+              width={1000}
+              height={1000}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </Reveal>
           <div className="about-children-text">
             <h2>The Children We Serve</h2>
             <p>
@@ -97,16 +101,17 @@ export default function AboutPage() {
           centrepiece. After "here's the problem" comes "here's the person
           who lives this every day." Deep navy bg. */}
       <section className="about-story">
-        <Image
-          className="about-story-doodle"
-          src={cld("v1786782369/MH-star-giff.gif")}
-          alt=""
-          width={400}
-          height={400}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
+        <Parallax className="about-story-doodle" strength={16}>
+          <Image
+            src={cld("v1786782369/MH-star-giff.gif")}
+            alt=""
+            width={400}
+            height={400}
+            style={{ width: "100%", height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="about-story-inner">
           <span className="about-story-eyebrow">In Her Own Words</span>
           <h2>Meet Salome, Our Matron</h2>

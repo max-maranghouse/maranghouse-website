@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -20,14 +22,16 @@ export default function DonatePage() {
           the columns stack (photo above panel) on narrow screens. */}
       <section className="donate-hero">
         <div className="donate-hero-inner">
-          <BgPhoto
-            src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
-            alt="A child at Marang House smiling while hugging a toy"
-            className="donate-hero-graphic"
-            position="center 30%"
-            sizes="(max-width: 760px) 70vw, 400px"
-            priority
-          />
+          <Reveal className="donate-hero-graphic">
+            <BgPhoto
+              src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
+              alt="A child at Marang House smiling while hugging a toy"
+              className="bg-fill"
+              position="center 30%"
+              sizes="(max-width: 760px) 70vw, 400px"
+              priority
+            />
+          </Reveal>
           <div className="donate-hero-text">
             <h1 className="donate-hero-heading">Donate</h1>
             <p className="donate-hero-body">
@@ -125,16 +129,17 @@ export default function DonatePage() {
 
       {/* 3. OTHER WAYS TO GIVE — deep navy bg, orange-tinted cards */}
       <section className="donate-other">
-        <Image
-          className="donate-other-doodle"
-          src={cld("v1786782365/MH-love-giff.gif")}
-          alt=""
-          width={320}
-          height={320}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
+        <Parallax className="donate-other-doodle" strength={16}>
+          <Image
+            src={cld("v1786782365/MH-love-giff.gif")}
+            alt=""
+            width={320}
+            height={320}
+            style={{ width: "100%", height: "auto" }}
+            unoptimized
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="donate-other-inner">
           <h2>Other Ways To Give</h2>
           <div className="donate-other-grid">
