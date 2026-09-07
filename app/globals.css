@@ -122,7 +122,7 @@ img { display: block; }
   text-decoration: none; text-transform: uppercase;
 }
 .btn:hover { opacity: .88; transform: scale(1.03); }
-.btn-yellow  { background: var(--canva-yellow); color: #1a1a1a; }
+.btn-yellow  { background: var(--canva-yellow); color: var(--color-brand-deep); }
 .btn-orange  { background: var(--orange); color: #fff; }
 .btn-blue    { background: var(--blue); color: #fff; }
 .btn-blue-dk { background: var(--blue-dk); color: #fff; }
@@ -134,13 +134,17 @@ img { display: block; }
    SECTION 1: HERO (corkboard)
 ═══════════════════════════════════════ */
 .hero {
-  position: relative; min-height: 700px;
+  position: relative; min-height: 760px;
   overflow: hidden; display: flex; align-items: stretch;
 }
 .hero-photo {
   position: absolute; inset: 0;
 }
-.hero-flags-wrap { position: absolute; z-index: 1; top: -42px; left: -20px; width: calc(100% + 20px); pointer-events: none; }
+/* MH-011: pushed further up (was top: -42px) so more of the bunting's own
+   height sits above the section's clipped top edge, opening up clear space
+   between it and the logo/headline block below instead of the two nearly
+   touching. */
+.hero-flags-wrap { position: absolute; z-index: 1; top: -80px; left: -20px; width: calc(100% + 20px); pointer-events: none; }
 .hero-flags { width: 100%; height: auto; }
 /* The corkboard artwork replaced in MH-003 renders noticeably lighter than
    the previous background — this tint warms/darkens it back down to match
@@ -160,9 +164,13 @@ img { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-content { animation: none; } }
 @keyframes heroIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-.hero-doodle { width: 100px; align-self: center; margin: 0 0 22px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
+/* MH-011: inline beside the headline (was stacked above it), so it reads
+   against the text block instead of sitting up near the flags/cork area,
+   where it was hard to see. */
+.hero-heading-row { display: flex; align-items: flex-start; gap: 28px; margin-bottom: 32px; }
+.hero-doodle { width: 200px; flex-shrink: 0; filter: drop-shadow(0 4px 10px rgba(0,0,0,.2)); }
 .hero h1 {
-  font-size: 3.6rem; line-height: 1.08; color: #fff; margin-bottom: 22px; font-weight: 700;
+  font-size: 3.6rem; line-height: 1.08; color: #fff; margin-bottom: 0; font-weight: 700;
   text-shadow: 0 2px 14px rgba(0,0,0,.25);
 }
 .hero h1 span { color: var(--canva-yellow); }
@@ -175,8 +183,11 @@ img { display: block; }
 .hero-doodads {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
 }
+/* MH-011: nudged down from top: 8% (with the taller .hero and higher
+   flags above) so the photos read as a separate cluster from the bunting
+   instead of their pins nearly touching the flags. */
 .hero-polaroid-1-wrap {
-  position: absolute; right: 28%; top: 8%; width: 460px;
+  position: absolute; right: 28%; top: 15%; width: 460px;
   transform: rotate(-2deg);
 }
 .hero-polaroid-1 {
@@ -184,11 +195,8 @@ img { display: block; }
   filter: drop-shadow(0 12px 26px rgba(0,0,0,.3));
 }
 .hero-polaroid-2 {
-  position: absolute; right: 0%; top: 8%; width: 480px;
+  position: absolute; right: 0%; top: 15%; width: 480px;
   filter: drop-shadow(0 14px 30px rgba(0,0,0,.32));
-}
-.hero-sketch {
-  position: absolute; right: 23%; bottom: 0; width: 220px;
 }
 /* Below 1400px, .hero-content's fixed 640px max-width leaves too little
    clear space for the mid-size desktop photos without overlapping the
@@ -205,6 +213,10 @@ img { display: block; }
    untouched, only horizontal alignment changes. */
 @media (max-width: 760px) {
   .hero-content { align-items: center; text-align: center; }
+  /* Stacks back to logo-above-heading at mobile widths — side-by-side
+     doesn't leave the headline enough room to wrap legibly this narrow. */
+  .hero-heading-row { flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .hero-doodle { width: 130px; }
   .hero-btns { justify-content: center; }
   /* The polaroids + kids sketch don't fit mobile widths well (see the
      removed per-breakpoint repositioning this replaces) — hidden here,
@@ -255,16 +267,22 @@ img { display: block; }
 /* Positioned against .lk-card rather than in the text's flex row so the ring
    can overshoot the card's top edge and the heart can hang near its bottom
    edge, matching the reference "breaking out of the panel" keyring. */
+/* MH-011: pulled in from the card's right edge (was right: 1%) so it reads
+   closer to .lk-card-text instead of floating in the card's empty right
+   margin on wide viewports. */
+/* MH-011: the static tilt is now SwayOnScroll's `base` prop (a plain CSS
+   `transform: rotate()` here would be clobbered by Motion's own inline
+   `rotate`, same reason Parallax's `rotate` prop exists). */
 .lk-card-pin {
-  position: absolute; z-index: 2; right: 1%; top: -15%; width: 460px;
-  filter: drop-shadow(0 14px 34px rgba(0,0,0,.35)); transform: rotate(-5deg);
+  position: absolute; z-index: 2; right: 20%; top: -15%; width: 460px;
+  filter: drop-shadow(0 14px 34px rgba(0,0,0,.35));
 }
 @media (max-width: 1100px) {
   .lk-card { padding: 42px 5% 46px 44px; }
   .lk-title { font-size: 2.8rem; }
   .lk-card-text { max-width: 460px; }
   .lk-desc { max-width: 420px; }
-  .lk-card-pin { width: 300px; top: -11%; right: 0%; }
+  .lk-card-pin { width: 300px; top: -11%; right: 15%; }
 }
 @media (max-width: 760px) {
   .lk-band { padding: 48px 5.5%; }
@@ -506,41 +524,51 @@ img { display: block; }
 }
 
 /* ═══════════════════════════════════════
-   TRUSTED BY (supporters) — existing, verified content, demoted to a
-   quieter trust-signal band since it sits outside the core content
-   priorities: smaller heading, one star doodle instead of two, unified
-   placeholder styling instead of four unrelated colours.
+   TRUSTED BY (supporters) — MH-011: extracted into SupportersSection
+   (reused on Home and Lightkeepers) with a layered brand-blue gradient
+   background, matching the navy treatment already used by .lk-what and
+   .donate-other, replacing the earlier warm/cream gradient so light
+   text/avatar borders read against it instead of the previous dark text.
 ═══════════════════════════════════════ */
-.sponsors-section {
+.supporters-section {
   padding: 132px 5.5% 80px;
   background:
-    radial-gradient(circle at 14% 18%, rgba(248,224,38,.42), transparent 31%),
-    radial-gradient(circle at 86% 74%, rgba(242,121,38,.22), transparent 34%),
-    linear-gradient(135deg, #fffdf2 0%, #fff7d4 48%, #fff0dc 100%);
+    radial-gradient(circle at 14% 18%, rgba(0,74,173,.4), transparent 34%),
+    radial-gradient(circle at 86% 74%, rgba(106,63,181,.28), transparent 38%),
+    linear-gradient(135deg, #0b3c82 0%, #171442 115%);
   text-align: center; position: relative; overflow: visible;
 }
-.sponsors-section-inner { position: relative; z-index: 1; }
-.sponsors-section h2 { font-size: 1.9rem; color: var(--color-brand-deep); line-height: 1.2; margin-bottom: 16px; }
+.supporters-section-inner { position: relative; z-index: 1; }
+.supporters-section h2 { font-size: 1.9rem; color: #fff; line-height: 1.2; margin-bottom: 16px; }
 /* Extra top clearance so the corner doodles (132px min height at this
    width, per the shared mobile doodle rule) don't sit over the heading. */
 @media (max-width: 760px) {
-  .sponsors-section { padding-top: 154px; }
+  .supporters-section { padding-top: 154px; }
 }
-.sponsors-sub { font-size: 0.96rem; font-weight: 700; color: #38435e; max-width: 520px; margin: 0 auto 44px; line-height: 1.55; }
-.sponsors-row { display: flex; gap: 80px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
-.sponsors-row + .sponsors-row { margin-top: -6px; }
-.sponsor-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 156px; isolation: isolate; }
-.sponsor-item::before {
+.supporters-sub { font-size: 0.96rem; font-weight: 700; color: rgba(255,255,255,.82); max-width: 520px; margin: 0 auto 44px; line-height: 1.55; }
+/* Flex-wrap (not a strict grid) so all 11 supplied supporters wrap cleanly
+   and, crucially, any leftover last row centers itself instead of a CSS
+   grid's lone item sitting stranded at the left edge under a full row
+   above it. Reduces naturally through tablet to 2-then-1 columns on
+   mobile without cropping any portrait/logo. */
+/* max-width tuned so 11 items wrap 4-per-row (4/4/3) at desktop — not
+   5-per-row, which would strand a single lonely item on its own final
+   row instead of a balanced, centered row of three. */
+.supporters-grid {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 40px 32px; max-width: 760px; margin: 0 auto 50px;
+}
+.supporter-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 156px; isolation: isolate; }
+.supporter-item::before {
   content: ""; position: absolute; z-index: -1; top: 44px; left: 50%;
   width: 160px; height: 160px; border-radius: 50%;
   transform: translate(-50%, -50%) scale(.72); opacity: 0;
-  background: radial-gradient(circle, rgba(255,244,154,.98) 0%, rgba(251,175,60,.5) 35%, rgba(0,74,173,.13) 58%, transparent 73%);
+  background: radial-gradient(circle, rgba(255,244,154,.9) 0%, rgba(251,175,60,.45) 35%, rgba(255,255,255,.12) 58%, transparent 73%);
   filter: blur(8px); transition: opacity .28s ease, transform .32s ease;
 }
-.sponsor-avatar { position: relative; width: 126px; height: 126px; border: 5px solid rgba(255,255,255,.92); border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 22px rgba(0,45,110,.18); }
-.sponsor-avatar.placeholder { display: flex; align-items: center; justify-content: center; font-family: var(--h); font-weight: 600; font-size: 1.55rem; color: var(--color-brand-deep); background: linear-gradient(145deg, #ffe95f, #f9b13d); }
-.sponsor-name { font-size: 0.88rem; color: var(--color-brand-deep); font-weight: 800; text-align: center; line-height: 1.35; }
-.sponsor-name span { display: block; font-weight: 600; }
+.supporter-avatar { position: relative; width: 126px; height: 126px; border: 5px solid rgba(255,255,255,.92); border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 22px rgba(0,10,40,.35); margin: 0 auto; }
+.supporter-name { font-size: 0.88rem; color: #fff; font-weight: 800; text-align: center; line-height: 1.35; }
+.supporter-name span { display: block; font-weight: 600; color: rgba(255,255,255,.72); }
 
 /* ═══════════════════════════════════════
    SECTION 5: TESTIMONIALS
@@ -634,7 +662,10 @@ img { display: block; }
    numbers on top.
 ═══════════════════════════════════════ */
 .stats-section { background: linear-gradient(135deg, var(--color-brand-deep) 0%, #1e0f3c 120%); position: relative; overflow: hidden; min-height: 640px; display: flex; align-items: center; }
-.stats-section-bg { position: absolute; left: 0; right: 0; bottom: 0; height: 55%; z-index: 0; object-position: center bottom; }
+/* Plain sized <Image> (not BgPhoto fill+cover) at its own 1945x844 ratio,
+   pinned to the section's bottom edge, so the artwork's upper detail is
+   never cropped regardless of section width. */
+.stats-section-bg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; z-index: 0; pointer-events: none; }
 .stats-section-inner { position: relative; z-index: 1; width: 100%; padding: 80px 5.5% 70px; }
 .stats-heading { text-align: center; margin-bottom: 50px; }
 .stats-heading h2 { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); color: #fff; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
@@ -680,10 +711,10 @@ img { display: block; }
    own section's edge so it stays inside the section that owns it, instead
    of the previous per-doodle negative offsets that bled across section
    seams. */
-.sponsors-cloud { position: absolute; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
-.sponsors-cloud--long { top: 18px; left: 4%; width: 230px; }
-.sponsors-cloud--small { top: 54px; left: 19%; width: 118px; }
-.sponsors-sun { position: absolute; top: 24px; right: 5%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
+.supporters-cloud { position: absolute; z-index: 3; pointer-events: none; filter: drop-shadow(0 8px 18px rgba(0,0,0,.12)); }
+.supporters-cloud--long { top: 18px; left: 4%; width: 230px; }
+.supporters-cloud--small { top: 54px; left: 19%; width: 118px; }
+.supporters-sun { position: absolute; top: 24px; right: 5%; width: 180px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
 /* Meet section doodle */
 .meet-doodle { position: absolute; bottom: 24px; right: 5%; width: 200px; z-index: 3; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(0,0,0,.15)); }
 /* About story section doodle */
@@ -699,12 +730,12 @@ img { display: block; }
      one top/bottom offset and one left/right offset, so touching the
      unused sides isn't needed and would risk stretching an absolutely
      positioned, height:auto image between two opposing edges. */
-  .sponsors-sun, .meet-doodle, .about-story-doodle,
+  .supporters-sun, .meet-doodle, .about-story-doodle,
   .lk-why-doodle, .donate-body-doodle, .donate-other-doodle {
     width: 132px !important;
   }
-  .sponsors-cloud--long { top: 20px; left: 3%; width: 145px; }
-  .sponsors-cloud--small { top: 64px; left: 25%; width: 82px; }
+  .supporters-cloud--long { top: 20px; left: 3%; width: 145px; }
+  .supporters-cloud--small { top: 64px; left: 25%; width: 82px; }
 }
 
 /* ═══════════════════════════════════════
@@ -746,19 +777,32 @@ img { display: block; }
     linear-gradient(104deg, #f8e026 0%, #fbaf3c 45%, #f27926 100%);
   padding: 148px 5.5% 88px; position: relative; overflow: hidden;
 }
+/* MH-011: sits behind the illustrated clouds (lower z-index, painted
+   first) so the clouds still read on top of it, as a soft decorative
+   layer rather than a second foreground doodle. Flush to the section's
+   left edge (not inset) and full opacity — the flags' own colours read
+   true against the orange section background instead of being tinted by
+   it through a translucent layer. */
+/* MH-011: spans the section's full width (was a fixed 340px left corner
+   piece) so the bunting reads as a banner across the whole top of the
+   section, same edge-to-edge treatment as the Home hero's flags. */
+.about-children-flags { position: absolute; z-index: 0; top: 4px; left: 0; right: 0; width: 100%; pointer-events: none; }
 .about-children-cloud { position: absolute; z-index: 1; pointer-events: none; filter: drop-shadow(0 9px 18px rgba(69,44,10,.14)); }
 .about-children-cloud--small { top: 12px; right: 5%; width: 190px; }
 .about-children-cloud--round { top: 58px; right: 19%; width: 112px; }
 .about-children-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
 .about-children-inner > h2 { text-align: center; font-size: clamp(2.2rem, 1.6rem + 2vw, 3rem); color: var(--color-brand-deep); margin-bottom: 32px; }
+/* MH-011: renders pirates_helpers.jpg at its own natural 1400x770 ratio
+   (width: 100%, height: auto) instead of the previous fixed 16:7
+   fill+cover frame, so the full photo shows uncropped. */
 .about-children-photo {
-  width: 100%; position: relative; aspect-ratio: 16 / 7; overflow: hidden;
+  width: 100%; max-width: 900px; position: relative; overflow: hidden;
   border: 6px solid rgba(255,255,255,.86); border-radius: 24px;
-  box-shadow: 0 16px 40px rgba(92,48,0,.22); margin-bottom: 38px;
+  box-shadow: 0 16px 40px rgba(92,48,0,.22); margin: 0 auto 38px;
 }
-.about-children-photo img { object-fit: cover; object-position: 52% 47%; }
+.about-children-photo img { display: block; width: 100%; height: auto; }
 .about-children-text { columns: 2 320px; column-gap: 52px; }
-.about-children-text p { break-inside: avoid; font-size: 1rem; line-height: 1.72; color: #2a1a00; margin-bottom: 18px; }
+.about-children-text p { break-inside: avoid; font-size: 1rem; line-height: 1.72; color: var(--color-brand-deep); margin-bottom: 18px; }
 .about-children-text em { color: var(--orange); font-style: italic; font-weight: 700; }
 @media (max-width: 900px) {
   .about-navy { flex-direction: column; }
@@ -775,7 +819,8 @@ img { display: block; }
   .about-children-cloud--small { top: 12px; right: 1%; width: 132px; }
   .about-children-cloud--round { top: 52px; right: 28%; width: 78px; }
   .about-children-inner > h2 { margin-bottom: 24px; }
-  .about-children-photo { aspect-ratio: 4 / 3; border-width: 4px; border-radius: 18px; margin-bottom: 28px; }
+  .about-children-flags { width: 100%; left: 0; right: 0; }
+  .about-children-photo { border-width: 4px; border-radius: 18px; margin-bottom: 28px; }
   .about-children-text { columns: 1; text-align: left; }
 }
 
@@ -846,8 +891,14 @@ img { display: block; }
 }
 
 /* — Lightkeepers — */
+/* MH-011: the supplied sunburst backdrop, replacing the flat orange
+   gradient. A CSS background-image (not next/image) since this wrapper's
+   height is intrinsic to .lk-hero's content, not a fixed box a `fill`
+   image could target. */
 .lk-page-gradient {
-  background: linear-gradient(104deg, #f8e026 0%, #fbaf3c 45%, #f27926 100%);
+  background:
+    url("https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/MH-Web_background5.png")
+    center / cover no-repeat;
 }
 .lk-hero { position: relative; padding: 116px 5.5% 90px; text-align: center; overflow: hidden; }
 .lk-hero-cloud { position: absolute; z-index: 2; height: auto; pointer-events: none; filter: drop-shadow(0 10px 20px rgba(0,0,0,.14)); }
@@ -887,35 +938,36 @@ img { display: block; }
    starts past it. Percentage offsets (not fixed px) so it tracks the
    image's own rendered size at every breakpoint, since .lk-hero-graphic
    img is width: 100%; height: auto with no fixed container height. */
+/* MH-011: the rounded navy pill/tile is gone — title/subtext sit directly
+   on the hero artwork's blue-card area, shifted toward its left edge (past
+   the heart badge, ahead of where the pill used to centre itself) instead
+   of the previous right-biased box. A text-shadow (below, on h1/p) carries
+   the contrast the pill's background used to provide. */
 .lk-hero-overlay {
   position: absolute;
   z-index: 3;
-  left: 46%; right: 5%; top: 29%; bottom: 12%;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center; box-sizing: border-box;
+  left: 40%; right: 5%; top: 29%; bottom: 12%;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  text-align: left; box-sizing: border-box;
   padding: clamp(10px, 1.8vw, 24px) clamp(12px, 3vw, 42px);
-  border: 2px solid rgba(255,255,255,.22); border-radius: 999px;
-  background: linear-gradient(145deg, rgba(7,45,108,.92), rgba(18,20,72,.84));
-  box-shadow: 0 16px 36px rgba(10,14,55,.28), inset 0 1px 0 rgba(255,255,255,.2);
-  backdrop-filter: blur(2px);
 }
-/* 90px left of the base 46%/5% box (30px + a further 60px), width
-   unchanged (left -90px, right +90px so both edges shift together).
-   MH-009: raised from 761px to 861px — the pin badge (.lk-hero-pin-accent)
-   only shrinks to its smaller "mobile" size at max-width: 860px, so the
-   previous 761px threshold left a 761-860px window where this shift ran
-   against the still-large pin, overlapping the "The Lightkeepers" heading.
-   Matching this breakpoint to the pin's own means the shift only ever
-   applies once the pin has already shrunk out of the way. */
+/* MH-009: raised from 761px to 861px — the pin badge (.lk-hero-pin-accent)
+   only shrinks to its smaller "mobile" size at max-width: 860px, so a
+   lower threshold would run this shift against the still-large pin,
+   overlapping the "The Lightkeepers" heading. Matching this breakpoint to
+   the pin's own means the shift only ever applies once the pin has
+   already shrunk out of the way. */
 @media (min-width: 861px) {
-  .lk-hero-overlay { left: calc(46% - 72px); right: calc(5% + 72px); }
+  .lk-hero-overlay { left: calc(40% - 72px); right: calc(5% + 72px); }
 }
 .lk-hero-overlay h1 {
   position: relative; z-index: 1; font-size: clamp(1.5rem, 4.8vw, 3.45rem); color: var(--canva-yellow); line-height: 1.04; margin-bottom: 0.24em;
+  text-shadow: 0 2px 14px rgba(4,10,40,.55), 0 1px 3px rgba(4,10,40,.7);
 }
 .lk-hero-overlay p {
   position: relative; z-index: 1; color: #fff; font-weight: 800; line-height: 1.28;
   font-size: clamp(0.76rem, 1.55vw, 1.16rem); margin-bottom: 0;
+  text-shadow: 0 2px 10px rgba(4,10,40,.55), 0 1px 3px rgba(4,10,40,.7);
 }
 .lk-hero-overlay-cta {
   background: var(--canva-yellow); color: #1a1a1a;
@@ -960,7 +1012,7 @@ img { display: block; }
      decorative curve along the card's lower-right edge, putting yellow
      text directly over the same yellow shape; lifting the box (smaller
      top, larger bottom) clears both lines above that curve. */
-  .lk-hero-overlay { left: 51%; right: 3%; top: 16%; bottom: 27%; padding: 6px 10px; border-width: 1px; }
+  .lk-hero-overlay { left: 51%; right: 3%; top: 16%; bottom: 27%; padding: 6px 10px; align-items: flex-start; text-align: left; }
   .lk-hero-overlay h1 { font-size: clamp(1.02rem, 5.1vw, 1.8rem); }
   .lk-hero-overlay p { font-size: clamp(0.62rem, 2.7vw, 0.86rem); line-height: 1.18; }
   .lk-what { padding-top: 40px; }
@@ -973,12 +1025,13 @@ img { display: block; }
 /* — Lightkeepers: What Your Gift Provides — */
 .lk-impact {
   background:
-    linear-gradient(104deg, #f8e026 0%, #fbaf3c 45%, #f27926 100%);
+    url("https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/MH-Web_background1.png")
+    center / cover no-repeat;
   padding: 80px 5.5%; position: relative; overflow: visible;
 }
 .lk-impact-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
 .lk-impact-inner h2 { font-size: 2.2rem; color: var(--color-brand-deep); margin-bottom: 12px; }
-.lk-impact-lead { font-size: 1.02rem; color: #2a1a00; font-weight: 600; max-width: 600px; margin: 0 auto 48px; line-height: 1.65; }
+.lk-impact-lead { font-size: 1.02rem; color: var(--color-brand-deep); font-weight: 600; max-width: 600px; margin: 0 auto 48px; line-height: 1.65; }
 .lk-impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; text-align: center; }
 .lk-impact-item { background: var(--color-brand-deep); border-radius: 18px; padding: 32px 28px; box-shadow: 0 12px 30px rgba(0,0,0,.2); }
 .lk-impact-icon { font-size: 2.4rem; display: block; margin: 0 auto 14px; text-align: center; }
@@ -1078,9 +1131,13 @@ img { display: block; }
    between the (now dark) hero and .involved-white below, reading as one
    long plain stretch. Cards inside (.bank-box, .info-strip) keep their
    own contrasting fills against this tint. */
+/* MH-011: the supplied layered wave backdrop, replacing the flat orange
+   gradient. Contact's .contact-form-section keeps its own separate
+   gradient — it isn't part of this task's scope. */
 .donate-body-band {
   background:
-    linear-gradient(104deg, #f8e026 0%, #fbaf3c 45%, #f27926 100%);
+    url("https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/MH-Web_background4.png")
+    center / cover no-repeat;
   position: relative; overflow: visible;
 }
 /* — Donate: Other Ways To Give — */
@@ -1099,7 +1156,7 @@ img { display: block; }
   border-radius: 18px; padding: 36px 28px 32px; display: flex; flex-direction: column;
 }
 .donate-other-card h3 { font-size: 1.1rem; color: var(--color-brand-deep); margin-bottom: 12px; font-family: var(--font-body); font-weight: 800; }
-.donate-other-card p { font-size: 0.92rem; color: #2a1a00; line-height: 1.7; margin-bottom: 24px; flex: 1; }
+.donate-other-card p { font-size: 0.92rem; color: var(--color-brand-deep); line-height: 1.7; margin-bottom: 24px; flex: 1; }
 .donate-other-card .btn { align-self: flex-start; background: var(--color-brand-deep); color: #fff; }
 @media (max-width: 760px) {
   .donate-other-grid { flex-direction: column; gap: 24px; }
@@ -1526,7 +1583,7 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
   .involved-card,
   .donate-other-card,
   .lk-impact-item,
-  .sponsor-item {
+  .supporter-item {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .btn:hover { box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2); }
@@ -1541,8 +1598,8 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
     box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
   }
   .involved-card:hover { box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22); }
-  .sponsor-item:hover { transform: translateY(-4px); }
-  .sponsor-item:hover::before { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .supporter-item:hover { transform: translateY(-4px); }
+  .supporter-item:hover::before { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 /* ═══════════════════════════════════════
@@ -1665,10 +1722,15 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
    the next cycle instead of snapping. Each beam's own fixed relative
    angle (7deg, -6deg, etc.) still rides on top of this shared rotation,
    so the fan keeps its shape throughout the sweep. */
+/* MH-011: starts pointing top-right (visible immediately on load, since
+   the lantern anchor sits near the hero's left edge — the previous 180deg
+   start pointed the whole fan off-canvas to the left) and sweeps down
+   through down-left, ending pointing top-left; `alternate` then swings it
+   back through the same path, rather than jumping. */
 @keyframes lkBeamFanSweep {
-  0% { transform: translate(-50%, -50%) rotate(180deg); opacity: .75; }
-  50% { transform: translate(-50%, -50%) rotate(90deg); opacity: 1; }
-  100% { transform: translate(-50%, -50%) rotate(0deg); opacity: .85; }
+  0% { transform: translate(-50%, -50%) rotate(-40deg); opacity: .75; }
+  50% { transform: translate(-50%, -50%) rotate(140deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(230deg); opacity: .85; }
 }
 @media (max-width: 760px) {
   /* Widths are no longer overridden here — the base rules' plain `vw`

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
+import SupportersSection from "@/components/SupportersSection";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import FlickerText from "@/components/motion/FlickerText";
@@ -232,6 +233,10 @@ export default function LightkeepersPage() {
           </blockquote>
         </div>
       </section>
+
+      {/* MH-011: reused from Home, self-link CTA omitted since .lk-cta
+          right below is already this page's own final conversion action. */}
+      <SupportersSection showCta={false} />
 
       {/* 5. CTA — prominent BackaBuddy link */}
       <section className="lk-cta">

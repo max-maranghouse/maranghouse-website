@@ -48,6 +48,16 @@ export default function AboutPage() {
           by an editorial two-column reading layout. The illustrated cloud pair
           lives in its own top rail so it never competes with the copy. */}
       <section className="about-children">
+        <Parallax className="about-children-flags" strength={14}>
+          <Image
+            src={cld("v1788285379/Flags_For_Marang1.png")}
+            alt=""
+            width={1537}
+            height={864}
+            style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
+          />
+        </Parallax>
         <Parallax className="about-children-cloud about-children-cloud--small" strength={12}>
           <Image
             src={cld("v1788471578/MH-Website-small-cloud.png")}
@@ -72,10 +82,11 @@ export default function AboutPage() {
           <h2>The Children We Serve</h2>
           <Reveal as="figure" className="about-children-photo">
             <Image
-              src={cld("v1786782366/MH-Group-kids.jpg")}
-              alt="Children at Marang House"
-              fill
-              sizes="(max-width: 900px) 90vw, 520px"
+              src={cld("maranghouse/pirates_helpers.jpg")}
+              alt="Children at Marang House wearing Marang House t-shirts, one in a pirate hat"
+              width={1400}
+              height={770}
+              sizes="(max-width: 900px) 90vw, 900px"
             />
           </Reveal>
           <div className="about-children-text">
