@@ -3,6 +3,7 @@ import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
+import FlickerText from "@/components/motion/FlickerText";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -18,15 +19,25 @@ export default function LightkeepersPage() {
       {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
-          <Parallax className="lk-hero-cloud" strength={55}>
+          <Parallax className="lk-hero-cloud lk-hero-cloud--long" strength={38}>
             <Image
-              src={cld("v1786782353/MH-real-cloud.png")}
+              src={cld("v1788471574/MH-Website-long-cloud.png")}
               alt=""
-              width={600}
-              height={600}
-              sizes="(max-width: 760px) 280px, 520px"
+              width={1672}
+              height={941}
+              sizes="(max-width: 760px) 190px, 420px"
               style={{ width: "100%", height: "auto" }}
-              unoptimized
+              aria-hidden="true"
+            />
+          </Parallax>
+          <Parallax className="lk-hero-cloud lk-hero-cloud--tall" strength={58}>
+            <Image
+              src={cld("v1788471558/MH-Website-tall-cloud.png")}
+              alt=""
+              width={1536}
+              height={1024}
+              sizes="(max-width: 760px) 90px, 180px"
+              style={{ width: "100%", height: "auto" }}
               aria-hidden="true"
             />
           </Parallax>
@@ -74,7 +85,7 @@ export default function LightkeepersPage() {
               </div>
             </div>
             <div className="lk-hero-overlay">
-              <h1>The Lightkeepers</h1>
+              <h1><FlickerText text="The Lightkeepers" /></h1>
               <p>Become a lightkeeper, join Marang&rsquo;s circle of light!</p>
             </div>
           </div>

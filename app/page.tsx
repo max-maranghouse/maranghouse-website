@@ -222,15 +222,7 @@ export default function HomePage() {
           and bottom hands. A plain <Image> at its own aspect ratio shows
           the whole thing, so the section grows to fit it instead. */}
       <section className="mission-banner">
-        <ParallaxBgPhoto
-          src={cld("v1786782356/MH-Rays-BG.png")}
-          alt=""
-          className="mission-banner-bg"
-          position="center center"
-          sizes="100vw"
-          strength={55}
-        />
-        <div className="mission-banner-scrim" aria-hidden="true" />
+        <div className="mission-banner-bg" aria-hidden="true" />
         <div className="mission-banner-content">
           <p className="mission-label">OUR</p>
           <h2>MISSION</h2>
@@ -240,13 +232,15 @@ export default function HomePage() {
           </p>
         </div>
         <Reveal className="mission-banner-photo-wrap">
-          <Image
-            className="mission-banner-photo"
-            src={cld("MH-heart-hands-banner.png")}
-            alt="Two pairs of hands forming a heart shape"
-            width={2732}
-            height={1536}
-          />
+          <Parallax className="mission-banner-photo-scroll" strength={14}>
+            <Image
+              className="mission-banner-photo"
+              src={cld("v1786782371/MH-heart-hands-banner.png")}
+              alt="Two pairs of hands forming a heart shape"
+              width={2732}
+              height={1536}
+            />
+          </Parallax>
           <Parallax className="mission-love-doodle" strength={8}>
             <Image
               src={cld("MH-love-giff.gif")}
@@ -269,15 +263,26 @@ export default function HomePage() {
           made the two sections read as one long, indistinguishable blue
           block instead of two distinct sections. */}
       <section className="sponsors-section">
-        <Image
-          className="sponsors-cloud"
-          src={cld("v1786782353/MH-real-cloud.png")}
-          alt=""
-          width={400}
-          height={400}
-          style={{ height: "auto" }}
-          aria-hidden="true"
-        />
+        <Parallax className="sponsors-cloud sponsors-cloud--long" strength={18}>
+          <Image
+            src={cld("v1788471574/MH-Website-long-cloud.png")}
+            alt=""
+            width={1672}
+            height={941}
+            style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
+          />
+        </Parallax>
+        <Parallax className="sponsors-cloud sponsors-cloud--small" strength={30}>
+          <Image
+            src={cld("v1788471578/MH-Website-small-cloud.png")}
+            alt=""
+            width={1536}
+            height={1024}
+            style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
+          />
+        </Parallax>
         <Image
           className="sponsors-sun"
           src={cld("v1786782364/MH-shun-giff.gif")}
@@ -305,7 +310,7 @@ export default function HomePage() {
               alt="Daryl Impey"
               className="sponsor-avatar"
               position="70% center"
-              sizes="96px"
+              sizes="126px"
             />
             <div className="sponsor-name">
               Professional Road Cyclist
@@ -325,7 +330,7 @@ export default function HomePage() {
               alt="Pirates Running Club"
               className="sponsor-avatar"
               position="right center"
-              sizes="96px"
+              sizes="126px"
             />
             <div className="sponsor-name">
               Pirates
