@@ -46,18 +46,18 @@ export default function ContactPage() {
 
       <section className="contact-form-section">
         <div className="contact-form-wrap">
-          {/* v1786782356/MH-info-pg-element.png — leads the row (left of the
-              text) as a deliberate, large visual anchor rather than a small
+          {/* MH-info-pg-element.png — leads the row (left of the text) as a
+              deliberate, large visual anchor rather than a small
               afterthought. Plain <Image>, not BgPhoto/fill, so the cutout's
               own irregular transparent edges render as-is rather than being
               cropped to a rectangle. */}
           <Reveal className="contact-aside-photo-wrap">
             <Image
               className="contact-aside-photo"
-              src={cld("v1787612209/MH_-_Website_-about_us_-_kid_hat.webp")}
+              src={cld("MH-info-pg-element.png")}
               alt="A child at Marang House"
-              width={870}
-              height={717}
+              width={1000}
+              height={1000}
               style={{ height: "auto" }}
             />
             <Image
@@ -84,7 +84,7 @@ export default function ContactPage() {
               <div className="contact-line">
                 ✉ <a href={`mailto:${ORGANISATION.email}`}>{ORGANISATION.email}</a>
               </div>
-              <div className="contact-line" style={{ color: "#7a4a10", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
+              <div className="contact-line" style={{ color: "var(--color-brand-deep)", fontSize: ".82rem", fontWeight: 600, marginTop: "12px" }}>
                 NPC Reg # {ORGANISATION.registrations.npc}
               </div>
             </div>

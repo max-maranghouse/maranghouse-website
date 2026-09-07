@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import BgPhoto from "@/components/BgPhoto";
-import WhatsAppFab from "@/components/WhatsAppFab";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
 import NewsletterInterestForm from "@/components/NewsletterInterestForm";
+import SupportersSection from "@/components/SupportersSection";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
+import SwayOnScroll from "@/components/motion/SwayOnScroll";
 import VerticalCutReveal from "@/components/motion/VerticalCutReveal";
 import NumberTicker from "@/components/motion/NumberTicker";
 import { cld } from "@/lib/images";
@@ -29,7 +29,7 @@ export default function HomePage() {
         <Parallax className="hero-flags-wrap" strength={10}>
           <Image
             className="hero-flags"
-            src={cld("v1788285379/Flags_For_Marang1.png")}
+            src={cld("Flags_For_Marang2.png")}
             alt=""
             width={1537}
             height={864}
@@ -38,19 +38,24 @@ export default function HomePage() {
           />
         </Parallax>
         <div className="hero-content">
-          <Image
-            className="hero-doodle"
-            src={cld("v1784193083/maranghouse/marang_house_logo_sm.png")}
-            alt="Marang House logo"
-            width={120}
-            height={120}
-            style={{ height: "auto" }}
-          />
-          <h1>
-            <VerticalCutReveal text="Fostering Health," />
-            <br />
-            Providing <span>Hope.</span>
-          </h1>
+          {/* Sits inline beside the headline (not stacked above it) so it
+              reads against the navy/text block instead of the busy
+              flags/cork area higher up the section. */}
+          <div className="hero-heading-row">
+            <Image
+              className="hero-doodle"
+              src={cld("v1784193083/maranghouse/marang_house_logo_sm.png")}
+              alt="Marang House logo"
+              width={120}
+              height={120}
+              style={{ height: "auto" }}
+            />
+            <h1>
+              <VerticalCutReveal text="Fostering Health," />
+              <br />
+              Providing <span>Hope.</span>
+            </h1>
+          </div>
           <p className="hero-sub">
             Creating a safe, clean, and nurturing home for children living with chronic illnesses.
           </p>
@@ -87,17 +92,7 @@ export default function HomePage() {
             priority
             style={{ height: "auto" }}
           />
-          <Image
-            className="hero-sketch"
-            src={cld("MH-kids-sketch.png")}
-            alt=""
-            width={1000}
-            height={1000}
-            priority
-            style={{ height: "auto" }}
-          />
         </div>
-        <WhatsAppFab />
       </section>
 
       {/* 2. BECOME A LIGHTKEEPER — orange gradient band with navy card */}
@@ -114,14 +109,18 @@ export default function HomePage() {
               <Link href="/lightkeepers" className="btn lk-signup">Meet the Lightkeepers</Link>
             </div>
           </div>
-          <Image
-            className="lk-card-pin"
-            src={cld("MH-lighthouse-keychain.png")}
-            alt="Lightkeeper enamel keyring badge"
-            width={1000}
-            height={1000}
-            style={{ height: "auto" }}
-          />
+          {/* Sways from the top (the keyring's own hole/hook), pivoting
+              left-right as the section scrolls through the viewport,
+              mimicking a hanging keyring swinging. */}
+          <SwayOnScroll className="lk-card-pin" strength={7} base={-5}>
+            <Image
+              src={cld("MH-lighthouse-keychain.png")}
+              alt="Lightkeeper enamel keyring badge"
+              width={1000}
+              height={1000}
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </SwayOnScroll>
         </div>
       </section>
 
@@ -257,129 +256,9 @@ export default function HomePage() {
 
       <NewsletterInterestForm />
 
-      {/* 6. TRUSTED BY — social proof, deep navy bg. Plain gradient, no
-          rays photo overlay — the Mission section right above this one
-          already uses that same rays image, and stacking it here too
-          made the two sections read as one long, indistinguishable blue
-          block instead of two distinct sections. */}
-      <section className="sponsors-section">
-        <Parallax className="sponsors-cloud sponsors-cloud--long" strength={18}>
-          <Image
-            src={cld("v1788471574/MH-Website-long-cloud.png")}
-            alt=""
-            width={1672}
-            height={941}
-            style={{ width: "100%", height: "auto" }}
-            aria-hidden="true"
-          />
-        </Parallax>
-        <Parallax className="sponsors-cloud sponsors-cloud--small" strength={30}>
-          <Image
-            src={cld("v1788471578/MH-Website-small-cloud.png")}
-            alt=""
-            width={1536}
-            height={1024}
-            style={{ width: "100%", height: "auto" }}
-            aria-hidden="true"
-          />
-        </Parallax>
-        <Image
-          className="sponsors-sun"
-          src={cld("v1786782364/MH-shun-giff.gif")}
-          alt=""
-          width={300}
-          height={300}
-          style={{ height: "auto" }}
-          unoptimized
-          aria-hidden="true"
-        />
-        <div className="sponsors-section-inner">
-        <h2>
-          The people who help us
-          <br />
-          transform lives
-        </h2>
-        <p className="sponsors-sub">
-          Businesses and fellow foundations have given their time and support to help us make a
-          difference in children&apos;s lives.
-        </p>
-        <div className="sponsors-row">
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193096/maranghouse/Daryl_and_David1.jpg")}
-              alt="Daryl Impey"
-              className="sponsor-avatar"
-              position="70% center"
-              sizes="126px"
-            />
-            <div className="sponsor-name">
-              Professional Road Cyclist
-              <span>Daryl Impey</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder">MW</div>
-            <div className="sponsor-name">
-              Mrs Universe
-              <span>Monique Weyers</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193104/maranghouse/pirates_helpers.jpg")}
-              alt="Pirates Running Club"
-              className="sponsor-avatar"
-              position="right center"
-              sizes="126px"
-            />
-            <div className="sponsor-name">
-              Pirates
-              <span>Running Club</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder">JJC</div>
-            <div className="sponsor-name">
-              JHB Junior
-              <span>Council</span>
-            </div>
-          </div>
-        </div>
-        <div className="sponsors-row">
-          <div className="sponsor-item">
-            <BgPhoto
-              src={cld("v1784193097/maranghouse/Daryl_and_David2.jpg")}
-              alt="David Higgs"
-              className="sponsor-avatar"
-              position="65% top"
-              sizes="96px"
-            />
-            <div className="sponsor-name">
-              Chef &amp; Personality
-              <span>David Higgs</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder">NW</div>
-            <div className="sponsor-name">
-              Miss Earth 2019
-              <span>Nazia Wadee</span>
-            </div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder">RD</div>
-            <div className="sponsor-name">Reach For A Dream</div>
-          </div>
-          <div className="sponsor-item">
-            <div className="sponsor-avatar placeholder">PCI</div>
-            <div className="sponsor-name">PCI Carpets</div>
-          </div>
-        </div>
-        <Link href="/lightkeepers" className="btn btn-yellow">
-          SPONSOR A CHILD TODAY
-        </Link>
-        </div>
-      </section>
+      {/* 6. TRUSTED BY — social proof. Extracted into SupportersSection so
+          Lightkeepers can reuse it (MH-011). */}
+      <SupportersSection />
 
       {/* 7. HOW YOU CAN GET INVOLVED — MERGED from old §7 "All Support Is
           Welcome" + §8 "How You Can Get Involved". Emotional pitch as intro,
@@ -449,14 +328,22 @@ export default function HomePage() {
       </section>
 
       {/* 8. CREATING A BETTER FUTURE — stats, deep navy gradient bg.
-          Hills image sits at the bottom of the section. */}
+          Hills image sits at the bottom of the section. A plain sized
+          <Image> at its natural 1945x844 ratio, not a BgPhoto fill+cover,
+          so its upper detail (ridge line, tree silhouettes) stays visible
+          at wide desktop widths instead of being cropped by the previous
+          `height: 55%` cover layer — the same cover-cropping problem the
+          Mission section's MH-heart-hands-banner.png had (see that
+          section's comment above) and was fixed the same way. */}
       <section className="stats-section">
-        <BgPhoto
+        <Image
+          className="stats-section-bg"
           src={cld("v1786782346/MH-hills.png")}
           alt=""
-          className="stats-section-bg"
-          position="center bottom"
+          width={1945}
+          height={844}
           sizes="100vw"
+          aria-hidden="true"
         />
         <div className="stats-section-inner">
           <div className="stats-heading">
