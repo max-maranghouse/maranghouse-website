@@ -22,6 +22,7 @@ const slides = [
   ["v1788293382/Marang_House_Garden_Day-5.jpg", "A Garden Day moment at Marang House"],
   ["v1788293370/MH-Website-eating-popcorn.jpg", "Children sharing popcorn at Marang House Garden Day"],
   ["v1788293368/MH-Website-facepaint-3.jpg", "A child showing their face paint at Marang House Garden Day"],
+  ["v1784191578/maranghouse/f61dc2fe-6b4f-442e-b13e-6de22a754a2d.jpg", "Children at Marang House wearing face masks and shields, making heart shapes with their hands"],
 ] as const;
 
 /**

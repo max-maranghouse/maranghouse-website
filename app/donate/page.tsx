@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import BgPhoto from "@/components/BgPhoto";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Parallax from "@/components/motion/Parallax";
+import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
 
@@ -16,38 +16,38 @@ export const metadata: Metadata = {
 export default function DonatePage() {
   return (
     <>
-      {/* 1. HERO — two columns: child photo left, high-contrast copy/CTA
-          panel right. Photo comes first in markup so it also leads when
-          the columns stack (photo above panel) on narrow screens. */}
+      {/* 1. HERO — full-bleed photo with the heading/CTA reading directly
+          over it behind a dark scrim, instead of two equal-weight boxes
+          (photo tile + separate text tile) side by side. Same "text over
+          photo" language the Lightkeepers hero already uses, so the photo
+          and copy read as one composition rather than a pair of cards. */}
       <section className="donate-hero">
-        <div className="donate-hero-inner">
-          <Parallax className="donate-hero-graphic" strength={10}>
-            <BgPhoto
-              src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
-              alt="A child at Marang House smiling while hugging a toy"
-              className="bg-fill"
-              position="center 30%"
-              sizes="(max-width: 760px) 70vw, 400px"
-              priority
-            />
-          </Parallax>
-          <div className="donate-hero-text">
-            <h1 className="donate-hero-heading">Donate</h1>
-            <p className="donate-hero-body">
-              Your donation keeps the lights on, the kitchen warm, and the hospital
-              transport running for children who have nowhere else to go. Whether it&rsquo;s
-              a once-off gift or a monthly commitment, every contribution goes directly to
-              the children in our care.
-            </p>
-            <ButtonLink
-              href={DONATION.primary.url}
-              variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Donate via BackaBuddy
-            </ButtonLink>
-          </div>
+        <ParallaxBgPhoto
+          src={cld("v1787755261/MH_-_Website_-_Clo_-_Close_Up.webp")}
+          alt="A child at Marang House smiling while hugging a toy"
+          className="donate-hero-bg"
+          position="center 30%"
+          sizes="100vw"
+          priority
+          strength={40}
+        />
+        <div className="donate-hero-scrim" aria-hidden="true" />
+        <div className="donate-hero-text">
+          <h1 className="donate-hero-heading">Donate</h1>
+          <p className="donate-hero-body">
+            Your donation keeps the lights on, the kitchen warm, and the hospital
+            transport running for children who have nowhere else to go. Whether it&rsquo;s
+            a once-off gift or a monthly commitment, every contribution goes directly to
+            the children in our care.
+          </p>
+          <ButtonLink
+            href={DONATION.primary.url}
+            variant="primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Donate via BackaBuddy
+          </ButtonLink>
         </div>
       </section>
 
@@ -64,64 +64,66 @@ export default function DonatePage() {
         aria-hidden="true"
       />
       <div className="donate-body">
-        <div className="donate-primary">
-          <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
-          <h2>Give monthly <span className="keep-together">through BackaBuddy</span></h2>
-          <p>
-            A monthly donor becomes a Marang House Lightkeeper, part of the community
-            that keeps the Circle of Light shining. Your recurring gift provides
-            stability that one-off donations cannot.
-          </p>
-          <ButtonLink
-            href={DONATION.primary.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {DONATION.primary.label}
-          </ButtonLink>
-        </div>
-        <div className="bank-box">
-          <h3>Bank transfer</h3>
-          <dl className="bank-details">
-            <dt>Bank</dt>
-            <dd>{DONATION.eft.bank}</dd>
-            <dt>Branch</dt>
-            <dd>{DONATION.eft.branch}</dd>
-            <dt>Branch No</dt>
-            <dd>{DONATION.eft.branchCode}</dd>
-            <dt>Account Name</dt>
-            <dd>{DONATION.eft.accountName}</dd>
-            <dt>Account No</dt>
-            <dd>{DONATION.eft.accountNumber} ({DONATION.eft.accountType.toLowerCase()})</dd>
-            <dt>Swift No</dt>
-            <dd>{DONATION.eft.swiftCode}</dd>
-          </dl>
-          <p className="bank-note">
-            {DONATION.eft.referenceInstruction} Send proof of payment to{" "}
-            <strong>{DONATION.eft.proofOfPaymentEmail}</strong>.
-          </p>
-        </div>
-        <div className="info-tile">
-          <span className="info-tile-icon" aria-hidden="true">🧾</span>
-          <div>
-            <span className="info-tile-eyebrow">Section 18A</span>
-            <h3>Tax Deductions</h3>
+        <div className="donate-tiles">
+          <div className="donate-primary">
+            <p className="donate-primary__eyebrow">Become a Lightkeeper</p>
+            <h2>Give monthly <span className="keep-together">through BackaBuddy</span></h2>
             <p>
-              Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A
-              certificate can be issued after donation.
+              A monthly donor becomes a Marang House Lightkeeper, part of the community
+              that keeps the Circle of Light shining. Your recurring gift provides
+              stability that one-off donations cannot.
+            </p>
+            <ButtonLink
+              href={DONATION.primary.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {DONATION.primary.label}
+            </ButtonLink>
+          </div>
+          <div className="bank-box">
+            <h3>Bank transfer</h3>
+            <dl className="bank-details">
+              <dt>Bank</dt>
+              <dd>{DONATION.eft.bank}</dd>
+              <dt>Branch</dt>
+              <dd>{DONATION.eft.branch}</dd>
+              <dt>Branch No</dt>
+              <dd>{DONATION.eft.branchCode}</dd>
+              <dt>Account Name</dt>
+              <dd>{DONATION.eft.accountName}</dd>
+              <dt>Account No</dt>
+              <dd>{DONATION.eft.accountNumber} ({DONATION.eft.accountType.toLowerCase()})</dd>
+              <dt>Swift No</dt>
+              <dd>{DONATION.eft.swiftCode}</dd>
+            </dl>
+            <p className="bank-note">
+              {DONATION.eft.referenceInstruction} Send proof of payment to{" "}
+              <strong>{DONATION.eft.proofOfPaymentEmail}</strong>.
             </p>
           </div>
-        </div>
-        <div className="info-tile">
-          <span className="info-tile-icon" aria-hidden="true">🤝</span>
-          <div>
-            <span className="info-tile-eyebrow">Corporate Giving</span>
-            <h3>BBBEE Scorecard Points</h3>
-            <p>
-              Corporate donors can earn B-BBEE scorecard points through their contribution
-              to Marang House. <Link href="/contact">Contact us</Link> to discuss options{" "}
-              <span className="keep-together">and requirements.</span>
-            </p>
+          <div className="info-tile">
+            <span className="info-tile-icon" aria-hidden="true">🧾</span>
+            <div>
+              <span className="info-tile-eyebrow">Section 18A</span>
+              <h3>Tax Deductions</h3>
+              <p>
+                Donations are tax-deductible in South Africa under Section 18A of the Income Tax Act. A
+                certificate can be issued after donation.
+              </p>
+            </div>
+          </div>
+          <div className="info-tile">
+            <span className="info-tile-icon" aria-hidden="true">🤝</span>
+            <div>
+              <span className="info-tile-eyebrow">Corporate Giving</span>
+              <h3>BBBEE Scorecard Points</h3>
+              <p>
+                Corporate donors can earn B-BBEE scorecard points through their contribution
+                to Marang House. <Link href="/contact">Contact us</Link> to discuss options{" "}
+                <span className="keep-together">and requirements.</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

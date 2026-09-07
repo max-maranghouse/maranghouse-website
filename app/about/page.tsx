@@ -44,32 +44,41 @@ export default function AboutPage() {
         </Parallax>
       </section>
 
-      {/* 2. THE CHILDREN WE SERVE — orange rays bg. Uses the cutout element
-          photo (swapped from Contact page) instead of the kid-hat image
-          (which moved to Contact). */}
+      {/* 2. THE CHILDREN WE SERVE — a wide, conventional photo frame followed
+          by an editorial two-column reading layout. The illustrated cloud pair
+          lives in its own top rail so it never competes with the copy. */}
       <section className="about-children">
-        <Parallax className="about-children-doodle" strength={14}>
+        <Parallax className="about-children-cloud about-children-cloud--small" strength={12}>
           <Image
-            src={cld("v1786782353/MH-real-cloud.png")}
+            src={cld("v1788471578/MH-Website-small-cloud.png")}
             alt=""
-            width={400}
-            height={400}
+            width={1536}
+            height={1024}
+            style={{ width: "100%", height: "auto" }}
+            aria-hidden="true"
+          />
+        </Parallax>
+        <Parallax className="about-children-cloud about-children-cloud--round" strength={20}>
+          <Image
+            src={cld("v1788471560/MH-Website-round-cloud.png")}
+            alt=""
+            width={1536}
+            height={1024}
             style={{ width: "100%", height: "auto" }}
             aria-hidden="true"
           />
         </Parallax>
         <div className="about-children-inner">
+          <h2>The Children We Serve</h2>
           <Reveal as="figure" className="about-children-photo">
             <Image
-              src={cld("c_crop,x_470,y_0,w_1730,h_1766/v1786782366/MH-Group-kids.jpg")}
+              src={cld("v1786782366/MH-Group-kids.jpg")}
               alt="Children at Marang House"
-              width={1730}
-              height={1766}
-              style={{ width: "100%", height: "auto" }}
+              fill
+              sizes="(max-width: 900px) 90vw, 520px"
             />
           </Reveal>
           <div className="about-children-text">
-            <h2>The Children We Serve</h2>
             <p>
               They arrive from communities across South Africa, children as young as
               seven, travelling hundreds of kilometres to Johannesburg for life-saving treatment.
@@ -99,7 +108,7 @@ export default function AboutPage() {
 
       {/* 3. SALOME'S STORY — moved up from bottom to become the emotional
           centrepiece. After "here's the problem" comes "here's the person
-          who lives this every day." Deep navy bg. */}
+          who lives this every day." The sparkle sits at the top-left. */}
       <section className="about-story">
         <Parallax className="about-story-doodle" strength={16}>
           <Image
