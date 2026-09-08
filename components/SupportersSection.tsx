@@ -12,7 +12,11 @@ type Supporter = {
   position?: string;
 };
 
-/** All 11 supplied supporter photos/logos, in the order they're displayed. */
+/**
+ * The four named individuals only. Partner organization logos live in
+ * PartnersCarousel's PARTNERS list — MH-012 split the two apart so this
+ * gallery reads as people, not a mix of faces and business marks.
+ */
 const SUPPORTERS: Supporter[] = [
   {
     name: "Daryl Impey",
@@ -27,11 +31,6 @@ const SUPPORTERS: Supporter[] = [
     alt: "David Higgs",
   },
   {
-    name: "Pirates Running Club",
-    src: cld("v1788812598/Pirates_Road_Running.png"),
-    alt: "Pirates Road Running logo",
-  },
-  {
     name: "Monique Weyers",
     role: "Mrs Universe",
     src: cld("Monique_Weyers.jpg"),
@@ -42,36 +41,6 @@ const SUPPORTERS: Supporter[] = [
     role: "Miss Earth 2019",
     src: cld("Nazia_Wadee.jpg"),
     alt: "Nazia Wadee",
-  },
-  {
-    name: "Reach For A Dream",
-    src: cld("Reach_For_A_Dream.png"),
-    alt: "Reach For A Dream logo",
-  },
-  {
-    name: "PCI Carpets",
-    src: cld("PCI_Carpets.png"),
-    alt: "PCI Carpets logo",
-  },
-  {
-    name: "JHB Junior Council",
-    src: cld("v1788812597/7.png"),
-    alt: "JHB Junior Council emblem",
-  },
-  {
-    name: "Nelson Mandela Children's Hospital",
-    src: cld("v1788812595/Nelson_Mandela_s_Children_Hospital.png"),
-    alt: "Nelson Mandela Children's Hospital logo",
-  },
-  {
-    name: "Charlotte Maxeke Hospital",
-    src: cld("v1788812595/Charlotte_Maxeke_Hospital.png"),
-    alt: "Charlotte Maxeke Johannesburg Academic Hospital logo",
-  },
-  {
-    name: "University of Johannesburg",
-    src: cld("v1788812594/University_of_Johannesburg.png"),
-    alt: "University of Johannesburg logo",
   },
 ];
 
@@ -87,7 +56,7 @@ type SupportersSectionProps = {
 export default function SupportersSection({ showCta = true }: SupportersSectionProps) {
   return (
     <section className="supporters-section">
-      <Parallax className="supporters-cloud supporters-cloud--long" strength={18}>
+      <Parallax className="supporters-cloud supporters-cloud--long" strength={30}>
         <Image
           src={cld("v1788471574/MH-Website-long-cloud.png")}
           alt=""
@@ -97,7 +66,7 @@ export default function SupportersSection({ showCta = true }: SupportersSectionP
           aria-hidden="true"
         />
       </Parallax>
-      <Parallax className="supporters-cloud supporters-cloud--small" strength={30}>
+      <Parallax className="supporters-cloud supporters-cloud--small" strength={48}>
         <Image
           src={cld("v1788471578/MH-Website-small-cloud.png")}
           alt=""
@@ -123,10 +92,6 @@ export default function SupportersSection({ showCta = true }: SupportersSectionP
           <br />
           transform lives
         </h2>
-        <p className="supporters-sub">
-          Businesses and fellow foundations have given their time and support to help us make a
-          difference in children&apos;s lives.
-        </p>
         <div className="supporters-grid">
           {SUPPORTERS.map((supporter) => (
             <div className="supporter-item" key={supporter.name}>

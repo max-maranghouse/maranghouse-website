@@ -58,7 +58,7 @@ export default function AboutPage() {
             aria-hidden="true"
           />
         </Parallax>
-        <Parallax className="about-children-cloud about-children-cloud--small" strength={12}>
+        <Parallax className="about-children-cloud about-children-cloud--small" strength={22}>
           <Image
             src={cld("v1788471578/MH-Website-small-cloud.png")}
             alt=""
@@ -68,7 +68,7 @@ export default function AboutPage() {
             aria-hidden="true"
           />
         </Parallax>
-        <Parallax className="about-children-cloud about-children-cloud--round" strength={20}>
+        <Parallax className="about-children-cloud about-children-cloud--round" strength={34}>
           <Image
             src={cld("v1788471560/MH-Website-round-cloud.png")}
             alt=""
@@ -105,8 +105,9 @@ export default function AboutPage() {
             </p>
             <p>
               In 1998, Dr Pieter Ernst saw this gap and founded Marang House as a beacon
-              of hope. <em>Marang</em> is the Setswana word for a ray of sunshine, the
-              light we try to bring into the life of every child who walks through our doors.
+              of hope. <em className="about-children-marang">Marang</em> is the Setswana word for a ray of
+              sunshine, the light we try to bring into the life of every child who walks through
+              our doors.
             </p>
             <p>
               What began as one doctor&rsquo;s vision has grown into a home that has served
@@ -132,22 +133,42 @@ export default function AboutPage() {
             aria-hidden="true"
           />
         </Parallax>
+        <div className="about-story-intro">
+          <Reveal as="figure" className="about-story-portrait">
+            <Image
+              src={cld("v1788862586/MH-Web-Salome-Portrait-1.jpg")}
+              alt="Salome, Matron of Marang House, smiling"
+              width={3000}
+              height={4000}
+              sizes="(max-width: 760px) 80vw, 420px"
+            />
+          </Reveal>
+          <div className="about-story-intro-text">
+            <span className="about-story-eyebrow">In Her Own Words</span>
+            <h2>Meet Salome, Our Matron</h2>
+            <p className="about-story-quote">
+              &ldquo;I worked alongside (Founder) Dr Pieter Ernst in theatre. One day he asked me if I
+              would come and help at a children&rsquo;s home called Marang House. He saw something in me
+              that I couldn&rsquo;t yet see in myself. Today I know exactly what he saw.&rdquo;
+            </p>
+            <p className="about-story-standout">
+              Children don&rsquo;t heal because of insulin alone. Children heal because they feel
+              <span> secure and loved.</span>
+            </p>
+            <Parallax className="about-story-love-doodle" strength={8}>
+              <Image
+                src={cld("MH-love-giff.gif")}
+                alt=""
+                width={200}
+                height={200}
+                style={{ width: "100%", height: "auto" }}
+                unoptimized
+                aria-hidden="true"
+              />
+            </Parallax>
+          </div>
+        </div>
         <div className="about-story-inner">
-          <span className="about-story-eyebrow">In Her Own Words</span>
-          <h2>Meet Salome, Our Matron</h2>
-          <p>
-            Salome, Matron of Marang House, was fourteen years old when she watched her grandmother pass
-            away at home. That was the moment she decided she wanted to become a nurse.
-          </p>
-          <p className="about-story-quote">
-            &ldquo;Years later, I worked alongside Dr Pieter Ernst in theatre. One day he asked me if I
-            would come and help at a children&rsquo;s home called Marang House. He saw something in me
-            that I couldn&rsquo;t yet see in myself. Today I know exactly what he saw.&rdquo;
-          </p>
-          <p className="about-story-standout">
-            Children don&rsquo;t heal because of insulin alone. Children heal because they feel
-            <span> secure and loved.</span>
-          </p>
           <p>
             Every child who comes to Marang House has already faced more than most adults. They leave
             their families and travel hundreds of kilometres to Johannesburg for life-saving treatment.

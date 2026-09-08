@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
+import PartnersCarousel from "@/components/PartnersCarousel";
 import SupportersSection from "@/components/SupportersSection";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
@@ -20,7 +21,7 @@ export default function LightkeepersPage() {
       {/* 1. HERO — lighthouse banner, kept from original */}
       <div className="lk-page-gradient">
         <section className="lk-hero">
-          <Parallax className="lk-hero-cloud lk-hero-cloud--long" strength={38}>
+          <Parallax className="lk-hero-cloud lk-hero-cloud--long" strength={62}>
             <Image
               src={cld("v1788471574/MH-Website-long-cloud.png")}
               alt=""
@@ -31,7 +32,7 @@ export default function LightkeepersPage() {
               aria-hidden="true"
             />
           </Parallax>
-          <Parallax className="lk-hero-cloud lk-hero-cloud--tall" strength={58}>
+          <Parallax className="lk-hero-cloud lk-hero-cloud--tall" strength={90}>
             <Image
               src={cld("v1788471558/MH-Website-tall-cloud.png")}
               alt=""
@@ -235,8 +236,11 @@ export default function LightkeepersPage() {
       </section>
 
       {/* MH-011: reused from Home, self-link CTA omitted since .lk-cta
-          right below is already this page's own final conversion action. */}
+          right below is already this page's own final conversion action.
+          MH-012: people and partner logos split into two consecutive
+          sections; Partners keeps no CTA of its own. */}
       <SupportersSection showCta={false} />
+      <PartnersCarousel />
 
       {/* 5. CTA — prominent BackaBuddy link */}
       <section className="lk-cta">

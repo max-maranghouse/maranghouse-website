@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
 import NewsletterInterestForm from "@/components/NewsletterInterestForm";
-import SupportersSection from "@/components/SupportersSection";
+import PartnersCarousel from "@/components/PartnersCarousel";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
+import ScaleOnScroll from "@/components/motion/ScaleOnScroll";
 import SwayOnScroll from "@/components/motion/SwayOnScroll";
 import VerticalCutReveal from "@/components/motion/VerticalCutReveal";
 import NumberTicker from "@/components/motion/NumberTicker";
@@ -185,7 +186,7 @@ export default function HomePage() {
           />
         </Parallax>
         <div className="meet-inner">
-          <Parallax className="meet-photo-wrap" strength={10}>
+          <ScaleOnScroll className="meet-photo-wrap">
             <Image
               className="meet-photo"
               src={cld("MH-girl-arch.png")}
@@ -194,7 +195,7 @@ export default function HomePage() {
               height={1000}
               style={{ width: "100%", height: "auto" }}
             />
-          </Parallax>
+          </ScaleOnScroll>
           <div className="meet-text">
             <h2>
               A Day At<br />Marang House.
@@ -256,9 +257,10 @@ export default function HomePage() {
 
       <NewsletterInterestForm />
 
-      {/* 6. TRUSTED BY — social proof. Extracted into SupportersSection so
-          Lightkeepers can reuse it (MH-011). */}
-      <SupportersSection />
+      {/* 6. OUR PARTNERS — MH-012 follow-up: the people gallery
+          (SupportersSection) is Lightkeepers-only now; Home keeps just the
+          partner logo strip here. */}
+      <PartnersCarousel />
 
       {/* 7. HOW YOU CAN GET INVOLVED — MERGED from old §7 "All Support Is
           Welcome" + §8 "How You Can Get Involved". Emotional pitch as intro,
