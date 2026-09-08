@@ -96,6 +96,25 @@ export default function ContactForm() {
         <span className="contact-field-required" aria-hidden="true">*</span>
       </div>
 
+      <div className="contact-field">
+        <label htmlFor="contact-reason" className="sr-only">
+          Reason for contact
+        </label>
+        <select id="contact-reason" name="reason" required defaultValue="">
+          <option value="" disabled>
+            Reason for contact
+          </option>
+          <option value="General Enquiry">General Enquiry</option>
+          <option value="Volunteering">Volunteering</option>
+          <option value="Donation">Donation</option>
+          <option value="Tax Certificate (Section 18A)">Tax Certificate (Section 18A)</option>
+          <option value="Sponsor a Child">Sponsor a Child</option>
+          <option value="Media / Press">Media / Press</option>
+          <option value="Other">Other</option>
+        </select>
+        <span className="contact-field-required" aria-hidden="true">*</span>
+      </div>
+
       <div className="contact-form-row">
         <div className="contact-field" style={{ flex: 1 }}>
           <label htmlFor="contact-email" className="sr-only">
