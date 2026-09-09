@@ -19,10 +19,22 @@ from a code merge alone.
 
 - **Repo:** https://github.com/max-maranghouse/maranghouse-website
 - **Vercel project:** `marang-house-website` (team `marang-house-team`)
-- **Two GitHub accounts exist on this machine** — `max-maranghouse` (owns
-  the repo) and `Maxwell103`. Pushes must authenticate as
-  `max-maranghouse`; a 403 on push means the wrong `gh` account is active
-  (`gh auth switch --user max-maranghouse` then `gh auth setup-git`).
+- **`Maxwell103` is the standard working GitHub account for this repo** —
+  it has push access (`max-maranghouse` remains the repo owner/admin
+  account but isn't used for day-to-day pushes/PRs). If a push 403s, the
+  wrong `gh` account is active: `gh auth switch --user Maxwell103` then
+  `gh auth setup-git`.
+- **Conductor-specific gotcha:** Conductor injects its own `GH_TOKEN` into
+  every shell it gives an agent, which silently overrides `gh auth switch`
+  for `gh api`/`gh pr`/`gh issue`/`gh auth switch` itself (though not for
+  `git push`, which goes through the credential helper instead). That
+  token can create PRs but not merge or comment on them. To act as a real
+  account (switch, merge, comment, etc.) from inside a Conductor session,
+  unset it first: `env -u GH_TOKEN -u GITHUB_TOKEN gh pr merge <n>
+  --squash`. `.conductor/settings.local.toml` (machine-local, gitignored)
+  runs this automatically for `gh auth switch`/`setup-git` at workspace
+  setup, but `gh pr merge`/`comment`/etc. still need the `env -u` prefix
+  per command since Conductor re-injects `GH_TOKEN` into every new shell.
 
 ## Branch baseline
 
