@@ -40,3 +40,7 @@ design-reference/
 # Playwright MCP tooling output (QA screenshots/logs from this session, not
 # site content).
 .playwright-mcp/
+
+# Conductor machine-local overrides (per-developer gh account, etc.) — not
+# shared with the team.
+.conductor/settings.local.toml
