@@ -3,6 +3,7 @@ import { fredoka, nunito, permanentMarker } from "@/lib/fonts";
 import { ORGANISATION } from "@/lib/site-data";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ConsentBanner from "@/components/ConsentBanner";
 import ClickLightEffect from "@/components/motion/ClickLightEffect";
 import "./globals.css";
 
@@ -78,6 +79,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <ConsentBanner />
         <ClickLightEffect />
       </body>
     </html>

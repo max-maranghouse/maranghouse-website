@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Container from "@/components/ui/Container";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import { DONATION, ORGANISATION, SITE_NAVIGATION } from "@/lib/site-data";
 
 export default function SiteFooter() {
@@ -50,6 +51,22 @@ export default function SiteFooter() {
           NPC {ORGANISATION.registrations.npc} · NPO {ORGANISATION.registrations.npo} · PBO{" "}
           {ORGANISATION.registrations.pbo}
         </p>
+        <nav className="site-footer__legal-links" aria-label="Legal">
+          <ul>
+            <li>
+              <Link href="/privacy-policy">Privacy &amp; POPIA Notice</Link>
+            </li>
+            <li>
+              <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+            </li>
+            <li>
+              <Link href="/cookie-policy">Cookie Notice</Link>
+            </li>
+            <li>
+              <CookiePreferencesButton />
+            </li>
+          </ul>
+        </nav>
       </Container>
     </footer>
   );
