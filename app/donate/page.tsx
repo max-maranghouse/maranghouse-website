@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -6,12 +5,14 @@ import Parallax from "@/components/motion/Parallax";
 import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Donate",
   description:
     "Become a Marang House Lightkeeper with a monthly donation through BackaBuddy, or support the house by EFT.",
-};
+  path: "/donate",
+});
 
 export default function DonatePage() {
   return (

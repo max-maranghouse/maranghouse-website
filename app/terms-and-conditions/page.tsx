@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/components/legal/LegalPage";
 import { LEGAL_EFFECTIVE_DATE, REGISTERED_OFFICE_ADDRESS } from "@/lib/legal-data";
 import { DONATION, ORGANISATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms & Conditions",
   description:
     "The terms governing use of maranghouse.org, including third-party services, BackaBuddy donations, and the governing law that applies.",
-};
+  path: "/terms-and-conditions",
+});
 
 export default function TermsAndConditionsPage() {
   return (

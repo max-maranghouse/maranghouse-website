@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import LegalPage from "@/components/legal/LegalPage";
 import { LEGAL_EFFECTIVE_DATE } from "@/lib/legal-data";
 import { ORGANISATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Cookie Notice",
   description:
     "What Necessary and Analytics cookies maranghouse.org uses, how consent is gated, and how to change your choice at any time.",
-};
+  path: "/cookie-policy",
+});
 
 export default function CookiePolicyPage() {
   return (

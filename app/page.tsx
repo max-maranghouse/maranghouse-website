@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
@@ -11,7 +12,16 @@ import SwayOnScroll from "@/components/motion/SwayOnScroll";
 import VerticalCutReveal from "@/components/motion/VerticalCutReveal";
 import NumberTicker from "@/components/motion/NumberTicker";
 import { cld } from "@/lib/images";
-import { DONATION } from "@/lib/site-data";
+import { DONATION, ORGANISATION } from "@/lib/site-data";
+
+// Title/description are intentionally omitted here — they're inherited from
+// the root layout's defaults, which already describe the homepage. Only the
+// canonical link (not set by `metadataBase` alone) needs adding.
+export const metadata: Metadata = {
+  alternates: {
+    canonical: ORGANISATION.websiteUrl,
+  },
+};
 
 export default function HomePage() {
   return (
@@ -104,7 +114,7 @@ export default function HomePage() {
             <p className="lk-desc">
               The <strong>Marang Circle of Light</strong> is a community of <strong>monthly donors</strong>{" "}
               who keep the light of home shining, joy and love for chronically ill children receiving
-              treatment away from home. Be the first to get a limited-edition keyring with love from us.
+              treatment away from home.
             </p>
             <div className="lk-cta-row">
               <Link href="/lightkeepers" className="btn lk-signup">Meet the Lightkeepers</Link>
@@ -119,6 +129,7 @@ export default function HomePage() {
               alt="Lightkeeper enamel keyring badge"
               width={1000}
               height={1000}
+              sizes="(max-width: 760px) 180px, (max-width: 1100px) 300px, 460px"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
           </SwayOnScroll>
@@ -164,6 +175,7 @@ export default function HomePage() {
               alt="Children and caregivers at Marang House waving and celebrating together"
               width={1000}
               height={667}
+              sizes="(max-width: 1000px) 420px, 640px"
               style={{ width: "100%", height: "auto" }}
             />
           </Parallax>
@@ -193,6 +205,7 @@ export default function HomePage() {
               alt="A child celebrating with her caregiver at Marang House"
               width={1000}
               height={1000}
+              sizes="(max-width: 860px) 460px, 620px"
               style={{ width: "100%", height: "auto" }}
             />
           </ScaleOnScroll>
