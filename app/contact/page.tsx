@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/motion/Reveal";
@@ -6,28 +5,34 @@ import Parallax from "@/components/motion/Parallax";
 import ParallaxBgPhoto from "@/components/motion/ParallaxBgPhoto";
 import { cld } from "@/lib/images";
 import { ORGANISATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description:
     "Get in touch with Marang House, call, email, or send us a message. 22 Milner Ave, Franklin Roosevelt Park, Johannesburg.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
       {/* v1787695702/MH_-_Website_-_contact_hero_image.svg — an SVG export,
-          so it's requested as a rasterised PNG via Cloudinary's on-the-fly
-          f_png,q_auto transform instead of the shared cld() f_auto,q_auto
-          helper (next/image has no SVG support here). Since it rasterises
-          from a real vector source, Cloudinary can render it cleanly at any
-          requested width (verified up to 2400px), so the earlier
-          "stretches at full-bleed" problem doesn't apply here. Same
-          full-bleed-photo-with-overlay-text treatment as the Donate hero,
-          replacing the previous contained-photo-card-beside-heading split. */}
+          so it's requested as a rasterised image via Cloudinary's on-the-fly
+          transform instead of next/image's src (which has no SVG support
+          here). Uses f_auto like the shared cld() helper — not the earlier
+          f_png special case — so the cloudinaryLoader can still apply
+          Next's per-viewport width srcset and content-negotiate WebP/AVIF
+          instead of always shipping a full-resolution PNG (verified
+          real-browser Accept headers still get a raster image back, not raw
+          SVG, and the result renders identically at 640w and full-bleed
+          widths — see MH-013 launch-readiness Handoff for the before/after
+          sizes). Same full-bleed-photo-with-overlay-text treatment as the
+          Donate hero, replacing the previous contained-photo-card-beside-
+          heading split. */}
       <section className="contact-hero">
         <ParallaxBgPhoto
-          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_png,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
+          src="https://res.cloudinary.com/m4hqddxx/image/upload/f_auto,q_auto:best/v1787695702/MH_-_Website_-_contact_hero_image.svg"
           alt="Children at Marang House wearing Marang House t-shirts"
           className="contact-hero-bg"
           position="center top"
@@ -58,6 +63,7 @@ export default function ContactPage() {
               alt="A child at Marang House"
               width={1000}
               height={1000}
+              sizes="(max-width: 1040px) 280px, 380px"
               style={{ height: "auto" }}
             />
             <Image

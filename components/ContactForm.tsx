@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { createClient, isSubmissionError } from "@formspree/core";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -145,6 +146,11 @@ export default function ContactForm() {
           {errorMessage}
         </p>
       )}
+
+      <p className="contact-form-hint" style={{ fontWeight: 500 }}>
+        Submitting this form sends your details to Marang House via Formspree. See our{" "}
+        <Link href="/privacy-policy">Privacy &amp; POPIA Notice</Link> for how we use them.
+      </p>
 
       <button className="contact-submit" type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "SENDING…" : "SUBMIT"} <span aria-hidden="true">➤</span>

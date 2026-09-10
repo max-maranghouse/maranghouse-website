@@ -451,6 +451,7 @@ img { display: block; }
 .newsletter-interest input[type="email"] { min-height: 3rem; border: 2px solid var(--color-brand-deep); border-radius: .5rem; padding: .6rem .8rem; font: inherit; }
 .newsletter-interest__consent { display: flex; gap: .65rem; align-items: flex-start; font-size: .9rem; font-weight: 700; }
 .newsletter-interest__consent input { min-width: 1.25rem; min-height: 1.25rem; margin-top: .15rem; }
+.newsletter-interest__privacy { font-size: .78rem; margin-top: -.4rem; }
 .newsletter-interest__status { font-weight: 800; }
 @media (max-width: 700px) { .newsletter-interest { grid-template-columns: 1fr; } }
 @media (max-width: 860px) {

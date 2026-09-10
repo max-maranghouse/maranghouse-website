@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import PartnersCarousel from "@/components/PartnersCarousel";
@@ -8,12 +7,14 @@ import Parallax from "@/components/motion/Parallax";
 import FlickerText from "@/components/motion/FlickerText";
 import { cld } from "@/lib/images";
 import { DONATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/lightkeepers",
   title: "The Lightkeepers",
   description:
     "The Lightkeepers are a community of monthly donors who keep the lights on at Marang House. Join the Circle of Light via BackaBuddy.",
-};
+});
 
 export default function LightkeepersPage() {
   return (
@@ -49,6 +50,7 @@ export default function LightkeepersPage() {
               alt="A lighthouse beaming light across the Marang House Lightkeepers banner"
               width={2004}
               height={916}
+              sizes="(max-width: 1600px) 100vw, 1600px"
               priority
             />
             {/* Decorative repeat of the Lightkeeper enamel pin (already
@@ -62,6 +64,7 @@ export default function LightkeepersPage() {
                 alt=""
                 width={1000}
                 height={1000}
+                sizes="170px"
                 aria-hidden="true"
               />
             </Parallax>
@@ -251,6 +254,7 @@ export default function LightkeepersPage() {
               alt="Lightkeeper lighthouse enamel pin"
               width={1000}
               height={1000}
+              sizes="(max-width: 660px) 220px, 260px"
               style={{ width: "100%", height: "auto" }}
             />
           </Reveal>

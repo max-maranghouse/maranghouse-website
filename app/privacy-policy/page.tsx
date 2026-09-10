@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/components/legal/LegalPage";
 import { INFO_REGULATOR_URL, LEGAL_EFFECTIVE_DATE } from "@/lib/legal-data";
 import { ORGANISATION } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy & POPIA Notice",
   description:
     "How Marang House NPC collects, uses, and protects personal information submitted through maranghouse.org, in line with South Africa's POPIA.",
-};
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (
