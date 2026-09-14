@@ -1,7 +1,6 @@
 import Image from "next/image";
 import BgPhoto from "@/components/BgPhoto";
 import PartnersCarousel from "@/components/PartnersCarousel";
-import SupportersSection from "@/components/SupportersSection";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
 import FlickerText from "@/components/motion/FlickerText";
@@ -238,11 +237,8 @@ export default function LightkeepersPage() {
         </div>
       </section>
 
-      {/* MH-011: reused from Home, self-link CTA omitted since .lk-cta
-          right below is already this page's own final conversion action.
-          MH-012: people and partner logos split into two consecutive
-          sections; Partners keeps no CTA of its own. */}
-      <SupportersSection showCta={false} />
+      {/* Restored per launch decision: partner logos stay public, the
+          people gallery (SupportersSection) stays withheld. */}
       <PartnersCarousel />
 
       {/* 5. CTA — prominent BackaBuddy link */}
