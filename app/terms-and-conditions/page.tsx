@@ -25,10 +25,9 @@ export default function TermsAndConditionsPage() {
     >
       <h2>Using this website</h2>
       <p>
-        You may browse this site and use its Contact and newsletter-interest forms for their
-        intended purpose — learning about {ORGANISATION.name}, getting in touch, and giving.
-        You agree not to misuse the site, attempt to disrupt it, or submit false or malicious
-        information through its forms.
+        You may browse this site and use its Contact form for its intended purpose — learning
+        about {ORGANISATION.name}, getting in touch, and giving. You agree not to misuse the
+        site, attempt to disrupt it, or submit false or malicious information through its forms.
       </p>
 
       <h2>Intellectual property</h2>
@@ -41,10 +40,9 @@ export default function TermsAndConditionsPage() {
       <h2>Third-party services</h2>
       <p>
         This site relies on third-party services to operate: <strong>Formspree</strong> to
-        deliver form submissions, <strong>Brevo</strong> to send newsletter updates,{" "}
-        <strong>Cloudinary</strong> to serve images, and a <strong>Google Maps</strong> embed
-        on our Contact page. Each operates under its own terms, which are independent of
-        these terms.
+        deliver form submissions, <strong>Cloudinary</strong> to serve images, and a{" "}
+        <strong>Google Maps</strong> embed on our Contact page. Each operates under its own
+        terms, which are independent of these terms.
       </p>
 
       <h2>Donations via BackaBuddy</h2>

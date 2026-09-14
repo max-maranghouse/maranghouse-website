@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import GardenDayCarousel from "@/components/GardenDayCarousel";
-import NewsletterInterestForm from "@/components/NewsletterInterestForm";
 import PartnersCarousel from "@/components/PartnersCarousel";
 import Reveal from "@/components/motion/Reveal";
 import Parallax from "@/components/motion/Parallax";
@@ -62,9 +61,9 @@ export default function HomePage() {
               style={{ height: "auto" }}
             />
             <h1>
-              <VerticalCutReveal text="Fostering Health," />
+              <VerticalCutReveal text="Fostering Health," className="hero-title-yellow" />
               <br />
-              Providing <span>Hope.</span>
+              Providing Hope.
             </h1>
           </div>
           <p className="hero-sub">
@@ -79,7 +78,6 @@ export default function HomePage() {
             >
               {DONATION.primary.label}
             </a>
-            <a href="#newsletter-interest" className="btn btn-yellow">Subscribe to newsletter</a>
           </div>
         </div>
         <div className="hero-doodads" aria-hidden="true">
@@ -268,11 +266,8 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <NewsletterInterestForm />
-
-      {/* 6. OUR PARTNERS — MH-012 follow-up: the people gallery
-          (SupportersSection) is Lightkeepers-only now; Home keeps just the
-          partner logo strip here. */}
+      {/* 6. OUR PARTNERS — restored per launch decision: partner logos stay
+          public, the people gallery (SupportersSection) stays withheld. */}
       <PartnersCarousel />
 
       {/* 7. HOW YOU CAN GET INVOLVED — MERGED from old §7 "All Support Is

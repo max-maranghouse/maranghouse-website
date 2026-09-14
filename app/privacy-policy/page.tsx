@@ -20,8 +20,8 @@ export default function PrivacyPolicyPage() {
         <p>
           This notice explains how {ORGANISATION.name} NPC collects, uses, and protects
           personal information when you visit <strong>maranghouse.org</strong> or use its
-          Contact and newsletter-interest forms. It is written to comply with South
-          Africa&apos;s Protection of Personal Information Act (POPIA).
+          Contact form. It is written to comply with South Africa&apos;s Protection of Personal
+          Information Act (POPIA).
         </p>
       }
     >
@@ -41,10 +41,6 @@ export default function PrivacyPolicyPage() {
           given), and the content of your message, submitted through our Contact page.
         </li>
         <li>
-          <strong>Newsletter interest details</strong> — your name and email address, if you
-          ask to be kept informed about Marang House news.
-        </li>
-        <li>
           <strong>Cookie-preference choice</strong> — whether you&apos;ve accepted or declined
           analytics cookies, stored in your browser. See our{" "}
           <Link href="/cookie-policy">Cookie Notice</Link>.
@@ -57,22 +53,15 @@ export default function PrivacyPolicyPage() {
 
       <h2>Why we process it, and on what basis</h2>
       <p>
-        We process Contact and newsletter-interest submissions with your consent, given when
-        you submit the relevant form, for the purpose you submitted it: to respond to your
-        enquiry or to send you the updates you asked for. Where enabled, analytics cookies are
-        also processed only with your separate, specific consent — see below.
+        We process Contact submissions with your consent, given when you submit the form, for
+        the purpose you submitted it: to respond to your enquiry. Where enabled, analytics
+        cookies are also processed only with your separate, specific consent — see below.
       </p>
 
       <h2>How your form submissions are handled</h2>
       <p>
-        Our Contact and newsletter-interest forms are processed through{" "}
-        <strong>Formspree</strong>, a third-party form-delivery service, which receives and
-        forwards your submission to us by email. Newsletter-interest submissions are also
-        entered into <strong>Brevo</strong>, an email-marketing platform we use to send
-        updates, which processes and stores that data on servers located in the{" "}
-        <strong>European Union</strong>. By submitting the newsletter-interest form, you
-        consent to this cross-border transfer, which is necessary to provide the service you
-        requested.
+        Our Contact form is processed through <strong>Formspree</strong>, a third-party
+        form-delivery service, which receives and forwards your submission to us by email.
       </p>
 
       <h2>Cookies and analytics</h2>
@@ -104,8 +93,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>How long we keep information</h2>
       <p>
-        We keep Contact and newsletter-interest submissions only for as long as needed to
-        respond to you or to continue sending the updates you asked for, and we delete
+        We keep Contact submissions only for as long as needed to respond to you, and we delete
         information on request. We do not have a fixed retention schedule beyond this.
       </p>
 

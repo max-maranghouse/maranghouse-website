@@ -174,16 +174,13 @@ export default function AboutPage() {
             Every child who comes to Marang House has already faced more than most adults. They leave
             their families and travel hundreds of kilometres to Johannesburg for life-saving treatment.
             Many arrive frightened. Some have spent more days in hospital than they have at home.
+            Every one of them deserves to feel safe. That is why Marang House exists.
           </p>
-          <p>Every one of them deserves to feel safe. That is why Marang House exists.</p>
           <p>
             It takes many people to create that feeling of security. A volunteer helping with homework.
             A donor buying school shoes. A warm meal after a long day at hospital. A hug before bedtime.
-          </p>
-          <p>Together, those small acts of kindness become something much bigger.</p>
-          <p>
-            They become <strong>The Marang House Circle of Light</strong>. Together, we are the
-            Lightkeepers.
+            Together, those small acts of kindness become something much bigger. They become{" "}
+            <strong>The Marang House Circle of Light</strong>. Together, we are the Lightkeepers.
           </p>
           <p>
             Security isn&rsquo;t created in a single day. It is built every single month. That is why
