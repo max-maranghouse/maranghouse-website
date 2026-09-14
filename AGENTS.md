@@ -6,16 +6,40 @@ the 2026-07-22/23 GoDaddy hosting compromise), see
 `MARANG-HOUSE-SITE-CONTEXT.md` §11 — still fully relevant, see the warning
 below.
 
-## ⚠️ Deployment status — read before assuming this is live
+## Deployment status — production is live
 
-The production domain `maranghouse.org` is **not** currently pointed at this
-Next.js project. It points at a separate, minimal static landing page in a
-different repo/Vercel project (`marang-house-landing`), put up as a stopgap
-after the original GoDaddy/WordPress hosting was compromised. Full story in
-`MARANG-HOUSE-SITE-CONTEXT.md` §11. When this project is ready to launch,
-the domain has to be manually moved from `marang-house-landing` to this
-project (`marang-house-website`) in the Vercel dashboard — it will not happen
-from a code merge alone.
+As of 2026-09-15, the production Next.js site is served by Vercel project
+`marang-house-website` (team `marang-house-team`) at
+`https://www.maranghouse.org`. `https://maranghouse.org` is attached to the
+same project and permanently redirects (308) to the `www` host. Full history,
+including the GoDaddy/WordPress hosting compromise, remains in
+`MARANG-HOUSE-SITE-CONTEXT.md` §11.
+
+The separate `marang-house-landing` project and its repository are preserved
+as the emergency stopgap, but neither public Marang House hostname is attached
+to it. Its recorded fallback deployment is
+`marang-house-landing-alhbhg9i0-marang-house-team.vercel.app`; do not delete,
+redeploy, or alter it during ordinary site work.
+
+Publishing workflow: work branches receive Vercel preview deployments;
+reviewed PRs merge into `main`; Vercel's Git integration deploys `main` to
+production. Verify that Production deployment after a merge—do not use
+`vercel --prod`, move domains, or attach public domains to a preview as a
+normal release action.
+
+### Production site vs. emergency fallback
+
+| | Production Next.js site | Preserved emergency landing site |
+| --- | --- | --- |
+| Vercel project | `marang-house-website` | `marang-house-landing` |
+| Public hostname | `www.maranghouse.org` (primary); `maranghouse.org` 308-redirects to it | None — keep both public hostnames detached during normal operation |
+| Deployment model | Git-connected: reviewed changes merge to `main`, which deploys to Production; work branches get Preview URLs | Standalone preserved deployment; do not connect it to a public hostname except for an emergency rollback |
+| Deployment reference | Launch Production deployment: `d6ca097` from `main`; generated URL: `marang-house-website.vercel.app` | Recorded fallback URL: `marang-house-landing-alhbhg9i0-marang-house-team.vercel.app` |
+| `/donate` behaviour | Real Next.js Donate page at `/donate` | Legacy stopgap redirects `/donate` to `/`; it is not a donation page |
+
+If a material production failure requires rollback, reassign **both** public
+domains to the retained landing deployment in Vercel, verify it loads, then
+investigate/fix from a preview. Do not patch a production deployment directly.
 
 - **Repo:** https://github.com/max-maranghouse/maranghouse-website
 - **Vercel project:** `marang-house-website` (team `marang-house-team`)
