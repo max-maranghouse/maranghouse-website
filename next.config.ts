@@ -10,11 +10,11 @@ const isDev = process.env.NODE_ENV === "development";
 // https://nextjs.org/docs/app/guides/content-security-policy#without-nonces.
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' https://res.cloudinary.com data:;
+  img-src 'self' https://res.cloudinary.com https://www.google-analytics.com data:;
   font-src 'self';
-  connect-src 'self' https://formspree.io;
+  connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com;
   frame-src https://www.google.com https://maps.google.com;
   object-src 'none';
   base-uri 'self';

@@ -66,11 +66,10 @@ export default function PrivacyPolicyPage() {
 
       <h2>Cookies and analytics</h2>
       <p>
-        This site does not load any analytics or tracking scripts by default. If we enable
-        Google Analytics (GA4) and/or PostHog in future, they will only run after you actively
-        consent to Analytics cookies through the cookie banner or the footer&apos;s
-        &ldquo;Cookie preferences&rdquo; control, and PostHog will be configured to mask input
-        field content. Full detail is in our <Link href="/cookie-policy">Cookie Notice</Link>.
+        Google Analytics (GA4), when enabled, only runs after you actively consent to Analytics
+        cookies through the cookie banner or the footer&apos;s &ldquo;Cookie preferences&rdquo; control.
+        This site does not use PostHog. Full detail is in our{" "}
+        <Link href="/cookie-policy">Cookie Notice</Link>.
       </p>
 
       <h2>Other service providers we use</h2>
