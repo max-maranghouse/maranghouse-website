@@ -35,13 +35,11 @@ export default function CookiePolicyPage() {
 
       <h2>Analytics</h2>
       <p>
-        This category covers <strong>Google Analytics (GA4)</strong> and{" "}
-        <strong>PostHog</strong> (which also provides session replay and heatmaps), which help
-        us understand how visitors use the site. Neither is active on this site yet: their
-        scripts, cookies, and any network requests will only load after you actively consent
-        to Analytics cookies, using the banner or the &ldquo;Cookie preferences&rdquo; control
-        in the footer. When enabled, PostHog will be configured to mask the content of form
-        and input fields in any session recording.
+        This category covers <strong>Google Analytics (GA4)</strong>, which helps us understand
+        how visitors use the site. Its scripts, cookies, and network requests only load after
+        you actively consent to Analytics cookies, using the banner or the
+        &ldquo;Cookie preferences&rdquo; control in the footer. PostHog, including its session
+        replay and heatmap features, is not active on this site.
       </p>
 
       <h2>Third-party storage outside our control</h2>
