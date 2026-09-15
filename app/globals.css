@@ -529,7 +529,9 @@ img { display: block; }
 @media (max-width: 860px) {
   .mission-banner { padding: 48px 6% 44px; }
   .mission-banner-content h2 { font-size: 3rem; }
-  .mission-love-doodle { top: calc(48% + 6px); left: calc(50% - 45px); width: 90px; }
+  /* MH-016: re-centred on the void formed by the hands rather than the
+     previous offset, which sat too low against the wrists. */
+  .mission-love-doodle { top: calc(54% - 45px); left: calc(50% - 45px); width: 90px; }
 }
 
 /* ═══════════════════════════════════════
@@ -795,6 +797,15 @@ img { display: block; }
   }
   .supporters-cloud--long { top: 20px; left: 3%; width: 145px; }
   .supporters-cloud--small { top: 64px; left: 25%; width: 82px; }
+}
+/* MH-016: at mobile widths .meet-text stacks below the photo and the stars
+   doodle's bottom-anchored desktop position lands on top of the second
+   paragraph. Giving the section extra bottom padding and re-anchoring the
+   doodle inside that padding drops it below the text without touching
+   .meet-inner/photo/text sizing. */
+@media (max-width: 860px) {
+  .meet-section { padding-bottom: 150px; }
+  .meet-doodle { bottom: 16px; }
 }
 
 /* ═══════════════════════════════════════
