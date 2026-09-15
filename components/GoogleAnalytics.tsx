@@ -70,6 +70,7 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
     // strict no-Google-request-before-consent policy while still making a
     // later withdrawal explicit to Google.
     window.gtag("consent", "default", { analytics_storage: "granted" });
+    window.gtag("js", new Date());
 
     const script = document.createElement("script");
     script.async = true;
