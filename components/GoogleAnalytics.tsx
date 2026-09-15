@@ -65,7 +65,13 @@ export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps)
     if (existingTag) return;
 
     window.dataLayer = window.dataLayer ?? [];
-    window.gtag = window.gtag ?? ((...args: unknown[]) => window.dataLayer?.push(args));
+    window.gtag =
+      window.gtag ??
+      function gtag() {
+        // Google reads the queued Arguments object, as in its canonical snippet.
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer?.push(arguments);
+      };
     // Consent is granted before the tag is fetched. This preserves the site's
     // strict no-Google-request-before-consent policy while still making a
     // later withdrawal explicit to Google.
