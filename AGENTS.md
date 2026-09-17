@@ -140,6 +140,17 @@ they aren't lost.
   numbers, EFT bank details, BackaBuddy campaign URL. Import from there
   rather than hardcoding these values anywhere, markdown included.
   GivenGain was dropped as a donation platform — don't reintroduce it.
+- **QR links route (MH-017, once implemented):** `/links` is an intentionally
+  isolated, QR-first landing page. Keep its editable copy and destinations in
+  `LINKS_PAGE` in `lib/site-data.ts`, its presentational components under
+  `components/links/`, and every stylesheet selector rooted at `.links-page`.
+  It must never be added to `SITE_NAVIGATION`, the footer, or the sitemap.
+  Link-page UI work must not alter shared components, global element selectors,
+  or existing route styles. The one required shared shell exception is an exact
+  pathname opt-out for `/links`; it must preserve the normal chrome and
+  click-light effect for every other route. Treat Home, Donate, and one other
+  existing route as regression checks whenever that shell or global stylesheet
+  changes.
 
 ## Still-open content questions (unresolved — don't silently guess on these)
 

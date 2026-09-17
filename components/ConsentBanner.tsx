@@ -11,7 +11,17 @@ import {
   writeConsent,
 } from "@/lib/consent";
 
-export default function ConsentBanner() {
+type ConsentBannerProps = {
+  /**
+   * `site` (default) is the fixed bottom bar used on every normal route.
+   * `links` is the same state/storage/behaviour rendered in-flow inside the
+   * `/links` card instead, so it never overlays the page's donation/social
+   * actions (MH-018). Only a modifier class differs between the two.
+   */
+  presentation?: "site" | "links";
+};
+
+export default function ConsentBanner({ presentation = "site" }: ConsentBannerProps) {
   // Derived (not effect-set) so the server/first-hydration render and the
   // real client value never disagree in a way React would warn about —
   // useSyncExternalStore is built for exactly this "read an external,
@@ -64,13 +74,15 @@ export default function ConsentBanner() {
 
   if (!isOpen) return null;
 
+  const className =
+    presentation === "links" ? "consent-banner consent-banner--links" : "consent-banner";
+
   return (
-    <div className="consent-banner" role="region" aria-label="Cookie preferences">
+    <div className={className} role="region" aria-label="Cookie preferences">
       <div className="consent-banner__inner" ref={panelRef}>
         <div className="consent-banner__text">
           <p>
-            We use necessary cookies to run this site, and, only with your consent, analytics
-            cookies to understand how it&apos;s used. See our{" "}
+            We use cookies to understand how visitors use our site. See our{" "}
             <Link href="/cookie-policy">Cookie Notice</Link> for details.
           </p>
           <label className="consent-banner__toggle">
@@ -79,7 +91,7 @@ export default function ConsentBanner() {
               checked={analyticsChecked}
               onChange={(event) => setAnalyticsChecked(event.target.checked)}
             />
-            <span>Analytics cookies (GA4 &amp; PostHog)</span>
+            <span>Analytics cookies</span>
           </label>
           <p className="consent-banner__necessary-note">Necessary cookies are always on.</p>
         </div>

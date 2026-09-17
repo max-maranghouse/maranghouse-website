@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { fredoka, nunito, permanentMarker } from "@/lib/fonts";
 import { ORGANISATION } from "@/lib/site-data";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import ConsentBanner from "@/components/ConsentBanner";
-import ClickLightEffect from "@/components/motion/ClickLightEffect";
+import SiteShell from "@/components/SiteShell";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
@@ -77,11 +74,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main-content">{children}</main>
-        <SiteFooter />
-        <ConsentBanner />
-        <ClickLightEffect />
+        <SiteShell>{children}</SiteShell>
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         ) : null}

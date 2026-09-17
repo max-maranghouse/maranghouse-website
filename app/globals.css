@@ -2059,3 +2059,158 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
   .consent-banner__actions { width: 100%; }
   .consent-banner__actions .btn { flex: 1 1 auto; }
 }
+
+/* ═══════════════════════════════════════
+   LINKS PAGE (MH-017) — QR-first focused landing page.
+   Every selector below is rooted at .links-page; this is the only page
+   allowed to own its own full-viewport layout instead of the shared
+   header/footer chrome.
+   ═══════════════════════════════════════ */
+.links-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--gutter);
+  background:
+    radial-gradient(circle at 82% 12%, rgba(248, 224, 38, 0.22), transparent 45%),
+    radial-gradient(circle at 8% 92%, rgba(106, 63, 181, 0.38), transparent 45%),
+    linear-gradient(135deg, #0b3c82 0%, #10164d 115%);
+}
+.links-page__card {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-7) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: 0 1.5rem 3rem rgba(8, 47, 115, 0.35);
+  text-align: center;
+}
+.links-page__logo { width: 4.5rem; height: 4.5rem; object-fit: contain; }
+.links-page__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-brand-deep);
+}
+.links-page__sun {
+  width: 8.75rem;
+  height: 8.75rem;
+  object-fit: contain;
+  margin-block: calc(var(--space-2) * -1) 0;
+}
+.links-page__list {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.links-page__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 3.25rem;
+  width: 100%;
+  border-radius: var(--radius-round);
+  padding: 0.9rem 1.5rem;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+.links-page__action:hover { transform: translateY(-2px); }
+.links-page__action-icon { width: 1.35rem; height: 1.35rem; flex: 0 0 auto; }
+.links-page__action[data-variant="primary"] {
+  background: var(--color-yellow);
+  color: var(--color-brand-deep);
+}
+.links-page__action[data-variant="secondary"] {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-deep);
+  border-color: var(--color-border);
+}
+@media (max-width: 22.5rem) {
+  .links-page__card { padding: var(--space-6) var(--space-4); }
+}
+
+/* ═══════════════════════════════════════
+   LINKS PAGE — inline cookie consent (MH-018).
+   The fixed site-wide `.consent-banner` would cover the card's lower
+   actions on `/links`, so this variant renders in normal document flow
+   instead. Reuses every `.consent-banner__*` element/behaviour from
+   ConsentBanner.tsx unchanged; only overridden here, under `.links-page`,
+   never on the shared selectors themselves.
+   ═══════════════════════════════════════ */
+.links-page .consent-banner--links {
+  position: static;
+  inset-inline: auto;
+  bottom: auto;
+  z-index: auto;
+  width: 100%;
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  background: var(--color-brand-soft);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.links-page .consent-banner--links .consent-banner__inner {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  max-width: none;
+  margin-inline: 0;
+}
+/* The shared rule's `flex: 1 1 20rem` sets a *width* basis for the site
+   banner's row layout; under this variant's column layout that same basis
+   is read as a forced 20rem *height*, leaving a large empty gap. Reset it. */
+.links-page .consent-banner--links .consent-banner__text { flex: 0 1 auto; }
+.links-page .consent-banner--links .consent-banner__text p { color: var(--color-ink); }
+.links-page .consent-banner--links .consent-banner__text a { color: var(--color-brand); }
+.links-page .consent-banner--links .consent-banner__toggle { color: var(--color-ink); }
+.links-page .consent-banner--links .consent-banner__necessary-note { color: var(--color-muted); }
+.links-page .consent-banner--links .consent-banner__actions {
+  width: 100%;
+  flex-direction: column;
+}
+.links-page .consent-banner--links .consent-banner__actions .btn {
+  width: 100%;
+  min-height: 2.75rem;
+}
+.links-page .consent-banner--links .consent-banner__actions .btn-blue-outline {
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.links-page .consent-banner--links .consent-banner__actions .btn-blue-outline:hover {
+  border-color: var(--color-brand-deep);
+}
+@media (min-width: 26rem) {
+  .links-page .consent-banner--links .consent-banner__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .links-page .consent-banner--links .consent-banner__actions .btn { width: auto; flex: 1 1 auto; }
+}
+
+.links-page__cookie-btn {
+  margin-top: var(--space-4);
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.links-page__cookie-btn:hover { color: var(--color-brand-deep); }
