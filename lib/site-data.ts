@@ -59,3 +59,40 @@ export const DONATION = {
     proofOfPaymentEmail: ORGANISATION.email,
   },
 } as const;
+
+export type LinksPageItem = {
+  label: string;
+  href: string;
+  external: boolean;
+};
+
+// Dedicated content model for the QR-first `/links` landing page (MH-017).
+// Kept separate from SITE_NAVIGATION/DONATION so this fundraiser-QR
+// destination stays a one-place edit and never leaks into primary nav.
+export const LINKS_PAGE = {
+  canonicalUrl: `${ORGANISATION.websiteUrl}/links`,
+  title: `Support ${ORGANISATION.name}`,
+  tagline: "Thank you for scanning in — here's how you can help today.",
+  items: [
+    {
+      label: "Donate via BackaBuddy",
+      href: DONATION.primary.url,
+      external: true,
+    },
+    {
+      label: "More ways to donate",
+      href: "/donate",
+      external: false,
+    },
+    {
+      label: "Follow Marang House on Instagram",
+      href: "https://www.instagram.com/marang_house/",
+      external: true,
+    },
+    {
+      label: "Follow Marang House on Facebook",
+      href: "https://www.facebook.com/maranghouse/",
+      external: true,
+    },
+  ],
+} as const satisfies { canonicalUrl: string; title: string; tagline: string; items: readonly LinksPageItem[] };
