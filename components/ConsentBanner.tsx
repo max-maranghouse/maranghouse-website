@@ -82,8 +82,7 @@ export default function ConsentBanner({ presentation = "site" }: ConsentBannerPr
       <div className="consent-banner__inner" ref={panelRef}>
         <div className="consent-banner__text">
           <p>
-            We use necessary cookies to run this site, and, only with your consent, analytics
-            cookies to understand how it&apos;s used. See our{" "}
+            We use cookies to understand how visitors use our site. See our{" "}
             <Link href="/cookie-policy">Cookie Notice</Link> for details.
           </p>
           <label className="consent-banner__toggle">
@@ -92,7 +91,7 @@ export default function ConsentBanner({ presentation = "site" }: ConsentBannerPr
               checked={analyticsChecked}
               onChange={(event) => setAnalyticsChecked(event.target.checked)}
             />
-            <span>Analytics cookies (GA4 &amp; PostHog)</span>
+            <span>Analytics cookies</span>
           </label>
           <p className="consent-banner__necessary-note">Necessary cookies are always on.</p>
         </div>
