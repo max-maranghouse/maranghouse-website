@@ -60,7 +60,10 @@ export const DONATION = {
   },
 } as const;
 
+export type LinksPageItemId = "backabuddy" | "donate" | "instagram" | "facebook";
+
 export type LinksPageItem = {
+  id: LinksPageItemId;
   label: string;
   href: string;
   external: boolean;
@@ -68,31 +71,35 @@ export type LinksPageItem = {
 
 // Dedicated content model for the QR-first `/links` landing page (MH-017).
 // Kept separate from SITE_NAVIGATION/DONATION so this fundraiser-QR
-// destination stays a one-place edit and never leaks into primary nav.
+// destination stays a one-place edit and never leaks into primary nav. `id`
+// maps each item to its icon in components/links/icons.tsx.
 export const LINKS_PAGE = {
   canonicalUrl: `${ORGANISATION.websiteUrl}/links`,
   title: `Support ${ORGANISATION.name}`,
-  tagline: "Thank you for scanning in — here's how you can help today.",
   items: [
     {
+      id: "backabuddy",
       label: "Donate via BackaBuddy",
       href: DONATION.primary.url,
       external: true,
     },
     {
+      id: "donate",
       label: "More ways to donate",
       href: "/donate",
       external: false,
     },
     {
+      id: "instagram",
       label: "Follow Marang House on Instagram",
       href: "https://www.instagram.com/marang_house/",
       external: true,
     },
     {
+      id: "facebook",
       label: "Follow Marang House on Facebook",
       href: "https://www.facebook.com/maranghouse/",
       external: true,
     },
   ],
-} as const satisfies { canonicalUrl: string; title: string; tagline: string; items: readonly LinksPageItem[] };
+} as const satisfies { canonicalUrl: string; title: string; items: readonly LinksPageItem[] };

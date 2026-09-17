@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = {
   ...pageMetadata({
     title: LINKS_PAGE.title,
-    description: LINKS_PAGE.tagline,
+    description: "Ways to support Marang House: donate or follow us on social media.",
     path: "/links",
   }),
   robots: {
