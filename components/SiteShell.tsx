@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ClickLightEffect from "@/components/motion/ClickLightEffect";
+import ConsentBanner from "@/components/ConsentBanner";
 
 // `/links` is a QR-first focused landing page: it must skip the normal
 // header/footer/click-light chrome while every other route keeps it exactly
@@ -26,6 +27,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       <main id="main-content">{children}</main>
       <SiteFooter />
       <ClickLightEffect />
+      <ConsentBanner />
     </>
   );
 }

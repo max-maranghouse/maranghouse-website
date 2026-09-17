@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { fredoka, nunito, permanentMarker } from "@/lib/fonts";
 import { ORGANISATION } from "@/lib/site-data";
 import SiteShell from "@/components/SiteShell";
-import ConsentBanner from "@/components/ConsentBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
@@ -76,7 +75,6 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteShell>{children}</SiteShell>
-        <ConsentBanner />
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         ) : null}

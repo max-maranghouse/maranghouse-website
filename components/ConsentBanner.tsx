@@ -11,7 +11,17 @@ import {
   writeConsent,
 } from "@/lib/consent";
 
-export default function ConsentBanner() {
+type ConsentBannerProps = {
+  /**
+   * `site` (default) is the fixed bottom bar used on every normal route.
+   * `links` is the same state/storage/behaviour rendered in-flow inside the
+   * `/links` card instead, so it never overlays the page's donation/social
+   * actions (MH-018). Only a modifier class differs between the two.
+   */
+  presentation?: "site" | "links";
+};
+
+export default function ConsentBanner({ presentation = "site" }: ConsentBannerProps) {
   // Derived (not effect-set) so the server/first-hydration render and the
   // real client value never disagree in a way React would warn about —
   // useSyncExternalStore is built for exactly this "read an external,
@@ -64,8 +74,11 @@ export default function ConsentBanner() {
 
   if (!isOpen) return null;
 
+  const className =
+    presentation === "links" ? "consent-banner consent-banner--links" : "consent-banner";
+
   return (
-    <div className="consent-banner" role="region" aria-label="Cookie preferences">
+    <div className={className} role="region" aria-label="Cookie preferences">
       <div className="consent-banner__inner" ref={panelRef}>
         <div className="consent-banner__text">
           <p>

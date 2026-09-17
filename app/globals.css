@@ -2133,3 +2133,78 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
 @media (max-width: 22.5rem) {
   .links-page__card { padding: var(--space-6) var(--space-4); }
 }
+
+/* ═══════════════════════════════════════
+   LINKS PAGE — inline cookie consent (MH-018).
+   The fixed site-wide `.consent-banner` would cover the card's lower
+   actions on `/links`, so this variant renders in normal document flow
+   instead. Reuses every `.consent-banner__*` element/behaviour from
+   ConsentBanner.tsx unchanged; only overridden here, under `.links-page`,
+   never on the shared selectors themselves.
+   ═══════════════════════════════════════ */
+.links-page .consent-banner--links {
+  position: static;
+  inset-inline: auto;
+  bottom: auto;
+  z-index: auto;
+  width: 100%;
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  background: var(--color-brand-soft);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.links-page .consent-banner--links .consent-banner__inner {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  max-width: none;
+  margin-inline: 0;
+}
+/* The shared rule's `flex: 1 1 20rem` sets a *width* basis for the site
+   banner's row layout; under this variant's column layout that same basis
+   is read as a forced 20rem *height*, leaving a large empty gap. Reset it. */
+.links-page .consent-banner--links .consent-banner__text { flex: 0 1 auto; }
+.links-page .consent-banner--links .consent-banner__text p { color: var(--color-ink); }
+.links-page .consent-banner--links .consent-banner__text a { color: var(--color-brand); }
+.links-page .consent-banner--links .consent-banner__toggle { color: var(--color-ink); }
+.links-page .consent-banner--links .consent-banner__necessary-note { color: var(--color-muted); }
+.links-page .consent-banner--links .consent-banner__actions {
+  width: 100%;
+  flex-direction: column;
+}
+.links-page .consent-banner--links .consent-banner__actions .btn {
+  width: 100%;
+  min-height: 2.75rem;
+}
+.links-page .consent-banner--links .consent-banner__actions .btn-blue-outline {
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.links-page .consent-banner--links .consent-banner__actions .btn-blue-outline:hover {
+  border-color: var(--color-brand-deep);
+}
+@media (min-width: 26rem) {
+  .links-page .consent-banner--links .consent-banner__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .links-page .consent-banner--links .consent-banner__actions .btn { width: auto; flex: 1 1 auto; }
+}
+
+.links-page__cookie-btn {
+  margin-top: var(--space-4);
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.links-page__cookie-btn:hover { color: var(--color-brand-deep); }

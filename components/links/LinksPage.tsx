@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import ConsentBanner from "@/components/ConsentBanner";
+import LinksCookiePreferencesButton from "@/components/links/LinksCookiePreferencesButton";
 import { cld } from "@/lib/images";
 import { LINKS_PAGE, ORGANISATION } from "@/lib/site-data";
 
@@ -43,6 +45,9 @@ export default function LinksPage() {
             </li>
           ))}
         </ul>
+
+        <ConsentBanner presentation="links" />
+        <LinksCookiePreferencesButton />
       </div>
     </div>
   );
