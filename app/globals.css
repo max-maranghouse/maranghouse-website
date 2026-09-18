@@ -2072,35 +2072,45 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
   align-items: center;
   justify-content: center;
   padding: var(--space-6) var(--gutter);
-  background:
-    radial-gradient(circle at 82% 12%, rgba(248, 224, 38, 0.22), transparent 45%),
-    radial-gradient(circle at 8% 92%, rgba(106, 63, 181, 0.38), transparent 45%),
-    linear-gradient(135deg, #0b3c82 0%, #10164d 115%);
+  background: var(--color-white);
 }
-.links-page__card {
+.links-page__frame {
   width: 100%;
   max-width: 26rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem rgba(8, 47, 115, 0.25);
+}
+.links-page__header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-7) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-white);
-  box-shadow: 0 1.5rem 3rem rgba(8, 47, 115, 0.35);
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: linear-gradient(160deg, var(--color-brand-deep) 0%, var(--color-brand) 130%);
   text-align: center;
 }
 .links-page__logo { width: 4.5rem; height: 4.5rem; object-fit: contain; }
 .links-page__title {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  color: var(--color-brand-deep);
+  color: var(--color-white);
 }
 .links-page__sun {
-  width: 8.75rem;
-  height: 8.75rem;
+  width: 6.5rem;
+  height: 6.5rem;
   object-fit: contain;
   margin-block: calc(var(--space-2) * -1) 0;
+}
+.links-page__surface {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-5) calc(var(--space-6) + 0.85rem);
+  background: var(--color-white);
+  text-align: center;
 }
 .links-page__list {
   width: 100%;
@@ -2136,8 +2146,16 @@ footer.site-footer { display: block; padding: 0; background: var(--color-brand-d
   color: var(--color-brand-deep);
   border-color: var(--color-border);
 }
+.links-page__accent {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 0.85rem;
+  background: linear-gradient(90deg, var(--color-orange), var(--color-yellow));
+}
 @media (max-width: 22.5rem) {
-  .links-page__card { padding: var(--space-6) var(--space-4); }
+  .links-page__header { padding: var(--space-5) var(--space-4); }
+  .links-page__surface { padding: var(--space-5) var(--space-4) calc(var(--space-5) + 0.85rem); }
 }
 
 /* ═══════════════════════════════════════
