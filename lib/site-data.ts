@@ -49,8 +49,8 @@ export const DONATION = {
   },
   eft: {
     bank: "Nedbank",
-    branch: "Business Northrand",
-    branchCode: "146-905",
+    branch: "Northern Gauteng",
+    branchCode: "198765",
     accountName: "Marang House",
     accountNumber: "1469095769",
     accountType: "Cheque",
